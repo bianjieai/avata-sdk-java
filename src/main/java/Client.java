@@ -1,4 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
@@ -7,7 +6,7 @@ import model.mt.MtClient;
 import model.nft.NftClient;
 import model.order.OrderClient;
 import model.records.RecordsClient;
-import model.tx.TxClient;
+import proxy.tx.impl.TxClient;
 import util.Strings;
 
 public class Client {

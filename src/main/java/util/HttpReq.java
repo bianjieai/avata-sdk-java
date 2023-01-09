@@ -3,6 +3,8 @@ package util;
 import config.ConfigCache;
 import okhttp3.*;
 
+import java.io.IOException;
+
 public class HttpReq {
     private static OkHttpClient okHttpClient;
 
@@ -14,7 +16,7 @@ public class HttpReq {
     /**
      * todo
      */
-    public ResponseBody Post(String content) {
+    public Response Post(String content) {
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, content);
@@ -24,20 +26,34 @@ public class HttpReq {
                 .addHeader("x-api-key", ConfigCache.get().getApiKey())
                 .addHeader("Content-Type", "application/json")
                 .build();
+        request = AvataUtils.signReq(request);
         Response response = null;
         try {
             response = okHttpClient.newCall(request).execute();
-        }catch (Exception e) {
+        }catch (IOException e) {
             // todo 异常处理
         }
 
-        return response.body();
+        return response;
     }
 
     /**
      * todo
      */
-    public void Get() {
-
+    public Response Get(String content) {
+        String url = ConfigCache.get().getAvataGatewayAddress() + content;
+        Request request = new Request.Builder()
+                .url(url)
+                .method("GET", null)
+                .addHeader("x-api-key", ConfigCache.get().getApiKey())
+                .build();
+        request = AvataUtils.signReq(request);
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            // todo 异常处理
+        }
+        return response;
     }
 }

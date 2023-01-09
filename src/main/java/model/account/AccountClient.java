@@ -1,12 +1,20 @@
 package model.account;
 
+import okhttp3.Response;
 import okhttp3.ResponseBody;
+import proxy.account.AccountProxy;
 import util.HttpReq;
 
-public class AccountClient {
+import java.io.IOException;
 
-    public void createAccount(){
+public class AccountClient implements AccountProxy {
+
+    public CreateAccountRes createAccount(String name, String operationId){
         HttpReq httpReq = new HttpReq();
-        ResponseBody res = httpReq.Post("");
+        Response res = httpReq.Post("");
+        //todo
+
+        return null;
     }
+
 }

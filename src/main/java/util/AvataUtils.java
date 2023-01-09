@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class AvataUtils {
     public static Request signReq(Request req) {
-        //todo
+        //todo 对请求添加时间戳和签名参数
         return req;
     }
 
