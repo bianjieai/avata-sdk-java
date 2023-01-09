@@ -11,6 +11,13 @@ import util.HttpReq;
 import java.io.IOException;
 
 public class TxClient implements TxProxy {
+
+    /**
+     * Query transaction
+     *
+     * @param operationId Transaction operationId
+     * @return TxRes, Transaction Result
+     */
     public TxRes queryTx(String operationId){
         HttpReq httpReq = new HttpReq();
         // todo 使用stringbuffer

@@ -14,7 +14,7 @@ public class HttpReq {
     }
 
     /**
-     * todo
+     * Send a post request
      */
     public Response Post(String content) {
 
@@ -38,7 +38,7 @@ public class HttpReq {
     }
 
     /**
-     * todo
+     * Send a get request
      */
     public Response Get(String content) {
         String url = ConfigCache.get().getAvataGatewayAddress() + content;
