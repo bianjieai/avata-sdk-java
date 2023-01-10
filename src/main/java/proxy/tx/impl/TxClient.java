@@ -6,9 +6,7 @@ import exception.SdkException;
 import model.tx.TxRes;
 import okhttp3.Response;
 import proxy.tx.TxProxy;
-import util.HttpReq;
-
-import java.io.IOException;
+import util.HttpClient;
 
 public class TxClient implements TxProxy {
     private static final String QUERY_TX = "/v1beta1/tx/";
@@ -21,17 +19,21 @@ public class TxClient implements TxProxy {
      */
     public TxRes queryTx(String operationId){
         // todo 优化httpreq获取
-        HttpReq httpReq = new HttpReq();
+        HttpClient httpReq = new HttpClient();
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
         sb.append(operationId);
         String result;
+        Response res;
         try {
-            Response res = httpReq.Get(sb.toString(), "");
+            res = httpReq.Get(sb.toString(), "");
             result = res.body().string();
         } catch (Exception e) {
             // todo 定义错误类型
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+        }
+        if (res.code() != 200) {
+            throw new SdkException("", res.code(), res.message());
         }
         TxRes txRes = JSONObject.parseObject(result, TxRes.class);
         return txRes;

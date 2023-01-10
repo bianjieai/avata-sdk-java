@@ -30,15 +30,24 @@ public class Client {
     }
 
     public static class Builder {
-        private String avataGateway;
+        private String doMain;
         private String apiKey;
         private String apiSecret;
+        private long httpTimeout;
 
-        public Builder setAvataGateway(String avataGateway) {
-            if (Strings.isEmpty(avataGateway)) {
+        public Builder setDoMain(String doMain) {
+            if (Strings.isEmpty(doMain)) {
                 throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
             }
-            this.avataGateway = avataGateway;
+            this.doMain = doMain;
+            return this;
+        }
+
+        public Builder setHttpTimeout(long httpTimeout) {
+            if (httpTimeout == 0) {
+                throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+            }
+            this.httpTimeout = httpTimeout;
             return this;
         }
 
@@ -59,16 +68,16 @@ public class Client {
         }
 
         public Client init() {
-            ConfigCache.initCache(avataGateway, apiKey, apiSecret);
+            ConfigCache.initCache(doMain, httpTimeout, apiKey, apiSecret);
             return new Client(this);
         }
     }
 
-    public Boolean setGatewayUrl(String gatewayUrl) {
-        if (gatewayUrl.isEmpty()) {
+    public Boolean setDoMain(String doMain) {
+        if (doMain.isEmpty()) {
             return false;
         }
-        ConfigCache.get().setDoMain(gatewayUrl);
+        ConfigCache.get().setDoMain(doMain);
         return true;
     }
 }

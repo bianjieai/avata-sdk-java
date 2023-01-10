@@ -8,13 +8,13 @@ public class ConfigInfo {
 
     private String apiSecret;
 
-    private long connectTimeout;
+    private long httpTimeout;
 
     public ConfigInfo() {
         /**
          * default 10s
          */
-        connectTimeout = 10;
+        httpTimeout = 10;
     }
 
     public String getDoMain() {
@@ -41,11 +41,11 @@ public class ConfigInfo {
         this.doMain = doMain;
     }
 
-    public long getConnectTimeout() {
-        return connectTimeout;
+    public long getHttpTimeout() {
+        return httpTimeout;
     }
 
-    public void setConnectTimeout(long connectTimeout) {
-        this.connectTimeout = connectTimeout;
+    public void setHttpTimeout(long httpTimeout) {
+        this.httpTimeout = httpTimeout;
     }
 }
