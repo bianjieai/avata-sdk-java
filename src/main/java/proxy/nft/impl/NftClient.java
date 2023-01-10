@@ -7,7 +7,7 @@ import model.PublicResponse;
 import model.nft.CreateNftRequest;
 import okhttp3.Response;
 import proxy.nft.NftProxy;
-import util.HttpReq;
+import util.HttpClient;
 import util.Strings;
 
 public class NftClient implements NftProxy {
@@ -15,7 +15,7 @@ public class NftClient implements NftProxy {
 
     @Override
     public PublicResponse createNft(CreateNftRequest createNftRequest, String classId) {
-        HttpReq httpReq = new HttpReq();
+        HttpClient httpReq = new HttpClient();
 
         // todo 校验必填参数
         if (Strings.isEmpty(createNftRequest.getName())) {

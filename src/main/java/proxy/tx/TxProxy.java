@@ -1,6 +1,6 @@
 package proxy.tx;
 
-import model.tx.TxRes;
+import model.tx.QueryTxResponse;
 
 public interface TxProxy {
     /**
@@ -8,5 +8,5 @@ public interface TxProxy {
      * @param operationId OPERATION ID
      * @return
      */
-    TxRes queryTx(String operationId);
+    QueryTxResponse queryTx(String operationId);
 }

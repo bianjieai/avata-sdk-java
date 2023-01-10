@@ -7,7 +7,6 @@ public enum ErrorMessage {
     ;
 
     private Integer code;
-
     private String message;
 
     private ErrorMessage(Integer code, String message) {
@@ -18,7 +17,6 @@ public enum ErrorMessage {
     public String getMessage() {
         return message;
     }
-
     public Integer getCode() {
         return code;
     }

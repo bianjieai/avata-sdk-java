@@ -2,10 +2,11 @@ package model.tx;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.BaseResponse;
 
 @NoArgsConstructor
 @Data
-public class TxRes {
+public class QueryTxResponse extends BaseResponse {
 
     private DataDTO data;
 
