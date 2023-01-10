@@ -3,7 +3,7 @@ import constant.ErrorMessage;
 import exception.SdkException;
 import proxy.account.impl.AccountClient;
 import model.mt.MtClient;
-import model.nft.NftClient;
+import proxy.nft.impl.NftClient;
 import model.order.OrderClient;
 import model.records.RecordsClient;
 import proxy.tx.impl.TxClient;
