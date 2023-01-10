@@ -8,6 +8,7 @@ import model.nft.CreateNftRequest;
 import okhttp3.Response;
 import proxy.nft.NftProxy;
 import util.HttpReq;
+import util.Strings;
 
 public class NftClient implements NftProxy {
     private static final String CREATE_NFT = "/v1beta1/nft/nfts/";
@@ -15,6 +16,14 @@ public class NftClient implements NftProxy {
     @Override
     public PublicResponse createNft(CreateNftRequest createNftRequest, String classId) {
         HttpReq httpReq = new HttpReq();
+
+        // todo 校验必填参数
+        if (Strings.isEmpty(createNftRequest.getName())) {
+            throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
+        }
+        if (Strings.isEmpty(createNftRequest.getOperationId())){
+            throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
+        }
 
         // 请求body
         StringBuffer sb = new StringBuffer();

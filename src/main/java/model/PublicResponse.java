@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class PublicResponse {
 
-    private CreateNftResponse.DataDTO data;
+    private DataDTO data;
 
-    public CreateNftResponse.DataDTO getData() {
+    public DataDTO getData() {
         return data;
     }
 
-    public void setData(CreateNftResponse.DataDTO data) {
+    public void setData(DataDTO data) {
         this.data = data;
     }
 
