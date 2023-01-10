@@ -1,7 +1,7 @@
 import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
-import model.account.AccountClient;
+import proxy.account.impl.AccountClient;
 import model.mt.MtClient;
 import model.nft.NftClient;
 import model.order.OrderClient;
@@ -68,7 +68,7 @@ public class Client {
         if (gatewayUrl.isEmpty()) {
             return false;
         }
-        ConfigCache.get().setAvataGatewayAddress(gatewayUrl);
+        ConfigCache.get().setDoMain(gatewayUrl);
         return true;
     }
 }

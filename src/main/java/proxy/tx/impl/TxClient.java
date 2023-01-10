@@ -11,6 +11,7 @@ import util.HttpReq;
 import java.io.IOException;
 
 public class TxClient implements TxProxy {
+    private static final String QUERY_TX = "/v1beta1/tx/";
 
     /**
      * Query transaction
@@ -19,18 +20,20 @@ public class TxClient implements TxProxy {
      * @return TxRes, Transaction Result
      */
     public TxRes queryTx(String operationId){
+        // todo 优化httpreq获取
         HttpReq httpReq = new HttpReq();
-        // todo 使用stringbuffer
-        String content = "/tx/" + operationId;
-        Response res = httpReq.Get(content);
-        String tx;
+        StringBuffer sb = new StringBuffer();
+        sb.append(QUERY_TX);
+        sb.append(operationId);
+        String result;
         try {
-            tx = res.body().string();
-        } catch (IOException e) {
+            Response res = httpReq.Get(sb.toString(), "");
+            result = res.body().string();
+        } catch (Exception e) {
             // todo 定义错误类型
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
         }
-        TxRes txRes = JSONObject.parseObject(tx, TxRes.class);
+        TxRes txRes = JSONObject.parseObject(result, TxRes.class);
         return txRes;
     }
 }

@@ -1,4 +1,4 @@
-import model.account.CreateAccountRes;
+import model.account.AccountResponse;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
@@ -9,7 +9,7 @@ public class AccountTest {
                 .setApiKey("")
                 .setApiSecret("")
                 .init();
-        CreateAccountRes account = client.accountClient.createAccount("", "");
+        AccountResponse account = client.accountClient.createAccount("", "");
         System.out.println("");
     }
 }

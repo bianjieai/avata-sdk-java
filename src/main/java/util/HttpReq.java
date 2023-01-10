@@ -4,24 +4,26 @@ import config.ConfigCache;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.time.Duration;
 
 public class HttpReq {
     private static OkHttpClient okHttpClient;
 
     static {
         okHttpClient = new OkHttpClient().newBuilder()
+                .callTimeout(Duration.ZERO)// todo
                 .build();
     }
 
     /**
      * Send a post request
      */
-    public Response Post(String content) {
+    public Response Post(String path, String content) throws IOException {
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, content);
         Request request = new Request.Builder()
-                .url(ConfigCache.get().getAvataGatewayAddress())
+                .url(ConfigCache.get().getDoMain())
                 .method("POST", body)
                 .addHeader("x-api-key", ConfigCache.get().getApiKey())
                 .addHeader("Content-Type", "application/json")
@@ -31,7 +33,7 @@ public class HttpReq {
         try {
             response = okHttpClient.newCall(request).execute();
         }catch (IOException e) {
-            // todo 异常处理
+            throw e;
         }
 
         return response;
@@ -40,10 +42,13 @@ public class HttpReq {
     /**
      * Send a get request
      */
-    public Response Get(String content) {
-        String url = ConfigCache.get().getAvataGatewayAddress() + content;
+    public Response Get(String path, String content) throws IOException {
+        StringBuffer url = new StringBuffer();
+        url.append(ConfigCache.get().getDoMain());
+        url.append(path);
+        url.append(content);
         Request request = new Request.Builder()
-                .url(url)
+                .url(url.toString())
                 .method("GET", null)
                 .addHeader("x-api-key", ConfigCache.get().getApiKey())
                 .build();
@@ -52,7 +57,7 @@ public class HttpReq {
         try {
             response = okHttpClient.newCall(request).execute();
         } catch (IOException e) {
-            // todo 异常处理
+            throw e;
         }
         return response;
     }

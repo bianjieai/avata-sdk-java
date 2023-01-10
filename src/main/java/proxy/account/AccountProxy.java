@@ -1,6 +1,6 @@
 package proxy.account;
 
-import model.account.CreateAccountRes;
+import model.account.AccountResponse;
 
 public interface AccountProxy {
     /**
@@ -9,5 +9,5 @@ public interface AccountProxy {
      * @param operationId 操作id，需幂等
      * @return
      */
-    CreateAccountRes createAccount(String name, String operationId);
+    AccountResponse createAccount(String name, String operationId);
 }

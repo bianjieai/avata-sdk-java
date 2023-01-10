@@ -2,7 +2,7 @@ package config;
 
 public class ConfigInfo {
 
-    private String avataGatewayAddress = "localhost:8096";
+    private String doMain = "localhost:8096";
 
     private String apiKey;
 
@@ -17,8 +17,8 @@ public class ConfigInfo {
         connectTimeout = 10;
     }
 
-    public String getAvataGatewayAddress() {
-        return avataGatewayAddress;
+    public String getDoMain() {
+        return doMain;
     }
 
     public String getApiKey() {
@@ -37,8 +37,8 @@ public class ConfigInfo {
         this.apiSecret = apiSecret;
     }
 
-    public void setAvataGatewayAddress(String avataGatewayAddress) {
-        this.avataGatewayAddress = avataGatewayAddress;
+    public void setDoMain(String doMain) {
+        this.doMain = doMain;
     }
 
     public long getConnectTimeout() {

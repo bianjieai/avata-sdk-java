@@ -1,6 +1,6 @@
 package model.account;
 
-public class CreateAccountRes {
+public class AccountResponse {
     /**
      * 链账户地址
      */

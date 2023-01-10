@@ -16,7 +16,7 @@ public class ConfigCache {
         ConfigInfo configInfo = new ConfigInfo();
 
         if (!Strings.isEmpty(avataGateway)) {
-            configInfo.setAvataGatewayAddress(avataGateway);
+            configInfo.setDoMain(avataGateway);
         }
         if (!Strings.isEmpty(apiKey)) {
             configInfo.setApiKey(apiKey);

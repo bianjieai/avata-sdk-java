@@ -1,12 +1,9 @@
 package constant;
 
 public enum ErrorMessage {
-    // Param check  1
-    // Chain error  2
-    // other 9
 
     UNKNOWN_ERROR(9999, "unknown error"),
-    INTERNAL_ERROR(1001, "internal error")
+    INTERNAL_ERROR(500, "internal error")
     ;
 
     private Integer code;
