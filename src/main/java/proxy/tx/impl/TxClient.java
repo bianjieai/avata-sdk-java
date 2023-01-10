@@ -24,12 +24,16 @@ public class TxClient implements TxProxy {
         sb.append(QUERY_TX);
         sb.append(operationId);
         String result;
+        Response res;
         try {
-            Response res = httpReq.Get(sb.toString(), "");
+            res = httpReq.Get(sb.toString(), "");
             result = res.body().string();
         } catch (Exception e) {
             // todo 定义错误类型
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+        }
+        if (res.code() != 200) {
+            throw new SdkException("", res.code(), res.message());
         }
         TxRes txRes = JSONObject.parseObject(result, TxRes.class);
         return txRes;

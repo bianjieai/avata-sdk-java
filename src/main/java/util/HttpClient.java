@@ -18,7 +18,7 @@ public class HttpClient {
     /**
      * Send a post request
      */
-    public Response Post(String path, String content) throws IOException {
+    public Response Post(String path, String content) throws Exception {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
@@ -32,20 +32,13 @@ public class HttpClient {
                 .addHeader("Content-Type", "application/json")
                 .build();
         request = AvataUtils.signReq(request);
-        Response response = null;
-        try {
-            response = okHttpClient.newCall(request).execute();
-        }catch (IOException e) {
-            throw e;
-        }
-
-        return response;
+        return okHttpClient.newCall(request).execute();
     }
 
     /**
      * Send a get request
      */
-    public Response Get(String path, String content) throws IOException {
+    public Response Get(String path, String content) throws Exception {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
@@ -56,12 +49,6 @@ public class HttpClient {
                 .addHeader("x-api-key", ConfigCache.get().getApiKey())
                 .build();
         request = AvataUtils.signReq(request);
-        Response response = null;
-        try {
-            response = okHttpClient.newCall(request).execute();
-        } catch (IOException e) {
-            throw e;
-        }
-        return response;
+        return okHttpClient.newCall(request).execute();
     }
 }

@@ -23,12 +23,15 @@ public class AccountClient implements AccountProxy {
         body.put("name", name);
         body.put("operation_id", operationId);
         String result;
+        Response res;
         try {
-            Response res = httpReq.Post(CREATE_ACCOUNT, JSONObject.toJSONString(body));
+            res = httpReq.Post(CREATE_ACCOUNT, JSONObject.toJSONString(body));
             result = res.body().string();
         }catch (Exception e) {
-            //todo err
             throw  new SdkException(ErrorMessage.INTERNAL_ERROR);
+        }
+        if (res.code() != 200){
+            throw new SdkException("", res.code(), res.message());//todo 获取codeSpace
         }
         AccountResponse response = JSONObject.parseObject(result, AccountResponse.class);
         return response;
