@@ -6,7 +6,7 @@ import exception.SdkException;
 import model.account.AccountResponse;
 import okhttp3.Response;
 import proxy.account.AccountProxy;
-import util.HttpReq;
+import util.HttpClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class AccountClient implements AccountProxy {
     private static final String CREATE_ACCOUNTS = "/v1beta1/accounts";
 
     public AccountResponse createAccount(String name, String operationId){
-        HttpReq httpReq = new HttpReq();
+        HttpClient httpReq = new HttpClient();
 
         // 请求body
         Map<String, Object> body = new HashMap<>();

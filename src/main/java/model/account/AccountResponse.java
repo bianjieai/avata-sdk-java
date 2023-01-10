@@ -1,18 +1,51 @@
 package model.account;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
 public class AccountResponse {
-    /**
-     * 链账户地址
-     */
-    private String account;
 
-    /**
-     * 链账户名称
-     */
-    private String name;
+    private DataDTO data;
 
-    /**
-     * 操作id
-     */
-    private String operation_id;
+    public DataDTO getData() {
+        return data;
+    }
+
+    public void setData(DataDTO data) {
+        this.data = data;
+    }
+
+    @NoArgsConstructor
+    @Data
+    public static class DataDTO {
+        private String account;
+        private String name;
+        private String operationId;
+
+        public String getAccount() {
+            return account;
+        }
+
+        public void setAccount(String account) {
+            this.account = account;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getOperationId() {
+            return operationId;
+        }
+
+        public void setOperationId(String operationId) {
+            this.operationId = operationId;
+        }
+    }
 }

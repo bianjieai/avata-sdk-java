@@ -6,9 +6,7 @@ import exception.SdkException;
 import model.tx.TxRes;
 import okhttp3.Response;
 import proxy.tx.TxProxy;
-import util.HttpReq;
-
-import java.io.IOException;
+import util.HttpClient;
 
 public class TxClient implements TxProxy {
     private static final String QUERY_TX = "/v1beta1/tx/";
@@ -21,7 +19,7 @@ public class TxClient implements TxProxy {
      */
     public TxRes queryTx(String operationId){
         // todo 优化httpreq获取
-        HttpReq httpReq = new HttpReq();
+        HttpClient httpReq = new HttpClient();
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
         sb.append(operationId);
