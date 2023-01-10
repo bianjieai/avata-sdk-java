@@ -19,7 +19,7 @@ public class AccountTest {
             System.out.println("no exception");
         }catch (Exception e) {
             System.out.println(e);
-            System.out.println("exception");
+            e.printStackTrace();
         }
     }
 }

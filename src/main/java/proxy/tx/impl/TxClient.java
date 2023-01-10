@@ -33,7 +33,7 @@ public class TxClient implements TxProxy {
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
         }
         if (res.code() != 200) {
-            throw new SdkException("", res.code(), res.message());
+            throw new SdkException(res.code(), res.message(), null);
         }
         TxRes txRes = JSONObject.parseObject(result, TxRes.class);
         return txRes;
