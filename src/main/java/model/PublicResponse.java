@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class PublicResponse {
+public class PublicResponse extends BaseResponse {
 
     private DataDTO data;
 

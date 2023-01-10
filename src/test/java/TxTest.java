@@ -1,5 +1,6 @@
 import model.PublicResponse;
 import model.nft.CreateNftRequest;
+import model.tx.QueryTxResponse;
 import org.junit.jupiter.api.Test;
 
 public class TxTest {
@@ -10,12 +11,9 @@ public class TxTest {
                 .setApiKey("000001")
                 .setApiSecret("ceshi")
                 .init();
-//        TxRes txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
-        CreateNftRequest req = new CreateNftRequest();
-        req.setName("");
-        PublicResponse res = client.nftClient.createNft(req, "classId");
+        QueryTxResponse txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
 
-        System.out.println(res.getData().getOperationId());
+        System.out.println(txRes.getCode());
     }
 
 }

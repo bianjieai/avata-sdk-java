@@ -3,7 +3,7 @@ package proxy.tx.impl;
 import com.alibaba.fastjson.JSONObject;
 import constant.ErrorMessage;
 import exception.SdkException;
-import model.tx.TxRes;
+import model.tx.QueryTxResponse;
 import okhttp3.Response;
 import proxy.tx.TxProxy;
 import util.HttpClient;
@@ -17,7 +17,7 @@ public class TxClient implements TxProxy {
      * @param operationId Transaction operationId
      * @return TxRes, Transaction Result
      */
-    public TxRes queryTx(String operationId){
+    public QueryTxResponse queryTx(String operationId){
         // todo 优化httpreq获取
         HttpClient httpReq = new HttpClient();
         StringBuffer sb = new StringBuffer();
@@ -35,7 +35,9 @@ public class TxClient implements TxProxy {
         if (res.code() != 200) {
             throw new SdkException(res.code(), res.message(), null);
         }
-        TxRes txRes = JSONObject.parseObject(result, TxRes.class);
+        QueryTxResponse txRes = JSONObject.parseObject(result, QueryTxResponse.class);
+        txRes.setCode(res.code());
+        txRes.setMessage(res.message());
         return txRes;
     }
 }

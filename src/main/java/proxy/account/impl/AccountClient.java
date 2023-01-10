@@ -36,6 +36,8 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(res.code(), res.message(), errorResponse.getError());
         }
         AccountResponse response = JSONObject.parseObject(result, AccountResponse.class);
+        response.setCode(res.code());
+        response.setMessage(res.message());
         return response;
     }
 
