@@ -2,10 +2,11 @@ package model.account;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.BaseResponse;
 
 @NoArgsConstructor
 @Data
-public class AccountResponse {
+public class AccountResponse extends BaseResponse {
 
     private DataDTO data;
 

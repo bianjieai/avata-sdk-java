@@ -1,28 +1,29 @@
 package exception;
 
 import constant.ErrorMessage;
+import model.ErrorResponse;
 
 public class SdkException extends RuntimeException {
-    private final String codeSpace;
+    private final ErrorResponse.ErrorDTO error;
     private final int code;
     private final String msg;
 
     public SdkException(ErrorMessage errorMessage) {
         super(errorMessage.getMessage());
-        this.codeSpace = errorMessage.getCodeSpace();
+        this.error = null;
         this.code = errorMessage.getCode();
         this.msg = errorMessage.getMessage();
     }
 
-    public SdkException(String codeSpace, int code, String msg) {
+    public SdkException(int code, String msg, ErrorResponse.ErrorDTO error) {
         super(msg);
-        this.codeSpace = codeSpace;
+        this.error = error;
         this.code = code;
         this.msg = msg;
     }
 
-    public String getCodeSpace() {
-        return codeSpace;
+    public ErrorResponse.ErrorDTO getError() {
+        return error;
     }
 
     public int getCode() {

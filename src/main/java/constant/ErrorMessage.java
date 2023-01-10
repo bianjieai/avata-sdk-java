@@ -2,25 +2,20 @@ package constant;
 
 public enum ErrorMessage {
 
-    UNKNOWN_ERROR("avata",9999, "unknown error"),
-    INTERNAL_ERROR("avata",500, "internal error")
+    UNKNOWN_ERROR(9999, "unknown error"),
+    INTERNAL_ERROR(500, "internal error")
     ;
 
-    private String codeSpace;
     private Integer code;
     private String message;
 
-    private ErrorMessage(String codeSpace, Integer code, String message) {
-        this.codeSpace = codeSpace;
+    private ErrorMessage(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
     public String getMessage() {
         return message;
-    }
-    public String getCodeSpace() {
-        return codeSpace;
     }
     public Integer getCode() {
         return code;
