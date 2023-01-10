@@ -1,7 +1,7 @@
 package proxy.nft;
 
+import model.PublicResponse;
 import model.nft.CreateNftRequest;
-import model.nft.CreateNftResponse;
 
 public interface NftProxy {
     /**
@@ -9,5 +9,5 @@ public interface NftProxy {
      * @param createNftRequest 请求参数
      * @return
      */
-    CreateNftResponse createNft(CreateNftRequest createNftRequest);
+    PublicResponse createNft(CreateNftRequest createNftRequest, String classId);
 }
