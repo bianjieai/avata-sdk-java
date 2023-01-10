@@ -5,7 +5,7 @@ public class AccountTest {
     @Test
     void TestCreateAccount() {
         Client client = new Client.Builder()
-                .setAvataGateway("")
+                .setDoMain("")
                 .setApiKey("")
                 .setApiSecret("")
                 .init();

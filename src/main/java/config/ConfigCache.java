@@ -12,7 +12,7 @@ public class ConfigCache {
 
     private static final ConcurrentHashMap<String, ConfigInfo> MAP = new ConcurrentHashMap<>();
 
-    public static void initCache(String avataGateway, String apiKey, String apiSecret) {
+    public static void initCache(String avataGateway, long httpTimeout, String apiKey, String apiSecret) {
         ConfigInfo configInfo = new ConfigInfo();
 
         if (!Strings.isEmpty(avataGateway)) {
@@ -24,6 +24,7 @@ public class ConfigCache {
         if (!Strings.isEmpty(apiSecret)) {
             configInfo.setApiSecret(apiSecret);
         }
+        configInfo.setHttpTimeout(httpTimeout);
 
         MAP.put(SDK_CACHE_KEY, configInfo);
 
