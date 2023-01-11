@@ -4,8 +4,8 @@ import exception.SdkException;
 import proxy.account.impl.AccountClient;
 import model.mt.MtClient;
 import proxy.nft.impl.NftClient;
-import model.order.OrderClient;
-import model.records.RecordsClient;
+import proxy.order.impl.OrderClient;
+import proxy.records.impl.RecordsClient;
 import proxy.tx.impl.TxClient;
 import util.Strings;
 

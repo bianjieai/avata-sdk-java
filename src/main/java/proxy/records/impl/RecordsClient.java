@@ -1,4 +1,4 @@
-package model.records;
+package proxy.records.impl;
 
 public class RecordsClient {
 }
