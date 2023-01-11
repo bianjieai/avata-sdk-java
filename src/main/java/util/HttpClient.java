@@ -18,7 +18,7 @@ public class HttpClient {
     /**
      * Send a post request
      */
-    public Response Post(String path, String content) throws Exception {
+    public static Response Post(String path, String content) throws Exception {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
@@ -38,7 +38,7 @@ public class HttpClient {
     /**
      * Send a get request
      */
-    public Response Get(String path, String content) throws Exception {
+    public static Response Get(String path, String content) throws Exception {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
