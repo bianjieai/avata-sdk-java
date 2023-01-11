@@ -1,7 +1,6 @@
 package proxy.tx.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
 import model.ErrorResponse;
@@ -31,10 +30,11 @@ public class TxClient implements TxProxy {
             res = HttpClient.Get(sb.toString(), "");
             result = res.body().string();
         } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
         }
         if (res.code() != 200) {
-            throw new SdkException(res.code(), res.message(), null);
+            ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
         }
         QueryTxResponse txRes = JSONObject.parseObject(result, QueryTxResponse.class);
         txRes.setCode(res.code());
@@ -45,7 +45,7 @@ public class TxClient implements TxProxy {
     /**
      * Query queue info
      *
-     * @return TxRes, Transaction Result
+     * @return QueryQueueResponse, queue info
      */
     public QueryQueueResponse queryQueueInfo(){
         String result;
@@ -54,11 +54,11 @@ public class TxClient implements TxProxy {
             res = HttpClient.Get(QUERY_QUEUE_INFO, "");
             result = res.body().string();
         } catch (Exception e) {
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR);
+            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
         }
         if (res.code() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(res.code(), res.message(), errorResponse.getError());
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
         }
         QueryQueueResponse queryRes = JSONObject.parseObject(result, QueryQueueResponse.class);
         queryRes.setCode(res.code());

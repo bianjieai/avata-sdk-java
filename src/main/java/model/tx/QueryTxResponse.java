@@ -21,18 +21,32 @@ public class QueryTxResponse extends BaseResponse {
         private Integer blockHeight;
         private String timestamp;
         private String tag;
-        private String nft;
-        private String mt;
-        private DataDTO.RecordDTO record;
+        private Nft nft;
+        private Mt mt;
+        private Record record;
 
         @NoArgsConstructor
         @Data
-        public static class RecordDTO {
-            private DataDTO.RecordDTO.CreateRecordDTO createRecord;
+        public static class Nft {
+            private String classId;
+            private String nftId;
+        }
+
+        @NoArgsConstructor
+        @Data
+        public static class Mt {
+            private String classId;
+            private String mtId;
+        }
+
+        @NoArgsConstructor
+        @Data
+        public static class Record {
+            private CreateRecord createRecord;
 
             @NoArgsConstructor
             @Data
-            public static class CreateRecordDTO {
+            public static class CreateRecord {
                 private String recordId;
                 private String certificateUrl;
             }

@@ -37,15 +37,15 @@ public class Client {
 
         public Builder setDoMain(String doMain) {
             if (Strings.isEmpty(doMain)) {
-                throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+                throw new SdkException(ErrorMessage.DOMAIN_ERROR, null, null);
             }
             this.doMain = doMain;
             return this;
         }
 
         public Builder setHttpTimeout(long httpTimeout) {
-            if (httpTimeout == 0) {
-                throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+            if (httpTimeout <= 0) {
+                throw new SdkException(ErrorMessage.HTTP_TIMEOUT_ERROR, null, null);
             }
             this.httpTimeout = httpTimeout;
             return this;
@@ -53,7 +53,7 @@ public class Client {
 
         public Builder setApiKey(String apiKey) {
             if (Strings.isEmpty(apiKey)) {
-                throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+                throw new SdkException(ErrorMessage.API_KEY_ERROR, null, null);
             }
             this.apiKey = apiKey;
             return this;
@@ -61,7 +61,7 @@ public class Client {
 
         public Builder setApiSecret(String apiSecret) {
             if (Strings.isEmpty(apiSecret)) {
-                throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
+                throw new SdkException(ErrorMessage.API_SECRET_ERROR, null, null);
             }
             this.apiSecret = apiSecret;
             return this;

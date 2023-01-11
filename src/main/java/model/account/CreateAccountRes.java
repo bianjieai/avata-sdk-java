@@ -6,7 +6,7 @@ import model.BaseResponse;
 
 @NoArgsConstructor
 @Data
-public class AccountResponse extends BaseResponse {
+public class CreateAccountRes extends BaseResponse {
 
     private DataDTO data;
 
