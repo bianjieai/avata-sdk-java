@@ -3,6 +3,7 @@ package proxy.nft.impl;
 import com.alibaba.fastjson.JSONObject;
 import constant.ErrorMessage;
 import exception.SdkException;
+import model.ErrorResponse;
 import model.PublicResponse;
 import model.nft.*;
 import okhttp3.Response;
@@ -17,45 +18,57 @@ public class NftClient implements NftProxy {
     private static final String TRANSFER_CLASS = "/v1beta1/nft/class-transfers/";
     private static final String CREATE_NFT = "/v1beta1/nft/nfts/";
     private static final String TRANSFER_NFT = "/v1beta1/nft/nft-transfers/";
-
+    private static final String EDIT_NFT = "/v1beta1/nft/nfts/";
     private static final String DELETE_NFT = "/v1beta1/nft/nfts/";
+    private static final String BATCH_CREATE_NFT = "/v1beta1/nft/batch/nfts/";
+    private static final String BATCH_TRANSFER_NFT = "/v1beta1/nft/batch/nft-transfers/";
+    private static final String BATCH_EDIT_NFT = "/v1beta1/nft/batch/nfts/";
+    private static final String BATCH_DELETE_NFT = "/v1beta1/nft/batch/nfts/";
+    private static final String QUERY_NFT = "/v1beta1/nft/nfts";
+    private static final String QUERY_NFT_DETAIL = "/v1beta1/nft/nfts/";
+    private static final String QUERY_NFT_HISTORY = "/v1beta1/nft/nfts/";
+
 
     @Override
-    public PublicResponse createClass(CreateClassRequest createClassRequest) {
-        HttpReq httpReq = new HttpReq();
-
+    public PublicResponse createClass(CreateClassReq req) {
+        HttpClient httpReq = new HttpClient();
         // todo 校验必填参数
-        if (Strings.isEmpty(createClassRequest.getName())) {
+        if (Strings.isEmpty(req.getName())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-        if (Strings.isEmpty(createClassRequest.getOwner())) {
+        if (Strings.isEmpty(req.getOwner())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-        if (Strings.isEmpty(createClassRequest.getOperationId())) {
+        if (Strings.isEmpty(req.getOperation_id())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-
         // 请求body
         String result;
+        Response res;
         try {
-            Response res = httpReq.Post(CREATE_CLASS, JSONObject.toJSONString(createClassRequest));
+            res = httpReq.Post(CREATE_CLASS, JSONObject.toJSONString(req));
             result = res.body().string();
         } catch (Exception e) {
-            //todo err
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR);
+            // todo 定义错误类型
+            throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
         }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        return response;
+        if (res.code() != 200) {
+            System.out.println("-------");
+            throw new SdkException(res.code(), res.message(), null);
+        }
+        PublicResponse resp = JSONObject.parseObject(result, PublicResponse.class);
+        resp.setCode(res.code());
+        resp.setMessage(res.message());
+        return resp;
     }
 
     @Override
-    public QueryClassResponse queryClass(QueryClassRequest queryClassRequest) {
-        // todo 优化httpreq获取
-        HttpReq httpReq = new HttpReq();
+    public QueryClassResp queryClass(QueryClassReq req) {
+        HttpClient httpReq = new HttpClient();
         //如果要加查询条件
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_CLASS);
-        sb.append(queryClassRequest.getName());
+        sb.append(req.getName());
         String result;
         try {
             Response res = httpReq.Get(sb.toString(), "");
@@ -64,14 +77,13 @@ public class NftClient implements NftProxy {
             // todo 定义错误类型
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
         }
-        QueryClassResponse response = JSONObject.parseObject(result, QueryClassResponse.class);
+        QueryClassResp response = JSONObject.parseObject(result, QueryClassResp.class);
         return response;
     }
 
     @Override
-    public QueryClassDetailResponse queryClassDetail(String classId) {
-        // todo 优化httpreq获取
-        HttpReq httpReq = new HttpReq();
+    public QueryClassDetailResp queryClassDetail(String classId) {
+        HttpClient httpReq = new HttpClient();
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_CLASS_DETAIL);
         sb.append(classId);
@@ -83,19 +95,19 @@ public class NftClient implements NftProxy {
             // todo 定义错误类型
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
         }
-        QueryClassDetailResponse res = JSONObject.parseObject(result, QueryClassDetailResponse.class);
+        QueryClassDetailResp res = JSONObject.parseObject(result, QueryClassDetailResp.class);
         return res;
     }
 
     @Override
-    public PublicResponse transferClass(TransferClassRequest transferClassRequest, String classId, String owner) {
-        HttpReq httpReq = new HttpReq();
+    public PublicResponse transferClass(TransferClassReq req, String classId, String owner) {
+        HttpClient httpReq = new HttpClient();
 
         // todo 校验必填参数
-        if (Strings.isEmpty(transferClassRequest.getRecipient())) {
+        if (Strings.isEmpty(req.getRecipient())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-        if (Strings.isEmpty(transferClassRequest.getOperationId())) {
+        if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
 
@@ -105,39 +117,44 @@ public class NftClient implements NftProxy {
         sb.append(classId);
         sb.append(owner);
         String result;
+        Response res;
         try {
-            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(transferClassRequest));
+            res = httpReq.Post(sb.toString(), JSONObject.toJSONString(req));
             result = res.body().string();
         } catch (Exception e) {
-            //todo err
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);
         }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        return response;
+        if (res.code() != 200) {
+            ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
+            throw new SdkException(res.code(), res.message(), errorResponse.getError());
+        }
+        PublicResponse resp = JSONObject.parseObject(result, PublicResponse.class);
+        resp.setCode(res.code());
+        resp.setMessage(res.message());
+        return resp;
     }
 
     @Override
-    public PublicResponse createNft(CreateNftRequest createNftRequest, String classId) {
+    public PublicResponse createNft(CreateNftReq req, String classId) {
         HttpClient httpReq = new HttpClient();
 
         // todo 校验必填参数
-        if (Strings.isEmpty(createNftRequest.getName())) {
+        if (Strings.isEmpty(req.getName())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-        if (Strings.isEmpty(createNftRequest.getOperationId())) {
+        if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-
         // 请求body
         StringBuffer sb = new StringBuffer();
         sb.append(CREATE_NFT);
         sb.append(classId);
         String result;
+        Response res;
         try {
-            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(createNftRequest));
+            res = httpReq.Post(sb.toString(), JSONObject.toJSONString(req));
             result = res.body().string();
         } catch (Exception e) {
-            //todo err
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);
         }
         PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
@@ -145,14 +162,13 @@ public class NftClient implements NftProxy {
     }
 
     @Override
-    public  PublicResponse transferNft(TransferNftRequest transferNftRequest, String classId, String owner, String nftId){
-        HttpReq httpReq = new HttpReq();
-
+    public PublicResponse transferNft(TransferNftReq req, String classId, String owner, String nftId) {
+        HttpClient httpReq = new HttpClient();
         // todo 校验必填参数
-        if (Strings.isEmpty(transferNftRequest.getRecipient())) {
+        if (Strings.isEmpty(req.getRecipient())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
-        if (Strings.isEmpty(transferNftRequest.getOperationId())) {
+        if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
 
@@ -164,7 +180,7 @@ public class NftClient implements NftProxy {
         sb.append(nftId);
         String result;
         try {
-            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(transferNftRequest));
+            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(req));
             result = res.body().string();
         } catch (Exception e) {
             //todo err
@@ -175,11 +191,16 @@ public class NftClient implements NftProxy {
     }
 
     @Override
-    public PublicResponse deleteNft(DeleteNftRequest deleteNftRequest,String classId,String owner,String nftId){
-        HttpReq httpReq = new HttpReq();
+    public PublicResponse editNft(EditNftReq req, String classId, String owner, String nftId) {
+        return null;
+    }
+
+    @Override
+    public PublicResponse deleteNft(DeleteNftReq req, String classId, String owner, String nftId) {
+        HttpClient httpReq = new HttpClient();
 
         // todo 校验必填参数
-        if (Strings.isEmpty(deleteNftRequest.getOperationId())) {
+        if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.INTERNAL_ERROR);//todo
         }
 
@@ -191,7 +212,7 @@ public class NftClient implements NftProxy {
         sb.append(nftId);
         String result;
         try {
-            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(deleteNftRequest));
+            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(req));
             result = res.body().string();
         } catch (Exception e) {
             //todo err
@@ -199,5 +220,41 @@ public class NftClient implements NftProxy {
         }
         PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
         return response;
+    }
+
+    @Override
+    public PublicResponse batchCreateNft(BatchCreateNftReq req, String classId){
+        return null;
+    }
+
+    @Override
+    public PublicResponse batchTransferNft(BatchTransferNftReq req, String owner){
+        return null;
+    }
+
+    @Override
+    public PublicResponse batchEditNft(BatchEditNftReq req, String owner){
+        return null;
+    }
+
+    @Override
+    public PublicResponse batchDeleteNft(BatchDeleteNftReq req, String owner){
+        return null;
+
+    }
+
+    @Override
+    public QueryNftResp queryNft(QueryNftReq req){
+        return null;
+    }
+
+    @Override
+    public QueryNftDetailResp queryNftDetail(String classId, String nftId){
+        return null;
+    }
+
+    @Override
+    public QueryNftHistoryResp queryNftHistory(String classId, String nftId){
+        return null;
     }
 }

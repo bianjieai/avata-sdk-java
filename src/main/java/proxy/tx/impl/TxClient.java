@@ -18,7 +18,7 @@ public class TxClient implements TxProxy {
      * @return TxRes, Transaction Result
      */
     public QueryTxResponse queryTx(String operationId){
-        // todo 优化httpreq获取
+        // todo 优化 httpreq 获取
         HttpClient httpReq = new HttpClient();
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
@@ -33,6 +33,7 @@ public class TxClient implements TxProxy {
             throw new SdkException(ErrorMessage.UNKNOWN_ERROR);
         }
         if (res.code() != 200) {
+            System.out.println("-------");
             throw new SdkException(res.code(), res.message(), null);
         }
         QueryTxResponse txRes = JSONObject.parseObject(result, QueryTxResponse.class);

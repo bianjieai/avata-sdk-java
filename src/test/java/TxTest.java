@@ -1,5 +1,3 @@
-import model.PublicResponse;
-import model.nft.CreateNftRequest;
 import model.tx.QueryTxResponse;
 import org.junit.jupiter.api.Test;
 

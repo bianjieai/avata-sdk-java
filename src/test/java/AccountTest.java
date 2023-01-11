@@ -14,7 +14,7 @@ public class AccountTest {
                 .setApiSecret("ceshi")
                 .init();
         try {
-            AccountResponse account = client.accountClient.createAccount("sxjtest", "sxjcreateaccount004");
+            AccountResponse account = client.accountClient.createAccount("lmhtest", "lmhcreateaccount002");
             System.out.println(account.getData());
             System.out.println("no exception");
         }catch (Exception e) {
