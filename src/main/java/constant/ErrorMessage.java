@@ -1,9 +1,15 @@
 package constant;
 
 public enum ErrorMessage {
-
-    UNKNOWN_ERROR(9999, "unknown error"),
-    INTERNAL_ERROR(500, "internal error")
+    AVATA_ERROR(-1, "avata error"),
+    UNKNOWN_ERROR(-1, "unknown error"),
+    INTERNAL_ERROR(-1, "internal error"),
+    OPERATION_ID_ERROR(-1, "operation_id is required"),
+    NAME_ERROR(-1, "name is required"),
+    API_KEY_ERROR(-1, "api_key is required"),
+    API_SECRET_ERROR(-1, "api_secret is required"),
+    DOMAIN_ERROR(-1, "domain is required"),
+    HTTP_TIMEOUT_ERROR(-1, "http timeout can not less than 0")
     ;
 
     private Integer code;
@@ -19,24 +25,6 @@ public enum ErrorMessage {
     }
     public Integer getCode() {
         return code;
-    }
-
-    public static String getMessage(Integer code) {
-        for (ErrorMessage error : ErrorMessage.values()) {
-            if (error.code.equals(code)) {
-                return error.message;
-            }
-        }
-        return null;
-    }
-
-    public static String getMessage(ErrorMessage errorMessage) {
-        for (ErrorMessage error : ErrorMessage.values()) {
-            if (error.code.equals(errorMessage.code)) {
-                return error.message;
-            }
-        }
-        return null;
     }
 
 }
