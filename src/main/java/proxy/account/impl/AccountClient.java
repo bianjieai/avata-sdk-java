@@ -1,6 +1,7 @@
 package proxy.account.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
 import model.ErrorResponse;
@@ -17,7 +18,6 @@ public class AccountClient implements AccountProxy {
     private static final String CREATE_ACCOUNTS = "/v1beta1/accounts";
 
     public AccountResponse createAccount(String name, String operationId){
-        HttpClient httpReq = new HttpClient();
 
         // 请求body
         Map<String, Object> body = new HashMap<>();
@@ -26,7 +26,7 @@ public class AccountClient implements AccountProxy {
         String result;
         Response res;
         try {
-            res = httpReq.Post(CREATE_ACCOUNT, JSONObject.toJSONString(body));
+            res = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(body));
             result = res.body().string();
         }catch (Exception e) {
             throw  new SdkException(ErrorMessage.INTERNAL_ERROR);
