@@ -12,7 +12,7 @@ public class TxTest {
 
     @Test
     public void queryTx(){
-        QueryTxResponse txRes = client.txClient.queryTx("lmhtestcreatenft0001");
+        QueryTxResponse txRes = client.txClient.queryTx("crfsdvad344321");
         System.out.println(txRes.getData());
     }
 
