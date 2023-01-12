@@ -25,8 +25,7 @@ public class TxClient implements TxProxy {
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
         sb.append(operationId);
-        ForestRequest<?> forestRequest = HttpClient.Get(sb.toString(), "");
-        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        ForestResponse response = HttpClient.Get(sb.toString(), "");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -42,8 +41,7 @@ public class TxClient implements TxProxy {
      * @return QueryQueueResponse, queue info
      */
     public QueryQueueResponse queryQueueInfo(){
-        ForestRequest<?> forestRequest = HttpClient.Get(QUERY_QUEUE_INFO, "");
-        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        ForestResponse response = HttpClient.Get(QUERY_QUEUE_INFO, "");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);

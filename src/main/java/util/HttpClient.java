@@ -3,6 +3,7 @@ package util;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestRequest;
+import com.dtflys.forest.http.ForestResponse;
 import config.ConfigCache;
 import okhttp3.*;
 import sun.security.util.Length;
@@ -16,7 +17,7 @@ public class HttpClient {
     /**
      * Send a post request
      */
-    public static ForestRequest<?> Post(String path, String content) {
+    public static ForestResponse Post(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
@@ -32,13 +33,13 @@ public class HttpClient {
         if (body != null) {
             req.addBody(body);
         }
-        return req;
+        return req.execute(ForestResponse.class);
     }
 
     /**
      * Send a get request
      */
-    public static ForestRequest<?> Get(String path, String content) {
+    public static ForestResponse Get(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
@@ -54,6 +55,6 @@ public class HttpClient {
         if (query != null) {
             req.addQuery(query);
         }
-        return req;
+        return req.execute(ForestResponse.class);
     }
 }

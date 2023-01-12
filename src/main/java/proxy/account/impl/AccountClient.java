@@ -30,8 +30,7 @@ public class AccountClient implements AccountProxy {
         if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        ForestRequest<?> forestRequest = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
-        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -49,8 +48,7 @@ public class AccountClient implements AccountProxy {
         if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        ForestRequest<?> forestRequest = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
-        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -64,8 +62,7 @@ public class AccountClient implements AccountProxy {
 
     @Override
     public QueryAccountsRes queryAccounts(QueryAccountsReq req) {
-        ForestRequest<?> forestRequest = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req));
-        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -77,8 +74,7 @@ public class AccountClient implements AccountProxy {
 
     @Override
     public QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req) {
-        ForestRequest<?> forestRequest = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
-        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
