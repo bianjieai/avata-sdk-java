@@ -2,7 +2,6 @@
 import model.tx.QueryQueueResponse;
 import model.tx.QueryTxResponse;
 import org.junit.jupiter.api.Test;
-import util.UrlBuilder;
 
 public class TxTest {
     Client client = new Client.Builder()
