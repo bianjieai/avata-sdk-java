@@ -7,7 +7,8 @@ public enum ErrorMessage {
     OPERATION_ID_ERROR(-1, "operation_id is required"),
     NAME_ERROR(-1, "name is required"),
     OWNER_ERROR(-1,"owner is required"),
-
+    NFTS_ERROR(-1,"nfts is required"),
+    DATA_ERROR(-2,"data is required"),
     RECIPIENT_ERROR(-1,"recipient is required"),
     API_KEY_ERROR(-1, "api_key is required"),
     API_SECRET_ERROR(-1, "api_secret is required"),

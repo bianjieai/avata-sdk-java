@@ -14,7 +14,7 @@ public class AccountTest {
     void TestCreateAccount() {
         CreateAccountReq req = new CreateAccountReq();
         req.setName("dxycfuvgibo");
-        req.setOperationId("operationId3418");
+        req.setOperationId("operationId341833");
         try {
             CreateAccountRes account = client.accountClient.createAccount(req);
             System.out.println(account.getData());

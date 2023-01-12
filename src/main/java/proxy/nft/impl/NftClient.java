@@ -4,16 +4,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
 import exception.SdkException;
+import model.BaseResponse;
 import model.ErrorResponse;
 import model.PublicResponse;
-import model.account.CreateAccountRes;
 import model.nft.*;
-import model.tx.QueryTxResponse;
 import okhttp3.Response;
 import proxy.nft.NftProxy;
 import util.HttpClient;
 import util.Strings;
 
+import java.awt.*;
 import java.lang.reflect.Array;
 
 public class NftClient implements NftProxy {
@@ -53,6 +53,7 @@ public class NftClient implements NftProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 
@@ -81,6 +82,7 @@ public class NftClient implements NftProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryClassDetailResp res = JSONObject.parseObject(result, QueryClassDetailResp.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 
@@ -100,6 +102,8 @@ public class NftClient implements NftProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+
         return res;
     }
 
@@ -119,13 +123,21 @@ public class NftClient implements NftProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+
         return res;
     }
     //avataoqfkdubslm27ids1veptd32qkhd
 
     @Override //todo
     public PublicResponse transferNft(TransferNftReq req, String classId, String owner, String nftId) {
-
+        // check params
+        if (Strings.isEmpty(req.getRecipient())) {
+            throw new SdkException(ErrorMessage.NAME_ERROR, null, null);//todo
+        }
+        if (Strings.isEmpty(req.getOperation_id())) {
+            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);//todo
+        }
         return null;
     }
 
@@ -150,26 +162,62 @@ public class NftClient implements NftProxy {
 
     @Override //todo
     public PublicResponse deleteNft(DeleteNftReq req, String classId, String owner, String nftId) {
+        // check params
+        if (Strings.isEmpty(req.getOperation_id())) {
+            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        }
 
+        return null;
     }
 
     @Override
     public PublicResponse batchCreateNft(BatchCreateNftReq req, String classId) {
-
+        // check params
+        if (Strings.isEmpty(req.getName())) {
+            throw new SdkException(ErrorMessage.NAME_ERROR, null, null);
+        }
+        if (req.getRecipients() == null) {
+            throw new SdkException(ErrorMessage.RECIPIENT_ERROR, null, null);
+        }
+        if (Strings.isEmpty(req.getOperation_id())) {
+            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        }
+        return null;
     }
 
     @Override
     public PublicResponse batchTransferNft(BatchTransferNftReq req, String owner) {
+        // check params
+        if (req.getData() == null) {
+            throw new SdkException(ErrorMessage.DATA_ERROR, null, null);
+        }
+        if (Strings.isEmpty(req.getOperation_id())) {
+            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        }
         return null;
     }
 
     @Override
     public PublicResponse batchEditNft(BatchEditNftReq req, String owner) {
+        // check params
+        if (req.getNfts() == null) {
+            throw new SdkException(ErrorMessage.NFTS_ERROR, null, null);
+        }
+        if (Strings.isEmpty(req.getOperation_id())) {
+            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        }
         return null;
     }
 
     @Override
     public PublicResponse batchDeleteNft(BatchDeleteNftReq req, String owner) {
+        // check params
+        if (req.getNfts() == null) {
+            throw new SdkException(ErrorMessage.NFTS_ERROR, null, null);
+        }
+        if (Strings.isEmpty(req.getOperation_id())) {
+            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        }
         return null;
 
     }
@@ -181,7 +229,7 @@ public class NftClient implements NftProxy {
 
     @Override //todo
     public QueryNftDetailResp queryNftDetail(String classId, String nftId) {
-
+        return null;
     }
 
     @Override
