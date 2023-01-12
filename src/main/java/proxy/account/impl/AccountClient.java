@@ -5,6 +5,7 @@ import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
 import exception.SdkException;
+import model.BaseResponse;
 import model.ErrorResponse;
 import model.account.*;
 import model.tx.QueryQueueResponse;
@@ -37,8 +38,7 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);
-        res.setCode(response.getStatusCode());
-        res.setMessage(response.getReasonPhrase());
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 
@@ -55,8 +55,7 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         BatchCreateAccountRes res = JSONObject.parseObject(result, BatchCreateAccountRes.class);
-        res.setCode(response.getStatusCode());
-        res.setMessage(response.getReasonPhrase());
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 
@@ -69,6 +68,7 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryAccountsRes res = JSONObject.parseObject(result, QueryAccountsRes.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 
@@ -81,6 +81,7 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryAccountsHistoryRes res = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 }
