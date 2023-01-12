@@ -11,11 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AvataUtils {
-    public static Request signReq(Request req) {
-        //todo 对请求添加时间戳和签名参数
-        return req;
-    }
-
     /**
      * 对请求参数进行签名处理
      *
