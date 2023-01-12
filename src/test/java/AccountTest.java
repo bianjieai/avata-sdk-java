@@ -12,7 +12,7 @@ public class AccountTest {
     void TestCreateAccount() {
         CreateAccountReq req = new CreateAccountReq();
         req.setName("name");
-        req.setOperationId("operationId");
+        req.setOperationId("sxjcreateaccount013");
         try {
             CreateAccountRes account = client.accountClient.createAccount(req);
             System.out.println(account.getData());

@@ -12,9 +12,9 @@ public class ConfigInfo {
 
     public ConfigInfo() {
         /**
-         * default 10s
+         * default 10000ms
          */
-        httpTimeout = 10;
+        httpTimeout = 10000;
     }
 
     public String getDoMain() {
