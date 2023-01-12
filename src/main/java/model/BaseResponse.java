@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 public class BaseResponse {
     private int code;
     private String message;
+    private Http http;
 
     public BaseResponse() {
         this.code = 0;
@@ -18,6 +19,11 @@ public class BaseResponse {
     public static class Http {
         private Integer code;
         private String message;
+
+        public Http(Integer code, String message){
+            this.code = code;
+            this.message = message;
+        }
     }
 }
 
