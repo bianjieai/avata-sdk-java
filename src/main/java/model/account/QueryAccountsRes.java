@@ -12,7 +12,7 @@ import java.util.List;
 public class QueryAccountsRes extends BaseResponse {
 
     @JSONField(name = "data")
-    private QueryAccountsHistoryRes.DataDTO data;
+    private DataDTO data;
 
     @NoArgsConstructor
     @Data
