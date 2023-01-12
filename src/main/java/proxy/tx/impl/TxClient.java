@@ -5,6 +5,7 @@ import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
 import exception.SdkException;
+import model.BaseResponse;
 import model.ErrorResponse;
 import model.tx.QueryQueueResponse;
 import model.tx.QueryTxResponse;
@@ -33,6 +34,7 @@ public class TxClient implements TxProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryTxResponse res = JSONObject.parseObject(result, QueryTxResponse.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 
@@ -49,6 +51,7 @@ public class TxClient implements TxProxy {
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryQueueResponse res = JSONObject.parseObject(result, QueryQueueResponse.class);
+        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
     }
 }
