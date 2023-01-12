@@ -12,7 +12,7 @@ import proxy.tx.TxProxy;
 import util.HttpClient;
 
 public class TxClient implements TxProxy {
-    private static final String QUERY_TX = "/v1beta1/tx/";
+    private static final String QUERY_TX = "/v1beta1/tx";
     private static final String QUERY_QUEUE_INFO = "/v1beta1/tx/queue/info";
 
     /**
@@ -24,6 +24,7 @@ public class TxClient implements TxProxy {
     public QueryTxResponse queryTx(String operationId){
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
+        sb.append("/");
         sb.append(operationId);
         ForestResponse response = HttpClient.Get(sb.toString(), "");
         String result = response.readAsString();

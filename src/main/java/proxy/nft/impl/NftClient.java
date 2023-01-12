@@ -1,11 +1,14 @@
 package proxy.nft.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
 import exception.SdkException;
 import model.ErrorResponse;
 import model.PublicResponse;
+import model.account.CreateAccountRes;
 import model.nft.*;
+import model.tx.QueryTxResponse;
 import okhttp3.Response;
 import proxy.nft.NftProxy;
 import util.HttpClient;
@@ -43,69 +46,42 @@ public class NftClient implements NftProxy {
         if (Strings.isEmpty(req.getOperation_id())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Post(CREATE_CLASS, JSONObject.toJSONString(req));
-            result = res.body().string();
-        } catch (Exception e) {
-            System.out.println(e);
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestResponse response = HttpClient.Post(CREATE_CLASS, JSONObject.toJSONString(req));
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        return res;
     }
 
     @Override
     public QueryClassResp queryClass(QueryClassReq req) {
         StringBuffer sb = new StringBuffer();
-        sb.append("?");
-        //todo 参数拼接方法
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(QUERY_CLASS, sb.toString());
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        sb.append(QUERY_CLASS);
+        ForestResponse response = HttpClient.Get(sb.toString(), JSONObject.toJSONString(req));
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        QueryClassResp resp = JSONObject.parseObject(result, QueryClassResp.class);
-        resp.setCode(res.code());
-        resp.setMessage(res.message());
-        return resp;
+        QueryClassResp res = JSONObject.parseObject(result, QueryClassResp.class);
+        return res;
     }
 
     @Override
     public QueryClassDetailResp queryClassDetail(String classId) {
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_CLASS_DETAIL);
-        sb.append(classId);
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(sb.toString(), "");
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestResponse response = HttpClient.Get(sb.toString(), "");
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        QueryClassDetailResp resp = JSONObject.parseObject(result, QueryClassDetailResp.class);
-        resp.setCode(res.code());
-        resp.setMessage(res.message());
-        return resp;
+        QueryClassDetailResp res = JSONObject.parseObject(result, QueryClassDetailResp.class);
+        return res;
     }
 
     @Override //todo
@@ -117,26 +93,14 @@ public class NftClient implements NftProxy {
         if (Strings.isEmpty(req.getOperation_id())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append(TRANSFER_CLASS);
-        sb.append(classId);
-        sb.append("/" + owner);
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Post(sb.toString(), JSONObject.toJSONString(req));
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestResponse response = HttpClient.Post(TRANSFER_CLASS, JSONObject.toJSONString(req));
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        return res;
     }
 
     @Override
@@ -148,26 +112,14 @@ public class NftClient implements NftProxy {
         if (Strings.isEmpty(req.getOperation_id())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);//todo
         }
-        // 请求body
-        StringBuffer sb = new StringBuffer();
-        sb.append(CREATE_NFT);
-        sb.append(classId);
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Post(sb.toString(), JSONObject.toJSONString(req));
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestResponse response = HttpClient.Post(CREATE_NFT, JSONObject.toJSONString(req));
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        return res;
     }
     //avataoqfkdubslm27ids1veptd32qkhd
 
@@ -186,91 +138,24 @@ public class NftClient implements NftProxy {
         if (Strings.isEmpty(req.getOperation_id())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append(EDIT_NFT);
-        sb.append(classId);
-        sb.append("/");
-        sb.append(owner);
-        sb.append("/");
-        sb.append(nftId);
-        String result;
-        Response res;
-        try {//todo Patch请求
-            res = HttpClient.Post(sb.toString(), JSONObject.toJSONString(req));
-            result = res.body().string();
-        } catch (Exception e) {
-            System.out.println(e);
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestResponse response = HttpClient.Post(EDIT_NFT, JSONObject.toJSONString(req));
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
+        return res;
     }
 
     @Override //todo
     public PublicResponse deleteNft(DeleteNftReq req, String classId, String owner, String nftId) {
-        HttpClient httpReq = new HttpClient();
 
-        // todo 校验必填参数
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);//todo
-        }
-
-        // 请求body
-        StringBuffer sb = new StringBuffer();
-        sb.append(DELETE_NFT);
-        sb.append(classId);
-        sb.append(owner);
-        sb.append(nftId);
-        String result;
-        try {
-            Response res = httpReq.Post(sb.toString(), JSONObject.toJSONString(req));
-            result = res.body().string();
-        } catch (Exception e) {
-            //todo err
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);//todo
-        }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        return response;
     }
 
     @Override
     public PublicResponse batchCreateNft(BatchCreateNftReq req, String classId) {
-        // check params
-        if (Strings.isEmpty(req.getName())) {
-            throw new SdkException(ErrorMessage.NAME_ERROR, null, null);//todo
-        }
-        if ((req.getRecipients() == null)) {
-            throw new SdkException(ErrorMessage.RECIPIENT_ERROR, null, null);//todo
-        }
-        if (Strings.isEmpty(req.getOperation_id())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);//todo
-        }
-        // 请求body
-        StringBuffer sb = new StringBuffer();
-        sb.append(BATCH_CREATE_NFT);
-        sb.append(classId);
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Post(sb.toString(), JSONObject.toJSONString(req));
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200) {
-            ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
-        }
-        PublicResponse response = JSONObject.parseObject(result, PublicResponse.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+
     }
 
     @Override
@@ -296,25 +181,7 @@ public class NftClient implements NftProxy {
 
     @Override //todo
     public QueryNftDetailResp queryNftDetail(String classId, String nftId) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(QUERY_NFT_DETAIL);
-        sb.append(classId);
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(sb.toString(), "");
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
-        }
-        if (res.code() != 200) {
-            ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
-        }
-        QueryNftDetailResp resp = JSONObject.parseObject(result, QueryNftDetailResp.class);
-        resp.setCode(res.code());
-        resp.setMessage(res.message());
-        return resp;
+
     }
 
     @Override
