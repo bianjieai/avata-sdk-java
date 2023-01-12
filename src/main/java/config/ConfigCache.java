@@ -30,7 +30,9 @@ public class ConfigCache {
         if (!Strings.isEmpty(apiSecret)) {
             configInfo.setApiSecret(apiSecret);
         }
-        configInfo.setHttpTimeout(httpTimeout);
+        if (httpTimeout != null) {
+            configInfo.setHttpTimeout(httpTimeout);
+        }
 
         MAP.put(SDK_CACHE_KEY, configInfo);
 
