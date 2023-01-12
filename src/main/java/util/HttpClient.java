@@ -1,54 +1,59 @@
 package util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.Forest;
+import com.dtflys.forest.http.ForestRequest;
 import config.ConfigCache;
 import okhttp3.*;
+import sun.security.util.Length;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HttpClient {
-    private static OkHttpClient okHttpClient;
-
-    static {
-        okHttpClient = new OkHttpClient().newBuilder()
-                .callTimeout(Duration.ofSeconds(ConfigCache.get().getHttpTimeout()))
-                .build();
-    }
-
     /**
      * Send a post request
      */
-    public static Response Post(String path, String content) throws Exception {
+    public static ForestRequest<?> Post(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
+        ForestRequest<?> req = Forest.post(url.toString()).contentTypeJson();
 
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, content);
-        Request request = new Request.Builder()
-                .url(url.toString())
-                .method("POST", body)
-                .addHeader("x-api-key", ConfigCache.get().getApiKey())
-                .addHeader("Content-Type", "application/json")
-                .build();
-        request = AvataUtils.signReq(request);
-        return okHttpClient.newCall(request).execute();
+        // signature
+        Long currentTime = System.currentTimeMillis();
+        Map<String, Object> body = JSONObject.parseObject(content);
+        String signature = AvataUtils.signature(path, null, body, currentTime, ConfigCache.get().getApiSecret());
+        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        req.addHeader("x-timestamp", String.valueOf(currentTime));
+        req.addHeader("x-signature", signature);
+        if (body != null) {
+            req.addBody(body);
+        }
+        return req;
     }
 
     /**
      * Send a get request
      */
-    public static Response Get(String path, String content) throws Exception {
+    public static ForestRequest<?> Get(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
-        url.append(content);
-        Request request = new Request.Builder()
-                .url(url.toString())
-                .method("GET", null)
-                .addHeader("x-api-key", ConfigCache.get().getApiKey())
-                .build();
-        request = AvataUtils.signReq(request);
-        return okHttpClient.newCall(request).execute();
+        ForestRequest<?> req = Forest.get(url.toString()).contentTypeJson();
+
+        // signature
+        Long currentTime = System.currentTimeMillis();
+        Map<String, Object> query = JSONObject.parseObject(content);
+        String signature = AvataUtils.signature(path, query, null, currentTime, ConfigCache.get().getApiSecret());
+        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        req.addHeader("x-timestamp", String.valueOf(currentTime));
+        req.addHeader("x-signature", signature);
+        if (query != null) {
+            req.addQuery(query);
+        }
+        return req;
     }
 }

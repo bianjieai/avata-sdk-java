@@ -33,7 +33,7 @@ public class Client {
         private String doMain;
         private String apiKey;
         private String apiSecret;
-        private long httpTimeout;
+        private Integer httpTimeout;
 
         public Builder setDoMain(String doMain) {
             if (Strings.isEmpty(doMain)) {
@@ -43,7 +43,7 @@ public class Client {
             return this;
         }
 
-        public Builder setHttpTimeout(long httpTimeout) {
+        public Builder setHttpTimeout(Integer httpTimeout) {
             if (httpTimeout <= 0) {
                 throw new SdkException(ErrorMessage.HTTP_TIMEOUT_ERROR, null, null);
             }

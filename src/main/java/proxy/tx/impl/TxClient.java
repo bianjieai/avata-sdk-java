@@ -1,12 +1,13 @@
 package proxy.tx.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.http.ForestRequest;
+import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
 import exception.SdkException;
 import model.ErrorResponse;
 import model.tx.QueryQueueResponse;
 import model.tx.QueryTxResponse;
-import okhttp3.Response;
 import proxy.tx.TxProxy;
 import util.HttpClient;
 
@@ -24,22 +25,15 @@ public class TxClient implements TxProxy {
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
         sb.append(operationId);
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(sb.toString(), "");
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestRequest<?> forestRequest = HttpClient.Get(sb.toString(), "");
+        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        QueryTxResponse txRes = JSONObject.parseObject(result, QueryTxResponse.class);
-        txRes.setCode(res.code());
-        txRes.setMessage(res.message());
-        return txRes;
+        QueryTxResponse res = JSONObject.parseObject(result, QueryTxResponse.class);
+        return res;
     }
 
     /**
@@ -48,21 +42,14 @@ public class TxClient implements TxProxy {
      * @return QueryQueueResponse, queue info
      */
     public QueryQueueResponse queryQueueInfo(){
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(QUERY_QUEUE_INFO, "");
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestRequest<?> forestRequest = HttpClient.Get(QUERY_QUEUE_INFO, "");
+        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        QueryQueueResponse queryRes = JSONObject.parseObject(result, QueryQueueResponse.class);
-        queryRes.setCode(res.code());
-        queryRes.setMessage(res.message());
-        return queryRes;
+        QueryQueueResponse res = JSONObject.parseObject(result, QueryQueueResponse.class);
+        return res;
     }
 }

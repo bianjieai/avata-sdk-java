@@ -1,15 +1,20 @@
 package proxy.account.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.http.ForestRequest;
+import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
 import exception.SdkException;
 import model.ErrorResponse;
 import model.account.*;
+import model.tx.QueryQueueResponse;
 import model.tx.QueryTxResponse;
 import okhttp3.Response;
 import proxy.account.AccountProxy;
 import util.HttpClient;
 import util.Strings;
+
+import java.util.Map;
 
 public class AccountClient implements AccountProxy {
     private static final String CREATE_ACCOUNT = "/v1beta1/account";
@@ -25,22 +30,17 @@ public class AccountClient implements AccountProxy {
         if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
-            result = res.body().string();
-        }catch (Exception e) {
-            throw  new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200){
+        ForestRequest<?> forestRequest = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
+        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        CreateAccountRes response = JSONObject.parseObject(result, CreateAccountRes.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+        CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);
+        res.setCode(response.getStatusCode());
+        res.setMessage(response.getReasonPhrase());
+        return res;
     }
 
     @Override
@@ -49,67 +49,42 @@ public class AccountClient implements AccountProxy {
         if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
-            result = res.body().string();
-        }catch (Exception e) {
-            throw  new SdkException(ErrorMessage.INTERNAL_ERROR, null, null);
-        }
-        if (res.code() != 200){
+        ForestRequest<?> forestRequest = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
+        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        BatchCreateAccountRes response = JSONObject.parseObject(result, BatchCreateAccountRes.class);
-        response.setCode(0);
-        response.setMessage("");
-        return response;
+        BatchCreateAccountRes res = JSONObject.parseObject(result, BatchCreateAccountRes.class);
+        res.setCode(response.getStatusCode());
+        res.setMessage(response.getReasonPhrase());
+        return res;
     }
 
     @Override
     public QueryAccountsRes queryAccounts(QueryAccountsReq req) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("?");
-        //todo 参数拼接方法
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(QUERY_ACCOUNTS, sb.toString());
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestRequest<?> forestRequest = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req));
+        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        QueryAccountsRes txRes = JSONObject.parseObject(result, QueryAccountsRes.class);
-        txRes.setCode(res.code());
-        txRes.setMessage(res.message());
-        return txRes;
+        QueryAccountsRes res = JSONObject.parseObject(result, QueryAccountsRes.class);
+        return res;
     }
 
     @Override
     public QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("?");
-        //todo 参数拼接方法
-        String result;
-        Response res;
-        try {
-            res = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, sb.toString());
-            result = res.body().string();
-        } catch (Exception e) {
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
-        }
-        if (res.code() != 200) {
+        ForestRequest<?> forestRequest = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
+        ForestResponse response = forestRequest.execute(ForestResponse.class);
+        String result = response.readAsString();
+        if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(res.code(), res.message()));
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        QueryAccountsHistoryRes txRes = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
-        txRes.setCode(res.code());
-        txRes.setMessage(res.message());
-        return txRes;
+        QueryAccountsHistoryRes res = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
+        return res;
     }
 }
