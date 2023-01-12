@@ -44,7 +44,11 @@ public class Client {
         }
 
         public Builder setHttpTimeout(Integer httpTimeout) {
-            if (httpTimeout <= 0) {
+            if (httpTimeout == null) {
+                this.httpTimeout = 10000;
+                return this;
+            }
+            if (httpTimeout < 0) {
                 throw new SdkException(ErrorMessage.HTTP_TIMEOUT_ERROR, null, null);
             }
             this.httpTimeout = httpTimeout;

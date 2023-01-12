@@ -43,7 +43,7 @@ public class HttpClient {
         StringBuffer url = new StringBuffer();
         url.append(ConfigCache.get().getDoMain());
         url.append(path);
-        ForestRequest<?> req = Forest.get(url.toString()).contentTypeJson();
+        ForestRequest<?> req = Forest.get(url.toString());
 
         // signature
         Long currentTime = System.currentTimeMillis();
