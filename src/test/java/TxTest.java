@@ -1,5 +1,4 @@
-import model.PublicResponse;
-import model.nft.CreateNftRequest;
+import model.tx.QueryQueueResponse;
 import model.tx.QueryTxResponse;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +11,8 @@ public class TxTest {
 
     @Test
     public void queryTx(){
-
-        QueryTxResponse txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
-
-        System.out.println(txRes.getData().getNft().getNftId());
+        QueryTxResponse txRes = client.txClient.queryTx("lmhtestcreatenft0001");
+        System.out.println(txRes.getData());
     }
 
     @Test

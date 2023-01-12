@@ -1,5 +1,7 @@
 import model.account.CreateAccountReq;
 import model.account.CreateAccountRes;
+import model.account.QueryAccountsRes;
+import model.tx.QueryQueueResponse;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
@@ -11,8 +13,8 @@ public class AccountTest {
     @Test
     void TestCreateAccount() {
         CreateAccountReq req = new CreateAccountReq();
-        req.setName("name");
-        req.setOperationId("operationId");
+        req.setName("dxycfuvgibo");
+        req.setOperationId("operationId3418");
         try {
             CreateAccountRes account = client.accountClient.createAccount(req);
             System.out.println(account.getData());

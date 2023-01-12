@@ -11,11 +11,11 @@ public class BatchCreateNftReq {
 
     private String name;
     private String uri;
-    private String uriHash;
+    private String uri_hash;
     private String data;
     private List<RecipientsDTO> recipients;
     private String tag;
-    private String operationId;
+    private String operation_id;
 
     @NoArgsConstructor
     @Data
