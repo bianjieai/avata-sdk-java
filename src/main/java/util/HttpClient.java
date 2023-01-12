@@ -57,4 +57,48 @@ public class HttpClient {
         }
         return req.execute(ForestResponse.class);
     }
+
+    /**
+     * Send a patch request
+     */
+    public static ForestResponse Patch(String path, String content) {
+        StringBuffer url = new StringBuffer();
+        url.append(ConfigCache.get().getDoMain());
+        url.append(path);
+        ForestRequest<?> req = Forest.patch(url.toString()).contentTypeJson();
+
+        // signature
+        Long currentTime = System.currentTimeMillis();
+        Map<String, Object> body = JSONObject.parseObject(content);
+        String signature = AvataUtils.signature(path, null, body, currentTime, ConfigCache.get().getApiSecret());
+        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        req.addHeader("x-timestamp", String.valueOf(currentTime));
+        req.addHeader("x-signature", signature);
+        if (body != null) {
+            req.addBody(body);
+        }
+        return req.execute(ForestResponse.class);
+    }
+
+    /**
+     * Send a delete request
+     */
+    public static ForestResponse Delete(String path, String content) {
+        StringBuffer url = new StringBuffer();
+        url.append(ConfigCache.get().getDoMain());
+        url.append(path);
+        ForestRequest<?> req = Forest.delete(url.toString()).contentTypeJson();
+
+        // signature
+        Long currentTime = System.currentTimeMillis();
+        Map<String, Object> body = JSONObject.parseObject(content);
+        String signature = AvataUtils.signature(path, null, body, currentTime, ConfigCache.get().getApiSecret());
+        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        req.addHeader("x-timestamp", String.valueOf(currentTime));
+        req.addHeader("x-signature", signature);
+        if (body != null) {
+            req.addBody(body);
+        }
+        return req.execute(ForestResponse.class);
+    }
 }

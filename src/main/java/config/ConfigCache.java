@@ -52,7 +52,7 @@ public class ConfigCache {
         // 请求超时时间，单位为毫秒, 默认值为3000
         configuration.setTimeout(httpTimeout);
         // 连接超时时间，单位为毫秒, 默认值为2000
-        configuration.setConnectTimeout(2000);
+        configuration.setConnectTimeout(configInfo.getHttpTimeout());
         // 设置重试器
         configuration.setRetryer(BackOffRetryer.class);
         // 请求失败后重试次数，默认为0次不重试
