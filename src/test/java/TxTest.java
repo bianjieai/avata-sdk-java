@@ -11,7 +11,7 @@ public class TxTest {
 
     @Test
     public void queryTx(){
-        QueryTxResponse txRes = client.txClient.queryTx("crfsdvad344321");
+        QueryTxResponse txRes = client.txClient.queryTx("lmhcreatenft003");
         System.out.println(txRes.getData());
     }
 

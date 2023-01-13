@@ -17,7 +17,7 @@ public class BatchDeleteNftReq {
     @NoArgsConstructor
     @Data
     public static class NftsDTO {
-        private String classId;
-        private String nftId;
+        private String class_id;
+        private String nft_id;
     }
 }

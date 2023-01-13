@@ -35,6 +35,9 @@ public class AccountClient implements AccountProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
+            if (errorResponse == null) {
+                // todo
+            }
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);

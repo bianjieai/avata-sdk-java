@@ -58,7 +58,7 @@ public class ConfigCache {
         // 请求失败后重试次数，默认为0次不重试
         configuration.setMaxRetryCount(0);
         // 单向验证的HTTPS的默认SSL协议，默认为SSLv3
-        configuration.setSslProtocol(SSLUtils.SSL_3);
+        configuration.setSslProtocol(SSLUtils.TLS_1_2);
         // 打开或关闭日志，默认为true
         configuration.setLogEnabled(true);
         // [自v1.5.27版本起可用] 异步模式（默认为 platform）
