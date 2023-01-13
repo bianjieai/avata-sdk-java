@@ -8,7 +8,7 @@ public class ConfigInfo {
 
     private String apiSecret;
 
-    private long httpTimeout;
+    private Integer httpTimeout;
 
     public ConfigInfo() {
         /**
@@ -41,11 +41,11 @@ public class ConfigInfo {
         this.doMain = doMain;
     }
 
-    public long getHttpTimeout() {
+    public Integer getHttpTimeout() {
         return httpTimeout;
     }
 
-    public void setHttpTimeout(long httpTimeout) {
+    public void setHttpTimeout(Integer httpTimeout) {
         this.httpTimeout = httpTimeout;
     }
 }

@@ -8,7 +8,6 @@ public class TxTest {
             .setDoMain("http://192.168.150.41:18081")
             .setApiKey("000001")
             .setApiSecret("ceshi")
-            .setHttpTimeout(30000)
             .init();
 
     @Test
