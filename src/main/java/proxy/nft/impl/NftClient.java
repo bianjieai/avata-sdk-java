@@ -7,15 +7,11 @@ import exception.SdkException;
 import model.BaseResponse;
 import model.ErrorResponse;
 import model.PublicResponse;
-import model.account.QueryAccountsRes;
 import model.nft.*;
-import okhttp3.Response;
 import proxy.nft.NftProxy;
 import util.HttpClient;
 import util.Strings;
 
-import java.awt.*;
-import java.lang.reflect.Array;
 
 public class NftClient implements NftProxy {
     private static final String CREATE_CLASS = "/v1beta1/nft/classes";
@@ -136,7 +132,7 @@ public class NftClient implements NftProxy {
         return res;
     }
 
-    @Override //todo
+    @Override
     public PublicResponse transferNft(TransferNftReq req, String classId, String owner, String nftId) {
         // check params
         if (Strings.isEmpty(req.getRecipient())) {
