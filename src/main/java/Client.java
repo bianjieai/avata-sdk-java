@@ -2,7 +2,7 @@ import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
 import proxy.account.impl.AccountClient;
-import model.mt.MtClient;
+import proxy.mt.impl.MtClient;
 import proxy.nft.impl.NftClient;
 import proxy.order.impl.OrderClient;
 import proxy.records.impl.RecordsClient;

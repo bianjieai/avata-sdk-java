@@ -1,5 +1,3 @@
-import model.account.CreateAccountReq;
-import model.account.CreateAccountRes;
 import model.order.CreateOrderReq;
 import model.order.PublicOrderRes;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,7 @@ public class OrderTest {
     void TestCreateOrder() {
         CreateOrderReq req = new CreateOrderReq();
         req.setOrderId("sxjtestorderid001");
-        req.setAccount("account");
+        req.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
         req.setAmount(100);
         req.setOrderType("gas");// todo 提供枚举
         try {
