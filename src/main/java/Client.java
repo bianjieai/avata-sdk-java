@@ -34,6 +34,7 @@ public class Client {
         private String apiKey;
         private String apiSecret;
         private Integer httpTimeout;
+        private Boolean log;
 
         public Builder setDoMain(String doMain) {
             if (Strings.isEmpty(doMain)) {
@@ -71,8 +72,17 @@ public class Client {
             return this;
         }
 
+        public Builder setLog(Boolean log) {
+            if (log == null) {
+                this.log = true;
+                return this;
+            }
+            this.log = log;
+            return this;
+        }
+
         public Client init() {
-            ConfigCache.initCache(doMain, httpTimeout, apiKey, apiSecret);
+            ConfigCache.initCache(doMain, httpTimeout, apiKey, apiSecret, log);
             return new Client(this);
         }
     }
