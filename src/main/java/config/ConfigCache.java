@@ -17,7 +17,7 @@ public class ConfigCache {
 
     private static final ConcurrentHashMap<String, ConfigInfo> MAP = new ConcurrentHashMap<>();
 
-    public static void initCache(String avataGateway, Integer httpTimeout, String apiKey, String apiSecret) {
+    public static void initCache(String avataGateway, Integer httpTimeout, String apiKey, String apiSecret, Boolean log) {
         // init configInfo
         ConfigInfo configInfo = new ConfigInfo();
 
@@ -32,6 +32,10 @@ public class ConfigCache {
         }
         if (httpTimeout != null) {
             configInfo.setHttpTimeout(httpTimeout);
+        }
+
+        if (log == null) {
+            log = true;
         }
 
         MAP.put(SDK_CACHE_KEY, configInfo);
@@ -60,7 +64,7 @@ public class ConfigCache {
         // 单向验证的HTTPS的默认SSL协议，默认为SSLv3
         configuration.setSslProtocol(SSLUtils.TLS_1_2);
         // 打开或关闭日志，默认为true
-        configuration.setLogEnabled(true);
+        configuration.setLogEnabled(log);
         // [自v1.5.27版本起可用] 异步模式（默认为 platform）
         configuration.setAsyncMode(ForestAsyncMode.PLATFORM);
 

@@ -2,7 +2,7 @@ import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
 import proxy.account.impl.AccountClient;
-import model.mt.MtClient;
+import proxy.mt.impl.MtClient;
 import proxy.nft.impl.NftClient;
 import proxy.order.impl.OrderClient;
 import proxy.records.impl.RecordsClient;
@@ -34,6 +34,7 @@ public class Client {
         private String apiKey;
         private String apiSecret;
         private Integer httpTimeout;
+        private Boolean log;
 
         public Builder setDoMain(String doMain) {
             if (Strings.isEmpty(doMain)) {
@@ -71,8 +72,17 @@ public class Client {
             return this;
         }
 
+        public Builder setLog(Boolean log) {
+            if (log == null) {
+                this.log = true;
+                return this;
+            }
+            this.log = log;
+            return this;
+        }
+
         public Client init() {
-            ConfigCache.initCache(doMain, httpTimeout, apiKey, apiSecret);
+            ConfigCache.initCache(doMain, httpTimeout, apiKey, apiSecret, log);
             return new Client(this);
         }
     }
