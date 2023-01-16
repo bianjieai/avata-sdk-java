@@ -17,14 +17,14 @@ public interface NftProxy {
      * @param req 请求参数
      * @return
      */
-    QueryClassResp queryClass(QueryClassReq req);
+    QueryClassesResp queryClasses(QueryClassesReq req);
 
     /**
      * 查询 NFT 类别详情
      * @param classId 路径参数
      * @return
      */
-    QueryClassDetailResp queryClassDetail(String classId);
+    QueryClassResp queryClass(String classId);
 
     /**
      * 转让 NFT 类别
@@ -109,7 +109,7 @@ public interface NftProxy {
      * @param req
      * @return
      */
-    QueryNftResp queryNft(QueryNftReq req);
+    QueryNftsResp queryNfts(QueryNftsReq req);
 
     /**
      * 查询 NFT 详情
@@ -117,7 +117,7 @@ public interface NftProxy {
      * @param nftId
      * @return
      */
-    QueryNftDetailResp queryNftDetail(String classId, String nftId);
+    QueryNftResp queryNft(String classId, String nftId);
 
     /**
      * 查询 NFT 操作记录
