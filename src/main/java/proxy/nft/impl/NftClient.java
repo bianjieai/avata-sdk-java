@@ -47,7 +47,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
         if (response.isError()){
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            System.out.println(errorResponse);
+            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -128,7 +128,7 @@ public class NftClient implements NftProxy {
     public PublicResponse transferNft(TransferNftReq req, String classId, String owner, String nftId) {
         // check params
         if (Strings.isEmpty(req.getRecipient())) {
-            throw new SdkException(ErrorMessage.NAME_ERROR, null, null);//todo
+            throw new SdkException(ErrorMessage.RECIPIENT_ERROR, null, null);//todo
         }
         if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);//todo
@@ -214,7 +214,7 @@ public class NftClient implements NftProxy {
         if (req.getData() == null) {
             throw new SdkException(ErrorMessage.DATA_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOperation_id())) {
+        if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(BATCH_TRANSFER_NFT, owner);
@@ -239,10 +239,8 @@ public class NftClient implements NftProxy {
         if (Strings.isEmpty(req.getOperationId())) {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append(BATCH_EDIT_NFT);
-        sb.append(owner);
-        ForestResponse response = HttpClient.Patch(sb.toString(), JSONObject.toJSONString(req));
+        String path = String.format(BATCH_EDIT_NFT, owner);
+        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.isError()) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
