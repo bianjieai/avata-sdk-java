@@ -21,8 +21,8 @@ public enum ErrorMessage {
     API_KEY_ERROR(-1, "api_key is required"),
     API_SECRET_ERROR(-1, "api_secret is required"),
     DOMAIN_ERROR(-1, "domain is required"),
-    HTTP_TIMEOUT_ERROR(-1, "http timeout can not less than 0")
-    ;
+    HTTP_TIMEOUT_ERROR(-1, "http timeout can not less than 0"),
+    REQUEST_TIMEOUT_ERROR(-1, "request timeout");
 
     private Integer code;
     private String message;
@@ -35,6 +35,7 @@ public enum ErrorMessage {
     public String getMessage() {
         return message;
     }
+
     public Integer getCode() {
         return code;
     }

@@ -34,7 +34,7 @@ public class SdkException extends RuntimeException {
         private Integer code;
         private String message;
 
-        public Http(Integer code, String message){
+        public Http(Integer code, String message) {
             this.code = code;
             this.message = message;
         }
