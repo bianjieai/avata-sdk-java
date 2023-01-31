@@ -4,8 +4,6 @@ import model.account.QueryAccountsReq;
 import model.account.QueryAccountsRes;
 import org.junit.jupiter.api.Test;
 
-import javax.rmi.CORBA.Util;
-
 public class AccountTest {
     Client client = new Client.Builder()
             .setDoMain("http://192.168.150.41:18081")
