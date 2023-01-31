@@ -20,7 +20,7 @@ public class OrderTest {
             PublicOrderRes res = client.orderClient.CreatrOrder(req);
             System.out.println(res.getData().getOperationId());
             System.out.println("no exception");
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
         }

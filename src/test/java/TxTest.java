@@ -11,7 +11,7 @@ public class TxTest {
             .init();
 
     @Test
-    public void queryTx(){
+    public void queryTx() {
 
         QueryTxResponse txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
 
@@ -19,7 +19,7 @@ public class TxTest {
     }
 
     @Test
-    public void queryQueueInfo(){
+    public void queryQueueInfo() {
         QueryQueueResponse res = client.txClient.queryQueueInfo();
 
         System.out.println(res.getData());
