@@ -52,8 +52,8 @@ public class OrderClient implements OrderProxy {
         if (req.getList() == null) {
             throw new SdkException(ErrorMessage.ORDER_LIST_ERROR, null, null);
         }
-        req.getList().forEach(l->{
-            if (Strings.isEmpty(l.getAccount())){
+        req.getList().forEach(l -> {
+            if (Strings.isEmpty(l.getAccount())) {
                 throw new SdkException(ErrorMessage.ACCOUNT_ERROR, null, null);
             }
             if (l.getAmount() == null) {

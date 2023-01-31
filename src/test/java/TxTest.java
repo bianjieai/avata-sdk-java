@@ -1,3 +1,4 @@
+
 import model.tx.QueryQueueResponse;
 import model.tx.QueryTxResponse;
 import org.junit.jupiter.api.Test;
@@ -10,13 +11,15 @@ public class TxTest {
             .init();
 
     @Test
-    public void queryTx(){
-        QueryTxResponse txRes = client.txClient.queryTx("lmhcreatenft003");
-        System.out.println(txRes.getData());
+    public void queryTx() {
+
+        QueryTxResponse txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
+
+        System.out.println(txRes.getData().getNft().getNftId());
     }
 
     @Test
-    public void queryQueueInfo(){
+    public void queryQueueInfo() {
         QueryQueueResponse res = client.txClient.queryQueueInfo();
 
         System.out.println(res.getData());

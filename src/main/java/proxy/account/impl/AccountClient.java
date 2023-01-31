@@ -23,7 +23,7 @@ public class AccountClient implements AccountProxy {
     private static final String QUERY_ACCOUNTS = "/v1beta1/accounts";
     private static final String QUERY_ACCOUNTS_HISTORY = "/v1beta1/accounts/history";
 
-    public CreateAccountRes createAccount(CreateAccountReq req){
+    public CreateAccountRes createAccount(CreateAccountReq req) {
         // check params
         if (Strings.isEmpty(req.getName())) {
             throw new SdkException(ErrorMessage.NAME_ERROR, null, null);
@@ -32,6 +32,7 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
+
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -52,6 +53,7 @@ public class AccountClient implements AccountProxy {
             throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
+
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -65,6 +67,7 @@ public class AccountClient implements AccountProxy {
     @Override
     public QueryAccountsRes queryAccounts(QueryAccountsReq req) {
         ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req));
+
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -78,6 +81,7 @@ public class AccountClient implements AccountProxy {
     @Override
     public QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req) {
         ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
+
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);

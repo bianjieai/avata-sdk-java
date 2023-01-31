@@ -5,6 +5,7 @@ import model.account.*;
 public interface AccountProxy {
     /**
      * 创建链账户
+     *
      * @param req 创建链账户请求实体
      * @return
      */
@@ -12,6 +13,7 @@ public interface AccountProxy {
 
     /**
      * 批量创建链账户
+     *
      * @param req 批量创建链账户请求实体
      * @return
      */
@@ -19,6 +21,7 @@ public interface AccountProxy {
 
     /**
      * 查询链账户
+     *
      * @param req 查询链账户请求实体
      * @return
      */
@@ -26,6 +29,7 @@ public interface AccountProxy {
 
     /**
      * 查询链账户操作记录
+     *
      * @param req 查询链账户操作记录请求实体
      * @return
      */

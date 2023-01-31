@@ -22,7 +22,7 @@ public class TxClient implements TxProxy {
      * @param operationId Transaction operationId
      * @return TxRes, Transaction Result
      */
-    public QueryTxResponse queryTx(String operationId){
+    public QueryTxResponse queryTx(String operationId) {
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_TX);
         sb.append("/");
@@ -43,7 +43,7 @@ public class TxClient implements TxProxy {
      *
      * @return QueryQueueResponse, queue info
      */
-    public QueryQueueResponse queryQueueInfo(){
+    public QueryQueueResponse queryQueueInfo() {
         ForestResponse response = HttpClient.Get(QUERY_QUEUE_INFO, "");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
