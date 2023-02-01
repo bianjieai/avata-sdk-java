@@ -61,17 +61,11 @@ public class QueryTxResponse extends BaseResponse {
         @NoArgsConstructor
         @Data
         public static class Record {
-            @JSONField(name = "create_record")
-            private CreateRecord createRecord;
-
-            @NoArgsConstructor
-            @Data
-            public static class CreateRecord {
-                @JSONField(name = "record_id")
-                private String recordId;
-                @JSONField(name = "certificate_url")
-                private String certificateUrl;
-            }
+            @JSONField(name = "record_id")
+            private String recordId;
+            @JSONField(name = "certificate_url")
+            private String certificateUrl;
         }
     }
 }
+

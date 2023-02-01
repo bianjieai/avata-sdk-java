@@ -10,6 +10,8 @@ import java.util.Map;
 import config.ConfigCache;
 import constant.ErrorMessage;
 import exception.SdkException;
+import model.ErrorResponse;
+import model.account.CreateAccountRes;
 
 public class HttpClient {
     /**
@@ -122,7 +124,8 @@ public class HttpClient {
             if (response.getException() != null) {
                 throw new SdkException(-1, response.getException().getMessage(), null, null);
             }
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, null, null);
+            ErrorResponse res = JSONObject.parseObject(response.getContent(), ErrorResponse.class);
+            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, res.getError(), null);
         }
     }
 }

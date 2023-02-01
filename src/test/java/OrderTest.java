@@ -1,28 +1,83 @@
-import model.order.CreateOrderReq;
-import model.order.PublicOrderRes;
+import model.nft.BatchCreateNftReq;
+import model.order.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderTest {
     Client client = new Client.Builder()
-            .setDoMain("http://192.168.150.41:18081")
-            .setApiKey("000001")
-            .setApiSecret("ceshi")
+            .setDoMain("")
+            .setApiKey("")
+            .setApiSecret("")
+            .setHttpTimeout(10000)
             .init();
 
     @Test
+        //请求购买能量值/业务费接口示例
     void TestCreateOrder() {
         CreateOrderReq req = new CreateOrderReq();
-        req.setOrderId("sxjtestorderid001");
+        req.setOrderId("sxjtesto_rde2rid0w2");
         req.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
         req.setAmount(100);
-        req.setOrderType("gas");// todo 提供枚举
+        req.setOrderType("gas");
         try {
-            PublicOrderRes res = client.orderClient.CreatrOrder(req);
-            System.out.println(res.getData().getOperationId());
+            PublicOrderRes res = client.orderClient.CreateOrder(req);
+            System.out.println(res.getData().getOrderId());
             System.out.println("no exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
         }
     }
+
+    @Test
+        //请求查询能量值/业务费购买结果接口示例
+    void TestQueryOrder() {
+        try {
+            QueryOrderRes res = client.orderClient.QueryOrder("sxjtesto_rde2rid0w2");
+            System.out.println(res.getData());
+            System.out.println("no exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+        //请求查询能量值/业务费购买结果列表接口示例
+    void TestQueryOrders() {
+        QueryOrdersReq req = new QueryOrdersReq();
+        req.setStatus("success");
+        try {
+            QueryOrdersRes res = client.orderClient.QueryOrders(req);
+            System.out.println(res.getData());
+            System.out.println("no exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+        //请求批量购买能量值接口示例
+    void TestBatchCreatrOrders() {
+        BatchCreateOrdersReq req = new BatchCreateOrdersReq();
+        List<BatchCreateOrdersReq.ListDTO> list = new ArrayList<>();
+        BatchCreateOrdersReq.ListDTO dto1 = new BatchCreateOrdersReq.ListDTO();
+        dto1.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
+        dto1.setAmount(200);
+        list.add(dto1);
+        req.setList(list);
+        req.setOrderId("gaisbc3_b1627");
+        try {
+            PublicOrderRes res = client.orderClient.BatchCreatrOrders(req);
+            System.out.println(res.getData().getOrderId());
+            System.out.println("no exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
 }

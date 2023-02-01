@@ -10,7 +10,7 @@ import model.PublicResponse;
 @Data
 public class PublicOrderRes extends BaseResponse {
     @JSONField(name = "data")
-    private PublicResponse.DataDTO data;
+    private PublicOrderRes.DataDTO data;
 
     @NoArgsConstructor
     @Data
