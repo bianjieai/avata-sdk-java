@@ -3,9 +3,9 @@ import org.junit.jupiter.api.Test;
 
 public class AccountTest {
     Client client = new Client.Builder()
-            .setDoMain("http://192.168.150.41:18081")
-            .setApiKey("000001")
-            .setApiSecret("ceshi")
+            .setDoMain("")
+            .setApiKey("")
+            .setApiSecret("")
             .setHttpTimeout(10000)
             .init();
 
@@ -16,7 +16,7 @@ public class AccountTest {
     void TestCreateAccount() {
         CreateAccountReq req = new CreateAccountReq();
         req.setName("21233");
-        req.setOperationId(OperationID);
+        req.setOperationId("234231");
         try {
             CreateAccountRes account = client.accountClient.createAccount(req);
             System.out.println(account.getData());

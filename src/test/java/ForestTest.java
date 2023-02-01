@@ -21,8 +21,7 @@ public class ForestTest {
         req.setStartDate("2022-01-01");
         Map<String, Object> map = JSONObject.parseObject(JSONObject.toJSONString(req));
         System.out.println(map.toString());
-//        QueryQueueResponse res = Forest.get("http://192.168.150.41:18081/v1beta1/tx/queue/info").addHeader("x-api-key","000001").execute(QueryQueueResponse.class);
-//        System.out.println(res.getData());
+
     }
 
     @Test

@@ -7,9 +7,9 @@ import java.util.List;
 
 public class OrderTest {
     Client client = new Client.Builder()
-            .setDoMain("http://192.168.150.41:18081")
-            .setApiKey("000001")
-            .setApiSecret("ceshi")
+            .setDoMain("")
+            .setApiKey("")
+            .setApiSecret("")
             .setHttpTimeout(10000)
             .init();
 
@@ -17,10 +17,10 @@ public class OrderTest {
         //请求购买能量值/业务费接口示例
     void TestCreateOrder() {
         CreateOrderReq req = new CreateOrderReq();
-        req.setOrderId("sxjtesto_rderid002");
+        req.setOrderId("sxjtesto_rde2rid0w2");
         req.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
         req.setAmount(100);
-        req.setOrderType("gas");// todo 提供枚举
+        req.setOrderType("gas");
         try {
             PublicOrderRes res = client.orderClient.CreateOrder(req);
             System.out.println(res.getData().getOrderId());
@@ -35,7 +35,7 @@ public class OrderTest {
         //请求查询能量值/业务费购买结果接口示例
     void TestQueryOrder() {
         try {
-            QueryOrderRes res = client.orderClient.QueryOrder("gaisbc3_b167");
+            QueryOrderRes res = client.orderClient.QueryOrder("sxjtesto_rde2rid0w2");
             System.out.println(res.getData());
             System.out.println("no exception");
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class OrderTest {
         dto1.setAmount(200);
         list.add(dto1);
         req.setList(list);
-        req.setOrderId("gaisbc3_b167");
+        req.setOrderId("gaisbc3_b1627");
         try {
             PublicOrderRes res = client.orderClient.BatchCreatrOrders(req);
             System.out.println(res.getData().getOrderId());

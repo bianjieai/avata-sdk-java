@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class MtTest {
     Client client = new Client.Builder()
-            .setDoMain("http://192.168.150.41:18081")
-            .setApiKey("000001")
-            .setApiSecret("ceshi")
+            .setDoMain("")
+            .setApiKey("")
+            .setApiSecret("")
             .setHttpTimeout(10000)
             .init();
     String OperationID = String.valueOf(System.currentTimeMillis());

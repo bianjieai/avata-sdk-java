@@ -2,9 +2,8 @@ package config;
 
 public class ConfigInfo {
 
-    private String doMain ;
+    private String doMain;
 
-//    private String doMain = "localhost:8096";
     private String apiKey;
 
     private String apiSecret;
