@@ -8,14 +8,15 @@ public class TxTest {
             .setDoMain("http://192.168.150.41:18081")
             .setApiKey("000001")
             .setApiSecret("ceshi")
+            .setHttpTimeout(10000)
             .init();
 
     @Test
     public void queryTx() {
 
-        QueryTxResponse txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
+        QueryTxResponse txRes = client.txClient.queryTx("1675234249709");
 
-        System.out.println(txRes.getData().getNft().getNftId());
+        System.out.println(txRes.getData());
     }
 
     @Test

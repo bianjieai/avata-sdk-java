@@ -9,7 +9,7 @@ public interface OrderProxy {
      *
      * @return
      */
-    PublicOrderRes CreatrOrder(CreateOrderReq req);
+    PublicOrderRes CreateOrder(CreateOrderReq req);
 
     /**
      * 批量购买能量值
@@ -23,7 +23,7 @@ public interface OrderProxy {
      *
      * @return
      */
-    QueryOrderRes QueryOrder(QueryOrderReq req, String orderId);
+    QueryOrderRes QueryOrder( String orderId);
 
     /**
      * 查询能量值/业务费购买结果列表

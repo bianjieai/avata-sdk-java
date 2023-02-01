@@ -79,7 +79,7 @@ public interface MtProxy {
      *
      * @return
      */
-    QueryMtRes queryMt(QueryMtReq req, String classId, String mtId);
+    QueryMtRes queryMt(String classId, String mtId);
 
     /**
      * 查询 MT 操作记录

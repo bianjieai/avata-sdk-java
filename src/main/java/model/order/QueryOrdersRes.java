@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import model.BaseResponse;
 
 import java.util.List;
-
+@NoArgsConstructor
+@Data
 public class QueryOrdersRes extends BaseResponse {
 
     @JSONField(name = "data")
@@ -15,12 +16,18 @@ public class QueryOrdersRes extends BaseResponse {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "operation_result")
-        private List<OperationResult> operationResult;
+        @JSONField(name = "offset")
+        private int offset;
+        @JSONField(name = "limit")
+        private int limit;
+        @JSONField(name = "total_count")
+        private int totalCount;
+        @JSONField(name = "order_infos")
+        private List<OrderInfos> orderInfos;
 
         @NoArgsConstructor
         @Data
-        public static class OperationResult {
+        public static class OrderInfos {
             @JSONField(name = "order_id")
             private String orderId;
             @JSONField(name = "status")

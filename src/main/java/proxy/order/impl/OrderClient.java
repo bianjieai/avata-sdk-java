@@ -18,7 +18,7 @@ public class OrderClient implements OrderProxy {
     private static final String QUERY_ORDERS = "/v1beta1/orders";
 
     @Override
-    public PublicOrderRes CreatrOrder(CreateOrderReq req) {
+    public PublicOrderRes CreateOrder(CreateOrderReq req) {
         // check params
         if (Strings.isEmpty(req.getOrderId())) {
             throw new SdkException(ErrorMessage.ORDER_ID_ERROR, null, null);
@@ -73,12 +73,12 @@ public class OrderClient implements OrderProxy {
     }
 
     @Override
-    public QueryOrderRes QueryOrder(QueryOrderReq req, String orderId) {
+    public QueryOrderRes QueryOrder(String orderId) {
         StringBuffer sb = new StringBuffer();
         sb.append(QUERY_ORDER);
         sb.append("/");
         sb.append(orderId);
-        ForestResponse response = HttpClient.Get(sb.toString(), JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(sb.toString(),"");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -97,6 +97,7 @@ public class OrderClient implements OrderProxy {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
+        //这行代码 反序列化错了
         QueryOrdersRes res = JSONObject.parseObject(result, QueryOrdersRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;

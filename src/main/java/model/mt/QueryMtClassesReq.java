@@ -1,24 +1,29 @@
 package model.mt;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
 
 public class QueryMtClassesReq {
     @JSONField(name = "offset")
-    private Integer offset;
+    private String offset;
     @JSONField(name = "limit")
-    private Integer limit;
+    private String limit;
     @JSONField(name = "id")
-    private Integer id;
+    private String id;
     @JSONField(name = "name")
-    private Integer name;
+    private String name;
     @JSONField(name = "owner")
-    private Integer owner;
+    private String owner;
     @JSONField(name = "tx_hash")
-    private Integer txHash;
+    private String txHash;
     @JSONField(name = "start_date")
-    private Integer startDate;
+    private String startDate;
     @JSONField(name = "end_date")
-    private Integer endDate;
+    private String endDate;
     @JSONField(name = "sort_by")
-    private Integer sortBy;
+    private String sortBy;
 }
