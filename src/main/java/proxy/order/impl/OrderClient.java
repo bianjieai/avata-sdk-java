@@ -97,7 +97,6 @@ public class OrderClient implements OrderProxy {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
             throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
-        //这行代码 反序列化错了
         QueryOrdersRes res = JSONObject.parseObject(result, QueryOrdersRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
