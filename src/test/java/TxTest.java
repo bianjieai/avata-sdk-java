@@ -12,6 +12,7 @@ public class TxTest {
             .init();
 
     @Test
+    // 请求上链交易结果查询接口示例
     public void queryTx() {
 
         QueryTxResponse txRes = client.txClient.queryTx("1675234249709");
@@ -20,6 +21,7 @@ public class TxTest {
     }
 
     @Test
+    //请求上链交易排队状态查询接口示例
     public void queryQueueInfo() {
         QueryQueueResponse res = client.txClient.queryQueueInfo();
 
