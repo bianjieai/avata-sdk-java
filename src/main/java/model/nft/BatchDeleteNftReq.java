@@ -5,15 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 
 @NoArgsConstructor
 @Data
 public class BatchDeleteNftReq {
     @JSONField(name = "nfts")
     private List<NftsDTO> nfts;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
+
     @JSONField(name = "operation_id")
     private String operationId;
 

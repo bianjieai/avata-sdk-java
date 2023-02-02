@@ -4,8 +4,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 @NoArgsConstructor
 @Data
 public class CreateClassReq {
@@ -25,8 +23,6 @@ public class CreateClassReq {
     private String data;
     @JSONField(name = "owner")
     private String owner;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
     @JSONField(name = "operation_id")
     private String operationId;
 }

@@ -1,8 +1,4 @@
 import model.PublicResponse;
-import model.account.CreateAccountReq;
-import model.account.CreateAccountRes;
-import model.account.QueryAccountsReq;
-import model.account.QueryAccountsRes;
 import model.records.CreateRecordReq;
 import org.junit.jupiter.api.Test;
 

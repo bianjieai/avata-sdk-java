@@ -19,8 +19,6 @@ public class BatchCreateNftReq {
     private String data;
     @JSONField(name = "recipients")
     private List<RecipientsDTO> recipients;
-    @JSONField(name = "tag")
-    private String tag;
     @JSONField(name = "operation_id")
     private String operationId;
 

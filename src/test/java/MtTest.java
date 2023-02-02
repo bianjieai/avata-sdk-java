@@ -2,9 +2,6 @@ import model.PublicResponse;
 import model.mt.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MtTest {
     Client client = new Client.Builder()
             .setDoMain("")
@@ -21,8 +18,6 @@ public class MtTest {
         req.setName("lmhmtclassname01");
         req.setOwner("iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
         req.setData("123");
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "1");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.mtClient.createMtClass(req);
@@ -75,8 +70,6 @@ public class MtTest {
         req.setData("datadata");
         req.setAmount(100);
         req.setRecipient("iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "2");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.mtClient.createMt(req, "4f15f17298001ffcdce757d068dba933ef73193e6a261cb9d0f472a2ced1d756");
@@ -95,8 +88,6 @@ public class MtTest {
         req.setAmount(10);
         req.setRecipient("iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
         req.setOperationId(OperationID);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "3");
         try {
             PublicResponse res = client.mtClient.mintMt(req,
                     "4f15f17298001ffcdce757d068dba933ef73193e6a261cb9d0f472a2ced1d756",
@@ -116,8 +107,6 @@ public class MtTest {
         req.setAmount(10);
         req.setRecipient("iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
         req.setOperationId(OperationID);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "3");
         try {
             PublicResponse res = client.mtClient.transferMt(req,
                     "4f15f17298001ffcdce757d068dba933ef73193e6a261cb9d0f472a2ced1d756",
@@ -136,8 +125,6 @@ public class MtTest {
     void TestEditMt() {
         EditMtReq req = new EditMtReq();
         req.setData("789");
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "3");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.mtClient.editMt(req,
@@ -157,8 +144,6 @@ public class MtTest {
     void TestDeleteMt() {
         DeleteMtReq req = new DeleteMtReq();
         req.setAmount(1);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "4");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.mtClient.deleteMt(req,
