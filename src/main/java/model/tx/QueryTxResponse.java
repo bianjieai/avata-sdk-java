@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import model.BaseResponse;
 
-import java.util.Map;
-
 @NoArgsConstructor
 @Data
 public class QueryTxResponse extends BaseResponse {
