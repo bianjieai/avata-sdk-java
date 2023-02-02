@@ -11,7 +11,4 @@ import java.util.Map;
 public class DeleteNftReq {
     @JSONField(name = "operation_id")
     private String operationId;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
-
 }

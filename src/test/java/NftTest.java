@@ -1,11 +1,8 @@
 import model.PublicResponse;
 import model.nft.*;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class NftTest {
     Client client = new Client.Builder()
@@ -29,8 +26,6 @@ public class NftTest {
         req.setUriHash("123");
         req.setData("123");
         req.setOwner("iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "1");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.createClass(req);
@@ -85,8 +80,6 @@ public class NftTest {
         req.setUriHash("456");
         req.setData("456");
         req.setRecipient("iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "2");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.createNft(req, "bakvavoy");
@@ -104,8 +97,6 @@ public class NftTest {
         TransferNftReq req = new TransferNftReq();
         req.setRecipient("iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
         req.setOperationId(OperationID);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "3");
         try {
             PublicResponse res = client.nftClient.transferNft(req,
                     "bakvavoy",
@@ -126,8 +117,6 @@ public class NftTest {
         req.setName("lmhtesteditnft0001");
         req.setUri("http://www.789.com");
         req.setData("789");
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "3");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.editNft(req,
@@ -146,8 +135,6 @@ public class NftTest {
         //请求销毁 NFT 接口示例
     void TestDeleteNft() {
         DeleteNftReq req = new DeleteNftReq();
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "4");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.deleteNft(req,
@@ -180,8 +167,6 @@ public class NftTest {
         list.add(dto1);
 //        list.add(dto2);
         req.setRecipients(list);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "0");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.batchCreateNft(req, "bakvavoy");
@@ -208,8 +193,6 @@ public class NftTest {
         datalist.add(dataDTO);
         nftlist.add(nftsDTO);
         req.setData(datalist);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "9");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.batchTransferNft(req, "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
@@ -234,8 +217,6 @@ public class NftTest {
         nftsDTO.setData("123");
         nftslist.add(nftsDTO);
         req.setNfts(nftslist);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "6");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.batchEditNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
@@ -258,8 +239,6 @@ public class NftTest {
         nftsDTO.setNftId("avataaeqov8gmo0xetsexyi7k7cvxngn");
         nftslist.add(nftsDTO);
         req.setNfts(nftslist);
-        Map<String, Object> tag = new HashMap<String, Object>();
-        tag.put("123456", "23");
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.batchDeleteNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");

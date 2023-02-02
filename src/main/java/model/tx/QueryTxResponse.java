@@ -31,8 +31,6 @@ public class QueryTxResponse extends BaseResponse {
         private Integer blockHeight;
         @JSONField(name = "timestamp")
         private String timestamp;
-        @JSONField(name = "tag")
-        private Map<String, Object> tag;
         @JSONField(name = "nft")
         private Nft nft;
         @JSONField(name = "mt")

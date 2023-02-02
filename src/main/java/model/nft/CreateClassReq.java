@@ -25,8 +25,6 @@ public class CreateClassReq {
     private String data;
     @JSONField(name = "owner")
     private String owner;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
     @JSONField(name = "operation_id")
     private String operationId;
 }

@@ -12,8 +12,7 @@ import java.util.Map;
 public class BatchTransferNftReq {
     @JSONField(name = "data")
     private List<DataDTO> data;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
+
     @JSONField(name = "operation_id")
     private String operationId;
 

@@ -16,8 +16,6 @@ public class CreateMtClassReq {
     private String owner;
     @JSONField(name = "data")
     private String data;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
     @JSONField(name = "operation_id")
     private String operationId;
 }

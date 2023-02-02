@@ -15,7 +15,7 @@ public class TxTest {
     // 请求上链交易结果查询接口示例
     public void queryTx() {
 
-        QueryTxResponse txRes = client.txClient.queryTx("1675245507562");
+        QueryTxResponse txRes = client.txClient.queryTx("1675319615348");
 
         System.out.println(txRes.getData());
     }

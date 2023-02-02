@@ -15,6 +15,4 @@ public class TransferClassReq {
     @JSONField(name = "operation_id")
     private String operationId;
 
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
 }

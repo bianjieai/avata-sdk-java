@@ -12,8 +12,7 @@ import java.util.Map;
 public class BatchEditNftReq {
     @JSONField(name = "nfts")
     private List<NftsDTO> nfts;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
+
     @JSONField(name = "operation_id")
     private String operationId;
 

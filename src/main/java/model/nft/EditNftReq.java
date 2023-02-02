@@ -17,7 +17,5 @@ public class EditNftReq {
     private String data;
     @JSONField(name = "operation_id")
     private String operationId;
-    @JSONField(name = "tag")
-    private Map<String, Object> tag;
 
 }
