@@ -6,9 +6,9 @@
 
 ```
         <dependency>
-            <groupId></groupId>
-            <artifactId></artifactId>
-            <version></version>
+            <groupId>io.github.bianjieai</groupId>
+            <artifactId>avata-sdk</artifactId>
+            <version>${version}</version>
         </dependency>
 ```
 
