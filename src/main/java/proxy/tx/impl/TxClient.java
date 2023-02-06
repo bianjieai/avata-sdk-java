@@ -13,7 +13,7 @@ import proxy.tx.TxProxy;
 import util.HttpClient;
 
 public class TxClient implements TxProxy {
-    private static final String QUERY_TX = "/v1beta1/tx/";
+    private static final String QUERY_TX = "/v1beta1/tx/%s";
     private static final String QUERY_QUEUE_INFO = "/v1beta1/tx/queue/info";
 
     /**
@@ -22,11 +22,9 @@ public class TxClient implements TxProxy {
      * @param operationId Transaction operationId
      * @return TxRes, Transaction Result
      */
-    public QueryTxResponse queryTx(String operationId){
-        StringBuffer sb = new StringBuffer();
-        sb.append(QUERY_TX);
-        sb.append(operationId);
-        ForestResponse response = HttpClient.Get(sb.toString(), "");
+    public QueryTxResponse queryTx(String operationId) {
+        String path = String.format(QUERY_TX, operationId);
+        ForestResponse response = HttpClient.Get(path, "");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -42,7 +40,7 @@ public class TxClient implements TxProxy {
      *
      * @return QueryQueueResponse, queue info
      */
-    public QueryQueueResponse queryQueueInfo(){
+    public QueryQueueResponse queryQueueInfo() {
         ForestResponse response = HttpClient.Get(QUERY_QUEUE_INFO, "");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {

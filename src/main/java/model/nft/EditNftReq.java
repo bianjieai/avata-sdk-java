@@ -1,19 +1,19 @@
 package model.nft;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 @NoArgsConstructor
 @Data
-public class CreateNftRequest {
-
+public class EditNftReq {
+    @JSONField(name = "name")
     private String name;
+    @JSONField(name = "uri")
     private String uri;
-    private String uriHash;
+    @JSONField(name = "data")
     private String data;
-    private String recipient;
-    private Map<String, Object> tag;
+    @JSONField(name = "operation_id")
     private String operationId;
+
 }

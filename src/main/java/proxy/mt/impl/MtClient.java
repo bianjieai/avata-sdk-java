@@ -208,9 +208,9 @@ public class MtClient implements MtProxy {
     }
 
     @Override
-    public QueryMtRes queryMt(QueryMtReq req, String classId, String mtId) {
+    public QueryMtRes queryMt(String classId, String mtId) {
         String path = String.format(QUERY_MT, classId, mtId);
-        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(path,"");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);

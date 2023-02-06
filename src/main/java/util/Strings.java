@@ -2,10 +2,13 @@ package util;
 
 import java.util.List;
 
-/** String utility functions. */
+/**
+ * String utility functions.
+ */
 public class Strings {
 
-    private Strings() {}
+    private Strings() {
+    }
 
     public static String toCsv(List<String> src) {
         // return src == null ? null : String.join(", ", src.toArray(new String[0]));

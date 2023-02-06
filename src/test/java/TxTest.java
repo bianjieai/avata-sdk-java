@@ -5,21 +5,24 @@ import org.junit.jupiter.api.Test;
 
 public class TxTest {
     Client client = new Client.Builder()
-            .setDoMain("http://192.168.150.41:18081")
-            .setApiKey("000001")
-            .setApiSecret("ceshi")
+            .setDoMain("")
+            .setApiKey("")
+            .setApiSecret("")
+            .setHttpTimeout(10000)
             .init();
 
     @Test
-    public void queryTx(){
+    // 请求上链交易结果查询接口示例
+    public void queryTx() {
 
-        QueryTxResponse txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
+        QueryTxResponse txRes = client.txClient.queryTx("1675319615348");
 
-        System.out.println(txRes.getData().getNft().getNftId());
+        System.out.println(txRes.getData());
     }
 
     @Test
-    public void queryQueueInfo(){
+    //请求上链交易排队状态查询接口示例
+    public void queryQueueInfo() {
         QueryQueueResponse res = client.txClient.queryQueueInfo();
 
         System.out.println(res.getData());

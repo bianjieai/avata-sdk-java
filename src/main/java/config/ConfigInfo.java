@@ -7,7 +7,7 @@ package config;
  */
 public class ConfigInfo {
 
-    private String doMain = "localhost:8096";
+    private String doMain;
 
     private String apiKey;
 

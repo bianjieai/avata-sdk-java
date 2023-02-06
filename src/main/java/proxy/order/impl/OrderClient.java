@@ -14,11 +14,11 @@ import util.Strings;
 public class OrderClient implements OrderProxy {
     private static final String CREATE_ORDER = "/v1beta1/orders";
     private static final String BATCH_CREATE_ORDER = "/v1beta1/orders/batch";
-    private static final String QUERY_ORDER = "/v1beta1/orders";
+    private static final String QUERY_ORDER = "/v1beta1/orders/%s";
     private static final String QUERY_ORDERS = "/v1beta1/orders";
 
     @Override
-    public PublicOrderRes CreatrOrder(CreateOrderReq req) {
+    public PublicOrderRes CreateOrder(CreateOrderReq req) {
         // check params
         if (Strings.isEmpty(req.getOrderId())) {
             throw new SdkException(ErrorMessage.ORDER_ID_ERROR, null, null);
@@ -33,6 +33,7 @@ public class OrderClient implements OrderProxy {
             throw new SdkException(ErrorMessage.AMOUNT_ERROR, null, null);
         }
         ForestResponse response = HttpClient.Post(CREATE_ORDER, JSONObject.toJSONString(req));
+
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
@@ -52,8 +53,8 @@ public class OrderClient implements OrderProxy {
         if (req.getList() == null) {
             throw new SdkException(ErrorMessage.ORDER_LIST_ERROR, null, null);
         }
-        req.getList().forEach(l->{
-            if (Strings.isEmpty(l.getAccount())){
+        req.getList().forEach(l -> {
+            if (Strings.isEmpty(l.getAccount())) {
                 throw new SdkException(ErrorMessage.ACCOUNT_ERROR, null, null);
             }
             if (l.getAmount() == null) {
@@ -73,12 +74,9 @@ public class OrderClient implements OrderProxy {
     }
 
     @Override
-    public QueryOrderRes QueryOrder(QueryOrderReq req, String orderId) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(QUERY_ORDER);
-        sb.append("/");
-        sb.append(orderId);
-        ForestResponse response = HttpClient.Get(sb.toString(), JSONObject.toJSONString(req));
+    public QueryOrderRes QueryOrder(String orderId) {
+        String path = String.format(QUERY_ORDER, orderId);
+        ForestResponse response = HttpClient.Get(path, "");
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);

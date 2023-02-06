@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.http.ForestResponse;
-import config.ConfigCache;
-import okhttp3.*;
-import sun.security.util.Length;
 
-import java.io.IOException;
-import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
+
+import config.ConfigCache;
+import constant.ErrorMessage;
+import exception.SdkException;
+import model.ErrorResponse;
+import model.account.CreateAccountRes;
 
 public class HttpClient {
     /**
@@ -33,7 +33,9 @@ public class HttpClient {
         if (body != null) {
             req.addBody(body);
         }
-        return req.execute(ForestResponse.class);
+        ForestResponse response = req.execute(ForestResponse.class);
+        validateResponse(response);
+        return response;
     }
 
     /**
@@ -55,7 +57,9 @@ public class HttpClient {
         if (query != null) {
             req.addQuery(query);
         }
-        return req.execute(ForestResponse.class);
+        ForestResponse response = req.execute(ForestResponse.class);
+        validateResponse(response);
+        return response;
     }
 
     /**
@@ -77,7 +81,9 @@ public class HttpClient {
         if (body != null) {
             req.addBody(body);
         }
-        return req.execute(ForestResponse.class);
+        ForestResponse response = req.execute(ForestResponse.class);
+        validateResponse(response);
+        return response;
     }
 
     /**
@@ -99,6 +105,27 @@ public class HttpClient {
         if (body != null) {
             req.addBody(body);
         }
-        return req.execute(ForestResponse.class);
+        ForestResponse response = req.execute(ForestResponse.class);
+        validateResponse(response);
+        return response;
+    }
+
+    /**
+     * Validate ForestResponse
+     */
+    public static void validateResponse(ForestResponse response) {
+        // timeout error
+        if (response.isTimeout()) {
+            throw new SdkException(ErrorMessage.REQUEST_TIMEOUT_ERROR, null, null);
+        }
+        // Determine whether the network request failed
+        if (response.isError()) {
+            // Get the exception generated during the request
+            if (response.getException() != null) {
+                throw new SdkException(-1, response.getException().getMessage(), null, null);
+            }
+            ErrorResponse res = JSONObject.parseObject(response.getContent(), ErrorResponse.class);
+            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, res.getError(), null);
+        }
     }
 }

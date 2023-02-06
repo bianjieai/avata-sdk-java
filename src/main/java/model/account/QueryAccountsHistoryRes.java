@@ -12,7 +12,6 @@ import java.util.List;
 public class QueryAccountsHistoryRes extends BaseResponse {
 
 
-
     @JSONField(name = "data")
     private DataDTO data;
 

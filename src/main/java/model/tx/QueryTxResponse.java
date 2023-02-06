@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import model.BaseResponse;
 
-import java.util.Map;
-
 @NoArgsConstructor
 @Data
 public class QueryTxResponse extends BaseResponse {
@@ -31,8 +29,6 @@ public class QueryTxResponse extends BaseResponse {
         private Integer blockHeight;
         @JSONField(name = "timestamp")
         private String timestamp;
-        @JSONField(name = "tag")
-        private Map<String, Object> tag;
         @JSONField(name = "nft")
         private Nft nft;
         @JSONField(name = "mt")
@@ -61,17 +57,11 @@ public class QueryTxResponse extends BaseResponse {
         @NoArgsConstructor
         @Data
         public static class Record {
-            @JSONField(name = "create_record")
-            private CreateRecord createRecord;
-
-            @NoArgsConstructor
-            @Data
-            public static class CreateRecord {
-                @JSONField(name = "record_id")
-                private String recordId;
-                @JSONField(name = "certificate_url")
-                private String certificateUrl;
-            }
+            @JSONField(name = "record_id")
+            private String recordId;
+            @JSONField(name = "certificate_url")
+            private String certificateUrl;
         }
     }
 }
+
