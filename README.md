@@ -23,7 +23,7 @@ Client client = new Client.Builder()
             .init();
 ```
 
-- [链账户接口示例代码](./test/java/AccountTest)
+- [链账户接口示例代码](./test/java/AccountTest.java)
 - [交易结果查询接口示例代码](./test/java/TxTest)
 - [NFT 接口示例代码](./test/java/NftTest)
 - [MT 接口示例代码](./test/java/MtTest)
