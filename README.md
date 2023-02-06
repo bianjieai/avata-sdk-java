@@ -23,9 +23,9 @@ Client client = new Client.Builder()
             .init();
 ```
 
-- [链账户接口示例代码](./test/java/AccountTest.java)
-- [交易结果查询接口示例代码](./test/java/TxTest)
-- [NFT 接口示例代码](./test/java/NftTest)
-- [MT 接口示例代码](./test/java/MtTest)
-- [充值接口示例代码](./test/java/OrderTest)
-- [存证接口示例代码](./test/java/RecordTest)
+- [链账户接口示例代码](./src/test/java/AccountTest.java)
+- [交易结果查询接口示例代码](./src/test/java/TxTest.java)
+- [NFT 接口示例代码](./src/test/java/NftTest.java)
+- [MT 接口示例代码](./src/test/java/MtTest.java)
+- [充值接口示例代码](./src/test/java/OrderTest.java)
+- [存证接口示例代码](./src/test/java/RecordTest.java)
