@@ -21,7 +21,7 @@ public class AvataUtils {
      * @param apiSecret 应用方的 API Secret，例："AKIDz8krbsJ5yKBZQpn74WFkmLPc5ab"
      * @return 返回签名结果
      */
-    public static String signature(String path, Map<String, Object> query, Map<String, Object> body, long timestamp, String apiSecret) {
+    public static String sign(String path, Map<String, Object> query, Map<String, Object> body, long timestamp, String apiSecret) {
         Map<String, Object> paramsMap = new HashMap();
 
         paramsMap.put("path_url", path);

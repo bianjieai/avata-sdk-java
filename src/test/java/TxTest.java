@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class TxTest {
     Client client = new Client.Builder()
-            .setDoMain("")
-            .setApiKey("")
-            .setApiSecret("")
+            .setDoMain("https://192.168.150.41:18081")
+            .setApiKey("000001")
+            .setApiSecret("ceshi")
             .setHttpTimeout(10000)
             .init();
 

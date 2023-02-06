@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import model.ErrorResponse;
 
 /**
- * SDK自定义异常类
+ * SDK custom exception
  *
  * @author sxj
  */

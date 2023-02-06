@@ -1,7 +1,7 @@
 package constant;
 
 /**
- * SDK错误类型枚举
+ * SDK exception enum
  *
  * @author sxj
  */
