@@ -5,6 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import model.ErrorResponse;
 
+/**
+ * SDK custom exception
+ *
+ * @author sxj
+ */
 @Data
 public class SdkException extends RuntimeException {
     private final ErrorResponse.ErrorDTO error;

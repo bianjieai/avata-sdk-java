@@ -1,5 +1,10 @@
 package constant;
 
+/**
+ * SDK exception enum
+ *
+ * @author sxj
+ */
 public enum ErrorMessage {
     AVATA_ERROR(-1, "avata error"),
 

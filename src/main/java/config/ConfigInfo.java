@@ -1,5 +1,10 @@
 package config;
 
+/**
+ * 配置项
+ *
+ * @author sxj
+ */
 public class ConfigInfo {
 
     private String doMain;

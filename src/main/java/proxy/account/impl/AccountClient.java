@@ -23,6 +23,7 @@ public class AccountClient implements AccountProxy {
     private static final String QUERY_ACCOUNTS = "/v1beta1/accounts";
     private static final String QUERY_ACCOUNTS_HISTORY = "/v1beta1/accounts/history";
 
+    @Override
     public CreateAccountRes createAccount(CreateAccountReq req) {
         // check params
         if (Strings.isEmpty(req.getName())) {

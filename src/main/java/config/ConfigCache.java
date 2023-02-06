@@ -9,6 +9,11 @@ import util.Strings;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 初始化项目配置
+ *
+ * @author sxj
+ */
 public class ConfigCache {
     private ConfigCache() {
     }
@@ -55,14 +60,14 @@ public class ConfigCache {
         configuration.setMaxAsyncQueueSize(16);
         // 请求超时时间，单位为毫秒, 默认值为3000
         configuration.setTimeout(httpTimeout);
-        // 连接超时时间，单位为毫秒, 默认值为2000
+        // 连接超时时间，单位为毫秒, 用户自行设置，不设置则默认10000ms
         configuration.setConnectTimeout(configInfo.getHttpTimeout());
         // 设置重试器
         configuration.setRetryer(BackOffRetryer.class);
-        // 请求失败后重试次数，默认为0次不重试
+        // 请求失败后重试次数，默认为0次不重试,    此配置基本无用
         configuration.setMaxRetryCount(0);
-        // 单向验证的HTTPS的默认SSL协议，默认为TLS_1_2
-        configuration.setSslProtocol(SSLUtils.TLS_1_2);
+        // 单向验证的HTTPS的默认SSL协议，默认为SSLv3,    avata 需要TLS_1_2 或者 TLS_1_3
+        configuration.setSslProtocol(SSLUtils.SSL_3);
         // 打开或关闭日志，默认为true
         configuration.setLogEnabled(log);
         // [自v1.5.27版本起可用] 异步模式（默认为 platform）

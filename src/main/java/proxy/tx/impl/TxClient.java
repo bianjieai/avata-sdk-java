@@ -16,12 +16,7 @@ public class TxClient implements TxProxy {
     private static final String QUERY_TX = "/v1beta1/tx/%s";
     private static final String QUERY_QUEUE_INFO = "/v1beta1/tx/queue/info";
 
-    /**
-     * Query transaction
-     *
-     * @param operationId Transaction operationId
-     * @return TxRes, Transaction Result
-     */
+    @Override
     public QueryTxResponse queryTx(String operationId) {
         String path = String.format(QUERY_TX, operationId);
         ForestResponse response = HttpClient.Get(path, "");
@@ -35,11 +30,7 @@ public class TxClient implements TxProxy {
         return res;
     }
 
-    /**
-     * Query queue info
-     *
-     * @return QueryQueueResponse, queue info
-     */
+    @Override
     public QueryQueueResponse queryQueueInfo() {
         ForestResponse response = HttpClient.Get(QUERY_QUEUE_INFO, "");
         String result = response.readAsString();
