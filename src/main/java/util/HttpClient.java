@@ -9,7 +9,7 @@ import java.util.Map;
 
 import config.ConfigCache;
 import constant.ErrorMessage;
-import exception.SdkException;
+import exception.AvataException;
 import model.ErrorResponse;
 
 public class HttpClient {
@@ -123,16 +123,16 @@ public class HttpClient {
     public static void validateResponse(ForestResponse response) {
         // timeout error
         if (response.isTimeout()) {
-            throw new SdkException(ErrorMessage.REQUEST_TIMEOUT_ERROR, null, null);
+            throw new AvataException(ErrorMessage.REQUEST_TIMEOUT_ERROR, null, null);
         }
         // Determine whether the network request failed
         if (response.isError()) {
             // Get the exception generated during the request
             if (response.getException() != null) {
-                throw new SdkException(-1, response.getException().getMessage(), null, null);
+                throw new AvataException(-1, response.getException().getMessage(), null, null);
             }
             ErrorResponse res = JSONObject.parseObject(response.getContent(), ErrorResponse.class);
-            throw new SdkException(ErrorMessage.UNKNOWN_ERROR, res.getError(), null);
+            throw new AvataException(ErrorMessage.UNKNOWN_ERROR, res.getError(), null);
         }
     }
 }

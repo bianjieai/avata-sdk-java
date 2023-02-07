@@ -2,8 +2,8 @@ import model.account.*;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
-    Client client = new Client.Builder()
-            .setDoMain("")
+    AvataClient client = new AvataClient.Builder()
+            .setDomain("")
             .setApiKey("")
             .setApiSecret("")
             .setHttpTimeout(10000)

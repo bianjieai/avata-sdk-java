@@ -5,7 +5,7 @@ import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
 import com.dtflys.forest.retryer.BackOffRetryer;
 import com.dtflys.forest.ssl.SSLUtils;
-import util.Strings;
+import com.dtflys.forest.utils.StringUtils;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,13 +26,13 @@ public class ConfigCache {
         // init configInfo
         ConfigInfo configInfo = new ConfigInfo();
 
-        if (!Strings.isEmpty(avataGateway)) {
+        if (!StringUtils.isEmpty(avataGateway)) {
             configInfo.setDoMain(avataGateway);
         }
-        if (!Strings.isEmpty(apiKey)) {
+        if (!StringUtils.isEmpty(apiKey)) {
             configInfo.setApiKey(apiKey);
         }
-        if (!Strings.isEmpty(apiSecret)) {
+        if (!StringUtils.isEmpty(apiSecret)) {
             configInfo.setApiSecret(apiSecret);
         }
         if (httpTimeout != null) {
@@ -41,6 +41,7 @@ public class ConfigCache {
 
         if (log == null) {
             log = true;
+            // todo log 换成 slfj， 输出sdk自定义日志
         }
 
         MAP.put(SDK_CACHE_KEY, configInfo);

@@ -7,6 +7,9 @@ import model.BaseResponse;
 
 import java.util.List;
 
+/**
+ * 查询 NFT ：Response
+ */
 @NoArgsConstructor
 @Data
 public class QueryNftsRes extends BaseResponse {
@@ -17,13 +20,13 @@ public class QueryNftsRes extends BaseResponse {
     @Data
     public static class DataDTO {
         @JSONField(name = "offset")
-        private Integer offset;
+        private Integer offset;// 游标
 
         @JSONField(name = "limit")
-        private Integer limit;
+        private Integer limit;// 每页记录数
 
         @JSONField(name = "total_count")
-        private Integer totalCount;
+        private Integer totalCount;// 总记录数
 
         @JSONField(name = "nfts")
         private List<NftsDTO> nfts;
@@ -32,34 +35,34 @@ public class QueryNftsRes extends BaseResponse {
         @Data
         public static class NftsDTO {
             @JSONField(name = "id")
-            private String id;
+            private String id;// NFT ID
 
             @JSONField(name = "name")
-            private String name;
+            private String name;// NFT 名称
 
             @JSONField(name = "class_id")
-            private String classId;
+            private String classId;// NFT 类别 ID
 
             @JSONField(name = "class_name")
-            private String className;
+            private String className;// NFT 类别名称
 
             @JSONField(name = "class_symbol")
-            private String classSymbol;
+            private String classSymbol;// NFT 类别标识
 
             @JSONField(name = "uri")
-            private String uri;
+            private String uri;// 链外数据链接
 
             @JSONField(name = "owner")
-            private String owner;
+            private String owner;// NFT 持有者地址
 
             @JSONField(name = "status")
-            private String status;
+            private String status;// NFT 状态：active / burned;
 
             @JSONField(name = "tx_hash")
-            private String txHash;
+            private String txHash;// NFT 发行 Tx Hash
 
             @JSONField(name = "timestamp")
-            private String timestamp;
+            private String timestamp;// NFT 发行时间戳（UTC 时间）
         }
     }
 }

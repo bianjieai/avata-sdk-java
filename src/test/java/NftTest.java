@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NftTest {
-    Client client = new Client.Builder()
-            .setDoMain("")
+    AvataClient client = new AvataClient.Builder()
+            .setDomain("")
             .setApiKey("")
             .setApiSecret("")
             .setHttpTimeout(10000)
@@ -17,7 +17,7 @@ public class NftTest {
     @Test
         //请求创建 NFT 类别接口示例
     void TestCreateClass() {
-        CreateClassReq req = new CreateClassReq();
+        CreateNftClassReq req = new CreateNftClassReq();
         req.setName("lmhnftclassname01");
         req.setClassId("bakvavoy");
         req.setSymbol("123");
@@ -40,24 +40,24 @@ public class NftTest {
     @Test
         //请求查询 NFT 类别列表接口示例
     void TestQueryClasses() {
-        QueryClassesReq req = new QueryClassesReq();
+        QueryNftClassesReq req = new QueryNftClassesReq();
         req.setId("bakvavoy");
         req.setOwner("iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
-        QueryClassesRes res = client.nftClient.queryClasses(req);
+        QueryNftClassesRes res = client.nftClient.queryClasses(req);
         System.out.println(res.getData());
     }
 
     @Test
         //请求查询 NFT 类别详情接口示例
     void TestQueryClass() {
-        QueryClassRes res = client.nftClient.queryClass("bakvavoy");
+        QueryNftClassRes res = client.nftClient.queryClass("bakvavoy");
         System.out.println(res.getData());
     }
 
     @Test
         //请求转让 NFT 类别接口示例
     void TestTransferClass() {
-        TransferClassReq req = new TransferClassReq();
+        TransferNftClassReq req = new TransferNftClassReq();
         req.setRecipient("iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
         req.setOperationId(OperationID);
         try {
@@ -74,7 +74,7 @@ public class NftTest {
     @Test
         //请求发行 NFT 接口示例
     void TestCreateNft() {
-        CreateNftReq req = new CreateNftReq();
+        MintNftReq req = new MintNftReq();
         req.setName("lmhnft023011");
         req.setUri("http://www.456.com");
         req.setUriHash("456");
@@ -134,7 +134,7 @@ public class NftTest {
     @Test
         //请求销毁 NFT 接口示例
     void TestDeleteNft() {
-        DeleteNftReq req = new DeleteNftReq();
+        BurnNftReq req = new BurnNftReq();
         req.setOperationId(OperationID);
         try {
             PublicResponse res = client.nftClient.deleteNft(req,
@@ -152,13 +152,13 @@ public class NftTest {
     @Test
         //请求批量发行 NFT 接口示例
     void TestBatchCreateNft() {
-        BatchCreateNftReq req = new BatchCreateNftReq();
+        BatchMintNftReq req = new BatchMintNftReq();
         req.setName("lmhbatchnft111");
         req.setUri("http://www.000.com");
         req.setUriHash("000");
         req.setData("000");
-        List<BatchCreateNftReq.RecipientsDTO> list = new ArrayList<>();
-        BatchCreateNftReq.RecipientsDTO dto1 = new BatchCreateNftReq.RecipientsDTO();
+        List<BatchMintNftReq.RecipientsDTO> list = new ArrayList<>();
+        BatchMintNftReq.RecipientsDTO dto1 = new BatchMintNftReq.RecipientsDTO();
         dto1.setAmount(2);
         dto1.setRecipient("iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
 //        BatchCreateNftReq.RecipientsDTO dto2 = new BatchCreateNftReq.RecipientsDTO();
@@ -232,9 +232,9 @@ public class NftTest {
     @Test
         //请求批量销毁 NFT 接口示例
     void TestBatchDeleteNft() {
-        BatchDeleteNftReq req = new BatchDeleteNftReq();
-        List<BatchDeleteNftReq.NftsDTO> nftslist = new ArrayList<>();
-        BatchDeleteNftReq.NftsDTO nftsDTO = new BatchDeleteNftReq.NftsDTO();
+        BatchBurnNftReq req = new BatchBurnNftReq();
+        List<BatchBurnNftReq.NftsDTO> nftslist = new ArrayList<>();
+        BatchBurnNftReq.NftsDTO nftsDTO = new BatchBurnNftReq.NftsDTO();
         nftsDTO.setClassId("bakvavoy");
         nftsDTO.setNftId("avataaeqov8gmo0xetsexyi7k7cvxngn");
         nftslist.add(nftsDTO);

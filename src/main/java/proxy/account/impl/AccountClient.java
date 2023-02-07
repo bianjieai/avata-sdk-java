@@ -1,21 +1,15 @@
 package proxy.account.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
-import exception.SdkException;
+import exception.AvataException;
 import model.BaseResponse;
 import model.ErrorResponse;
 import model.account.*;
-import model.tx.QueryQueueResponse;
-import model.tx.QueryTxResponse;
-import okhttp3.Response;
 import proxy.account.AccountProxy;
 import util.HttpClient;
-import util.Strings;
-
-import java.util.Map;
+import com.dtflys.forest.utils.StringUtils;
 
 public class AccountClient implements AccountProxy {
     private static final String CREATE_ACCOUNT = "/v1beta1/account";
@@ -26,19 +20,19 @@ public class AccountClient implements AccountProxy {
     @Override
     public CreateAccountRes createAccount(CreateAccountReq req) {
         // check params
-        if (Strings.isEmpty(req.getName())) {
-            throw new SdkException(ErrorMessage.NAME_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getName())) {
+            throw new AvataException(ErrorMessage.NAME_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
 
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
-        }
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
+        }// todo 挪到validateResponse里
         CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
         return res;
@@ -47,15 +41,15 @@ public class AccountClient implements AccountProxy {
     @Override
     public BatchCreateAccountRes batchCreateAccounts(BatchCreateAccountReq req) {
         // check params
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
 
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         BatchCreateAccountRes res = JSONObject.parseObject(result, BatchCreateAccountRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -69,7 +63,7 @@ public class AccountClient implements AccountProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryAccountsRes res = JSONObject.parseObject(result, QueryAccountsRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -83,7 +77,7 @@ public class AccountClient implements AccountProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryAccountsHistoryRes res = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));

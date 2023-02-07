@@ -18,11 +18,11 @@ public class QueryMtBalancesRes extends BaseResponse {
     @Data
     public static class DataDTO {
         @JSONField(name = "offset")
-        private Integer offset;
+        private Integer offset;// 游标
         @JSONField(name = "limit")
-        private Integer limit;
+        private Integer limit;// 每页记录数
         @JSONField(name = "total_count")
-        private Integer totalCount;
+        private Integer totalCount;// 总记录数
         @JSONField(name = "mts")
         private List<MtsDTO> mts;
 
@@ -30,9 +30,9 @@ public class QueryMtBalancesRes extends BaseResponse {
         @Data
         public static class MtsDTO {
             @JSONField(name = "id")
-            private String id;
+            private String id;// MT ID
             @JSONField(name = "amount")
-            private Integer amount;
+            private Integer amount;// MT 数量
         }
     }
 }
