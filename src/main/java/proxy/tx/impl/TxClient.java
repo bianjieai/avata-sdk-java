@@ -2,7 +2,6 @@ package proxy.tx.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
-import com.dtflys.forest.utils.StringUtils;
 import constant.ErrorMessage;
 import exception.AvataException;
 import model.BaseResponse;
