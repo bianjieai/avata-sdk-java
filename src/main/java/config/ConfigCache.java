@@ -74,6 +74,7 @@ public class ConfigCache {
         // [自v1.5.27版本起可用] 异步模式（默认为 platform）
         configuration.setAsyncMode(ForestAsyncMode.PLATFORM);
 
+
     }
 
     public static final ConfigInfo get() {

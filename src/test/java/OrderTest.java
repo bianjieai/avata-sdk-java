@@ -21,7 +21,7 @@ public class OrderTest {
         req.setAmount(100);
         req.setOrderType("gas");
         try {
-            OrderRes res = client.orderClient.CreateOrder(req);
+            OrderRes res = client.orderClient.createOrder(req);
             System.out.println(res.getData().getOrderId());
             System.out.println("no exception");
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class OrderTest {
         //请求查询能量值/业务费购买结果接口示例
     void TestQueryOrder() {
         try {
-            QueryOrderRes res = client.orderClient.QueryOrder("sxjtesto_rde2rid0w2");
+            QueryOrderRes res = client.orderClient.queryOrder("sxjtesto_rde2rid0w2");
             System.out.println(res.getData());
             System.out.println("no exception");
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class OrderTest {
         QueryOrdersReq req = new QueryOrdersReq();
         req.setStatus("success");
         try {
-            QueryOrdersRes res = client.orderClient.QueryOrders(req);
+            QueryOrdersRes res = client.orderClient.queryOrders(req);
             System.out.println(res.getData());
             System.out.println("no exception");
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class OrderTest {
         req.setList(list);
         req.setOrderId("gaisbc3_b1627");
         try {
-            OrderRes res = client.orderClient.BatchCreatrOrders(req);
+            OrderRes res = client.orderClient.batchCreateOrders(req);
             System.out.println(res.getData().getOrderId());
             System.out.println("no exception");
         } catch (Exception e) {
