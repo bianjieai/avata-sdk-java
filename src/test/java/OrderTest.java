@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderTest {
-    Client client = new Client.Builder()
-            .setDoMain("")
+    AvataClient client = new AvataClient.Builder()
+            .setDomain("")
             .setApiKey("")
             .setApiSecret("")
             .setHttpTimeout(10000)
@@ -21,7 +21,7 @@ public class OrderTest {
         req.setAmount(100);
         req.setOrderType("gas");
         try {
-            PublicOrderRes res = client.orderClient.CreateOrder(req);
+            OrderRes res = client.orderClient.CreateOrder(req);
             System.out.println(res.getData().getOrderId());
             System.out.println("no exception");
         } catch (Exception e) {
@@ -61,16 +61,16 @@ public class OrderTest {
     @Test
         //请求批量购买能量值接口示例
     void TestBatchCreatrOrders() {
-        BatchCreateOrdersReq req = new BatchCreateOrdersReq();
-        List<BatchCreateOrdersReq.ListDTO> list = new ArrayList<>();
-        BatchCreateOrdersReq.ListDTO dto1 = new BatchCreateOrdersReq.ListDTO();
+        BatchCreateOrderReq req = new BatchCreateOrderReq();
+        List<BatchCreateOrderReq.ListDTO> list = new ArrayList<>();
+        BatchCreateOrderReq.ListDTO dto1 = new BatchCreateOrderReq.ListDTO();
         dto1.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
         dto1.setAmount(200);
         list.add(dto1);
         req.setList(list);
         req.setOrderId("gaisbc3_b1627");
         try {
-            PublicOrderRes res = client.orderClient.BatchCreatrOrders(req);
+            OrderRes res = client.orderClient.BatchCreatrOrders(req);
             System.out.println(res.getData().getOrderId());
             System.out.println("no exception");
         } catch (Exception e) {

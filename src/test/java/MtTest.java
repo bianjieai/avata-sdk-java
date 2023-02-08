@@ -3,8 +3,8 @@ import model.mt.*;
 import org.junit.jupiter.api.Test;
 
 public class MtTest {
-    Client client = new Client.Builder()
-            .setDoMain("")
+    AvataClient client = new AvataClient.Builder()
+            .setDomain("")
             .setApiKey("")
             .setApiSecret("")
             .setHttpTimeout(10000)
@@ -66,7 +66,7 @@ public class MtTest {
     @Test
         //请求发行 MT 接口示例
     void TestCreateMt() {
-        CreateMtReq req = new CreateMtReq();
+        IssueMtReq req = new IssueMtReq();
         req.setData("datadata");
         req.setAmount(100);
         req.setRecipient("iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
@@ -142,7 +142,7 @@ public class MtTest {
     @Test
         //请求销毁 MT 接口示例
     void TestDeleteMt() {
-        DeleteMtReq req = new DeleteMtReq();
+        BurnMtReq req = new BurnMtReq();
         req.setAmount(1);
         req.setOperationId(OperationID);
         try {

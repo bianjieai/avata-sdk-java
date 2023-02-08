@@ -45,7 +45,7 @@ public interface MtProxy {
      * @param classId MT 类别 ID
      * @return
      */
-    PublicResponse createMt(CreateMtReq req, String classId);
+    PublicResponse createMt(IssueMtReq req, String classId);
 
     /**
      * 增发 MT
@@ -88,7 +88,7 @@ public interface MtProxy {
      * @param mtId    MT ID
      * @return
      */
-    PublicResponse deleteMt(DeleteMtReq req, String classId, String owner, String mtId);
+    PublicResponse deleteMt(BurnMtReq req, String classId, String owner, String mtId);
 
     /**
      * 查询 MT

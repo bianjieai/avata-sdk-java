@@ -3,8 +3,8 @@ import model.records.CreateRecordReq;
 import org.junit.jupiter.api.Test;
 
 public class RecordTest {
-    Client client = new Client.Builder()
-            .setDoMain("")
+    AvataClient client = new AvataClient.Builder()
+            .setDomain("")
             .setApiKey("")
             .setApiSecret("")
             .setHttpTimeout(10000)

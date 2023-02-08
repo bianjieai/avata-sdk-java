@@ -3,14 +3,14 @@ package proxy.mt.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import constant.ErrorMessage;
-import exception.SdkException;
+import exception.AvataException;
 import model.BaseResponse;
 import model.ErrorResponse;
 import model.PublicResponse;
 import model.mt.*;
 import proxy.mt.MtProxy;
 import util.HttpClient;
-import util.Strings;
+import com.dtflys.forest.utils.StringUtils;
 
 public class MtClient implements MtProxy {
     private static final String CREATE_MT_CLASS = "/v1beta1/mt/classes";
@@ -30,20 +30,20 @@ public class MtClient implements MtProxy {
     @Override
     public PublicResponse createMtClass(CreateMtClassReq req) {
         // check params
-        if (Strings.isEmpty(req.getName())) {
-            throw new SdkException(ErrorMessage.NAME_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getName())) {
+            throw new AvataException(ErrorMessage.NAME_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOwner())) {
-            throw new SdkException(ErrorMessage.OWNER_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOwner())) {
+            throw new AvataException(ErrorMessage.OWNER_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         ForestResponse response = HttpClient.Post(CREATE_MT_CLASS, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -56,7 +56,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryMtClassesRes res = JSONObject.parseObject(result, QueryMtClassesRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -70,7 +70,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryMtClassRes res = JSONObject.parseObject(result, QueryMtClassRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -80,18 +80,18 @@ public class MtClient implements MtProxy {
     @Override
     public PublicResponse transferMtClass(TransferMtClassReq req, String classId, String owner) {
         // check params
-        if (Strings.isEmpty(req.getRecipient())) {
-            throw new SdkException(ErrorMessage.RECIPIENT_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getRecipient())) {
+            throw new AvataException(ErrorMessage.RECIPIENT_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(TRANSFER_MT_CLASS, classId, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -99,17 +99,17 @@ public class MtClient implements MtProxy {
     }
 
     @Override
-    public PublicResponse createMt(CreateMtReq req, String classId) {
+    public PublicResponse createMt(IssueMtReq req, String classId) {
         // check params
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(CREATE_MT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -119,15 +119,15 @@ public class MtClient implements MtProxy {
     @Override
     public PublicResponse mintMt(MintMtReq req, String classId, String mtId) {
         // check params
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(MINT_MT, classId, mtId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -137,18 +137,18 @@ public class MtClient implements MtProxy {
     @Override
     public PublicResponse transferMt(TransferMtReq req, String classId, String owner, String mtId) {
         // check params
-        if (Strings.isEmpty(req.getRecipient())) {
-            throw new SdkException(ErrorMessage.RECIPIENT_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getRecipient())) {
+            throw new AvataException(ErrorMessage.RECIPIENT_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(TRANSFER_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -158,18 +158,18 @@ public class MtClient implements MtProxy {
     @Override
     public PublicResponse editMt(EditMtReq req, String classId, String owner, String mtId) {
         // check params
-        if (Strings.isEmpty(req.getData())) {
-            throw new SdkException(ErrorMessage.DATA_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getData())) {
+            throw new AvataException(ErrorMessage.DATA_ERROR, null, null);
         }
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(EDIT_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -177,17 +177,17 @@ public class MtClient implements MtProxy {
     }
 
     @Override
-    public PublicResponse deleteMt(DeleteMtReq req, String classId, String owner, String mtId) {
+    public PublicResponse deleteMt(BurnMtReq req, String classId, String owner, String mtId) {
         // check params
-        if (Strings.isEmpty(req.getOperationId())) {
-            throw new SdkException(ErrorMessage.OPERATION_ID_ERROR, null, null);
+        if (StringUtils.isEmpty(req.getOperationId())) {
+            throw new AvataException(ErrorMessage.OPERATION_ID_ERROR, null, null);
         }
         String path = String.format(DELETE_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -200,7 +200,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryMtsRes res = JSONObject.parseObject(result, QueryMtsRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -214,7 +214,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryMtRes res = JSONObject.parseObject(result, QueryMtRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -228,7 +228,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryMtHistoryRes res = JSONObject.parseObject(result, QueryMtHistoryRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
@@ -242,7 +242,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         if (response.getStatusCode() != 200) {
             ErrorResponse errorResponse = JSONObject.parseObject(result, ErrorResponse.class);
-            throw new SdkException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new SdkException.Http(response.getStatusCode(), response.getReasonPhrase()));
+            throw new AvataException(ErrorMessage.AVATA_ERROR, errorResponse.getError(), new AvataException.Http(response.getStatusCode(), response.getReasonPhrase()));
         }
         QueryMtBalancesRes res = JSONObject.parseObject(result, QueryMtBalancesRes.class);
         res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));

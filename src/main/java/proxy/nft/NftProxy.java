@@ -11,7 +11,7 @@ public interface NftProxy {
      * @param req 创建 NFT 类别请求实体
      * @return
      */
-    PublicResponse createClass(CreateClassReq req);
+    PublicResponse createClass(CreateNftClassReq req);
 
     /**
      * 查询 NFT 类别
@@ -19,7 +19,7 @@ public interface NftProxy {
      * @param req 查询 NFT 类别请求实体
      * @return
      */
-    QueryClassesRes queryClasses(QueryClassesReq req);
+    QueryNftClassesRes queryClasses(QueryNftClassesReq req);
 
     /**
      * 查询 NFT 类别详情
@@ -27,7 +27,7 @@ public interface NftProxy {
      * @param classId NFT 类别 ID
      * @return
      */
-    QueryClassRes queryClass(String classId);
+    QueryNftClassRes queryClass(String classId);
 
     /**
      * 转让 NFT 类别
@@ -37,7 +37,7 @@ public interface NftProxy {
      * @param owner   NFT 类别权属者地址
      * @return
      */
-    PublicResponse transferClass(TransferClassReq req, String classId, String owner);
+    PublicResponse transferClass(TransferNftClassReq req, String classId, String owner);
 
     /**
      * 发行 NFT
@@ -46,7 +46,7 @@ public interface NftProxy {
      * @param classId NFT 类别 ID
      * @return
      */
-    PublicResponse createNft(CreateNftReq req, String classId);
+    PublicResponse createNft(MintNftReq req, String classId);
 
     /**
      * 转让 NFT
@@ -79,7 +79,7 @@ public interface NftProxy {
      * @param nftId NFT ID
      * @return
      */
-    PublicResponse deleteNft(DeleteNftReq req, String classId, String owner, String nftId);
+    PublicResponse deleteNft(BurnNftReq req, String classId, String owner, String nftId);
 
     /**
      * 批量发行 NFT
@@ -88,7 +88,7 @@ public interface NftProxy {
      * @param classId NFT 类别 ID
      * @return
      */
-    PublicResponse batchCreateNft(BatchCreateNftReq req, String classId);
+    PublicResponse batchCreateNft(BatchMintNftReq req, String classId);
 
     /**
      * 批量转让 NFT
@@ -115,7 +115,7 @@ public interface NftProxy {
      * @param owner NFT 持有者地址，也是 Tx 签名者地址
      * @return
      */
-    PublicResponse batchDeleteNft(BatchDeleteNftReq req, String owner);
+    PublicResponse batchDeleteNft(BatchBurnNftReq req, String owner);
 
     /**
      * 查询 NFT

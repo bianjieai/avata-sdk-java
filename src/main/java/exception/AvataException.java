@@ -11,13 +11,13 @@ import model.ErrorResponse;
  * @author sxj
  */
 @Data
-public class SdkException extends RuntimeException {
+public class AvataException extends RuntimeException {
     private final ErrorResponse.ErrorDTO error;
     private final int code;
     private final String msg;
     private final Http http;
 
-    public SdkException(ErrorMessage errorMessage, ErrorResponse.ErrorDTO error, Http http) {
+    public AvataException(ErrorMessage errorMessage, ErrorResponse.ErrorDTO error, Http http) {
         super(errorMessage.getMessage());
         this.error = error;
         this.http = http;
@@ -25,7 +25,7 @@ public class SdkException extends RuntimeException {
         this.msg = errorMessage.getMessage();
     }
 
-    public SdkException(int code, String msg, ErrorResponse.ErrorDTO error, Http http) {
+    public AvataException(int code, String msg, ErrorResponse.ErrorDTO error, Http http) {
         super(msg);
         this.error = error;
         this.code = code;

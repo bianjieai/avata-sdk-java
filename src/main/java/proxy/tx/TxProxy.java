@@ -1,7 +1,8 @@
 package proxy.tx;
 
-import model.tx.QueryQueueResponse;
-import model.tx.QueryTxResponse;
+import model.tx.QueryQueueReq;
+import model.tx.QueryQueueRes;
+import model.tx.QueryTxRes;
 
 public interface TxProxy {
     /**
@@ -10,12 +11,12 @@ public interface TxProxy {
      * @param operationId OPERATION ID
      * @return
      */
-    QueryTxResponse queryTx(String operationId);
+    QueryTxRes queryTx(String operationId);
 
     /**
      * 上链交易排队状态查询
      *
      * @return
      */
-    QueryQueueResponse queryQueueInfo();
+    QueryQueueRes queryQueueInfo(QueryQueueReq req);
 }

@@ -1,9 +1,9 @@
-package proxy.records;
+package proxy.record;
 
 import model.PublicResponse;
 import model.records.CreateRecordReq;
 
-public interface RecordsProxy {
+public interface RecordProxy {
     /**
      * 数字作品存证接口, 创建数字作品存证
      *

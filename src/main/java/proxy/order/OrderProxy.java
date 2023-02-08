@@ -1,6 +1,5 @@
 package proxy.order;
 
-import model.PublicResponse;
 import model.order.*;
 
 public interface OrderProxy {
@@ -10,7 +9,7 @@ public interface OrderProxy {
      * @param req 购买能量值/业务费请求实体
      * @return
      */
-    PublicOrderRes CreateOrder(CreateOrderReq req);
+    OrderRes CreateOrder(CreateOrderReq req);
 
     /**
      * 批量购买能量值
@@ -18,7 +17,7 @@ public interface OrderProxy {
      * @param req 批量购买能量值请求实体
      * @return
      */
-    PublicOrderRes BatchCreatrOrders(BatchCreateOrdersReq req);
+    OrderRes BatchCreatrOrders(BatchCreateOrderReq req);
 
     /**
      * 查询能量值/业务费购买结果

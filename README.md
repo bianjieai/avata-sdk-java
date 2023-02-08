@@ -15,7 +15,7 @@
 ### 创建和使用客户端
 
 ```
-Client client = new Client.Builder()
+AvataClient client = new AvataClient.Builder()
             .setDoMain("")
             .setApiKey("")
             .setApiSecret("")
