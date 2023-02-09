@@ -1,5 +1,4 @@
 import config.ConfigCache;
-import constant.ErrorMessage;
 import exception.AvataException;
 import proxy.account.impl.AccountClient;
 import proxy.mt.impl.MtClient;
@@ -34,11 +33,11 @@ public class AvataClient {
         private String apiKey;
         private String apiSecret;
         private Integer httpTimeout;
-        private Boolean log; // todo
+        private Boolean log;
 
         public Builder setDomain(String domain) {
             if (StringUtils.isEmpty(domain)) {
-                throw new AvataException(ErrorMessage.DOMAIN_ERROR, null, null);
+                throw AvataException.NewSDKException(AvataException.ErrDomain);
             }
             this.domain = domain;
             return this;
@@ -50,7 +49,7 @@ public class AvataClient {
                 return this;
             }
             if (httpTimeout < 0) {
-                throw new AvataException(ErrorMessage.HTTP_TIMEOUT_ERROR, null, null);
+                throw AvataException.NewSDKException(AvataException.HTTP_TIMEOUT_ERROR);
             }
             this.httpTimeout = httpTimeout;
             return this;
@@ -58,7 +57,7 @@ public class AvataClient {
 
         public Builder setApiKey(String apiKey) {
             if (StringUtils.isEmpty(apiKey)) {
-                throw new AvataException(ErrorMessage.API_KEY_ERROR, null, null);
+                throw AvataException.NewSDKException(AvataException.ErrAPIKey);
             }
             this.apiKey = apiKey;
             return this;
@@ -66,7 +65,7 @@ public class AvataClient {
 
         public Builder setApiSecret(String apiSecret) {
             if (StringUtils.isEmpty(apiSecret)) {
-                throw new AvataException(ErrorMessage.API_SECRET_ERROR, null, null);
+                throw AvataException.NewSDKException(AvataException.ErrAPISecret);
             }
             this.apiSecret = apiSecret;
             return this;

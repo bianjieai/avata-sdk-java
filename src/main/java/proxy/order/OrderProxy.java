@@ -9,7 +9,7 @@ public interface OrderProxy {
      * @param req 购买能量值/业务费请求实体
      * @return
      */
-    OrderRes CreateOrder(CreateOrderReq req);
+    OrderRes createOrder(CreateOrderReq req);
 
     /**
      * 批量购买能量值
@@ -17,7 +17,7 @@ public interface OrderProxy {
      * @param req 批量购买能量值请求实体
      * @return
      */
-    OrderRes BatchCreatrOrders(BatchCreateOrderReq req);
+    OrderRes batchCreateOrders(BatchCreateOrderReq req);
 
     /**
      * 查询能量值/业务费购买结果
@@ -25,7 +25,7 @@ public interface OrderProxy {
      * @param orderId Order ID
      * @return
      */
-    QueryOrderRes QueryOrder(String orderId);
+    QueryOrderRes queryOrder(String orderId);
 
     /**
      * 查询能量值/业务费购买结果列表
@@ -33,5 +33,5 @@ public interface OrderProxy {
      * @param req 查询能量值/业务费购买结果列表请求实体
      * @return
      */
-    QueryOrdersRes QueryOrders(QueryOrdersReq req);
+    QueryOrdersRes queryOrders(QueryOrdersReq req);
 }

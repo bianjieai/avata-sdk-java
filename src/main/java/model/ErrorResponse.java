@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class ErrorResponse {
 
-    private ErrorDTO error;
+    private AvataError error;
 
     @NoArgsConstructor
     @Data
-    public static class ErrorDTO {
+    public static class AvataError {
         @JSONField(name = "code")
         private String code;
         @JSONField(name = "code_space")
