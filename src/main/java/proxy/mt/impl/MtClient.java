@@ -33,13 +33,13 @@ public class MtClient implements MtProxy {
         log.info("createMtClass start");
         // check params
         if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "name"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (StringUtils.isEmpty(req.getOwner())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "owner"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "owner"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(CREATE_MT_CLASS, JSONObject.toJSONString(req));
         String result = response.readAsString();
@@ -82,10 +82,10 @@ public class MtClient implements MtProxy {
         log.info("transferMtClass start");
         // check params
         if (StringUtils.isEmpty(req.getRecipient())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "recipient"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_MT_CLASS, classId, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -103,7 +103,7 @@ public class MtClient implements MtProxy {
         log.info("createMt start");
         // check params
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(CREATE_MT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -121,7 +121,7 @@ public class MtClient implements MtProxy {
         log.info("mintMt start");
         // check params
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(MINT_MT, classId, mtId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -139,10 +139,10 @@ public class MtClient implements MtProxy {
         log.info("transferMt start");
         // check params
         if (StringUtils.isEmpty(req.getRecipient())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "recipient"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -160,10 +160,10 @@ public class MtClient implements MtProxy {
         log.info("editMt start");
         // check params
         if (StringUtils.isEmpty(req.getData())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "date"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "date"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(EDIT_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
@@ -181,7 +181,7 @@ public class MtClient implements MtProxy {
         log.info("deleteMt start");
         // check params
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(DELETE_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));

@@ -23,10 +23,10 @@ public class AccountClient implements AccountProxy {
         log.info("createAccount start");
         // check params
         if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "name"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
 
@@ -43,7 +43,7 @@ public class AccountClient implements AccountProxy {
         log.info("batchCreateAccounts start");
         // check params
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
 

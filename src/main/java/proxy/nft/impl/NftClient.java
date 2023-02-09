@@ -36,13 +36,13 @@ public class NftClient implements NftProxy {
         log.info("createClass start");
         // check params
         if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "name"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (StringUtils.isEmpty(req.getOwner())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "owner"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "owner"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(CREATE_CLASS, JSONObject.toJSONString(req));
 
@@ -87,10 +87,10 @@ public class NftClient implements NftProxy {
         log.info("transferClass start");
         // check params
         if (StringUtils.isEmpty(req.getRecipient())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "recipient"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_CLASS, classId, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -109,10 +109,10 @@ public class NftClient implements NftProxy {
         log.info("createNft start");
         // check params
         if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "name"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(CREATE_NFT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -130,10 +130,10 @@ public class NftClient implements NftProxy {
         log.info("transferNft start");
         // check params
         if (StringUtils.isEmpty(req.getRecipient())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "recipient"));//todo
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));//todo
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));//todo
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));//todo
         }
         String path = String.format(TRANSFER_NFT, classId, owner, nftId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -151,10 +151,10 @@ public class NftClient implements NftProxy {
         log.info("editNft start");
         // check params
         if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "name"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(EDIT_NFT, classId, owner, nftId);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
@@ -172,7 +172,7 @@ public class NftClient implements NftProxy {
         log.info("deleteNft start");
         // check params
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(DELETE_NFT, classId, owner, nftId);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
@@ -190,13 +190,13 @@ public class NftClient implements NftProxy {
         log.info("batchCreateNft start");
         // check params
         if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "name"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (req.getRecipients() == null) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "recipient"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_CREATE_NFT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -214,10 +214,10 @@ public class NftClient implements NftProxy {
         log.info("batchTransferNft start");
         // check params
         if (req.getData() == null) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "date"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "date"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_TRANSFER_NFT, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
@@ -236,10 +236,10 @@ public class NftClient implements NftProxy {
         log.info("batchEditNft start");
         // check params
         if (req.getNfts() == null) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "nfts"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "nfts"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_EDIT_NFT, owner);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
@@ -257,10 +257,10 @@ public class NftClient implements NftProxy {
         log.info("batchDeleteNft start");
         // check params
         if (req.getNfts() == null) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "nfts"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "nfts"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "operation_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_DELETE_NFT, owner);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));

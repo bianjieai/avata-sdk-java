@@ -23,19 +23,19 @@ public class OrderClient implements OrderProxy {
         log.info("createOrder start");
         // check params
         if (StringUtils.isEmpty(req.getOrderId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "order_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "order_id"));
         }
         if (StringUtils.isEmpty(req.getAccount())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "account"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "account"));
         }
         if (StringUtils.isEmpty(req.getOrderType())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "order_type"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "order_type"));
         }
         if (req.getAmount() == null) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "amount"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "amount"));
         }
         if (req.getAmount()%100 != 0){
-            throw AvataException.NewSDKException(AvataException.ErrAmount);
+            throw AvataException.InvalidParamException(AvataException.ErrAmount);
         }
         ForestResponse response = HttpClient.Post(CREATE_ORDER, JSONObject.toJSONString(req));
 
@@ -53,20 +53,20 @@ public class OrderClient implements OrderProxy {
         log.info("createClass start");
         // check params
         if (StringUtils.isEmpty(req.getOrderId())) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "order_id"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "order_id"));
         }
         if (req.getList() == null) {
-            throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "order_list"));
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "order_list"));
         }
         req.getList().forEach(l -> {
             if (StringUtils.isEmpty(l.getAccount())) {
-                throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "account"));
+                throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "account"));
             }
             if (l.getAmount() == null) {
-                throw AvataException.NewSDKException(String.format(AvataException.PARAM_ERROR, "amount"));
+                throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "amount"));
             }
             if (l.getAmount()%100 != 0) {
-                throw AvataException.NewSDKException(AvataException.ErrAmount);
+                throw AvataException.InvalidParamException(AvataException.ErrAmount);
             }
         });
 
