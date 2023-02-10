@@ -154,7 +154,7 @@ public class NftClient implements NftProxy {
     }
 
     @Override
-    public PublicResponse deleteNft(BurnNftReq req, String classId, String owner, String nftId) {
+    public PublicResponse burnNft(BurnNftReq req, String classId, String owner, String nftId) {
         log.debug("BurnNftReq {}, classId {}, owner {}, nftId {}", req, classId, owner, nftId);
         log.info("deleteNft start");
         // check params
@@ -227,7 +227,7 @@ public class NftClient implements NftProxy {
     }
 
     @Override
-    public PublicResponse batchDeleteNft(BatchBurnNftReq req, String owner) {
+    public PublicResponse batchBurnNft(BatchBurnNftReq req, String owner) {
         log.debug("BatchBurnNftReq {}, owner {}", req, owner);
         log.info("batchDeleteNft start");
         // check params

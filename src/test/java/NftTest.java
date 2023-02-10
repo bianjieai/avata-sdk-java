@@ -137,7 +137,7 @@ public class NftTest {
         BurnNftReq req = new BurnNftReq();
         req.setOperationId(OperationID);
         try {
-            PublicResponse res = client.nftClient.deleteNft(req,
+            PublicResponse res = client.nftClient.burnNft(req,
                     "bakvavoy",
                     "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr",
                     "avatavgj7c3u5722k0oddsgyi3ps2ced");
@@ -241,7 +241,7 @@ public class NftTest {
         req.setNfts(nftslist);
         req.setOperationId(OperationID);
         try {
-            PublicResponse res = client.nftClient.batchDeleteNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
+            PublicResponse res = client.nftClient.batchBurnNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
             System.out.println(res.getData().getOperationId());
             System.out.println("no exception");
         } catch (Exception e) {

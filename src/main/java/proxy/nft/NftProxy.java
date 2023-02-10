@@ -79,7 +79,7 @@ public interface NftProxy {
      * @param nftId NFT ID
      * @return
      */
-    PublicResponse deleteNft(BurnNftReq req, String classId, String owner, String nftId);
+    PublicResponse burnNft(BurnNftReq req, String classId, String owner, String nftId);
 
     /**
      * 批量发行 NFT
@@ -115,7 +115,7 @@ public interface NftProxy {
      * @param owner NFT 持有者地址，也是 Tx 签名者地址
      * @return
      */
-    PublicResponse batchDeleteNft(BatchBurnNftReq req, String owner);
+    PublicResponse batchBurnNft(BatchBurnNftReq req, String owner);
 
     /**
      * 查询 NFT
