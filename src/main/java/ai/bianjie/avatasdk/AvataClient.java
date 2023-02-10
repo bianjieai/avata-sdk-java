@@ -15,7 +15,7 @@ import com.dtflys.forest.retryer.BackOffRetryer;
 import com.dtflys.forest.ssl.SSLUtils;
 import com.dtflys.forest.utils.StringUtils;
 
-public class AvataClient {// todo 同时开启两个client，是否可行
+public class AvataClient {
     public NftClient nftClient;
     public AccountClient accountClient;
     public MtClient mtClient;
