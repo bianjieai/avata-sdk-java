@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class PublicResponse extends BaseResponse {
+public class PublicResponse {
 
     @JSONField(name = "data")
     private DataDTO data;

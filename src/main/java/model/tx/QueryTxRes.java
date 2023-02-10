@@ -3,7 +3,6 @@ package model.tx;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 
 /**
@@ -17,7 +16,7 @@ import model.BaseResponse;
  */
 @NoArgsConstructor
 @Data
-public class QueryTxRes extends BaseResponse {
+public class QueryTxRes {
 
     @JSONField(name = "data")
     private DataDTO data;

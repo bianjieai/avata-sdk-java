@@ -3,16 +3,13 @@ package model.nft;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
-
-import java.util.List;
 
 /**
  * 查询 NFT 操作记录：request
  */
 @NoArgsConstructor
 @Data
-public class QueryNftHistoryReq extends BaseResponse {
+public class QueryNftHistoryReq {
 
     @JSONField(name = "offset")
     private String offset;// 游标，默认为 0

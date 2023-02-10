@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import exception.AvataException;
 import lombok.extern.slf4j.Slf4j;
-import model.BaseResponse;
 import model.account.*;
 import proxy.account.AccountProxy;
 import util.HttpClient;
@@ -32,7 +31,7 @@ public class AccountClient implements AccountProxy {
 
         String result = response.readAsString();
         CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("createAccount end");
         return res;
     }
@@ -50,7 +49,7 @@ public class AccountClient implements AccountProxy {
         String result = response.readAsString();
         
         BatchCreateAccountRes res = JSONObject.parseObject(result, BatchCreateAccountRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("batchCreateAccounts end");
         return res;
     }
@@ -64,7 +63,7 @@ public class AccountClient implements AccountProxy {
         String result = response.readAsString();
         
         QueryAccountsRes res = JSONObject.parseObject(result, QueryAccountsRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryAccounts end");
         return res;
     }
@@ -78,7 +77,7 @@ public class AccountClient implements AccountProxy {
         String result = response.readAsString();
         
         QueryAccountsHistoryRes res = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryAccountsHistory end");
         return res;
     }

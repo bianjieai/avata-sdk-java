@@ -3,13 +3,12 @@ package model.account;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 import java.util.List;
 
 @NoArgsConstructor
 @Data
-public class QueryAccountsHistoryRes extends BaseResponse {
+public class QueryAccountsHistoryRes {
 
 
     @JSONField(name = "data")

@@ -3,7 +3,6 @@ package proxy.tx.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import lombok.extern.slf4j.Slf4j;
-import model.BaseResponse;
 import model.tx.QueryQueueReq;
 import model.tx.QueryQueueRes;
 import model.tx.QueryTxRes;
@@ -24,7 +23,7 @@ public class TxClient implements TxProxy {
         String result = response.readAsString();
 
         QueryTxRes res = JSONObject.parseObject(result, QueryTxRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryTx end");
         return res;
     }
@@ -37,7 +36,7 @@ public class TxClient implements TxProxy {
         String result = response.readAsString();
 
         QueryQueueRes res = JSONObject.parseObject(result, QueryQueueRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryQueueInfo end");
         return res;
     }

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import exception.AvataException;
 import lombok.extern.slf4j.Slf4j;
-import model.BaseResponse;
 import model.PublicResponse;
 import model.nft.*;
 import proxy.nft.NftProxy;
@@ -46,10 +45,7 @@ public class NftClient implements NftProxy {
         }
         ForestResponse response = HttpClient.Post(CREATE_CLASS, JSONObject.toJSONString(req));
 
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("createClass end");
         return res;
     }
@@ -62,7 +58,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
         
         QueryNftClassesRes res = JSONObject.parseObject(result, QueryNftClassesRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryClasses end");
         return res;
     }
@@ -76,7 +72,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
         
         QueryNftClassRes res = JSONObject.parseObject(result, QueryNftClassRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryClass end");
         return res;
     }
@@ -94,10 +90,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(TRANSFER_CLASS, classId, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("transferClass end");
         return res;
 
@@ -116,10 +109,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(CREATE_NFT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("createNft end");
         return res;
     }
@@ -140,7 +130,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
 
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("transferNft end");
         return res;
     }
@@ -158,10 +148,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(EDIT_NFT, classId, owner, nftId);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("editNft end");
         return res;
     }
@@ -176,10 +163,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(DELETE_NFT, classId, owner, nftId);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("deleteNft end");
         return res;
     }
@@ -200,10 +184,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(BATCH_CREATE_NFT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("batchCreateNft end");
         return res;
     }
@@ -221,10 +202,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(BATCH_TRANSFER_NFT, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("batchTransferNft end");
         return res;
 
@@ -243,10 +221,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(BATCH_EDIT_NFT, owner);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("batchEditNft end");
         return res;
     }
@@ -264,10 +239,7 @@ public class NftClient implements NftProxy {
         }
         String path = String.format(BATCH_DELETE_NFT, owner);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("batchDeleteNft end");
         return res;
     }
@@ -280,7 +252,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
         
         QueryNftsRes res = JSONObject.parseObject(result, QueryNftsRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryNfts end");
         return res;
     }
@@ -294,7 +266,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
         
         QueryNftRes res = JSONObject.parseObject(result, QueryNftRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryNft end");
         return res;
     }
@@ -308,7 +280,7 @@ public class NftClient implements NftProxy {
         String result = response.readAsString();
         
         QueryNftHistoryRes res = JSONObject.parseObject(result, QueryNftHistoryRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryNftHistory end");
         return res;
     }

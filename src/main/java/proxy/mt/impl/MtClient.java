@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import exception.AvataException;
 import lombok.extern.slf4j.Slf4j;
-import model.BaseResponse;
 import model.PublicResponse;
 import model.mt.*;
 import proxy.mt.MtProxy;
@@ -42,10 +41,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(CREATE_MT_CLASS, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("createMtClass end");
         return res;
     }
@@ -58,7 +54,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         
         QueryMtClassesRes res = JSONObject.parseObject(result, QueryMtClassesRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryMtClasses end");
         return res;
     }
@@ -72,7 +68,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         
         QueryMtClassRes res = JSONObject.parseObject(result, QueryMtClassRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         return res;
     }
 
@@ -89,10 +85,7 @@ public class MtClient implements MtProxy {
         }
         String path = String.format(TRANSFER_MT_CLASS, classId, owner);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("transferMtClass end");
         return res;
     }
@@ -107,10 +100,7 @@ public class MtClient implements MtProxy {
         }
         String path = String.format(CREATE_MT, classId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("createMt end");
         return res;
     }
@@ -125,10 +115,7 @@ public class MtClient implements MtProxy {
         }
         String path = String.format(MINT_MT, classId, mtId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("mintMt end");
         return res;
     }
@@ -146,10 +133,7 @@ public class MtClient implements MtProxy {
         }
         String path = String.format(TRANSFER_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("transferMt end");
         return res;
     }
@@ -167,10 +151,7 @@ public class MtClient implements MtProxy {
         }
         String path = String.format(EDIT_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("editMt end");
         return res;
     }
@@ -185,10 +166,7 @@ public class MtClient implements MtProxy {
         }
         String path = String.format(DELETE_MT, classId, owner, mtId);
         ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("deleteMt end");
         return res;
     }
@@ -201,7 +179,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         
         QueryMtsRes res = JSONObject.parseObject(result, QueryMtsRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryMts end");
         return res;
     }
@@ -215,7 +193,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         
         QueryMtRes res = JSONObject.parseObject(result, QueryMtRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryMt end");
         return res;
     }
@@ -229,7 +207,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         
         QueryMtHistoryRes res = JSONObject.parseObject(result, QueryMtHistoryRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryMtHistory end");
         return res;
     }
@@ -243,7 +221,7 @@ public class MtClient implements MtProxy {
         String result = response.readAsString();
         
         QueryMtBalancesRes res = JSONObject.parseObject(result, QueryMtBalancesRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryMtBalances end");
         return res;
     }

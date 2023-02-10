@@ -2,14 +2,13 @@ package model.order;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 /**
  * 查询能量值/业务费购买结果接口返回值
  */
 @NoArgsConstructor
 @lombok.Data
-public class QueryOrderRes extends BaseResponse {
+public class QueryOrderRes {
 
     @JSONField(name = "data")
     private Data data;

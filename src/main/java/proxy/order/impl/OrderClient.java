@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import exception.AvataException;
 import lombok.extern.slf4j.Slf4j;
-import model.BaseResponse;
 import model.order.*;
 import proxy.order.OrderProxy;
 import util.HttpClient;
@@ -42,7 +41,7 @@ public class OrderClient implements OrderProxy {
         String result = response.readAsString();
         
         OrderRes res = JSONObject.parseObject(result, OrderRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("createOrder end");
         return res;
     }
@@ -74,7 +73,7 @@ public class OrderClient implements OrderProxy {
         String result = response.readAsString();
         
         OrderRes res = JSONObject.parseObject(result, OrderRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("batchCreatrOrders end");
         return res;
     }
@@ -88,7 +87,7 @@ public class OrderClient implements OrderProxy {
         String result = response.readAsString();
         
         QueryOrderRes res = JSONObject.parseObject(result, QueryOrderRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryOrder end");
         return res;
     }
@@ -101,7 +100,7 @@ public class OrderClient implements OrderProxy {
         String result = response.readAsString();
         
         QueryOrdersRes res = JSONObject.parseObject(result, QueryOrdersRes.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        
         log.info("queryOrders end");
         return res;
     }

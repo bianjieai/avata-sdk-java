@@ -3,7 +3,6 @@ package model.nft;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  */
 @NoArgsConstructor
 @Data
-public class QueryNftHistoryRes extends BaseResponse {
+public class QueryNftHistoryRes {
 
     @JSONField(name = "data")
     private DataDTO data;
