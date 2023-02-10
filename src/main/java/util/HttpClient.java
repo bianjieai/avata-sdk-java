@@ -9,8 +9,10 @@ import java.util.Map;
 
 import config.ConfigCache;
 import exception.AvataException;
+import lombok.extern.slf4j.Slf4j;
 import model.ErrorResponse;
 
+@Slf4j
 public class HttpClient {
     /**
      * Send a post request
@@ -122,10 +124,12 @@ public class HttpClient {
     public static void validateResponse(ForestResponse response) {
         // timeout error
         if (response.isTimeout()) {
+            log.error("http request timeout");
             throw AvataException.TimeOutException();
         }
         // Determine whether the network request failed
         if (response.isError()) {
+            log.error("http request error");
             // Get the exception generated during the request
             if (response.getException() != null) {
                 throw AvataException.NewSDKException(response.getException().getMessage());
@@ -134,6 +138,7 @@ public class HttpClient {
             throw AvataException.NewSDKException(res.getError().getMessage());
         }
         if (response.getStatusCode() != 200) {
+            log.error("avata response error");
             ErrorResponse errorResponse = JSONObject.parseObject(response.readAsString(), ErrorResponse.class);
             throw AvataException.NewHTTPException(errorResponse.getError());
         }

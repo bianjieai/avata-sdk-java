@@ -41,7 +41,6 @@ public class ConfigCache {
 
         if (log == null) {
             log = true;
-            // todo log 换成 slfj， 输出sdk自定义日志
         }
 
         MAP.put(SDK_CACHE_KEY, configInfo);

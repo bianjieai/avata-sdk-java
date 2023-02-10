@@ -130,10 +130,10 @@ public class NftClient implements NftProxy {
         log.info("transferNft start");
         // check params
         if (StringUtils.isEmpty(req.getRecipient())) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));//todo
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));
         }
         if (StringUtils.isEmpty(req.getOperationId())) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));//todo
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_NFT, classId, owner, nftId);
         ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
