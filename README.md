@@ -15,7 +15,7 @@
 ### 创建和使用客户端
 
 ```
-AvataClient client = new AvataClient.Builder()
+ai.bianjie.avatasdk.AvataClient client = new ai.bianjie.avatasdk.AvataClient.Builder()
             .setDoMain("")
             .setApiKey("")
             .setApiSecret("")
