@@ -49,51 +49,47 @@ public class AvataClient {
         private Boolean log;
 
         public Builder setDomain(String domain) {
-            if (StringUtils.isEmpty(domain)) {
-                throw AvataException.NewSDKException(AvataException.ErrDomain);
-            }
             this.domain = domain;
             return this;
         }
 
         public Builder setHttpTimeout(Integer httpTimeout) {
-            if (httpTimeout == null) {
-                this.httpTimeout = 10000;
-                return this;
-            }
-            if (httpTimeout < 0) {
-                throw AvataException.NewSDKException(AvataException.HTTP_TIMEOUT_ERROR);
-            }
             this.httpTimeout = httpTimeout;
             return this;
         }
 
         public Builder setApiKey(String apiKey) {
-            if (StringUtils.isEmpty(apiKey)) {
-                throw AvataException.NewSDKException(AvataException.ErrAPIKey);
-            }
             this.apiKey = apiKey;
             return this;
         }
 
         public Builder setApiSecret(String apiSecret) {
-            if (StringUtils.isEmpty(apiSecret)) {
-                throw AvataException.NewSDKException(AvataException.ErrAPISecret);
-            }
             this.apiSecret = apiSecret;
             return this;
         }
 
         public Builder setLog(Boolean log) {
-            if (log == null) {
-                this.log = true;
-                return this;
-            }
             this.log = log;
             return this;
         }
 
         public AvataClient init() {
+            if (StringUtils.isEmpty(domain)) {
+                throw AvataException.NewSDKException(AvataException.ErrDomain);
+            }
+            if (StringUtils.isEmpty(apiKey)) {
+                throw AvataException.NewSDKException(AvataException.ErrAPIKey);
+            }
+            if (StringUtils.isEmpty(apiSecret)) {
+                throw AvataException.NewSDKException(AvataException.ErrAPISecret);
+            }
+            if (httpTimeout == null) {
+                httpTimeout = 10000;
+            }
+            if (httpTimeout < 0) {
+                throw AvataException.NewSDKException(AvataException.HTTP_TIMEOUT_ERROR);
+            }
+
             if (log == null) {
                 log = true;
             }
