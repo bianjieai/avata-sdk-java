@@ -1,5 +1,6 @@
-import model.PublicResponse;
-import model.records.CreateRecordReq;
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.PublicResponse;
+import ai.bianjie.avatasdk.model.records.CreateRecordReq;
 import org.junit.jupiter.api.Test;
 
 public class RecordTest {
@@ -29,7 +30,7 @@ public class RecordTest {
         try {
             PublicResponse res = client.recordsClient.createRecord(req);
             System.out.println(res.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();

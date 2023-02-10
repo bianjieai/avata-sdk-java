@@ -1,7 +1,8 @@
 
-import model.tx.QueryQueueReq;
-import model.tx.QueryQueueRes;
-import model.tx.QueryTxRes;
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.tx.QueryQueueReq;
+import ai.bianjie.avatasdk.model.tx.QueryQueueRes;
+import ai.bianjie.avatasdk.model.tx.QueryTxRes;
 import org.junit.jupiter.api.Test;
 
 public class TxTest {
