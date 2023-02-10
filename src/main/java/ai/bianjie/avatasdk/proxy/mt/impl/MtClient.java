@@ -1,5 +1,6 @@
 package ai.bianjie.avatasdk.proxy.mt.impl;
 
+import ai.bianjie.avatasdk.config.ConfigInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import ai.bianjie.avatasdk.exception.AvataException;
@@ -26,6 +27,12 @@ public class MtClient implements MtProxy {
     private static final String QUERY_MT_HISTORY = "/v1beta1/mt/mts/%s/%s/history";
     private static final String QUERY_MT_BALANCES = "/v1beta1/mt/mts/%s/%s/balances";
 
+    private ConfigInfo configInfo;
+
+    public MtClient(ConfigInfo configInfo) {
+        this.configInfo = configInfo;
+    }
+
     @Override
     public PublicResponse createMtClass(CreateMtClassReq req) {
         log.debug("CreateMtClassReq {}", req);
@@ -40,7 +47,7 @@ public class MtClient implements MtProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(CREATE_MT_CLASS, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(CREATE_MT_CLASS, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("createMtClass end");
         return res;
@@ -50,7 +57,7 @@ public class MtClient implements MtProxy {
     public QueryMtClassesRes queryMtClasses(QueryMtClassesReq req) {
         log.debug("QueryMtClassesReq {}", req);
         log.debug("queryMtClasses start");
-        ForestResponse response = HttpClient.Get(QUERY_MT_CLASSES, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(QUERY_MT_CLASSES, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         
         QueryMtClassesRes res = JSONObject.parseObject(result, QueryMtClassesRes.class);
@@ -64,7 +71,7 @@ public class MtClient implements MtProxy {
         log.debug("classId {}", classId);
         log.debug("queryMtClasses start");
         String path = String.format(QUERY_MT_CLASS, classId);
-        ForestResponse response = HttpClient.Get(path, "");
+        ForestResponse response = HttpClient.Get(path, "", configInfo);
         String result = response.readAsString();
         
         QueryMtClassRes res = JSONObject.parseObject(result, QueryMtClassRes.class);
@@ -84,7 +91,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_MT_CLASS, classId, owner);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("transferMtClass end");
         return res;
@@ -99,7 +106,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(CREATE_MT, classId);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("createMt end");
         return res;
@@ -114,7 +121,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(MINT_MT, classId, mtId);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("mintMt end");
         return res;
@@ -132,7 +139,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_MT, classId, owner, mtId);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("transferMt end");
         return res;
@@ -150,7 +157,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(EDIT_MT, classId, owner, mtId);
-        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("editMt end");
         return res;
@@ -165,7 +172,7 @@ public class MtClient implements MtProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(DELETE_MT, classId, owner, mtId);
-        ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("deleteMt end");
         return res;
@@ -175,7 +182,7 @@ public class MtClient implements MtProxy {
     public QueryMtsRes queryMts(QueryMtsReq req) {
         log.debug("QueryMtsReq {}", req);
         log.debug("queryMts start");
-        ForestResponse response = HttpClient.Get(QUERY_MTS, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(QUERY_MTS, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         
         QueryMtsRes res = JSONObject.parseObject(result, QueryMtsRes.class);
@@ -189,7 +196,7 @@ public class MtClient implements MtProxy {
         log.debug("classId {}, mtId {}", classId, mtId);
         log.debug("queryMt start");
         String path = String.format(QUERY_MT, classId, mtId);
-        ForestResponse response = HttpClient.Get(path,"");
+        ForestResponse response = HttpClient.Get(path,"", configInfo);
         String result = response.readAsString();
         
         QueryMtRes res = JSONObject.parseObject(result, QueryMtRes.class);
@@ -203,7 +210,7 @@ public class MtClient implements MtProxy {
         log.debug("QueryMtHistoryReq {}, classId {}, mtId {}", req, classId, mtId);
         log.debug("queryMtHistory start");
         String path = String.format(QUERY_MT_HISTORY, classId, mtId);
-        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         
         QueryMtHistoryRes res = JSONObject.parseObject(result, QueryMtHistoryRes.class);
@@ -217,7 +224,7 @@ public class MtClient implements MtProxy {
         log.debug("QueryMtBalancesReq {}, classId {}, account {}", req, classId, account);
         log.debug("queryMtBalances start");
         String path = String.format(QUERY_MT_BALANCES, classId, account);
-        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         
         QueryMtBalancesRes res = JSONObject.parseObject(result, QueryMtBalancesRes.class);

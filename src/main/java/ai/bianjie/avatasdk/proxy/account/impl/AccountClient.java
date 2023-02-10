@@ -1,5 +1,6 @@
 package ai.bianjie.avatasdk.proxy.account.impl;
 
+import ai.bianjie.avatasdk.config.ConfigInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import ai.bianjie.avatasdk.exception.AvataException;
@@ -16,6 +17,12 @@ public class AccountClient implements AccountProxy {
     private static final String QUERY_ACCOUNTS = "/v1beta1/accounts";
     private static final String QUERY_ACCOUNTS_HISTORY = "/v1beta1/accounts/history";
 
+    private ConfigInfo configInfo;
+
+    public AccountClient(ConfigInfo configInfo) {
+        this.configInfo = configInfo;
+    }
+
     @Override
     public CreateAccountRes createAccount(CreateAccountReq req) {
         log.debug("CreateAccountReq {}", req);
@@ -27,7 +34,7 @@ public class AccountClient implements AccountProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req), configInfo);
 
         String result = response.readAsString();
         CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);
@@ -44,7 +51,7 @@ public class AccountClient implements AccountProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req), configInfo);
 
         String result = response.readAsString();
         
@@ -58,7 +65,7 @@ public class AccountClient implements AccountProxy {
     public QueryAccountsRes queryAccounts(QueryAccountsReq req) {
         log.debug("QueryAccountsReq {}", req);
         log.debug("queryAccounts start");
-        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req), configInfo);
 
         String result = response.readAsString();
         
@@ -72,7 +79,7 @@ public class AccountClient implements AccountProxy {
     public QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req) {
         log.debug("QueryAccountsHistoryReq {}", req);
         log.debug("queryAccountsHistory start");
-        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req), configInfo);
 
         String result = response.readAsString();
         

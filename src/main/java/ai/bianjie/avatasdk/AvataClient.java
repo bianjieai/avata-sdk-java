@@ -1,6 +1,6 @@
 package ai.bianjie.avatasdk;
 
-import ai.bianjie.avatasdk.config.ConfigCache;
+import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
 import ai.bianjie.avatasdk.proxy.mt.impl.MtClient;
@@ -8,6 +8,11 @@ import ai.bianjie.avatasdk.proxy.nft.impl.NftClient;
 import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
 import ai.bianjie.avatasdk.proxy.record.impl.RecordClient;
 import ai.bianjie.avatasdk.proxy.tx.impl.TxClient;
+import com.dtflys.forest.Forest;
+import com.dtflys.forest.config.ForestConfiguration;
+import com.dtflys.forest.http.ForestAsyncMode;
+import com.dtflys.forest.retryer.BackOffRetryer;
+import com.dtflys.forest.ssl.SSLUtils;
 import com.dtflys.forest.utils.StringUtils;
 
 public class AvataClient {// todo 同时开启两个client，是否可行
@@ -22,12 +27,18 @@ public class AvataClient {// todo 同时开启两个client，是否可行
      * SDK initialization method
      */
     private AvataClient(Builder builder) {
-        this.accountClient = new AccountClient();
-        this.nftClient = new NftClient();
-        this.mtClient = new MtClient();
-        this.orderClient = new OrderClient();
-        this.recordsClient = new RecordClient();
-        this.txClient = new TxClient();
+        ConfigInfo configInfo = new ConfigInfo();
+        configInfo.setDoMain(builder.domain);
+        configInfo.setApiKey(builder.apiKey);
+        configInfo.setApiSecret(builder.apiSecret);
+        configInfo.setHttpTimeout(builder.httpTimeout);
+
+        this.accountClient = new AccountClient(configInfo);
+        this.nftClient = new NftClient(configInfo);
+        this.mtClient = new MtClient(configInfo);
+        this.orderClient = new OrderClient(configInfo);
+        this.recordsClient = new RecordClient(configInfo);
+        this.txClient = new TxClient(configInfo);
     }
 
     public static class Builder {
@@ -83,16 +94,39 @@ public class AvataClient {// todo 同时开启两个client，是否可行
         }
 
         public AvataClient init() {
-            ConfigCache.initCache(domain, httpTimeout, apiKey, apiSecret, log);
+            if (log == null) {
+                log = true;
+            }
+
+            // init forest
+            ForestConfiguration configuration = Forest.config();
+            configuration.setBackendName("okhttp3");
+            // 连接池最大连接数，默认值为500
+            configuration.setMaxConnections(100);
+            // 每个路由的最大连接数，默认值为500
+            configuration.setMaxRouteConnections(200);
+            // [自v1.5.22版本起可用] 最大请求等待队列大小
+            configuration.setMaxRequestQueueSize(100);
+            // [自v1.5.21版本起可用] 最大异步线程数
+            configuration.setMaxAsyncThreadSize(300);
+            // [自v1.5.22版本起可用] 最大异步线程池队列大小
+            configuration.setMaxAsyncQueueSize(16);
+            // 请求超时时间，单位为毫秒, 默认值为3000
+            configuration.setTimeout(httpTimeout);
+            // 连接超时时间，单位为毫秒, 默认值为2000
+            configuration.setConnectTimeout(2000);
+            // 设置重试器
+            configuration.setRetryer(BackOffRetryer.class);
+            // 请求失败后重试次数，默认为0次不重试, 无用配置
+            configuration.setMaxRetryCount(0);
+            // 单向验证的HTTPS的默认SSL协议，avata 需要TLS_1_2
+            configuration.setSslProtocol(SSLUtils.TLS_1_2);
+            // 打开或关闭日志，默认为true
+            configuration.setLogEnabled(log);
+            // [自v1.5.27版本起可用] 异步模式（默认为 platform）
+            configuration.setAsyncMode(ForestAsyncMode.PLATFORM);
+
             return new AvataClient(this);
         }
-    }
-
-    public Boolean setDoMain(String doMain) {
-        if (doMain.isEmpty()) {
-            return false;
-        }
-        ConfigCache.get().setDoMain(doMain);
-        return true;
     }
 }

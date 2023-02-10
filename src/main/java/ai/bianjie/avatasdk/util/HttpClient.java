@@ -1,5 +1,6 @@
 package ai.bianjie.avatasdk.util;
 
+import ai.bianjie.avatasdk.config.ConfigInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestRequest;
@@ -7,7 +8,6 @@ import com.dtflys.forest.http.ForestResponse;
 
 import java.util.Map;
 
-import ai.bianjie.avatasdk.config.ConfigCache;
 import ai.bianjie.avatasdk.exception.AvataException;
 import lombok.extern.slf4j.Slf4j;
 import ai.bianjie.avatasdk.model.ErrorResponse;
@@ -19,17 +19,17 @@ public class HttpClient {
      * @param path The url of the post request
      * @param content The body parameter of the post request
      */
-    public static ForestResponse Post(String path, String content) {
+    public static ForestResponse Post(String path, String content, ConfigInfo configInfo) {
         StringBuffer url = new StringBuffer();
-        url.append(ConfigCache.get().getDoMain());
+        url.append(configInfo.getDoMain());
         url.append(path);
         ForestRequest<?> req = Forest.post(url.toString()).contentTypeJson();
 
         // signature
         Long currentTime = System.currentTimeMillis();
         Map<String, Object> body = JSONObject.parseObject(content);
-        String signature = AvataUtils.sign(path, null, body, currentTime, ConfigCache.get().getApiSecret());
-        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        String signature = AvataUtils.sign(path, null, body, currentTime, configInfo.getApiSecret());
+        req.addHeader("x-api-key", configInfo.getApiKey());
         req.addHeader("x-timestamp", String.valueOf(currentTime));
         req.addHeader("x-signature", signature);
         if (body != null) {
@@ -45,17 +45,17 @@ public class HttpClient {
      * @param path The url of the get request
      * @param content The query parameter of the get request
      */
-    public static ForestResponse Get(String path, String content) {
+    public static ForestResponse Get(String path, String content, ConfigInfo configInfo) {
         StringBuffer url = new StringBuffer();
-        url.append(ConfigCache.get().getDoMain());
+        url.append(configInfo.getDoMain());
         url.append(path);
         ForestRequest<?> req = Forest.get(url.toString());
 
         // signature
         Long currentTime = System.currentTimeMillis();
         Map<String, Object> query = JSONObject.parseObject(content);
-        String signature = AvataUtils.sign(path, query, null, currentTime, ConfigCache.get().getApiSecret());
-        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        String signature = AvataUtils.sign(path, query, null, currentTime, configInfo.getApiSecret());
+        req.addHeader("x-api-key", configInfo.getApiKey());
         req.addHeader("x-timestamp", String.valueOf(currentTime));
         req.addHeader("x-signature", signature);
         if (query != null) {
@@ -71,17 +71,17 @@ public class HttpClient {
      * @param path The url of the patch request
      * @param content The body parameter of the patch request
      */
-    public static ForestResponse Patch(String path, String content) {
+    public static ForestResponse Patch(String path, String content, ConfigInfo configInfo) {
         StringBuffer url = new StringBuffer();
-        url.append(ConfigCache.get().getDoMain());
+        url.append(configInfo.getDoMain());
         url.append(path);
         ForestRequest<?> req = Forest.patch(url.toString()).contentTypeJson();
 
         // signature
         Long currentTime = System.currentTimeMillis();
         Map<String, Object> body = JSONObject.parseObject(content);
-        String signature = AvataUtils.sign(path, null, body, currentTime, ConfigCache.get().getApiSecret());
-        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        String signature = AvataUtils.sign(path, null, body, currentTime, configInfo.getApiSecret());
+        req.addHeader("x-api-key", configInfo.getApiKey());
         req.addHeader("x-timestamp", String.valueOf(currentTime));
         req.addHeader("x-signature", signature);
         if (body != null) {
@@ -97,17 +97,17 @@ public class HttpClient {
      * @param path The url of the delete request
      * @param content The body parameter of the delete request
      */
-    public static ForestResponse Delete(String path, String content) {
+    public static ForestResponse Delete(String path, String content, ConfigInfo configInfo) {
         StringBuffer url = new StringBuffer();
-        url.append(ConfigCache.get().getDoMain());
+        url.append(configInfo.getDoMain());
         url.append(path);
         ForestRequest<?> req = Forest.delete(url.toString()).contentTypeJson();
 
         // signature
         Long currentTime = System.currentTimeMillis();
         Map<String, Object> body = JSONObject.parseObject(content);
-        String signature = AvataUtils.sign(path, null, body, currentTime, ConfigCache.get().getApiSecret());
-        req.addHeader("x-api-key", ConfigCache.get().getApiKey());
+        String signature = AvataUtils.sign(path, null, body, currentTime, configInfo.getApiSecret());
+        req.addHeader("x-api-key", configInfo.getApiKey());
         req.addHeader("x-timestamp", String.valueOf(currentTime));
         req.addHeader("x-signature", signature);
         if (body != null) {
