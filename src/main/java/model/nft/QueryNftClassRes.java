@@ -3,14 +3,13 @@ package model.nft;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 /**
  * 查询 NFT 类别详情：Response
  */
 @NoArgsConstructor
 @Data
-public class QueryNftClassRes extends BaseResponse {
+public class QueryNftClassRes {
     private DataDTO data;
 
     @NoArgsConstructor

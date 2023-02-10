@@ -3,14 +3,13 @@ package model.mt;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 /**
  * 查询 MT 详情返回值
  */
 @NoArgsConstructor
 @Data
-public class QueryMtRes extends BaseResponse {
+public class QueryMtRes {
 
     @JSONField(name = "data")
     private DataDTO data;

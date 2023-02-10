@@ -3,14 +3,13 @@ package model.order;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 /**
  * 购买能量值/业务费接口返回值/批量购买能量值接口返回值
  */
 @NoArgsConstructor
 @Data
-public class OrderRes extends BaseResponse {
+public class OrderRes {
     @JSONField(name = "data")
     private OrderRes.DataDTO data;
 

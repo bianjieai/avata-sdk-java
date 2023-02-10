@@ -3,11 +3,10 @@ package model.account;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 @NoArgsConstructor
 @Data
-public class CreateAccountRes extends BaseResponse {
+public class CreateAccountRes {
 
     @JSONField(name = "data")
     private DataDTO data;

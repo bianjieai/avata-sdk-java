@@ -3,13 +3,12 @@ package model.mt;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 import java.util.List;
 
 @NoArgsConstructor
 @Data
-public class QueryMtBalancesRes extends BaseResponse {
+public class QueryMtBalancesRes {
 
     @JSONField(name = "data")
     private DataDTO data;

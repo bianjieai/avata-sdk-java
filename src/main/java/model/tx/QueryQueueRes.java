@@ -3,14 +3,13 @@ package model.tx;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.BaseResponse;
 
 /**
  * 上链交易排队状态查询返回值
  */
 @NoArgsConstructor
 @Data
-public class QueryQueueRes extends BaseResponse {
+public class QueryQueueRes {
 
     @JSONField(name = "data")
     private DataDTO data;

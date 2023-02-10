@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import exception.AvataException;
 import lombok.extern.slf4j.Slf4j;
-import model.BaseResponse;
 import model.PublicResponse;
 import model.records.CreateRecordReq;
 import proxy.record.RecordProxy;
@@ -39,10 +38,7 @@ public class RecordClient implements RecordProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(CREATE_RECORD, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        
-        PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
-        res.setHttp(new BaseResponse.Http(response.getStatusCode(), response.getReasonPhrase()));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.info("createRecord end");
         return res;
     }
