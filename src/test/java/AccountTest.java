@@ -3,9 +3,9 @@ import org.junit.jupiter.api.Test;
 
 public class AccountTest {
     AvataClient client = new AvataClient.Builder()
-            .setDomain("")
-            .setApiKey("")
-            .setApiSecret("")
+            .setDomain("https://stage.apis.avata.bianjie.ai")
+            .setApiKey("N282j1X1E1K6h0k1U3b4A3a9G4B7g86Q")
+            .setApiSecret("M2t2B1m1H1U6E0u1g3a4Y3f9p4k7y92G")
             .setHttpTimeout(10000)
             .init();
 
