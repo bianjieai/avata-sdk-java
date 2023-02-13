@@ -279,7 +279,7 @@ public class NftClient implements NftProxy {
     }
 
     @Override
-    public QueryNftHistoryRes queryNftHistory(String classId, String nftId) {
+    public QueryNftHistoryRes queryNftHistory(String classId, String nftId,QueryNftHistoryReq req) {
         log.debug("classId {}, nftId {}", classId, nftId);
         log.debug("queryNftHistory start");
         String path = String.format(QUERY_NFT_HISTORY, classId,nftId);

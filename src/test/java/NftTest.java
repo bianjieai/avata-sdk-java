@@ -20,7 +20,7 @@ public class NftTest {
     void TestCreateClass() {
         CreateNftClassReq req = new CreateNftClassReq();
         req.setName("lmhnftclassname01");
-        req.setClassId("bakvavoy");
+        req.setClassId("111bakvavoy");
         req.setSymbol("123");
         req.setDescription("123");
         req.setUri("http://www.123.com");
@@ -273,9 +273,11 @@ public class NftTest {
     @Test
         //请求查询 NFT 操作记录接口示例
     void TestQueryNftHistory() {
+        QueryNftHistoryReq req = new QueryNftHistoryReq();
+        req.setLimit("2");
         QueryNftHistoryRes res = client.nftClient.queryNftHistory(
                 "bakvavoy",
-                "avatabpyev9ewlg25bz4v8lpehap5xor");
+                "avatabpyev9ewlg25bz4v8lpehap5xor",req);
         System.out.println(res);
     }
 }
