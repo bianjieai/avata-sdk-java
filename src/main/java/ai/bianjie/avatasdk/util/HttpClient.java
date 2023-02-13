@@ -135,12 +135,7 @@ public class HttpClient {
                 throw AvataException.NewSDKException(response.getException().getMessage());
             }
             ErrorResponse res = JSONObject.parseObject(response.getContent(), ErrorResponse.class);
-            throw AvataException.NewSDKException(res.getError().getMessage());
-        }
-        if (response.getStatusCode() != 200) {
-            log.error("avata response error");
-            ErrorResponse errorResponse = JSONObject.parseObject(response.readAsString(), ErrorResponse.class);
-            throw AvataException.NewHTTPException(errorResponse.getError());
+            throw AvataException.NewHTTPException(res.getError());
         }
     }
 }
