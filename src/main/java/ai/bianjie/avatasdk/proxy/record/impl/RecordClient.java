@@ -1,5 +1,6 @@
 package ai.bianjie.avatasdk.proxy.record.impl;
 
+import ai.bianjie.avatasdk.config.ConfigInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import ai.bianjie.avatasdk.exception.AvataException;
@@ -13,6 +14,12 @@ import com.dtflys.forest.utils.StringUtils;
 @Slf4j
 public class RecordClient implements RecordProxy {
     private static final String CREATE_RECORD = "/v1beta1/record/records";
+
+    private ConfigInfo configInfo;
+
+    public RecordClient(ConfigInfo configInfo) {
+        this.configInfo = configInfo;
+    }
 
     @Override
     public PublicResponse createRecord(CreateRecordReq req) {
@@ -37,7 +44,7 @@ public class RecordClient implements RecordProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(CREATE_RECORD, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(CREATE_RECORD, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("createRecord end");
         return res;

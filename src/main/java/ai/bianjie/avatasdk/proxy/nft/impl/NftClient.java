@@ -1,5 +1,6 @@
 package ai.bianjie.avatasdk.proxy.nft.impl;
 
+import ai.bianjie.avatasdk.config.ConfigInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import ai.bianjie.avatasdk.exception.AvataException;
@@ -28,6 +29,12 @@ public class NftClient implements NftProxy {
     private static final String QUERY_NFT= "/v1beta1/nft/nfts/%s/%s";
     private static final String QUERY_NFT_HISTORY = "/v1beta1/nft/nfts/%s/%s/history";
 
+    private ConfigInfo configInfo;
+
+    public NftClient(ConfigInfo configInfo) {
+        this.configInfo = configInfo;
+    }
+
 
     @Override
     public PublicResponse createClass(CreateNftClassReq req) {
@@ -43,7 +50,7 @@ public class NftClient implements NftProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(CREATE_CLASS, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(CREATE_CLASS, JSONObject.toJSONString(req), configInfo);
 
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("createClass end");
@@ -54,7 +61,7 @@ public class NftClient implements NftProxy {
     public QueryNftClassesRes queryClasses(QueryNftClassesReq req) {
         log.debug("QueryNftClassesReq {}", req);
         log.debug("queryClasses start");
-        ForestResponse response = HttpClient.Get(QUERY_CLASSES,JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(QUERY_CLASSES,JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         
         QueryNftClassesRes res = JSONObject.parseObject(result, QueryNftClassesRes.class);
@@ -68,7 +75,7 @@ public class NftClient implements NftProxy {
         log.debug("classId {}", classId);
         log.debug("queryClass start");
         String path = String.format(QUERY_CLASS, classId);
-        ForestResponse response = HttpClient.Get(path, "");
+        ForestResponse response = HttpClient.Get(path, "", configInfo);
         String result = response.readAsString();
         
         QueryNftClassRes res = JSONObject.parseObject(result, QueryNftClassRes.class);
@@ -89,7 +96,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_CLASS, classId, owner);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("transferClass end");
         return res;
@@ -108,7 +115,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(CREATE_NFT, classId);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("createNft end");
         return res;
@@ -126,7 +133,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_NFT, classId, owner, nftId);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
 
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
@@ -147,7 +154,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(EDIT_NFT, classId, owner, nftId);
-        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("editNft end");
         return res;
@@ -162,7 +169,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(DELETE_NFT, classId, owner, nftId);
-        ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("deleteNft end");
         return res;
@@ -183,7 +190,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_CREATE_NFT, classId);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("batchCreateNft end");
         return res;
@@ -201,7 +208,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_TRANSFER_NFT, owner);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("batchTransferNft end");
         return res;
@@ -220,7 +227,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_EDIT_NFT, owner);
-        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Patch(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("batchEditNft end");
         return res;
@@ -238,7 +245,7 @@ public class NftClient implements NftProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(BATCH_DELETE_NFT, owner);
-        ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Delete(path, JSONObject.toJSONString(req), configInfo);
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("batchDeleteNft end");
         return res;
@@ -248,7 +255,7 @@ public class NftClient implements NftProxy {
     public QueryNftsRes queryNfts(QueryNftsReq req) {
         log.debug("QueryNftsReq {}", req);
         log.debug("queryNfts start");
-        ForestResponse response = HttpClient.Get(QUERY_NFTS, JSONObject.toJSONString(req));
+        ForestResponse response = HttpClient.Get(QUERY_NFTS, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         
         QueryNftsRes res = JSONObject.parseObject(result, QueryNftsRes.class);
@@ -262,7 +269,7 @@ public class NftClient implements NftProxy {
         log.debug("classId {}, nftId {}", classId, nftId);
         log.debug("queryNft start");
         String path = String.format(QUERY_NFT, classId,nftId);
-        ForestResponse response = HttpClient.Get(path, "");
+        ForestResponse response = HttpClient.Get(path, "", configInfo);
         String result = response.readAsString();
         
         QueryNftRes res = JSONObject.parseObject(result, QueryNftRes.class);
@@ -276,7 +283,7 @@ public class NftClient implements NftProxy {
         log.debug("classId {}, nftId {}", classId, nftId);
         log.debug("queryNftHistory start");
         String path = String.format(QUERY_NFT_HISTORY, classId,nftId);
-        ForestResponse response = HttpClient.Get(path, "");
+        ForestResponse response = HttpClient.Get(path, "", configInfo);
         String result = response.readAsString();
         
         QueryNftHistoryRes res = JSONObject.parseObject(result, QueryNftHistoryRes.class);
