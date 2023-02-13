@@ -139,7 +139,8 @@ public interface NftProxy {
      *
      * @param classId NFT 类别 ID
      * @param nftId NFT ID
+     * @param req 查询 NFT 操作记录请求实体
      * @return
      */
-    QueryNftHistoryRes queryNftHistory(String classId, String nftId);
+    QueryNftHistoryRes queryNftHistory(String classId, String nftId,QueryNftHistoryReq req);
 }

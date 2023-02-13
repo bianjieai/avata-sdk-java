@@ -7,9 +7,9 @@ import java.util.List;
 
 public class NftTest {
     AvataClient client = new AvataClient.Builder()
-            .setDomain("https://stage.apis.avata.bianjie.ai")
-            .setApiKey("N282j1X1E1K6h0k1U3b4A3a9G4B7g86Q")
-            .setApiSecret("M2t2B1m1H1U6E0u1g3a4Y3f9p4k7y92G")
+            .setDomain("")
+            .setApiKey("")
+            .setApiSecret("")
             .setHttpTimeout(10000)
             .init();
 
@@ -273,9 +273,11 @@ public class NftTest {
     @Test
         //请求查询 NFT 操作记录接口示例
     void TestQueryNftHistory() {
+        QueryNftHistoryReq req = new QueryNftHistoryReq();
+        req.setLimit("2");
         QueryNftHistoryRes res = client.nftClient.queryNftHistory(
                 "bakvavoy",
-                "avatabpyev9ewlg25bz4v8lpehap5xor");
+                "avatabpyev9ewlg25bz4v8lpehap5xor",req);
         System.out.println(res);
     }
 }
