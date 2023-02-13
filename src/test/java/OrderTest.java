@@ -1,4 +1,5 @@
-import model.order.*;
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.order.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class OrderTest {
         try {
             OrderRes res = client.orderClient.createOrder(req);
             System.out.println(res.getData().getOrderId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -36,7 +37,7 @@ public class OrderTest {
         try {
             QueryOrderRes res = client.orderClient.queryOrder("sxjtesto_rde2rid0w2");
             System.out.println(res.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -51,7 +52,7 @@ public class OrderTest {
         try {
             QueryOrdersRes res = client.orderClient.queryOrders(req);
             System.out.println(res.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -72,7 +73,7 @@ public class OrderTest {
         try {
             OrderRes res = client.orderClient.batchCreateOrders(req);
             System.out.println(res.getData().getOrderId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();

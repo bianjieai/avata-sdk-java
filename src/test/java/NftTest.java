@@ -1,5 +1,6 @@
-import model.PublicResponse;
-import model.nft.*;
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.PublicResponse;
+import ai.bianjie.avatasdk.model.nft.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class NftTest {
         try {
             PublicResponse res = client.nftClient.createClass(req);
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -84,7 +85,7 @@ public class NftTest {
         try {
             PublicResponse res = client.nftClient.createNft(req, "bakvavoy");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -103,7 +104,7 @@ public class NftTest {
                     "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl",
                     "avatavgj7c3u5722k0oddsgyi3ps2ced");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -124,7 +125,7 @@ public class NftTest {
                     "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr",
                     "avatavgj7c3u5722k0oddsgyi3ps2ced");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -137,12 +138,12 @@ public class NftTest {
         BurnNftReq req = new BurnNftReq();
         req.setOperationId(OperationID);
         try {
-            PublicResponse res = client.nftClient.deleteNft(req,
+            PublicResponse res = client.nftClient.burnNft(req,
                     "bakvavoy",
                     "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr",
                     "avatavgj7c3u5722k0oddsgyi3ps2ced");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -171,7 +172,7 @@ public class NftTest {
         try {
             PublicResponse res = client.nftClient.batchCreateNft(req, "bakvavoy");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -197,7 +198,7 @@ public class NftTest {
         try {
             PublicResponse res = client.nftClient.batchTransferNft(req, "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -221,7 +222,7 @@ public class NftTest {
         try {
             PublicResponse res = client.nftClient.batchEditNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -241,9 +242,9 @@ public class NftTest {
         req.setNfts(nftslist);
         req.setOperationId(OperationID);
         try {
-            PublicResponse res = client.nftClient.batchDeleteNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
+            PublicResponse res = client.nftClient.batchBurnNft(req, "iaa14c3dul0xdh4javrxec5vvfzvy7qk0qnfrruvvl");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();

@@ -1,4 +1,5 @@
-import model.account.*;
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.account.*;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
@@ -20,7 +21,7 @@ public class AccountTest {
         try {
             CreateAccountRes account = client.accountClient.createAccount(req);
             System.out.println(account.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -35,7 +36,7 @@ public class AccountTest {
         try {
             QueryAccountsRes account = client.accountClient.queryAccounts(req);
             System.out.println(account.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -51,7 +52,7 @@ public class AccountTest {
         try {
             BatchCreateAccountRes account = client.accountClient.batchCreateAccounts(req);
             System.out.println(account.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -66,7 +67,7 @@ public class AccountTest {
         try {
             QueryAccountsHistoryRes account = client.accountClient.queryAccountsHistory(req);
             System.out.println(account.getData());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();

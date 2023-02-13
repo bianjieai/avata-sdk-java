@@ -1,5 +1,6 @@
-import model.PublicResponse;
-import model.mt.*;
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.PublicResponse;
+import ai.bianjie.avatasdk.model.mt.*;
 import org.junit.jupiter.api.Test;
 
 public class MtTest {
@@ -22,7 +23,7 @@ public class MtTest {
         try {
             PublicResponse res = client.mtClient.createMtClass(req);
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -74,7 +75,7 @@ public class MtTest {
         try {
             PublicResponse res = client.mtClient.createMt(req, "4f15f17298001ffcdce757d068dba933ef73193e6a261cb9d0f472a2ced1d756");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -93,7 +94,7 @@ public class MtTest {
                     "4f15f17298001ffcdce757d068dba933ef73193e6a261cb9d0f472a2ced1d756",
                     "f676009a34102e0f9396da8d2f372790ee813c96a17ba91b797bdee57aa041a9");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -113,7 +114,7 @@ public class MtTest {
                     "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr",
                     "f676009a34102e0f9396da8d2f372790ee813c96a17ba91b797bdee57aa041a9");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -132,7 +133,7 @@ public class MtTest {
                     "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr",
                     "f676009a34102e0f9396da8d2f372790ee813c96a17ba91b797bdee57aa041a9");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
@@ -151,7 +152,7 @@ public class MtTest {
                     "iaa1jxf58dswgfqs84vw57wzucmttda3s3eu8dhcgr",
                     "f676009a34102e0f9396da8d2f372790ee813c96a17ba91b797bdee57aa041a9");
             System.out.println(res.getData().getOperationId());
-            System.out.println("no exception");
+            System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
