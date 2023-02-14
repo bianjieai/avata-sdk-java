@@ -7,7 +7,27 @@
     <groupId>io.github.bianjieai</groupId>
     <artifactId>avata-sdk-java</artifactId>
     <version>0.1.0</version>
-    <packaging>jar</packaging>
+    <url>https://github.com/bianjieai/avata-sdk-java</url>
+    <name>avata-sdk</name>
+    <licenses>
+        <license>
+            <name>Apache License</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/bianjieai/avata-sdk-java</url>
+        <connection>https://github.com/bianjieai/avata-sdk-java.git</connection>
+    </scm>
+    <developers>
+        <developer>
+            <name>bianjie</name>
+            <email>contact@bianjie.ai</email>
+            <organization>bianjie.ai</organization>
+        </developer>
+    </developers>
+    <description>AVATA SDK (java)</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -70,15 +90,6 @@
             <version>1.5.28</version>
         </dependency>
     </dependencies>
-
-    <developers>
-        <developer>
-            <name>bianjie</name>
-            <email>contact@bianjie.ai</email>
-            <organization>bianjie.ai</organization>
-        </developer>
-    </developers>
-    <description>AVATA SDK (java)</description>
 
 
     <distributionManagement>
