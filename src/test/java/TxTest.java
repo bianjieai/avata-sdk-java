@@ -1,22 +1,33 @@
-import model.PublicResponse;
-import model.nft.CreateNftRequest;
-import model.tx.TxRes;
+
+import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.tx.QueryQueueReq;
+import ai.bianjie.avatasdk.model.tx.QueryQueueRes;
+import ai.bianjie.avatasdk.model.tx.QueryTxRes;
 import org.junit.jupiter.api.Test;
 
 public class TxTest {
-    @Test
-    public void queryTx(){
-        Client client = new Client.Builder()
-                .setAvataGateway("http://192.168.150.41:18081")
-                .setApiKey("000001")
-                .setApiSecret("ceshi")
-                .init();
-//        TxRes txRes = client.txClient.queryTx("0816sxjtest001ss1111s");
-        CreateNftRequest req = new CreateNftRequest();
-        req.setName("");
-        PublicResponse res = client.nftClient.createNft(req, "classId");
+    AvataClient client = new AvataClient.Builder()
+            .setDomain("")
+            .setApiKey("")
+            .setApiSecret("")
+            .init();
 
-        System.out.println(res.getData().getOperationId());
+    @Test
+    // 请求上链交易结果查询接口示例
+    public void queryTx() {
+
+        QueryTxRes txRes = client.txClient.queryTx("operationID1676014869");
+
+        System.out.println(txRes.getData());
     }
 
+    @Test
+    //请求上链交易排队状态查询接口示例
+    public void queryQueueInfo() {
+        QueryQueueReq req = new QueryQueueReq();
+        req.setOperationId("test");
+        QueryQueueRes res = client.txClient.queryQueueInfo(req);
+
+        System.out.println(res.getData());
+    }
 }
