@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.bianjieai</groupId>
-    <artifactId>avata-sdk-java</artifactId>
+    <artifactId>avata-sdk</artifactId>
     <version>0.1.0</version>
     <url>https://github.com/bianjieai/avata-sdk-java</url>
     <name>avata-sdk</name>
@@ -103,30 +103,6 @@
         </repository>
     </distributionManagement>
 
-    <profiles>
-        <!-- Deployment profile (required so these plugins are only used when deploying) -->
-        <!--        <profile>-->
-        <!--            <id>deploy</id>-->
-        <!--            <build>-->
-        <!--                <plugins>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-source-plugin</artifactId>-->
-        <!--                    </plugin>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
-        <!--                    </plugin>-->
-        <!--                    &lt;!&ndash; GPG plugin &ndash;&gt;-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-gpg-plugin</artifactId>-->
-        <!--                    </plugin>-->
-        <!--                </plugins>-->
-        <!--            </build>-->
-        <!--        </profile>-->
-    </profiles>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -148,11 +124,13 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.2.0</version>
                     <configuration>
-                        <show>private</show>
                         <nohelp>true</nohelp>
                         <charset>UTF-8</charset>
                         <encoding>UTF-8</encoding>
                         <docencoding>UTF-8</docencoding>
+                        <show>package</show>
+                        <!-- 禁用java 8 的DocLint新特性，以确保当javadoc有编译错误时，也能正常生成javadoc jar包-->
+                        <additionalparam>-Xdoclint:none</additionalparam>
                     </configuration>
                     <executions>
                         <execution>
@@ -175,11 +153,7 @@
                                 <goal>sign</goal>
                             </goals>
                             <configuration>
-                                <!-- Prevent `gpg` from using pinentry programs -->
-                                <gpgArguments>
-                                    <arg>--pinentry-mode</arg>
-                                    <arg>loopback</arg>
-                                </gpgArguments>
+                                <keyname>bianjie</keyname>
                             </configuration>
                         </execution>
                     </executions>
