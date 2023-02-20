@@ -9,14 +9,15 @@ public interface TxProxy {
      * 上链交易结果查询
      *
      * @param operationId OPERATION ID
-     * @return
+     * @return QueryTxRes
      */
     QueryTxRes queryTx(String operationId);
 
     /**
      * 上链交易排队状态查询
      *
-     * @return
+     * @param req query queue request
+     * @return QueryQueueRes
      */
     QueryQueueRes queryQueueInfo(QueryQueueReq req);
 }
