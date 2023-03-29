@@ -11,14 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class MintNftReq {
 
-    @JSONField(name = "name")
-    private String name;// NFT 名称
     @JSONField(name = "uri")
     private String uri;// 链外数据链接
     @JSONField(name = "uri_hash")
     private String uriHash;// 链外数据 Hash
-    @JSONField(name = "data")
-    private String data;// 自定义链上元数据
     @JSONField(name = "recipient")
     private String recipient;// NFT 接收者地址，支持任一文昌链合法链账户地址，默认为 NFT 类别的权属者地址
     @JSONField(name = "operation_id")

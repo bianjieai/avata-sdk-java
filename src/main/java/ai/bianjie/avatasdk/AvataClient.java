@@ -3,10 +3,8 @@ package ai.bianjie.avatasdk;
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
-import ai.bianjie.avatasdk.proxy.mt.impl.MtClient;
 import ai.bianjie.avatasdk.proxy.nft.impl.NftClient;
 import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
-import ai.bianjie.avatasdk.proxy.record.impl.RecordClient;
 import ai.bianjie.avatasdk.proxy.tx.impl.TxClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
@@ -18,9 +16,7 @@ import com.dtflys.forest.utils.StringUtils;
 public class AvataClient {
     public NftClient nftClient;
     public AccountClient accountClient;
-    public MtClient mtClient;
     public OrderClient orderClient;
-    public RecordClient recordsClient;
     public TxClient txClient;
 
     /**
@@ -35,9 +31,7 @@ public class AvataClient {
 
         this.accountClient = new AccountClient(configInfo);
         this.nftClient = new NftClient(configInfo);
-        this.mtClient = new MtClient(configInfo);
         this.orderClient = new OrderClient(configInfo);
-        this.recordsClient = new RecordClient(configInfo);
         this.txClient = new TxClient(configInfo);
     }
 

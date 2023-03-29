@@ -12,18 +12,14 @@ import lombok.NoArgsConstructor;
 public class CreateNftClassReq {
     @JSONField(name = "name")
     private String name;// NFT 类别名称
-    @JSONField(name = "class_id")
-    private String classId;// NFT 类别 ID，仅支持小写字母及数字，以字母开头
+    @JSONField(name = "editable_by_owner")
+    private Integer editableByOwner;// NFT 类别权限的控制功能， 此类别下某一 NFT 的持有者可以编辑该 NFT 1 0
+    @JSONField(name = "editable_by_class_owner")
+    private Integer editableByClassOwner;// NFT 类别权限的控制功能， 此 NFT 类别的权属者可以编辑这个类别下所有的 NFT 1 0
     @JSONField(name = "symbol")
     private String symbol;// 标识
-    @JSONField(name = "description")
-    private String description;// 描述
     @JSONField(name = "uri")
     private String uri;// 链外数据链接
-    @JSONField(name = "uri_hash")
-    private String uriHash;// 链外数据 Hash
-    @JSONField(name = "data")
-    private String data;// 自定义链上元数据
     @JSONField(name = "owner")
     private String owner;// NFT 类别权属者地址，拥有在该 NFT 类别中发行 NFT 的权限和转让该 NFT 类别的权限。 支持任一 Avata 平台内合法链账户地址
     @JSONField(name = "operation_id")

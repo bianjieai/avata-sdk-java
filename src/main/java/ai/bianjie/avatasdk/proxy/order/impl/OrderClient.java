@@ -1,21 +1,21 @@
 package ai.bianjie.avatasdk.proxy.order.impl;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
-import com.alibaba.fastjson.JSONObject;
-import com.dtflys.forest.http.ForestResponse;
 import ai.bianjie.avatasdk.exception.AvataException;
-import lombok.extern.slf4j.Slf4j;
 import ai.bianjie.avatasdk.model.order.*;
 import ai.bianjie.avatasdk.proxy.order.OrderProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
+import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.http.ForestResponse;
 import com.dtflys.forest.utils.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class OrderClient implements OrderProxy {
-    private static final String CREATE_ORDER = "/v1beta1/orders";
-    private static final String BATCH_CREATE_ORDER = "/v1beta1/orders/batch";
-    private static final String QUERY_ORDER = "/v1beta1/orders/%s";
-    private static final String QUERY_ORDERS = "/v1beta1/orders";
+    private static final String CREATE_ORDER = "/v2/orders";
+    private static final String BATCH_CREATE_ORDER = "/v2/orders/batch";
+    private static final String QUERY_ORDER = "/v2/orders/%s";
+    private static final String QUERY_ORDERS = "/v2/orders";
 
     private ConfigInfo configInfo;
 
@@ -40,15 +40,15 @@ public class OrderClient implements OrderProxy {
         if (req.getAmount() == null) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "amount"));
         }
-        if (req.getAmount()%100 != 0){
+        if (req.getAmount() % 100 != 0) {
             throw AvataException.InvalidParamException(AvataException.ErrAmount);
         }
         ForestResponse response = HttpClient.Post(CREATE_ORDER, JSONObject.toJSONString(req), configInfo);
 
         String result = response.readAsString();
-        
+
         OrderRes res = JSONObject.parseObject(result, OrderRes.class);
-        
+
         log.debug("createOrder end");
         return res;
     }
@@ -71,16 +71,16 @@ public class OrderClient implements OrderProxy {
             if (l.getAmount() == null) {
                 throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "amount"));
             }
-            if (l.getAmount()%100 != 0) {
+            if (l.getAmount() % 100 != 0) {
                 throw AvataException.InvalidParamException(AvataException.ErrAmount);
             }
         });
 
         ForestResponse response = HttpClient.Post(BATCH_CREATE_ORDER, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
-        
+
         OrderRes res = JSONObject.parseObject(result, OrderRes.class);
-        
+
         log.debug("batchCreatrOrders end");
         return res;
     }
@@ -92,9 +92,9 @@ public class OrderClient implements OrderProxy {
         String path = String.format(QUERY_ORDER, orderId);
         ForestResponse response = HttpClient.Get(path, "", configInfo);
         String result = response.readAsString();
-        
+
         QueryOrderRes res = JSONObject.parseObject(result, QueryOrderRes.class);
-        
+
         log.debug("queryOrder end");
         return res;
     }
@@ -105,9 +105,9 @@ public class OrderClient implements OrderProxy {
         log.debug("createClass start");
         ForestResponse response = HttpClient.Get(QUERY_ORDERS, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
-        
+
         QueryOrdersRes res = JSONObject.parseObject(result, QueryOrdersRes.class);
-        
+
         log.debug("queryOrders end");
         return res;
     }

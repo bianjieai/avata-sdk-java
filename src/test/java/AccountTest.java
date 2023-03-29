@@ -2,11 +2,19 @@ import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.account.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 public class AccountTest {
+
+    private final static String URL = "";
+    private final static String API_KEY = "";
+    private final static String API_SECRET = "";
+
+
     AvataClient client = new AvataClient.Builder()
-            .setDomain("")
-            .setApiKey("")
-            .setApiSecret("")
+            .setDomain(URL)
+            .setApiKey(API_KEY)
+            .setApiSecret(API_SECRET)
             .setHttpTimeout(10000)
             .init();
 
@@ -16,8 +24,9 @@ public class AccountTest {
         //请求创建链账户接口示例
     void TestCreateAccount() {
         CreateAccountReq req = new CreateAccountReq();
-        req.setName("21233");
-        req.setOperationId("234231");
+        req.setName("huangjianfeng");
+        req.setOperationId(UUID.randomUUID().toString());
+        req.setUserId("huangjianfeng");
         try {
             CreateAccountRes account = client.accountClient.createAccount(req);
             System.out.println(account.getData());
@@ -73,5 +82,4 @@ public class AccountTest {
             e.printStackTrace();
         }
     }
-
 }

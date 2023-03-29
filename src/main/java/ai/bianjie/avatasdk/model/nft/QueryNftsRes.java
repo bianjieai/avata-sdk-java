@@ -18,8 +18,10 @@ public class QueryNftsRes {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "offset")
-        private Integer offset;// 游标
+        @JSONField(name = "prev_page_key")
+        private String prevPageKey;// 上一页数据的Key， Avata会根据该值进行上一页数据的查询
+        @JSONField(name = "next_page_key")
+        private String nextPageKey;//下一页数据的Key， Avata会根据该值进行下一页数据的查询
 
         @JSONField(name = "limit")
         private Integer limit;// 每页记录数
@@ -36,8 +38,6 @@ public class QueryNftsRes {
             @JSONField(name = "id")
             private String id;// NFT ID
 
-            @JSONField(name = "name")
-            private String name;// NFT 名称
 
             @JSONField(name = "class_id")
             private String classId;// NFT 类别 ID

@@ -51,10 +51,10 @@ public interface NftProxy {
     /**
      * 转让 NFT
      *
-     * @param req 转让 NFT请求实体
+     * @param req     转让 NFT请求实体
      * @param classId NFT 类别 ID
-     * @param owner NFT 持有者地址
-     * @param nftId NFT ID
+     * @param owner   NFT 持有者地址
+     * @param nftId   NFT ID
      * @return
      */
     PublicResponse transferNft(TransferNftReq req, String classId, String owner, String nftId);
@@ -62,10 +62,10 @@ public interface NftProxy {
     /**
      * 编辑 NFT
      *
-     * @param req 编辑 NFT 请求实体
+     * @param req     编辑 NFT 请求实体
      * @param classId NFT 类别 ID
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
-     * @param nftId NFT ID
+     * @param owner   NFT 持有者地址，也是 Tx 签名者地址
+     * @param nftId   NFT ID
      * @return
      */
     PublicResponse editNft(EditNftReq req, String classId, String owner, String nftId);
@@ -73,49 +73,13 @@ public interface NftProxy {
     /**
      * 销毁 NFT
      *
-     * @param req 销毁 NFT 请求实体
+     * @param req     销毁 NFT 请求实体
      * @param classId NFT 类别 ID
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
-     * @param nftId NFT ID
+     * @param owner   NFT 持有者地址，也是 Tx 签名者地址
+     * @param nftId   NFT ID
      * @return
      */
     PublicResponse burnNft(BurnNftReq req, String classId, String owner, String nftId);
-
-    /**
-     * 批量发行 NFT
-     *
-     * @param req 批量发行 NFT 请求实体
-     * @param classId NFT 类别 ID
-     * @return
-     */
-    PublicResponse batchCreateNft(BatchMintNftReq req, String classId);
-
-    /**
-     * 批量转让 NFT
-     *
-     * @param req 批量转让 NFT 请求实体
-     * @param owner NFT 持有者地址
-     * @return
-     */
-    PublicResponse batchTransferNft(BatchTransferNftReq req, String owner);
-
-    /**
-     * 批量编辑 NFT
-     *
-     * @param req 批量编辑 NFT请求实体
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
-     * @return
-     */
-    PublicResponse batchEditNft(BatchEditNftReq req, String owner);
-
-    /**
-     * 批量销毁 NFT
-     *
-     * @param req 批量销毁 NFT请求实体
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
-     * @return
-     */
-    PublicResponse batchBurnNft(BatchBurnNftReq req, String owner);
 
     /**
      * 查询 NFT
@@ -129,7 +93,7 @@ public interface NftProxy {
      * 查询 NFT 详情
      *
      * @param classId NFT 类别 ID
-     * @param nftId NFT ID
+     * @param nftId   NFT ID
      * @return
      */
     QueryNftRes queryNft(String classId, String nftId);
@@ -138,9 +102,9 @@ public interface NftProxy {
      * 查询 NFT 操作记录
      *
      * @param classId NFT 类别 ID
-     * @param nftId NFT ID
-     * @param req 查询 NFT 操作记录请求实体
+     * @param nftId   NFT ID
+     * @param req     查询 NFT 操作记录请求实体
      * @return
      */
-    QueryNftHistoryRes queryNftHistory(String classId, String nftId,QueryNftHistoryReq req);
+    QueryNftHistoryRes queryNftHistory(String classId, String nftId, QueryNftHistoryReq req);
 }

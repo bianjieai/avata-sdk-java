@@ -13,15 +13,13 @@ public class QueryNftRes {
 
     @JSONField(name = "data")
     private DataDTO data;
+
     @NoArgsConstructor
     @Data
     public static class DataDTO {
 
         @JSONField(name = "id")
         private String id;// NFT ID
-
-        @JSONField(name = "name")
-        private String name;// NFT 名称
 
         @JSONField(name = "class_id")
         private String classId;// NFT 类别 ID

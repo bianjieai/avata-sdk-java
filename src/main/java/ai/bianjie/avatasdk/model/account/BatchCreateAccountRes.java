@@ -18,7 +18,5 @@ public class BatchCreateAccountRes {
     public static class DataDTO {
         @JSONField(name = "accounts")
         private List<String> accounts;// 链账户地址列表
-        @JSONField(name = "operation_id")
-        private String operationId;// 操作 ID。此操作 ID 仅限在查询链账户接口中使用，用于查询创建链账户的授权状态。
     }
 }

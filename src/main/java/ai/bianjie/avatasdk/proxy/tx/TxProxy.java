@@ -1,7 +1,5 @@
 package ai.bianjie.avatasdk.proxy.tx;
 
-import ai.bianjie.avatasdk.model.tx.QueryQueueReq;
-import ai.bianjie.avatasdk.model.tx.QueryQueueRes;
 import ai.bianjie.avatasdk.model.tx.QueryTxRes;
 
 public interface TxProxy {
@@ -13,11 +11,4 @@ public interface TxProxy {
      */
     QueryTxRes queryTx(String operationId);
 
-    /**
-     * 上链交易排队状态查询
-     *
-     * @param req query queue request
-     * @return QueryQueueRes
-     */
-    QueryQueueRes queryQueueInfo(QueryQueueReq req);
 }

@@ -12,10 +12,10 @@ import com.dtflys.forest.utils.StringUtils;
 
 @Slf4j
 public class AccountClient implements AccountProxy {
-    private static final String CREATE_ACCOUNT = "/v1beta1/account";
-    private static final String BATCH_CREATE_ACCOUNTS = "/v1beta1/accounts";
-    private static final String QUERY_ACCOUNTS = "/v1beta1/accounts";
-    private static final String QUERY_ACCOUNTS_HISTORY = "/v1beta1/accounts/history";
+    private static final String CREATE_ACCOUNT = "/v2/account";
+    private static final String BATCH_CREATE_ACCOUNTS = "/v2/accounts";
+    private static final String QUERY_ACCOUNTS = "/v2/accounts";
+    private static final String QUERY_ACCOUNTS_HISTORY = "/v2/accounts/history";
 
     private ConfigInfo configInfo;
 

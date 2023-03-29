@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 上链交易结果查询返回值
- *
+ * <p>
  * 交易状态说明：
  * status 为 3（未处理），上链请求还在等待处理，请稍等；
  * status 为 0（处理中），上链请求正在处理，请等待处理完成；
@@ -24,8 +24,8 @@ public class QueryTxRes {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "type")
-        private String type;// 用户操作类型；Enum: "issue_class" "transfer_class" "mint_nft" "edit_nft" "burn_nft" "transfer_nft" "issue_class_mt" "transfer_class_mt" "issue_mt" "mint_mt" "edit_mt" "burn_mt" "transfer_mt" "mint_nft_batch" "edit_nft_batch" "burn_nft_batch" "transfer_nft_batch" "create_record"
+        @JSONField(name = "operation")
+        private String operation;// 用户操作类型。 module = 1 时，可选： 1：issue_class； 2：transfer_class； 3：mint_nft； 4：edit_nft； 5：burn_nft； 6：transfer_nft
         @JSONField(name = "module")
         private String module;// 交易模块；Enum: "nft" "mt" "record"
         @JSONField(name = "tx_hash")
@@ -40,37 +40,16 @@ public class QueryTxRes {
         private String timestamp;// 交易上链时间（UTC 时间）
         @JSONField(name = "nft")
         private Nft nft;// 具体参考接口文档
-        @JSONField(name = "mt")
-        private Mt mt;// 具体参考接口文档
-        @JSONField(name = "record")
-        private Record record;// 具体参考接口文档
 
         @NoArgsConstructor
         @Data
         public static class Nft {
             @JSONField(name = "class_id")
             private String classId;
-            @JSONField(name = "nft_id")
-            private String nftId;
+            @JSONField(name = "id")
+            private String id;
         }
 
-        @NoArgsConstructor
-        @Data
-        public static class Mt {
-            @JSONField(name = "class_id")
-            private String classId;
-            @JSONField(name = "mt_id")
-            private String mtId;
-        }
-
-        @NoArgsConstructor
-        @Data
-        public static class Record {
-            @JSONField(name = "record_id")
-            private String recordId;
-            @JSONField(name = "certificate_url")
-            private String certificateUrl;
-        }
     }
 }
 
