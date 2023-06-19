@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 查询 NFT 操作记录：Response
+ * 查询 NFT 操作记录正确返回值
  */
 @NoArgsConstructor
 @Data
@@ -20,8 +20,11 @@ public class QueryNftHistoryRes {
     @Data
     public static class DataDTO {
 
-        @JSONField(name = "offset")
-        private Integer offset;// 游标
+        @JSONField(name = "prev_page_key")
+        private String prevPageKey;// 上一页数据的Key， Avata会根据该值进行上一页数据的查询
+
+        @JSONField(name = "next_page_key")
+        private String nextPageKey;// 下一页数据的Key， Avata会根据该值进行上一页数据的查询
 
         @JSONField(name = "limit")
         private Integer limit;// 每页记录数
@@ -30,7 +33,7 @@ public class QueryNftHistoryRes {
         private Integer totalCount;// 总记录数
 
         @JSONField(name = "operation_records")
-        private List<OperationRecordsDTO> operationRecords;
+        private List<OperationRecordsDTO> operationRecords;// 操作记录列表
 
         @NoArgsConstructor
         @Data
@@ -40,7 +43,7 @@ public class QueryNftHistoryRes {
             private String txHash;// NFT 操作的 Tx Hash
 
             @JSONField(name = "operation")
-            private String operation;// NFT 操作类型；Enum: "mint" "edit" "transfer" "burn"
+            private Integer operation;// NFT 操作类型： 1：mint； 2：edit； 3：transfer； 4：burn；
 
             @JSONField(name = "signer")
             private String signer;// Tx 签名者地址

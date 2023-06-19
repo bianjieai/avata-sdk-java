@@ -3,6 +3,7 @@ package ai.bianjie.avatasdk.proxy.account;
 import ai.bianjie.avatasdk.model.account.*;
 
 public interface AccountProxy {
+
     /**
      * 创建链账户
      *
@@ -35,3 +36,5 @@ public interface AccountProxy {
      */
     QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req);
 }
+
+

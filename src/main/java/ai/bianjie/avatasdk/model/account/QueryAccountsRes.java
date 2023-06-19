@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 查询链账户正确返回值
+ */
 @NoArgsConstructor
 @Data
 public class QueryAccountsRes {
@@ -16,12 +19,19 @@ public class QueryAccountsRes {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "offset")
-        private Integer offset;// 游标
+
+        @JSONField(name = "prev_page_key")
+        private String prevPageKey;// 上一页数据的Key， Avata会根据该值进行上一页数据的查询
+
+        @JSONField(name = "next_page_key")
+        private String nextPageKey;// 下一页数据的Key， Avata会根据该值进行上一页数据的查询
+
         @JSONField(name = "limit")
         private Integer limit;// 每页记录数
+
         @JSONField(name = "total_count")
         private Integer totalCount;// 总记录数
+
         @JSONField(name = "accounts")
         private List<AccountsDTO> accounts;// 链账户列表
 
@@ -30,16 +40,12 @@ public class QueryAccountsRes {
         public static class AccountsDTO {
             @JSONField(name = "account")
             private String account;// 链账户地址
+
             @JSONField(name = "name")
             private String name;// 链账户名称
-            @JSONField(name = "gas")
-            private Integer gas;// 文昌链能量值余额
-            @JSONField(name = "biz_fee")
-            private Integer bizFee;// 文昌链 DDC 业务费余额，单位：分
+
             @JSONField(name = "operation_id")
             private String operationId;// 操作 ID
-            @JSONField(name = "status")
-            private Integer status;// Enum: 0，1；链账户的授权状态，0 未授权；1 已授权。链账户授权成功后，可使用该链账户地址发起上链交易请求；未授权时不影响作为交易的接受者地址进行使用（DDC 业务除外）。
         }
     }
 }

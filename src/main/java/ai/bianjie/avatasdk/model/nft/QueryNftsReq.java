@@ -5,14 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 查询 NFT ：request
+ * 查询 NFT 请求体
  */
 @NoArgsConstructor
 @Data
 public class QueryNftsReq {
 
-    @JSONField(name = "offset")
-    private String offset;// 游标，默认为 0
+    @JSONField(name = "page_key")
+    private String pageKey;// 分页数据的Key， Avata会根据该值进行上下页的查询， 该值请从返回的数据体中获取，首页查询可以不传该参数
 
     @JSONField(name = "limit")
     private String limit;// 每页记录数，默认为 10，上限为 50
@@ -20,11 +20,8 @@ public class QueryNftsReq {
     @JSONField(name = "id")
     private String id;// NFT ID
 
-    @JSONField(name = "name")
-    private String name;// NFT 名称，支持模糊查询
-
     @JSONField(name = "class_id")
-    private String classId;// NFT 类别 ID
+    private String classId;// NFT 合约地址
 
     @JSONField(name = "owner")
     private String owner;// NFT 持有者地址
@@ -33,7 +30,7 @@ public class QueryNftsReq {
     private String txHash;// 创建 NFT 的 Tx Hash
 
     @JSONField(name = "status")
-    private String status;// NFT 状态：active / burned，默认为 active
+    private String status;// NFT 状态 1：active（默认） 2：burned
 
     @JSONField(name = "start_date")
     private String startDate;// NFT 创建日期范围 - 开始，yyyy-MM-dd（UTC 时间）
@@ -43,5 +40,8 @@ public class QueryNftsReq {
 
     @JSONField(name = "sort_by")
     private String sortBy;// 排序规则：DATE_ASC / DATE_DESC
+
+    @JSONField(name = "count_total")
+    private String countTotal;// 是否查询数据的总数量 0：不查询总数（默认）1：查询总数
 
 }

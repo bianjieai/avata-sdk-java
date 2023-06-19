@@ -1,21 +1,22 @@
 package ai.bianjie.avatasdk.proxy.account.impl;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
-import com.alibaba.fastjson.JSONObject;
-import com.dtflys.forest.http.ForestResponse;
 import ai.bianjie.avatasdk.exception.AvataException;
-import lombok.extern.slf4j.Slf4j;
 import ai.bianjie.avatasdk.model.account.*;
 import ai.bianjie.avatasdk.proxy.account.AccountProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
+import com.alibaba.fastjson.JSONObject;
+import com.dtflys.forest.http.ForestResponse;
 import com.dtflys.forest.utils.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class AccountClient implements AccountProxy {
-    private static final String CREATE_ACCOUNT = "/v1beta1/account";
-    private static final String BATCH_CREATE_ACCOUNTS = "/v1beta1/accounts";
-    private static final String QUERY_ACCOUNTS = "/v1beta1/accounts";
-    private static final String QUERY_ACCOUNTS_HISTORY = "/v1beta1/accounts/history";
+
+    private static final String CREATE_ACCOUNT = "/v2/account";// 创建链账户接口
+    private static final String BATCH_CREATE_ACCOUNTS = "/v2/accounts";// 批量创建链账户接口
+    private static final String QUERY_ACCOUNTS = "/v2/accounts";// 查询链账户接口
+    private static final String QUERY_ACCOUNTS_HISTORY = "/v2/accounts/history";// 查询链账户操作记录接口
 
     private ConfigInfo configInfo;
 
@@ -23,22 +24,18 @@ public class AccountClient implements AccountProxy {
         this.configInfo = configInfo;
     }
 
+
     @Override
     public CreateAccountRes createAccount(CreateAccountReq req) {
         log.debug("CreateAccountReq {}", req);
         log.debug("createAccount start");
         // check params
-        if (StringUtils.isEmpty(req.getName())) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
-        }
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(CREATE_ACCOUNT, JSONObject.toJSONString(req), configInfo);
-
         String result = response.readAsString();
         CreateAccountRes res = JSONObject.parseObject(result, CreateAccountRes.class);
-        
         log.debug("createAccount end");
         return res;
     }
@@ -52,11 +49,8 @@ public class AccountClient implements AccountProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         ForestResponse response = HttpClient.Post(BATCH_CREATE_ACCOUNTS, JSONObject.toJSONString(req), configInfo);
-
         String result = response.readAsString();
-        
         BatchCreateAccountRes res = JSONObject.parseObject(result, BatchCreateAccountRes.class);
-        
         log.debug("batchCreateAccounts end");
         return res;
     }
@@ -66,11 +60,8 @@ public class AccountClient implements AccountProxy {
         log.debug("QueryAccountsReq {}", req);
         log.debug("queryAccounts start");
         ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS, JSONObject.toJSONString(req), configInfo);
-
         String result = response.readAsString();
-        
         QueryAccountsRes res = JSONObject.parseObject(result, QueryAccountsRes.class);
-        
         log.debug("queryAccounts end");
         return res;
     }
@@ -80,11 +71,8 @@ public class AccountClient implements AccountProxy {
         log.debug("QueryAccountsHistoryReq {}", req);
         log.debug("queryAccountsHistory start");
         ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req), configInfo);
-
         String result = response.readAsString();
-        
         QueryAccountsHistoryRes res = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
-        
         log.debug("queryAccountsHistory end");
         return res;
     }

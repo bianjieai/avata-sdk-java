@@ -3,11 +3,13 @@ package ai.bianjie.avatasdk;
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
-import ai.bianjie.avatasdk.proxy.mt.impl.MtClient;
+import ai.bianjie.avatasdk.proxy.contract.impl.ContractClient;
 import ai.bianjie.avatasdk.proxy.nft.impl.NftClient;
+import ai.bianjie.avatasdk.proxy.ns.impl.NsClient;
 import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
-import ai.bianjie.avatasdk.proxy.record.impl.RecordClient;
+import ai.bianjie.avatasdk.proxy.records.impl.RecordsClient;
 import ai.bianjie.avatasdk.proxy.tx.impl.TxClient;
+import ai.bianjie.avatasdk.proxy.user.impl.UserClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
@@ -16,12 +18,22 @@ import com.dtflys.forest.ssl.SSLUtils;
 import com.dtflys.forest.utils.StringUtils;
 
 public class AvataClient {
-    public NftClient nftClient;
+
+    public UserClient userClient;
+
     public AccountClient accountClient;
-    public MtClient mtClient;
-    public OrderClient orderClient;
-    public RecordClient recordsClient;
+
+    public NftClient nftClient;
+
     public TxClient txClient;
+
+    public NsClient nsClient;
+
+    public RecordsClient recordsClient;
+
+    public OrderClient orderClient;
+
+    public ContractClient contractClient;
 
     /**
      * SDK initialization method
@@ -33,12 +45,15 @@ public class AvataClient {
         configInfo.setApiSecret(builder.apiSecret);
         configInfo.setHttpTimeout(builder.httpTimeout);
 
+        this.userClient = new UserClient(configInfo);
         this.accountClient = new AccountClient(configInfo);
         this.nftClient = new NftClient(configInfo);
-        this.mtClient = new MtClient(configInfo);
-        this.orderClient = new OrderClient(configInfo);
-        this.recordsClient = new RecordClient(configInfo);
         this.txClient = new TxClient(configInfo);
+        this.nsClient = new NsClient(configInfo);
+        this.recordsClient = new RecordsClient(configInfo);
+        this.orderClient = new OrderClient(configInfo);
+        this.contractClient = new ContractClient(configInfo);
+
     }
 
     public static class Builder {

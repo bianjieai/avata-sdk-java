@@ -7,19 +7,24 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 查询 NFT ：Response
+ * 查询 NFT 正确返回值
  */
 @NoArgsConstructor
 @Data
 public class QueryNftsRes {
+
     @JSONField(name = "data")
     private DataDTO data;
 
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "offset")
-        private Integer offset;// 游标
+
+        @JSONField(name = "prev_page_key")
+        private String prevPageKey;// 上一页数据的Key， Avata会根据该值进行上一页数据的查询
+
+        @JSONField(name = "next_page_key")
+        private String nextPageKey;// 下一页数据的Key， Avata会根据该值进行上一页数据的查询
 
         @JSONField(name = "limit")
         private Integer limit;// 每页记录数
@@ -34,13 +39,10 @@ public class QueryNftsRes {
         @Data
         public static class NftsDTO {
             @JSONField(name = "id")
-            private String id;// NFT ID
-
-            @JSONField(name = "name")
-            private String name;// NFT 名称
+            private Integer id;// NFT ID
 
             @JSONField(name = "class_id")
-            private String classId;// NFT 类别 ID
+            private String classId;// NFT 合约地址
 
             @JSONField(name = "class_name")
             private String className;// NFT 类别名称
@@ -51,11 +53,14 @@ public class QueryNftsRes {
             @JSONField(name = "uri")
             private String uri;// 链外数据链接
 
+            @JSONField(name = "uri_hash")
+            private String uriHash;// 链外数据 Hash
+
             @JSONField(name = "owner")
             private String owner;// NFT 持有者地址
 
             @JSONField(name = "status")
-            private String status;// NFT 状态：active / burned;
+            private Integer status;// NFT 状态 1：active 2：burned
 
             @JSONField(name = "tx_hash")
             private String txHash;// NFT 发行 Tx Hash

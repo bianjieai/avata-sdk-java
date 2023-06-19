@@ -4,7 +4,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 /**
  * 上链交易结果查询返回值
  *
@@ -24,52 +23,73 @@ public class QueryTxRes {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "type")
-        private String type;// 用户操作类型；Enum: "issue_class" "transfer_class" "mint_nft" "edit_nft" "burn_nft" "transfer_nft" "issue_class_mt" "transfer_class_mt" "issue_mt" "mint_mt" "edit_mt" "burn_mt" "transfer_mt" "mint_nft_batch" "edit_nft_batch" "burn_nft_batch" "transfer_nft_batch" "create_record"
         @JSONField(name = "module")
-        private String module;// 交易模块；Enum: "nft" "mt" "record"
+        private Integer module;// 交易模块；Enum: 1:nft; 2:ns; 3:record; 4 合约调用；
+
+        @JSONField(name = "operation")
+        private Integer operation;// 用户操作类型；Enum: 用户操作类型。 module = 1 时， 1：issue_class； 2：transfer_class； 3：mint_nft； 4：edit_nft； 5：transfer_nft； 6：burn_nft
+
         @JSONField(name = "tx_hash")
         private String txHash;// 交易哈希
+
         @JSONField(name = "status")
-        private Integer status;// 交易状态， 0 处理中； 1 成功； 2 失败； 3 未处理；Enum: 0 1 2 3
+        private Integer status;// 交易状态,Enum: 0:处理中; 1:成功; 2:失败; 3:未处理;
+
         @JSONField(name = "message")
         private String message;// 交易失败的错误描述信息
+
         @JSONField(name = "block_height")
         private Integer blockHeight;// 交易上链的区块高度
+
         @JSONField(name = "timestamp")
         private String timestamp;// 交易上链时间（UTC 时间）
+
         @JSONField(name = "nft")
         private Nft nft;// 具体参考接口文档
-        @JSONField(name = "mt")
-        private Mt mt;// 具体参考接口文档
+
+        @JSONField(name = "ns")
+        private Ns ns;// 具体参考接口文档
+
         @JSONField(name = "record")
         private Record record;// 具体参考接口文档
 
         @NoArgsConstructor
         @Data
         public static class Nft {
+
             @JSONField(name = "class_id")
-            private String classId;
-            @JSONField(name = "nft_id")
-            private String nftId;
+            private String classId;// NFT 合约地址
+
+            @JSONField(name = "id")
+            private Integer id;// NFT ID
         }
 
         @NoArgsConstructor
         @Data
-        public static class Mt {
-            @JSONField(name = "class_id")
-            private String classId;
-            @JSONField(name = "mt_id")
-            private String mtId;
+        public static class Ns {
+
+            @JSONField(name = "name")
+            private String name;// 一级域名
+
+            @JSONField(name = "owner")
+            private String owner;// 当前域名拥有者的链账户地址
+
+            @JSONField(name = "node")
+            private String node;// 域名 node key
+
+            @JSONField(name = "expires")
+            private Integer expires;// 过期状态：Enum: 0:未过期; 1:已过期
         }
 
         @NoArgsConstructor
         @Data
         public static class Record {
+
             @JSONField(name = "record_id")
-            private String recordId;
+            private Integer recordId;// 区块链存证 ID
+
             @JSONField(name = "certificate_url")
-            private String certificateUrl;
+            private String certificateUrl;// 区块链存证证书的下载链接；证书下载链接并非长期有效，请您尽快将证书文件下载至本地并妥善保管。
         }
     }
 }

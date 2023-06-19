@@ -1,4 +1,5 @@
 import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.order.*;
 import org.junit.jupiter.api.Test;
 
@@ -13,17 +14,19 @@ public class OrderTest {
             .setHttpTimeout(10000)
             .init();
 
+    String OperationID = String.valueOf(System.currentTimeMillis());
+
     @Test
-        //请求购买能量值/业务费接口示例
+        //请求购买能量值接口示例
     void TestCreateOrder() {
         CreateOrderReq req = new CreateOrderReq();
-        req.setOrderId("sxjtesto_rde2rid0w2");
-        req.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
+        req.setAccount("");
         req.setAmount(100);
-        req.setOrderType("gas");
+        req.setOrderType(1);
+        req.setOperationId("buygas" + OperationID);
         try {
-            OrderRes res = client.orderClient.createOrder(req);
-            System.out.println(res.getData().getOrderId());
+            PublicResponse res = client.orderClient.createOrder(req);
+            System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
@@ -35,7 +38,8 @@ public class OrderTest {
         //请求查询能量值/业务费购买结果接口示例
     void TestQueryOrder() {
         try {
-            QueryOrderRes res = client.orderClient.queryOrder("sxjtesto_rde2rid0w2");
+            QueryOrderRes res = client.orderClient.queryOrder(
+                    "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -45,10 +49,16 @@ public class OrderTest {
     }
 
     @Test
-        //请求查询能量值/业务费购买结果列表接口示例
+        //请求查询能量值购买结果列表接口示例
     void TestQueryOrders() {
         QueryOrdersReq req = new QueryOrdersReq();
-        req.setStatus("success");
+        req.setPageKey("");
+        req.setLimit("1");
+        req.setStatus("2");
+        req.setStartDate("2023-04-26");
+        //req.setEndDate("");
+        //req.setSortBy("");
+        req.setCountTotal("1");
         try {
             QueryOrdersRes res = client.orderClient.queryOrders(req);
             System.out.println(res.getData());
@@ -63,21 +73,28 @@ public class OrderTest {
         //请求批量购买能量值接口示例
     void TestBatchCreatrOrders() {
         BatchCreateOrderReq req = new BatchCreateOrderReq();
+
         List<BatchCreateOrderReq.ListDTO> list = new ArrayList<>();
+
         BatchCreateOrderReq.ListDTO dto1 = new BatchCreateOrderReq.ListDTO();
-        dto1.setAccount("iaa1d3fmeputf2h3takuyz68sl42v3r5s3szdx8y80");
-        dto1.setAmount(200);
+        dto1.setAccount("");
+        dto1.setAmount(100);
         list.add(dto1);
+
+        BatchCreateOrderReq.ListDTO dto2 = new BatchCreateOrderReq.ListDTO();
+        dto2.setAccount("");
+        dto2.setAmount(100);
+        list.add(dto2);
+
         req.setList(list);
-        req.setOrderId("gaisbc3_b1627");
+        req.setOperationId("batchcreateorder" + OperationID);
         try {
-            OrderRes res = client.orderClient.batchCreateOrders(req);
-            System.out.println(res.getData().getOrderId());
+            PublicResponse res = client.orderClient.batchCreateOrders(req);
+            System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
         }
     }
-
 }

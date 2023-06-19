@@ -6,12 +6,12 @@ import ai.bianjie.avatasdk.model.nft.*;
 public interface NftProxy {
 
     /**
-     * 创建 NFT 类别
+     * 创建  NFT 类别
      *
-     * @param req 创建 NFT 类别请求实体
+     * @param req 创建  NFT 类别请求实体
      * @return
      */
-    PublicResponse createClass(CreateNftClassReq req);
+    PublicResponse createNftClass(CreateNftClassReq req);
 
     /**
      * 查询 NFT 类别
@@ -19,40 +19,40 @@ public interface NftProxy {
      * @param req 查询 NFT 类别请求实体
      * @return
      */
-    QueryNftClassesRes queryClasses(QueryNftClassesReq req);
+    QueryNftClassesRes queryNftClasses(QueryNftClassesReq req);
 
     /**
      * 查询 NFT 类别详情
      *
-     * @param classId NFT 类别 ID
+     * @param classId NFT 合约地址
      * @return
      */
-    QueryNftClassRes queryClass(String classId);
+    QueryNftClassRes queryNftClass(String classId);
 
     /**
      * 转让 NFT 类别
      *
      * @param req     转让 NFT 类别请求实体
-     * @param classId NFT 类别 ID
+     * @param classId NFT 合约地址
      * @param owner   NFT 类别权属者地址
      * @return
      */
-    PublicResponse transferClass(TransferNftClassReq req, String classId, String owner);
+    PublicResponse transferNftClass(TransferNftClassReq req, String classId, String owner);
 
     /**
      * 发行 NFT
      *
-     * @param req     发行 NFT请求实体
-     * @param classId NFT 类别 ID
+     * @param req     发行 NFT 请求实体
+     * @param classId NFT 合约地址
      * @return
      */
-    PublicResponse createNft(MintNftReq req, String classId);
+    PublicResponse mintNft(MintNftReq req, String classId);
 
     /**
      * 转让 NFT
      *
      * @param req 转让 NFT请求实体
-     * @param classId NFT 类别 ID
+     * @param classId NFT 合约地址
      * @param owner NFT 持有者地址
      * @param nftId NFT ID
      * @return
@@ -63,8 +63,8 @@ public interface NftProxy {
      * 编辑 NFT
      *
      * @param req 编辑 NFT 请求实体
-     * @param classId NFT 类别 ID
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
+     * @param classId NFT 合约地址
+     * @param owner NFT NFT 持有者地址或者 NFT 类别权属者地址，也是 Tx 签名者地址
      * @param nftId NFT ID
      * @return
      */
@@ -74,48 +74,13 @@ public interface NftProxy {
      * 销毁 NFT
      *
      * @param req 销毁 NFT 请求实体
-     * @param classId NFT 类别 ID
+     * @param classId NFT 合约地址
      * @param owner NFT 持有者地址，也是 Tx 签名者地址
      * @param nftId NFT ID
      * @return
      */
     PublicResponse burnNft(BurnNftReq req, String classId, String owner, String nftId);
 
-    /**
-     * 批量发行 NFT
-     *
-     * @param req 批量发行 NFT 请求实体
-     * @param classId NFT 类别 ID
-     * @return
-     */
-    PublicResponse batchCreateNft(BatchMintNftReq req, String classId);
-
-    /**
-     * 批量转让 NFT
-     *
-     * @param req 批量转让 NFT 请求实体
-     * @param owner NFT 持有者地址
-     * @return
-     */
-    PublicResponse batchTransferNft(BatchTransferNftReq req, String owner);
-
-    /**
-     * 批量编辑 NFT
-     *
-     * @param req 批量编辑 NFT请求实体
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
-     * @return
-     */
-    PublicResponse batchEditNft(BatchEditNftReq req, String owner);
-
-    /**
-     * 批量销毁 NFT
-     *
-     * @param req 批量销毁 NFT请求实体
-     * @param owner NFT 持有者地址，也是 Tx 签名者地址
-     * @return
-     */
-    PublicResponse batchBurnNft(BatchBurnNftReq req, String owner);
 
     /**
      * 查询 NFT
@@ -128,7 +93,7 @@ public interface NftProxy {
     /**
      * 查询 NFT 详情
      *
-     * @param classId NFT 类别 ID
+     * @param classId NFT 合约地址
      * @param nftId NFT ID
      * @return
      */
@@ -137,10 +102,10 @@ public interface NftProxy {
     /**
      * 查询 NFT 操作记录
      *
-     * @param classId NFT 类别 ID
+     * @param classId NFT 合约地址
      * @param nftId NFT ID
      * @param req 查询 NFT 操作记录请求实体
      * @return
      */
-    QueryNftHistoryRes queryNftHistory(String classId, String nftId,QueryNftHistoryReq req);
+    QueryNftHistoryRes queryNftHistory(String classId, String nftId, QueryNftHistoryReq req);
 }

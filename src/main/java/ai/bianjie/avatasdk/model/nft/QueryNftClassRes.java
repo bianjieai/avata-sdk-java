@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 查询 NFT 类别详情：Response
+ * 查询 NFT 类别详情正确返回值
  */
 @NoArgsConstructor
 @Data
@@ -15,27 +15,35 @@ public class QueryNftClassRes {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
+
         @JSONField(name = "id")
-        private String id;// NFT 类别 ID
+        private String id;// NFT 合约地址
+
         @JSONField(name = "name")
         private String name;// NFT 类别名称
+
+        @JSONField(name = "uri")
+        private String uri;// 链外资源标识符
+
         @JSONField(name = "symbol")
         private String symbol;// NFT 类别标识
-        @JSONField(name = "description")
-        private String description;// NFT 类别描述
+
         @JSONField(name = "nft_count")
         private Integer nftCount;// NFT 类别包含的 NFT 总量
-        @JSONField(name = "uri")
-        private String uri;// 链外数据链接
-        @JSONField(name = "uri_hash")
-        private String uriHash;// 链外数据 Hash
-        @JSONField(name = "data")
-        private String data;// 自定义链上元数据
+
         @JSONField(name = "owner")
         private String owner;// NFT 类别权属者地址
+
+        @JSONField(name = "editable_by_owner")
+        private Integer editableByOwner;// NFT 类别权限的控制功能， 此类别下某一 NFT 的持有者可以编辑该 NFT, 1:可编辑, 0:不可编辑
+
+        @JSONField(name = "editable_by_class_owner")
+        private Integer editableByClassOwner;// NFT 类别权限的控制功能， 此 NFT 类别的权属者可以编辑这个类别下所有的 NFT, 1:可编辑, 0:不可编辑
+
         @JSONField(name = "tx_hash")
-        private String txHash;// 创建 NFT 类别的 Tx Hash
+        private String txHash;// 部署合约的 Tx Hash
+
         @JSONField(name = "timestamp")
-        private String timestamp;// 创建 NFT 类别的时间戳（UTC 时间）
+        private String timestamp;// 部署合约的时间戳（UTC 时间）
     }
 }
