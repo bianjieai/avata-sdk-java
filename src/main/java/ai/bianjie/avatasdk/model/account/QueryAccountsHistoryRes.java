@@ -54,172 +54,173 @@ public class QueryAccountsHistoryRes {
             private String timestamp;// 操作时间戳（UTC 时间）
 
             @JSONField(name = "nft_msg")
-            private NftMsgDTO nftMsg;// 具体参考接口文档
-
-            @NoArgsConstructor
-            @Data
-            public static class NftMsgDTO {
-
-                @JSONField(name = "issue_class")
-                private IssueClassDTO IssueClass; //该字段实际不返回
-
-                @JSONField(name = "transfer_class")
-                private TransferclassDTO Transferclass; //该字段实际不返回
-
-                @JSONField(name = "mint")
-                private MintDTO mint; //该字段实际不返回
-
-                @JSONField(name = "edit")
-                private EditDTO Edit; //该字段实际不返回
-
-                @JSONField(name = "transfer")
-                private TransferDTO Transfer; //该字段实际不返回
-
-                @JSONField(name = "burn")
-                private BurnDTO Burn; //该字段实际不返回
-            }
-            public static class IssueClassDTO {
-
-                @JSONField(name = "id")
-                private String id; // NFT 合约地址
-
-                @JSONField(name = "name")
-                private String name; // NFT 类别名称
-
-                @JSONField(name = "uri")
-                private String uri; // 链外数据链接
-
-                @JSONField(name = "uri_hash")
-                private String uriHash; // 链外数据链接 Hash
-
-                @JSONField(name = "symbol")
-                private String symbol; // NFT 类别标识
-
-                @JSONField(name = "editable_by_owner")
-                private Integer editableByOwner; // NFT 类别权限的控制功能， 此类别下某一 NFT 的持有者可以编辑该 NFT 1：可编辑 0：不可编辑（默认）
-
-                @JSONField(name = "editable_by_class_owner")
-                private Integer editableByClassOwner; // NFT 类别权限的控制功能， 此 NFT 类别的权属者可以编辑这个类别下所有的 NFT 1：可编辑 0：不可编辑（默认）
-
-                @JSONField(name = "recipient")
-                private String recipient; // 接收者地址
-            }
-
-            public static class TransferclassDTO {
-
-                @JSONField(name = "id")
-                private String id; // NFT 合约地址
-
-                @JSONField(name = "name")
-                private String name; // NFT 类别名称
-
-                @JSONField(name = "uri")
-                private String uri; // 链外数据链接
-
-                @JSONField(name = "uri_hash")
-                private String uriHash; // 链外数据链接 Hash
-
-                @JSONField(name = "symbol")
-                private String symbol; // NFT 类别标识
-
-                @JSONField(name = "editable_by_owner")
-                private Integer editableByOwner; // NFT 类别权限的控制功能， 此类别下某一 NFT 的持有者可以编辑该 NFT 1：可编辑 0：不可编辑（默认）
-
-                @JSONField(name = "editable_by_class_owner")
-                private Integer editableByClassOwner; // NFT 类别权限的控制功能， 此 NFT 类别的权属者可以编辑这个类别下所有的 NFT 1：可编辑 0：不可编辑（默认）
-
-                @JSONField(name = "recipient")
-                private String recipient; // 接收者地址
-            }
-
-            public static class MintDTO {
-
-                @JSONField(name = "id")
-                private Integer id; // NFT ID
-
-                @JSONField(name = "class_id")
-                private String classId; // NFT 合约地址
-
-                @JSONField(name = "class_name")
-                private String className; // NFT 类别名称
-
-                @JSONField(name = "class_symbol")
-                private String classSymbol; // NFT 类别标识
-
-                @JSONField(name = "uri")
-                private String uri; // 链外数据链接
-
-                @JSONField(name = "uri_hash")
-                private String uriHash; // 链外数据链接 Hash
-
-                @JSONField(name = "recipient")
-                private String recipient; // 接收者地址
-            }
-            public static class EditDTO {
-
-                @JSONField(name = "id")
-                private Integer id; // NFT ID
-
-                @JSONField(name = "class_id")
-                private String classId; // NFT 合约地址
-
-                @JSONField(name = "class_name")
-                private String className; // NFT 类别名称
-
-                @JSONField(name = "class_symbol")
-                private String classSymbol; // NFT 类别标识
-
-                @JSONField(name = "uri")
-                private String uri; // 链外数据链接
-
-                @JSONField(name = "uri_hash")
-                private String uriHash; // 链外数据链接 Hash
-            }
-
-            public static class TransferDTO {
-
-                @JSONField(name = "id")
-                private Integer id; // NFT ID
-
-                @JSONField(name = "class_id")
-                private String classId; // NFT 合约地址
-
-                @JSONField(name = "class_name")
-                private String className; // NFT 类别名称
-
-                @JSONField(name = "class_symbol")
-                private String classSymbol; // NFT 类别标识
-
-                @JSONField(name = "uri")
-                private String uri; // 链外数据链接
-
-                @JSONField(name = "uri_hash")
-                private String uriHash; // 链外数据链接 Hash
-
-                @JSONField(name = "recipient")
-                private String recipient; // 接收者地址
-            }
-
-            public static class BurnDTO {
-
-                @JSONField(name = "id")
-                private Integer id; // NFT ID
-
-                @JSONField(name = "class_id")
-                private String classId; // NFT 合约地址
-
-                @JSONField(name = "class_name")
-                private String className; // NFT 类别名称
-
-                @JSONField(name = "class_symbol")
-                private String classSymbol; // NFT 类别标识
-
-                @JSONField(name = "uri")
-                private String uri; // 链外数据链接
-
-                @JSONField(name = "uri_hash")
-                private String uriHash; // 链外数据链接 Hash
-            }
+            private String nftMsg;// 具体参考接口文档
+//            @NoArgsConstructor
+//            @Data
+//            public static class NftMsgDTO {
+//
+//                @JSONField(name = "issue_class")
+//                private IssueClassDTO IssueClass; //该字段实际不返回
+//
+//                @JSONField(name = "transfer_class")
+//                private TransferclassDTO Transferclass; //该字段实际不返回
+//
+//                @JSONField(name = "mint")
+//                private MintDTO mint; //该字段实际不返回
+//
+//                @JSONField(name = "edit")
+//                private EditDTO Edit; //该字段实际不返回
+//
+//                @JSONField(name = "transfer")
+//                private TransferDTO Transfer; //该字段实际不返回
+//
+//                @JSONField(name = "burn")
+//                private BurnDTO Burn; //该字段实际不返回
+//            }
+//
+//            public static class IssueClassDTO {
+//
+//                @JSONField(name = "id")
+//                private String id; // NFT 合约地址
+//
+//                @JSONField(name = "name")
+//                private String name; // NFT 类别名称
+//
+//                @JSONField(name = "uri")
+//                private String uri; // 链外数据链接
+//
+//                @JSONField(name = "uri_hash")
+//                private String uriHash; // 链外数据链接 Hash
+//
+//                @JSONField(name = "symbol")
+//                private String symbol; // NFT 类别标识
+//
+//                @JSONField(name = "editable_by_owner")
+//                private Integer editableByOwner; // NFT 类别权限的控制功能， 此类别下某一 NFT 的持有者可以编辑该 NFT 1：可编辑 0：不可编辑（默认）
+//
+//                @JSONField(name = "editable_by_class_owner")
+//                private Integer editableByClassOwner; // NFT 类别权限的控制功能， 此 NFT 类别的权属者可以编辑这个类别下所有的 NFT 1：可编辑 0：不可编辑（默认）
+//
+//                @JSONField(name = "recipient")
+//                private String recipient; // 接收者地址
+//            }
+//
+//            public static class TransferclassDTO {
+//
+//                @JSONField(name = "id")
+//                private String id; // NFT 合约地址
+//
+//                @JSONField(name = "name")
+//                private String name; // NFT 类别名称
+//
+//                @JSONField(name = "uri")
+//                private String uri; // 链外数据链接
+//
+//                @JSONField(name = "uri_hash")
+//                private String uriHash; // 链外数据链接 Hash
+//
+//                @JSONField(name = "symbol")
+//                private String symbol; // NFT 类别标识
+//
+//                @JSONField(name = "editable_by_owner")
+//                private Integer editableByOwner; // NFT 类别权限的控制功能， 此类别下某一 NFT 的持有者可以编辑该 NFT 1：可编辑 0：不可编辑（默认）
+//
+//                @JSONField(name = "editable_by_class_owner")
+//                private Integer editableByClassOwner; // NFT 类别权限的控制功能， 此 NFT 类别的权属者可以编辑这个类别下所有的 NFT 1：可编辑 0：不可编辑（默认）
+//
+//                @JSONField(name = "recipient")
+//                private String recipient; // 接收者地址
+//            }
+//
+//            public static class MintDTO {
+//
+//                @JSONField(name = "id")
+//                private Integer id; // NFT ID
+//
+//                @JSONField(name = "class_id")
+//                private String classId; // NFT 合约地址
+//
+//                @JSONField(name = "class_name")
+//                private String className; // NFT 类别名称
+//
+//                @JSONField(name = "class_symbol")
+//                private String classSymbol; // NFT 类别标识
+//
+//                @JSONField(name = "uri")
+//                private String uri; // 链外数据链接
+//
+//                @JSONField(name = "uri_hash")
+//                private String uriHash; // 链外数据链接 Hash
+//
+//                @JSONField(name = "recipient")
+//                private String recipient; // 接收者地址
+//            }
+//
+//            public static class EditDTO {
+//
+//                @JSONField(name = "id")
+//                private Integer id; // NFT ID
+//
+//                @JSONField(name = "class_id")
+//                private String classId; // NFT 合约地址
+//
+//                @JSONField(name = "class_name")
+//                private String className; // NFT 类别名称
+//
+//                @JSONField(name = "class_symbol")
+//                private String classSymbol; // NFT 类别标识
+//
+//                @JSONField(name = "uri")
+//                private String uri; // 链外数据链接
+//
+//                @JSONField(name = "uri_hash")
+//                private String uriHash; // 链外数据链接 Hash
+//            }
+//
+//            public static class TransferDTO {
+//
+//                @JSONField(name = "id")
+//                private Integer id; // NFT ID
+//
+//                @JSONField(name = "class_id")
+//                private String classId; // NFT 合约地址
+//
+//                @JSONField(name = "class_name")
+//                private String className; // NFT 类别名称
+//
+//                @JSONField(name = "class_symbol")
+//                private String classSymbol; // NFT 类别标识
+//
+//                @JSONField(name = "uri")
+//                private String uri; // 链外数据链接
+//
+//                @JSONField(name = "uri_hash")
+//                private String uriHash; // 链外数据链接 Hash
+//
+//                @JSONField(name = "recipient")
+//                private String recipient; // 接收者地址
+//            }
+//
+//            public static class BurnDTO {
+//
+//                @JSONField(name = "id")
+//                private Integer id; // NFT ID
+//
+//                @JSONField(name = "class_id")
+//                private String classId; // NFT 合约地址
+//
+//                @JSONField(name = "class_name")
+//                private String className; // NFT 类别名称
+//
+//                @JSONField(name = "class_symbol")
+//                private String classSymbol; // NFT 类别标识
+//
+//                @JSONField(name = "uri")
+//                private String uri; // 链外数据链接
+//
+//                @JSONField(name = "uri_hash")
+//                private String uriHash; // 链外数据链接 Hash
+//            }
         }
     }
 }
