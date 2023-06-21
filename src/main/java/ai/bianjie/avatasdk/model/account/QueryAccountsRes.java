@@ -41,6 +41,12 @@ public class QueryAccountsRes {
             @JSONField(name = "account")
             private String account;// 链账户地址
 
+            @JSONField(name = "native_address")
+            private String nativeAddress;// todo
+
+            @JSONField(name = "hex_address")
+            private String hexAddress;// todo
+
             @JSONField(name = "name")
             private String name;// 链账户名称
 

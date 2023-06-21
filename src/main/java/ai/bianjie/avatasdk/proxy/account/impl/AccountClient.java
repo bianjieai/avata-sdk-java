@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AccountClient implements AccountProxy {
 
-    private static final String CREATE_ACCOUNT = "/v2/account";// 创建链账户接口
-    private static final String BATCH_CREATE_ACCOUNTS = "/v2/accounts";// 批量创建链账户接口
-    private static final String QUERY_ACCOUNTS = "/v2/accounts";// 查询链账户接口
-    private static final String QUERY_ACCOUNTS_HISTORY = "/v2/accounts/history";// 查询链账户操作记录接口
+    private static final String CREATE_ACCOUNT = "/v3/account";// 创建链账户接口
+    private static final String BATCH_CREATE_ACCOUNTS = "/v3/accounts";// 批量创建链账户接口
+    private static final String QUERY_ACCOUNTS = "/v3/accounts";// 查询链账户接口
+    private static final String QUERY_ACCOUNTS_HISTORY = "/v3/accounts/history";// 查询链账户操作记录接口
 
     private ConfigInfo configInfo;
 

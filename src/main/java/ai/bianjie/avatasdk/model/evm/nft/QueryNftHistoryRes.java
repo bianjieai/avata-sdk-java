@@ -1,4 +1,4 @@
-package ai.bianjie.avatasdk.model.account;
+package ai.bianjie.avatasdk.model.evm.nft;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 查询链账户操作记录正确返回值
+ * 查询 NFT 操作记录正确返回值
  */
 @NoArgsConstructor
 @Data
-public class QueryAccountsHistoryRes {
+public class QueryNftHistoryRes {
 
     @JSONField(name = "data")
     private DataDTO data;
@@ -38,28 +38,21 @@ public class QueryAccountsHistoryRes {
         @NoArgsConstructor
         @Data
         public static class OperationRecordsDTO {
-            @JSONField(name = "tx_hash")
-            private String txHash;// 操作 Tx Hash
 
-            @JSONField(name = "module")
-            private Integer module;// 功能模块；Enum: "nft"
+            @JSONField(name = "tx_hash")
+            private String txHash;// NFT 操作的 Tx Hash
 
             @JSONField(name = "operation")
-            private Integer operation;
-            // 操作类型： module = 1 时： 1：issue_class； 2：transfer_class 3：mint； 4：edit； 5：transfer； 6：burn；
-            // module = 2 时，可选：1：issue_class；2：transfer_class；3：issue；4：mint；5：edit；6：transfer；7：burn
+            private Integer operation;// NFT 操作类型： 1：mint； 2：edit； 3：transfer； 4：burn；
 
             @JSONField(name = "signer")
             private String signer;// Tx 签名者地址
 
+            @JSONField(name = "recipient")
+            private String recipient;// NFT 接收者地址
+
             @JSONField(name = "timestamp")
-            private String timestamp;// 操作时间戳（UTC 时间）
-
-            @JSONField(name = "nft_msg")
-            private String nftMsg;// 具体参考接口文档
-
-            @JSONField(name = "mt_msg")
-            private String mtMsg;// 具体参考接口文档
+            private String timestamp;// NFT 操作时间戳（UTC 时间）
         }
     }
 }

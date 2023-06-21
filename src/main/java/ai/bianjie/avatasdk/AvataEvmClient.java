@@ -2,10 +2,10 @@ package ai.bianjie.avatasdk;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
-import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
-import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
-import ai.bianjie.avatasdk.proxy.records.impl.RecordsClient;
-import ai.bianjie.avatasdk.proxy.tx.impl.TxClient;
+import ai.bianjie.avatasdk.proxy.evm.contract.impl.ContractClient;
+import ai.bianjie.avatasdk.proxy.evm.nft.impl.NftClient;
+import ai.bianjie.avatasdk.proxy.evm.ns.impl.NsClient;
+import ai.bianjie.avatasdk.proxy.evm.tx.impl.TxClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
@@ -13,42 +13,29 @@ import com.dtflys.forest.retryer.BackOffRetryer;
 import com.dtflys.forest.ssl.SSLUtils;
 import com.dtflys.forest.utils.StringUtils;
 
-public class AvataClient {
+public class AvataEvmClient {
 
-
-    public AccountClient accountClient;
-
-    //public NftClient nftClient;
-
+    public NftClient nftClient;
     public TxClient txClient;
+    public ContractClient contractClient;
+    public NsClient nsClient;
 
-   // public NsClient nsClient;
 
-    public RecordsClient recordsClient;
-
-    public OrderClient orderClient;
-
-    //public ContractClient contractClient;
 
     /**
      * SDK initialization method
      */
-    private AvataClient(Builder builder) {
+    private AvataEvmClient(Builder builder) {
         ConfigInfo configInfo = new ConfigInfo();
         configInfo.setDoMain(builder.domain);
         configInfo.setApiKey(builder.apiKey);
         configInfo.setApiSecret(builder.apiSecret);
         configInfo.setHttpTimeout(builder.httpTimeout);
 
-        //this.userClient = new UserClient(configInfo);
-        this.accountClient = new AccountClient(configInfo);
-        //this.nftClient = new NftClient(configInfo);
+        this.nftClient=new NftClient(configInfo);
         this.txClient = new TxClient(configInfo);
-        //this.nsClient = new NsClient(configInfo);
-        this.recordsClient = new RecordsClient(configInfo);
-        this.orderClient = new OrderClient(configInfo);
-      //  this.contractClient = new ContractClient(configInfo);
-
+        this.contractClient=new ContractClient(configInfo);
+        this.nsClient=new NsClient(configInfo);
     }
 
     public static class Builder {
@@ -83,7 +70,7 @@ public class AvataClient {
             return this;
         }
 
-        public AvataClient init() {
+        public AvataEvmClient init() {
             if (StringUtils.isEmpty(domain)) {
                 throw AvataException.NewSDKException(AvataException.ErrDomain);
             }
@@ -132,7 +119,7 @@ public class AvataClient {
             // [自v1.5.27版本起可用] 异步模式（默认为 platform）
             configuration.setAsyncMode(ForestAsyncMode.PLATFORM);
 
-            return new AvataClient(this);
+            return new AvataEvmClient(this);
         }
     }
 }

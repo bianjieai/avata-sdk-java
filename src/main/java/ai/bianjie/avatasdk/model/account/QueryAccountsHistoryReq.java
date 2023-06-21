@@ -20,10 +20,13 @@ public class QueryAccountsHistoryReq {
     private String account;// 链账户地址
 
     @JSONField(name = "module")
-    private String module;// 功能模块：1：nft；
+    private String module;// 功能模块：1：nft；2 : mt；
 
     @JSONField(name = "operation")
-    private String operation;// 操作类型，仅 module 不为空时有效，默认为："0"（all）。module = 1 时，可选：1：issue_class；2：transfer_class3：mint；4：edit；5：transfer；6：burn；
+    private String operation;
+    // 操作类型，仅 module 不为空时有效，默认为："0"（all）。
+    // module = 1 时，可选：1：issue_class；2：transfer_class；3：mint； 4：edit；5：transfer；6：burn；
+    // module = 2 时，可选：1：issue_class；2：transfer_class；3：issue；4：mint；5：edit；6：transfer；7：burn
 
     @JSONField(name = "tx_hash")
     private String txHash;// Tx Hash
