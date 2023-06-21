@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class OrderClient implements OrderProxy {
-    private static final String CREATE_ORDER = "/v2/orders";
-    private static final String BATCH_CREATE_ORDER = "/v2/orders/batch";
-    private static final String QUERY_ORDER = "/v2/orders/%s";
-    private static final String QUERY_ORDERS = "/v2/orders";
+    private static final String CREATE_ORDER = "/v3/orders";
+    private static final String BATCH_CREATE_ORDER = "/v3/orders/batch";
+    private static final String QUERY_ORDER = "/v3/orders/%s";
+    private static final String QUERY_ORDERS = "/v3/orders";
 
     private ConfigInfo configInfo;
 
