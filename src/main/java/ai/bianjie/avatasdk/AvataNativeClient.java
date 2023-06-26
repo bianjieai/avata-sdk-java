@@ -2,6 +2,7 @@ package ai.bianjie.avatasdk;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
+import ai.bianjie.avatasdk.proxy.nat.mt.impl.MtClient;
 import ai.bianjie.avatasdk.proxy.nat.nft.impl.NftClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
@@ -13,7 +14,7 @@ import com.dtflys.forest.utils.StringUtils;
 public class AvataNativeClient {
 
     public NftClient nftClient;
-    //public MtClient mtClient;
+    public MtClient mtClient;
     //public TxClient txClient;
 
 
@@ -28,7 +29,7 @@ public class AvataNativeClient {
         configInfo.setHttpTimeout(builder.httpTimeout);
 
         this.nftClient = new NftClient(configInfo);
-        //this.mtClient = new MtClient(configInfo);
+        this.mtClient = new MtClient(configInfo);
         //this.txClient=new TxClient(configInfo);
 
     }
