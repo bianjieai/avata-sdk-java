@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class QueryContractCallReq {
     @JSONField(name = "to")
-    private String to;// 合约地址
+    private String to;// 目标合约地址
 
     @JSONField(name = "data")
     private String data;// ABI 编码待签名交易的 hex 字符串

@@ -16,8 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ContractClient implements ContractProxy {
 
-    private static final String CONTRACT_CALL = "/v2/contract/calls";// 调用合约接口
-    private static final String QUERY_CONTRACT_CALL = "/v2/contract/calls";// 查询合约接口
+    private static final String CONTRACT_CALL = "/v3/evm/contract/calls";// 调用合约接口
+    private static final String QUERY_CONTRACT_CALL = "/v3/evm/contract/calls";// 查询合约接口
     private ConfigInfo configInfo;
 
     public ContractClient(ConfigInfo configInfo) {
