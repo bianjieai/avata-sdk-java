@@ -40,7 +40,7 @@ public class QueryDomainRes {
         private Integer expire;// 过期状态： 0：未过期；1：已过期
 
         @JSONField(name = "expire_timestamp")
-        private String expireTimestamp;// 当前域名过期时间戳
+        private Integer expireTimestamp;// 当前域名过期时间戳
 
         @JSONField(name = "msg")
         private String msg;// 提示信息

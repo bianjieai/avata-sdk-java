@@ -3,7 +3,7 @@ import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.records.CreateRecordReq;
 import org.junit.jupiter.api.Test;
 
-public class RecordTest {
+public class RecordsTest {
     AvataClient client = new AvataClient.Builder()
             .setDomain("")
             .setApiKey("")

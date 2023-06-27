@@ -15,6 +15,7 @@ public class AvataNativeClient {
 
     public NftClient nftClient;
     public MtClient mtClient;
+
     //public TxClient txClient;
 
 
@@ -30,8 +31,6 @@ public class AvataNativeClient {
 
         this.nftClient = new NftClient(configInfo);
         this.mtClient = new MtClient(configInfo);
-        //this.txClient=new TxClient(configInfo);
-
     }
 
     public static class Builder {

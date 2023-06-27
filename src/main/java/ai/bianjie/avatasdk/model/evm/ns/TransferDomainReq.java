@@ -4,6 +4,10 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * 转让域名接口请求体
+ */
 @NoArgsConstructor
 @Data
 public class TransferDomainReq {

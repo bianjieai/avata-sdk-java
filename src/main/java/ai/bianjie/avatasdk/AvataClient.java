@@ -17,18 +17,9 @@ public class AvataClient {
 
 
     public AccountClient accountClient;
-
-    //public NftClient nftClient;
-
     public TxClient txClient;
-
-   // public NsClient nsClient;
-
-    public RecordsClient recordsClient;
-
     public OrderClient orderClient;
-
-    //public ContractClient contractClient;
+    public RecordsClient recordsClient;
 
     /**
      * SDK initialization method
@@ -40,14 +31,14 @@ public class AvataClient {
         configInfo.setApiSecret(builder.apiSecret);
         configInfo.setHttpTimeout(builder.httpTimeout);
 
-        //this.userClient = new UserClient(configInfo);
+
         this.accountClient = new AccountClient(configInfo);
-        //this.nftClient = new NftClient(configInfo);
+
         this.txClient = new TxClient(configInfo);
-        //this.nsClient = new NsClient(configInfo);
-        this.recordsClient = new RecordsClient(configInfo);
+
         this.orderClient = new OrderClient(configInfo);
-      //  this.contractClient = new ContractClient(configInfo);
+
+        this.recordsClient=new RecordsClient(configInfo);
 
     }
 

@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RecordsClient implements RecordsProxy {
 
-    private static final String CREATE_RECORD = "/v2/record/records";// 创建存证
+    private static final String CREATE_RECORD = "/v3/record/records";// 创建存证
 
     private ConfigInfo configInfo;
 

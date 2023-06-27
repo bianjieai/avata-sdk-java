@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegisterDomainReq {
     @JSONField(name = "name")
-    private String name; // 一级域名，包含大小写英文字母、阿拉伯数字和连字符 -
+    private String name; // 包含大小写英文字母、阿拉伯数字和连字符 -；不区分大小写；长度不包括后缀
 
     @JSONField(name = "owner")
     private String owner;// 域名拥有者的链账户地址，支持任一 Avata 内托管的地址

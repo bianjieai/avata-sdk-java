@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class NsClient implements NsProxy {
-    private static final String REGISTER_DOMAIN = "/v2/ns/domains"; // 注册域名
-    private static final String QUERY_DOMAIN = "/v2/ns/domains"; // 查询域名
-    private static final String QUERY_OWNER_DOMAIN = "/v2/ns/domains/%s"; // 查询用户域名
-    private static final String TRANSFER_DOMAIN = "/v2/ns/transfers/%s/%s"; // 转让域名
+    private static final String REGISTER_DOMAIN = "/v3/evm/ns/domains"; // 注册域名
+    private static final String QUERY_DOMAIN = "/v3/evm/ns/domains"; // 查询域名
+    private static final String QUERY_OWNER_DOMAIN = "/v3/evm/ns/domains/%s"; // 查询用户域名
+    private static final String TRANSFER_DOMAIN = "/v3/evm/ns/transfers/%s/%s"; // 转让域名
 
     private ConfigInfo configInfo;
 

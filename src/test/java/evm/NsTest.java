@@ -51,11 +51,11 @@ public class NsTest {
         //请求查询用户域名接口示例
     void TestQueryOwnerDomain() {
         QueryOwnerDomainReq req = new QueryOwnerDomainReq();
-        //req.setPageKey("587mvF9aNXbGhFK8jaLdK4gFJPuIuOHX7HnvsAEdxdgvfDwGyfVsMpNAo36kBIInzHv4Jq3rXzNurPdeoUaH/WXvg-3pzz/y7-x74PIne/wS-fg0aQjSHKoxssXyc6TL-f06LyfRUmY=");
-        //req.setLimit("1");
-        //req.setName("lmhtest");
-        //req.setTld("w");
-        //req.setCountTotal("1");
+        req.setPageKey("");
+        req.setLimit("1");
+        req.setName("");
+        req.setTld("");
+        req.setCountTotal("1");
         try {
             QueryOwnerDomainRes res = client.nsClient.queryOwnerDomain(req, "0x1bBC0Cf1C37d34aFc9FF2d18161EA7cFe3839fD1");
             System.out.println(res.getData());
@@ -70,7 +70,7 @@ public class NsTest {
         //请求转让域名接口示例
     void TestTransferDomain() {
         TransferDomainReq req = new TransferDomainReq();
-        req.setRecipient("0x031B739E95F83cB006AB79bD15664eF38c607883");
+        req.setRecipient("");
         req.setOperationId("transferDomian" + OperationID);
         try {
             PublicResponse res = client.nsClient.transferDomain(req, "0x1bBC0Cf1C37d34aFc9FF2d18161EA7cFe3839fD1", "lmhtest.wallet");

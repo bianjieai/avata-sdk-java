@@ -18,6 +18,7 @@
 
 ### 创建和使用客户端
 
+公共接口：
 ```
 ai.bianjie.avatasdk.AvataClient client = new ai.bianjie.avatasdk.AvataClient.Builder()
             .setDoMain("")
@@ -27,15 +28,39 @@ ai.bianjie.avatasdk.AvataClient client = new ai.bianjie.avatasdk.AvataClient.Bui
             .init();
 ```
 
+原生接口：
+```
+ai.bianjie.avatasdk.AvataNativeClient client = new ai.bianjie.avatasdk.AvataNativeClient.Builder()
+            .setDomain("")
+            .setApiKey("")
+            .setApiSecret("")
+            .setHttpTimeout(10000)
+            .init();
+
+```
+
+
+智能合约接口：
+```
+ai.bianjie.avatasdk.AvataEvmClient client = new ai.bianjie.avatasdk.AvataEvmClient.Builder()
+            .setDomain("")
+            .setApiKey("")
+            .setApiSecret("")
+            .setHttpTimeout(10000)
+            .init();
+
+```
+
+
 公共接口：
 
 - [链账户接口示例代码](./src/test/java/AccountTest.java)
 - [充值接口示例代码](./src/test/java/OrderTest.java)
+- [存证接口示例代码](./src/test/java/RecordsTest.java)
 
 原生接口：
 
 - [NFT 接口示例代码](./src/test/java/nat/NftTest.java)
-- [存证接口示例代码](./src/test/java/nat/RecordTest.java)
 - [交易结果查询接口示例代码](./src/test/java/nat/TxTest.java)
 
 智能合约接口：
