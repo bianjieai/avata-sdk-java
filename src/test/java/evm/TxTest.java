@@ -2,6 +2,7 @@ package evm;
 
 import ai.bianjie.avatasdk.AvataEvmClient;
 import ai.bianjie.avatasdk.model.evm.tx.QueryTxRes;
+import ai.bianjie.avatasdk.model.evm.tx.QueryTxTypesRes;
 import org.junit.jupiter.api.Test;
 
 public class TxTest {
@@ -18,4 +19,9 @@ public class TxTest {
         System.out.println(txRes.getData());
     }
 
+    @Test
+    public void queryTxTypes(){
+        QueryTxTypesRes txRes = client.txClient.queryTxTypes();
+        System.out.println(txRes.getData());
+    }
 }

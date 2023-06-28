@@ -2,6 +2,7 @@ package nat;
 
 import ai.bianjie.avatasdk.AvataNativeClient;
 import ai.bianjie.avatasdk.model.nat.tx.QueryTxRes;
+import ai.bianjie.avatasdk.model.nat.tx.QueryTxTypesRes;
 import org.junit.jupiter.api.Test;
 
 public class TxTest {
@@ -17,5 +18,9 @@ public class TxTest {
         QueryTxRes txRes = client.txClient.queryTx("");
         System.out.println(txRes.getData());
     }
-
+    @Test
+    public void queryTxTypes(){
+        QueryTxTypesRes txRes = client.txClient.queryTxTypes();
+        System.out.println(txRes.getData());
+    }
 }

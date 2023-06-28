@@ -1,6 +1,7 @@
 package ai.bianjie.avatasdk.proxy.nat.tx;
 
 import ai.bianjie.avatasdk.model.nat.tx.QueryTxRes;
+import ai.bianjie.avatasdk.model.nat.tx.QueryTxTypesRes;
 
 
 public interface TxProxy {
@@ -13,12 +14,12 @@ public interface TxProxy {
     QueryTxRes queryTx(String operationId);
 
 
-    ///**
-    // * EVM 枚举值列表查询
-    // *
-    // * @return QueryTxTypesRes
-    // */
-    //
-    //QueryTxTypesRes queryTxTypes();
+    /**
+     * 原生枚举值列表查询
+     *
+     * @return QueryTxTypesRes
+     */
+
+    QueryTxTypesRes queryTxTypes();
 
 }
