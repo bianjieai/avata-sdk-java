@@ -1,11 +1,11 @@
-package evm;
+package nat;
 
-import ai.bianjie.avatasdk.AvataEvmClient;
-import ai.bianjie.avatasdk.model.evm.tx.QueryTxRes;
+import ai.bianjie.avatasdk.AvataNativeClient;
+import ai.bianjie.avatasdk.model.nat.tx.QueryTxRes;
 import org.junit.jupiter.api.Test;
 
 public class TxTest {
-    AvataEvmClient client = new AvataEvmClient.Builder()
+    AvataNativeClient client = new AvataNativeClient.Builder()
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")

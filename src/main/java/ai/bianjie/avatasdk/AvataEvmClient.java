@@ -19,8 +19,7 @@ public class AvataEvmClient {
     public TxClient txClient;
     public ContractClient contractClient;
     public NsClient nsClient;
-
-
+    
 
     /**
      * SDK initialization method

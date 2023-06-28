@@ -1,4 +1,4 @@
-package ai.bianjie.avatasdk.model.evm.tx;
+package ai.bianjie.avatasdk.model.nat.tx;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
@@ -25,14 +25,13 @@ public class QueryTxRes {
     @Data
     public static class DataDTO {
         @JSONField(name = "module")
-        private Integer module;// 交易模块；Enum: 1:nft; 2:ns; 3:record; 4 合约调用；
+        private Integer module;// 交易模块；Enum:  1 nft；2 mt；3 record 存证；
 
         @JSONField(name = "operation")
         private Integer operation; // Enum: 用户操作类型。
         //module = 1 时，可选： 1：issue_class； 2：transfer_class； 3：mint_nft； 4：edit_nft； 5：transfer_nft； 6：burn_nft；
-        //module = 2 时，可选： 1：create_domain； 2：transfer_domain
+        //module = 2 时，可选： 1：issue_class；2：transfer_class；3：issue； 4：mint； 5：edit； 6：transfer；7:  burn；
         //module = 3 时，可选： 1: create_record 创建存证；
-        //module = 4 时，可选： 1: contract_call 合约调用；
 
         @JSONField(name = "tx_hash")
         private String txHash;// 交易哈希
@@ -52,35 +51,30 @@ public class QueryTxRes {
         @JSONField(name = "nft")
         private Nft nft;// 具体参考接口文档
 
-        @JSONField(name = "ns")
-        private Ns ns;// 具体参考接口文档
+        @JSONField(name = "mt")
+        private Mt mt;// 具体参考接口文档
+
+        @JSONField(name = "record")
+        private Record record;// 具体参考接口文档
 
         @NoArgsConstructor
         @Data
         public static class Nft {
 
             @JSONField(name = "class_id")
-            private String classId;// NFT 合约地址
+            private String classId;// NFT 类别 ID
 
             @JSONField(name = "id")
-            private Integer id;// NFT ID
+            private String id;// NFT ID
         }
 
         @NoArgsConstructor
         @Data
-        public static class Ns {
-
-            @JSONField(name = "name")
-            private String name;// 一级域名
-
-            @JSONField(name = "owner")
-            private String owner;// 当前域名拥有者的链账户地址
-
-            @JSONField(name = "node")
-            private String node;// 域名 node key
-
-            @JSONField(name = "expires")
-            private Integer expires;// 过期状态：Enum: 0:未过期; 1:已过期
+        public static class Mt {
+            @JSONField(name = "class_id")
+            private String classId;// MT 类别 ID
+            @JSONField(name = "mt_id")
+            private String mtId;// MT ID
         }
 
         @NoArgsConstructor
@@ -88,7 +82,7 @@ public class QueryTxRes {
         public static class Record {
 
             @JSONField(name = "record_id")
-            private Integer recordId;// 区块链存证 ID
+            private String recordId;// 区块链存证 ID
 
             @JSONField(name = "certificate_url")
             private String certificateUrl;// 区块链存证证书的下载链接；证书下载链接并非长期有效，请您尽快将证书文件下载至本地并妥善保管。

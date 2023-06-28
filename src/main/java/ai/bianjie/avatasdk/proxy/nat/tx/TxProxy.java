@@ -1,6 +1,6 @@
-package ai.bianjie.avatasdk.proxy.evm.tx;
+package ai.bianjie.avatasdk.proxy.nat.tx;
 
-import ai.bianjie.avatasdk.model.evm.tx.QueryTxRes;
+import ai.bianjie.avatasdk.model.nat.tx.QueryTxRes;
 
 
 public interface TxProxy {

@@ -5,7 +5,6 @@ import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
 import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
 import ai.bianjie.avatasdk.proxy.records.impl.RecordsClient;
-import ai.bianjie.avatasdk.proxy.tx.impl.TxClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
@@ -15,9 +14,7 @@ import com.dtflys.forest.utils.StringUtils;
 
 public class AvataClient {
 
-
     public AccountClient accountClient;
-    public TxClient txClient;
     public OrderClient orderClient;
     public RecordsClient recordsClient;
 
@@ -33,8 +30,6 @@ public class AvataClient {
 
 
         this.accountClient = new AccountClient(configInfo);
-
-        this.txClient = new TxClient(configInfo);
 
         this.orderClient = new OrderClient(configInfo);
 
