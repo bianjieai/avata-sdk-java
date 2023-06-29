@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 查询链账户操作记录正确返回值
+ * EVM 查询链账户操作记录正确返回值
  */
 @NoArgsConstructor
 @Data
-public class QueryAccountsHistoryRes {
+public class QueryEvmAccountsHistoryRes {
 
     @JSONField(name = "data")
     private DataDTO data;
@@ -47,7 +47,6 @@ public class QueryAccountsHistoryRes {
             @JSONField(name = "operation")
             private Integer operation;
             // 操作类型： module = 1 时： 1：issue_class； 2：transfer_class 3：mint； 4：edit； 5：transfer； 6：burn；
-            // module = 2 时，可选：1：issue_class；2：transfer_class；3：issue；4：mint；5：edit；6：transfer；7：burn
 
             @JSONField(name = "signer")
             private String signer;// Tx 签名者地址
@@ -57,9 +56,6 @@ public class QueryAccountsHistoryRes {
 
             @JSONField(name = "nft_msg")
             private String nftMsg;// 具体参考接口文档
-
-            @JSONField(name = "mt_msg")
-            private String mtMsg;// 具体参考接口文档
         }
     }
 }

@@ -3,6 +3,7 @@ package ai.bianjie.avatasdk.proxy.account.impl;
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.account.*;
+import ai.bianjie.avatasdk.model.account.QueryNativeAccountsHistoryRes;
 import ai.bianjie.avatasdk.proxy.account.AccountProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
 import com.alibaba.fastjson.JSONObject;
@@ -16,8 +17,8 @@ public class AccountClient implements AccountProxy {
     private static final String CREATE_ACCOUNT = "/v3/account";// 创建链账户接口
     private static final String BATCH_CREATE_ACCOUNTS = "/v3/accounts";// 批量创建链账户接口
     private static final String QUERY_ACCOUNTS = "/v3/accounts";// 查询链账户接口
-    private static final String QUERY_ACCOUNTS_HISTORY = "/v3/accounts/history";// 查询链账户操作记录接口
-
+    private static final String QUERY_NATIVE_ACCOUNTS_HISTORY = "/v3/native/accounts/history";// 原生项目查询链账户操作记录接口
+    private static final String QUERY_EVM_ACCOUNTS_HISTORY = "/v3/evm/accounts/history";// EVM 项目查询链账户操作记录接口
     private ConfigInfo configInfo;
 
     public AccountClient(ConfigInfo configInfo) {
@@ -66,13 +67,26 @@ public class AccountClient implements AccountProxy {
         return res;
     }
 
+
     @Override
-    public QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req) {
+    public QueryNativeAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req) {
         log.debug("QueryAccountsHistoryReq {}", req);
         log.debug("queryAccountsHistory start");
-        ForestResponse response = HttpClient.Get(QUERY_ACCOUNTS_HISTORY, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = HttpClient.Get(QUERY_NATIVE_ACCOUNTS_HISTORY, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
-        QueryAccountsHistoryRes res = JSONObject.parseObject(result, QueryAccountsHistoryRes.class);
+        QueryNativeAccountsHistoryRes res = JSONObject.parseObject(result, QueryNativeAccountsHistoryRes.class);
+        log.debug("queryAccountsHistory end");
+        return res;
+    }
+
+
+    @Override
+    public QueryNativeAccountsHistoryRes queryEvmAccountsHistory(QueryAccountsHistoryReq req) {
+        log.debug("QueryAccountsHistoryReq {}", req);
+        log.debug("queryAccountsHistory start");
+        ForestResponse response = HttpClient.Get(QUERY_EVM_ACCOUNTS_HISTORY, JSONObject.toJSONString(req), configInfo);
+        String result = response.readAsString();
+        QueryNativeAccountsHistoryRes res = JSONObject.parseObject(result, QueryNativeAccountsHistoryRes.class);
         log.debug("queryAccountsHistory end");
         return res;
     }

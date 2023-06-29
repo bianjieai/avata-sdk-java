@@ -1,5 +1,6 @@
 import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.account.*;
+import ai.bianjie.avatasdk.model.account.QueryNativeAccountsHistoryRes;
 import org.junit.jupiter.api.Test;
 
 
@@ -8,7 +9,6 @@ public class AccountTest {
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
-            .setHttpTimeout(10000)
             .init();
 
     String OperationID = String.valueOf(System.currentTimeMillis());
@@ -69,19 +69,34 @@ public class AccountTest {
     }
 
     @Test
-        //请求查询链账户操作记录接口示例
-    void TestQueryAccountHistory() {
+        //原生项目：请求查询链账户操作记录接口示例
+    void TestQueryNativeAccountHistory() {
         QueryAccountsHistoryReq req = new QueryAccountsHistoryReq();
         //req.setPageKey("");
         //req.setLimit("");
         try {
-            QueryAccountsHistoryRes account = client.accountClient.queryAccountsHistory(req);
+            QueryNativeAccountsHistoryRes account = client.accountClient.queryNativeAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
         }
+    }
 
+    @Test
+        //EVM 项目：请求查询链账户操作记录接口示例
+    void TestQueryEvmAccountHistory() {
+        QueryAccountsHistoryReq req = new QueryAccountsHistoryReq();
+        //req.setPageKey("");
+        //req.setLimit("");
+        try {
+            QueryNativeAccountsHistoryRes account = client.accountClient.queryEvmAccountsHistory(req);
+            System.out.println(account.getData());
+            System.out.println("no ai.bianjie.avatasdk.exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
     }
 }
