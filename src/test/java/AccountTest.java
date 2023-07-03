@@ -9,6 +9,7 @@ public class AccountTest {
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
+            .setHttpTimeout(10000)
             .init();
 
     String OperationID = String.valueOf(System.currentTimeMillis());
@@ -35,8 +36,8 @@ public class AccountTest {
         QueryAccountsReq req = new QueryAccountsReq();
         //req.setPageKey("587mvF9aNXbGhFK8jaLdK4gFJPuIuO3U73nz/QIj59r8689f6d7j9G8usCj1zYY0sYqvERiqErB9l6OeZfVDzxyVJN6XGv9nAIlzs3tY2FOxrm5YO2Yl0jirFa9KXSmGAKApeVypCB7pnFjl");
         //req.setLimit("3");
-        //req.setAccount("0xd83DC58D586654D6067747b489EB8882F855669e");
-        //req.setName("");
+        req.setAccount("iaa1jjmwg5ah27aynuwt2phwa8sfvzh4lvvlelddxm");
+        //  req.setName("");
         //req.setOperationId("");
         //req.setStartDate("");
         //req.setEndDate("");
@@ -56,7 +57,7 @@ public class AccountTest {
         //请求批量创建链账户接口示例
     void TestBatchCreateAccount() {
         BatchCreateAccountReq req = new BatchCreateAccountReq();
-        req.setCount(10);
+        req.setCount(1);
         req.setOperationId("batchcreateaccount" + OperationID);
         try {
             BatchCreateAccountRes account = client.accountClient.batchCreateAccounts(req);
@@ -74,6 +75,7 @@ public class AccountTest {
         QueryAccountsHistoryReq req = new QueryAccountsHistoryReq();
         //req.setPageKey("");
         //req.setLimit("");
+        req.setAccount("iaa1jjmwg5ah27aynuwt2phwa8sfvzh4lvvlelddxm");
         try {
             QueryNativeAccountsHistoryRes account = client.accountClient.queryNativeAccountsHistory(req);
             System.out.println(account.getData());
