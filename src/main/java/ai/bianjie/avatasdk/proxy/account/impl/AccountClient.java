@@ -3,7 +3,6 @@ package ai.bianjie.avatasdk.proxy.account.impl;
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.account.*;
-import ai.bianjie.avatasdk.model.account.QueryNativeAccountsHistoryRes;
 import ai.bianjie.avatasdk.proxy.account.AccountProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
 import com.alibaba.fastjson.JSONObject;

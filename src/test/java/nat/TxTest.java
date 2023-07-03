@@ -10,6 +10,7 @@ public class TxTest {
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
+            .setHttpTimeout(10000)
             .init();
 
     @Test
@@ -18,8 +19,10 @@ public class TxTest {
         QueryTxRes txRes = client.txClient.queryTx("");
         System.out.println(txRes.getData());
     }
+
     @Test
-    public void queryTxTypes(){
+    // 枚举值列表查询
+    public void queryTxTypes() {
         QueryTxTypesRes txRes = client.txClient.queryTxTypes();
         System.out.println(txRes.getData());
     }
