@@ -62,11 +62,11 @@ ai.bianjie.avatasdk.AvataEvmClient client = new ai.bianjie.avatasdk.AvataEvmClie
 
 - [NFT 接口示例代码](./src/test/java/nat/NftTest.java)
 - [交易结果查询接口示例代码](./src/test/java/nat/TxTest.java)
+- [MT 接口示例代码](./src/test/java/nat/MtTest.java)
 
 智能合约接口：
 
 - [NFT 接口示例代码](./src/test/java/evm/NftTest.java)
 - [Web3 域名服务接口示例代码](./src/test/java/evm/NsTest.java)
 - [智能合约服务接口示例代码](./src/test/java/evm/ContractTest.java)
-- [钱包用户管理接口示例代码](./src/test/java/evm/UserTest.java)
 - [交易结果查询接口示例代码](./src/test/java/evm/TxTest.java)
