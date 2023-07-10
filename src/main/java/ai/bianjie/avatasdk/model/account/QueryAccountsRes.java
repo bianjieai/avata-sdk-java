@@ -38,8 +38,6 @@ public class QueryAccountsRes {
         @NoArgsConstructor
         @Data
         public static class AccountsDTO {
-            @JSONField(name = "account")
-            private String account;// 链账户地址
 
             @JSONField(name = "native_address")
             private String nativeAddress;// todo
