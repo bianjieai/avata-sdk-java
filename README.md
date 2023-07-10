@@ -61,8 +61,8 @@ ai.bianjie.avatasdk.AvataEvmClient client = new ai.bianjie.avatasdk.AvataEvmClie
 原生接口：
 
 - [NFT 接口示例代码](./src/test/java/nat/NftTest.java)
-- [交易结果查询接口示例代码](./src/test/java/nat/TxTest.java)
 - [MT 接口示例代码](./src/test/java/nat/MtTest.java)
+- [交易结果查询接口示例代码](./src/test/java/nat/TxTest.java)
 
 智能合约接口：
 
