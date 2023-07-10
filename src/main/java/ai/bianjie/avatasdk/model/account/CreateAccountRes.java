@@ -18,13 +18,18 @@ public class CreateAccountRes {
     @Data
     public static class DataDTO {
 
-        @JSONField(name = "account")
-        private String account; // 链账户地址
+        @JSONField(name = "address")
+        private AddressDTO address; // 链账户地址
 
-        @JSONField(name = "native_address")
-        private String nativeAddress;// todo
+        @NoArgsConstructor
+        @Data
+        public static class AddressDTO {
 
-        @JSONField(name = "hex_address")
-        private String hexAddress;// todo
+            @JSONField(name = "native_address")
+            private String nativeAddress;// todo
+
+            @JSONField(name = "hex_address")
+            private String hexAddress;// todo
+        }
     }
 }
