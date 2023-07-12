@@ -20,7 +20,18 @@ public class BatchCreateAccountRes {
     @Data
     public static class DataDTO {
 
-        @JSONField(name = "accounts")
-        private List<String> accounts;// 链账户地址列表
+        @JSONField(name = "addresses")
+        private List<AccountsDTO> addresses;// 链账户地址列表
+
+        @NoArgsConstructor
+        @Data
+        public static class AccountsDTO {
+
+            @JSONField(name = "native_address")
+            private String nativeAddress;// todo
+
+            @JSONField(name = "hex_address")
+            private String hexAddress;// todo
+        }
     }
 }
