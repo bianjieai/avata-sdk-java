@@ -5,6 +5,7 @@ import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
 import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
 import ai.bianjie.avatasdk.proxy.records.impl.RecordsClient;
+import ai.bianjie.avatasdk.proxy.user.impl.UserClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
@@ -17,6 +18,7 @@ public class AvataClient {
     public AccountClient accountClient;
     public OrderClient orderClient;
     public RecordsClient recordsClient;
+    public UserClient userClient;
 
     /**
      * SDK initialization method
@@ -33,7 +35,8 @@ public class AvataClient {
 
         this.orderClient = new OrderClient(configInfo);
 
-        this.recordsClient=new RecordsClient(configInfo);
+        this.recordsClient = new RecordsClient(configInfo);
+        this.userClient = new UserClient(configInfo);
 
     }
 
