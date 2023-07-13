@@ -56,6 +56,7 @@ ai.bianjie.avatasdk.AvataEvmClient client = new ai.bianjie.avatasdk.AvataEvmClie
 公共接口：
 
 - [链账户接口示例代码](./src/test/java/AccountTest.java)
+- [钱包用户接口示例代码](./src/test/java/UserTest.java)
 - [充值接口示例代码](./src/test/java/OrderTest.java)
 
 原生接口：
