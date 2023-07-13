@@ -40,10 +40,10 @@ public class QueryAccountsRes {
         public static class AccountsDTO {
 
             @JSONField(name = "native_address")
-            private String nativeAddress;// todo
+            private String nativeAddress;// 原生地址格式
 
             @JSONField(name = "hex_address")
-            private String hexAddress;// todo
+            private String hexAddress;// 以太坊地址格式
 
             @JSONField(name = "name")
             private String name;// 链账户名称

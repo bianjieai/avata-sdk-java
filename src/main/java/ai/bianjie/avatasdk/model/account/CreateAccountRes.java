@@ -19,10 +19,11 @@ public class CreateAccountRes {
     public static class DataDTO {
 
         @JSONField(name = "native_address")
-        private String nativeAddress;// todo
+        private String nativeAddress;// 原生地址格式
 
         @JSONField(name = "hex_address")
-        private String hexAddress;// todo
+        private String hexAddress;// 以太坊地址格式
+
     }
 }
 
