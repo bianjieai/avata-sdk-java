@@ -1,6 +1,5 @@
 package nat;
 
-import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.AvataNativeClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.nat.records.CreateRecordReq;
