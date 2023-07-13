@@ -17,7 +17,7 @@ public class CallBackUtils {
         String jsonStr1 = JSON.toJSONString(jsonStr, SerializerFeature.MapSortField);
         // 执行签名
         String signature1 = sha256Sum(jsonStr1 + "api_secret");
-        if (signature1 == signature) {
+        if (signature1.equals(signature)) {
             //将body存储到本地
             //TODO
             return "SUCCESS";
@@ -29,7 +29,7 @@ public class CallBackUtils {
     // 如果对接的是 v2 或者 v3 版本，用以下方式验签
     public static String callBack(String path, String body,Long timeStamp,String apiSecret,String signature) {
         String signature2 = sign(path, null, getMap(body), timeStamp, apiSecret);
-        if (signature2 == signature) {
+        if (signature2.equals(signature)) {
             //将body存储到本地
             //TODO
             return "SUCCESS";
