@@ -1,10 +1,10 @@
-package ai.bianjie.avatasdk.proxy.records.impl;
+package ai.bianjie.avatasdk.proxy.nat.records.impl;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.PublicResponse;
-import ai.bianjie.avatasdk.model.records.CreateRecordReq;
-import ai.bianjie.avatasdk.proxy.records.RecordsProxy;
+import ai.bianjie.avatasdk.model.nat.records.CreateRecordReq;
+import ai.bianjie.avatasdk.proxy.nat.records.RecordsProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
 import com.alibaba.fastjson.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RecordsClient implements RecordsProxy {
 
-    private static final String CREATE_RECORD = "/v3/record/records";// 创建存证
+    private static final String CREATE_RECORD = "/v3/native/record/records";// 创建存证
 
     private ConfigInfo configInfo;
 

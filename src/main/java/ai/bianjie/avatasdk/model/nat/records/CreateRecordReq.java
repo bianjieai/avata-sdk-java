@@ -1,4 +1,4 @@
-package ai.bianjie.avatasdk.model.records;
+package ai.bianjie.avatasdk.model.nat.records;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

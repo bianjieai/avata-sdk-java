@@ -1,7 +1,7 @@
-package ai.bianjie.avatasdk.proxy.records;
+package ai.bianjie.avatasdk.proxy.nat.records;
 
 import ai.bianjie.avatasdk.model.PublicResponse;
-import ai.bianjie.avatasdk.model.records.CreateRecordReq;
+import ai.bianjie.avatasdk.model.nat.records.CreateRecordReq;
 
 public interface RecordsProxy {
     /**

@@ -1,10 +1,13 @@
+package nat;
+
 import ai.bianjie.avatasdk.AvataClient;
+import ai.bianjie.avatasdk.AvataNativeClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
-import ai.bianjie.avatasdk.model.records.CreateRecordReq;
+import ai.bianjie.avatasdk.model.nat.records.CreateRecordReq;
 import org.junit.jupiter.api.Test;
 
 public class RecordsTest {
-    AvataClient client = new AvataClient.Builder()
+    AvataNativeClient client = new AvataNativeClient.Builder()
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")

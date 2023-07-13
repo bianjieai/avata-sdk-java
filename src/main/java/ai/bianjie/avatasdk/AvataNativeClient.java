@@ -4,6 +4,7 @@ import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.nat.mt.impl.MtClient;
 import ai.bianjie.avatasdk.proxy.nat.nft.impl.NftClient;
+import ai.bianjie.avatasdk.proxy.nat.records.impl.RecordsClient;
 import ai.bianjie.avatasdk.proxy.nat.tx.impl.TxClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
@@ -16,7 +17,9 @@ public class AvataNativeClient {
 
     public NftClient nftClient;
     public MtClient mtClient;
+    public RecordsClient recordsClient;
     public TxClient txClient;
+
 
     /**
      * SDK initialization method
@@ -30,6 +33,7 @@ public class AvataNativeClient {
 
         this.nftClient = new NftClient(configInfo);
         this.mtClient = new MtClient(configInfo);
+        this.recordsClient = new RecordsClient(configInfo);
         this.txClient = new TxClient(configInfo);
     }
 
