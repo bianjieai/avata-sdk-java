@@ -198,7 +198,7 @@ public class NftClient implements NftProxy {
         log.debug("classId {}, nftId {}", classId, nftId);
         log.debug("queryNftHistory start");
         String path = String.format(QUERY_NFT_HISTORY, classId, nftId);
-        ForestResponse response = HttpClient.Get(path, "", configInfo);
+        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req), configInfo);
         String result = response.readAsString();
         QueryNftHistoryRes res = JSONObject.parseObject(result, QueryNftHistoryRes.class);
         log.debug("queryNftHistory end");
