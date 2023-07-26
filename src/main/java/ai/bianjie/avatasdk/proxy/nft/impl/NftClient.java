@@ -106,9 +106,6 @@ public class NftClient implements NftProxy {
         if (StringUtils.isEmpty(req.getUri())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "uri"));
         }
-        if (StringUtils.isEmpty(req.getRecipient())) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "recipient"));
-        }
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
