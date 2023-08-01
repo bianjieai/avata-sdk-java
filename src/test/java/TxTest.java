@@ -10,6 +10,7 @@ public class TxTest {
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
+            .setHttpTimeout(10000)
             .init();
 
     @Test
