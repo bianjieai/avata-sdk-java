@@ -36,4 +36,44 @@ public interface NsProxy {
      * @return
      */
     PublicResponse transferDomain(TransferDomainReq req, String owner, String name);
+
+
+    /**
+     * 设置域名解析
+     *
+     * @param req   设置域名解析请求实体
+     * @param owner 域名拥有者地址
+     * @param name  域名名称
+     * @return
+     */
+    PublicResponse ResolveDomain(ResolveDomainReq req, String owner, String name);
+
+
+    /**
+     * 查询域名解析
+     *
+     * @param name 域名名称
+     * @param req  查询域名解析请求实体
+     * @return
+     */
+    QueryDomainResolvesRes queryDomainResolves(String name, QueryDomainResolvesReq req);
+
+    /**
+     * 设置域名反向解析
+     *
+     * @param req   设置域名反向解析请求实体
+     * @param owner 域名拥有者地址
+     * @return
+     */
+
+    PublicResponse reverseResolveDomain(ReverseResolveDomainReq req, String owner);
+
+
+    /**
+     * 查询域名反向解析
+     *
+     * @param owner 域名拥有者地址
+     */
+
+    QueryReverseResolveDomainRes queryReverseResolveDomain(String owner);
 }

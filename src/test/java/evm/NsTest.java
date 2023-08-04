@@ -57,7 +57,8 @@ public class NsTest {
         req.setTld("");
         req.setCountTotal("1");
         try {
-            QueryOwnerDomainRes res = client.nsClient.queryOwnerDomain(req, "0x1bBC0Cf1C37d34aFc9FF2d18161EA7cFe3839fD1");
+            QueryOwnerDomainRes res = client.nsClient.queryOwnerDomain(req,
+                    "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -73,7 +74,9 @@ public class NsTest {
         req.setRecipient("");
         req.setOperationId("transferDomian" + OperationID);
         try {
-            PublicResponse res = client.nsClient.transferDomain(req, "0x1bBC0Cf1C37d34aFc9FF2d18161EA7cFe3839fD1", "lmhtest.wallet");
+            PublicResponse res = client.nsClient.transferDomain(req,
+                    "",
+                    "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -82,5 +85,78 @@ public class NsTest {
         }
     }
 
+    @Test
+        //请求设置域名解析接口示例
+    void TestResolveDomain() {
+        ResolveDomainReq req = new ResolveDomainReq();
+        req.setResolveType(1);
+        ResolveDomainReq.AddrDTO addrDTO = new ResolveDomainReq.AddrDTO();
+        req.setAddrDTO(addrDTO);
+        addrDTO.setAddrValue("");
+        addrDTO.setBlockChain(1002);
+        //req.setResolveType(2);
+        //ResolveDomainReq.TextDTO textDTO = new ResolveDomainReq.TextDTO();
+        //req.setTextDTO(textDTO);
+        //textDTO.setKey("");
+        //textDTO.setTextValue("");
+        req.setOperationId("resolveDomain" + OperationID);
+        try {
+            PublicResponse res = client.nsClient.ResolveDomain(req,
+                    "",
+                    "");
+            System.out.println(res.getData());
+            System.out.println("no ai.bianjie.avatasdk.exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
 
+    @Test
+        //设置查询域名解析接口示例
+    void TestQueryDomainResolves() {
+        QueryDomainResolvesReq req = new QueryDomainResolvesReq();
+        req.setResolveType(0);
+        try {
+            QueryDomainResolvesRes res = client.nsClient.queryDomainResolves(
+                    "", req);
+            System.out.println(res.getData());
+            System.out.println("no ai.bianjie.avatasdk.exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+        //设置域名反向解析接口示例
+    void TestReverseResolveDomain() {
+        ReverseResolveDomainReq req = new ReverseResolveDomainReq();
+        req.setName("");
+        req.setOperationId(OperationID);
+        try {
+            PublicResponse res = client.nsClient.reverseResolveDomain(req,
+                    "");
+            System.out.println(res.getData());
+            System.out.println("no ai.bianjie.avatasdk.exception");
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+        // 查询域名反向解析接口示例
+    void TestQueryReverseResolveDomain() {
+        try {
+            QueryReverseResolveDomainRes res = client.nsClient.queryReverseResolveDomain(
+                    "");
+            System.out.println(res.getData());
+            System.out.println("no ai.bianjie.avatasdk.exception");
+        } catch (
+                Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
 }
