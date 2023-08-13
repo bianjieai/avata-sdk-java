@@ -10,12 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class QueryNftHistoryReq {
 
-    @JSONField(name = "class_id")
-    private String classId;// NFT 类别 ID
-
-    @JSONField(name = "nft_id")
-    private String nftId;// NFT ID
-
     @JSONField(name = "page_key")
     private String pageKey;// 分页数据的Key， Avata会根据该值进行上下页的查询， 该值请从返回的数据体中获取，首页查询可以不传该参数
 
