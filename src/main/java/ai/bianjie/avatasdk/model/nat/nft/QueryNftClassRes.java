@@ -29,7 +29,7 @@ public class QueryNftClassRes {
         private String description;// NFT 类别描述
 
         @JSONField(name = "nft_count")
-        private String nftCount;// NFT 类别包含的 NFT 总量
+        private Integer nftCount;// NFT 类别包含的 NFT 总量
 
         @JSONField(name = "uri")
         private String uri;// 链外数据链接
