@@ -135,7 +135,7 @@ public class HttpClient {
                 throw AvataException.NewSDKException(response.getException().getMessage());
             }
             ErrorResponse res = JSONObject.parseObject(response.getContent(), ErrorResponse.class);
-            throw AvataException.NewHTTPException(res.getError());
+            throw AvataException.NewClientException(res.getError());
         }
     }
 }
