@@ -15,15 +15,15 @@ public class QueryMtHistoryReq {
     @JSONField(name = "limit")
     private Integer limit;// 每页记录数，默认为 10，上限为 50
     @JSONField(name = "signer")
-    private Integer signer;// Tx 签名者地址
+    private String signer;// Tx 签名者地址
     @JSONField(name = "tx_hash")
-    private Integer txHash;// MT 操作 Tx Hash
+    private String txHash;// MT 操作 Tx Hash
     @JSONField(name = "operation")
-    private Integer operation;// 操作类型： issue(首发MT) / mint(增发MT) / edit(编辑MT) / transfer(转让MT) / burn(销毁MT)
+    private String operation;// 操作类型： issue(首发MT) / mint(增发MT) / edit(编辑MT) / transfer(转让MT) / burn(销毁MT)
     @JSONField(name = "start_date")
-    private Integer startDate;// MT 操作日期范围 - 开始，yyyy-MM-dd（UTC 时间）
+    private String startDate;// MT 操作日期范围 - 开始，yyyy-MM-dd（UTC 时间）
     @JSONField(name = "end_date")
-    private Integer endDate;// MT 操作日期范围 - 结束，yyyy-MM-dd（UTC 时间）
+    private String endDate;// MT 操作日期范围 - 结束，yyyy-MM-dd（UTC 时间）
     @JSONField(name = "sort_by")
-    private Integer sortBy;// 排序规则：DATE_ASC / DATE_DESC
+    private String sortBy;// 排序规则：DATE_ASC / DATE_DESC
 }
