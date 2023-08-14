@@ -25,14 +25,10 @@ public class QueryTxRes {
     @Data
     public static class DataDTO {
         @JSONField(name = "module")
-        private Integer module;// 交易模块；Enum: 1:nft; 2:ns; 3:record; 4 合约调用；
+        private Integer module;// Enum:交易模块 请通过 查询枚举值列表 接口查看
 
         @JSONField(name = "operation")
-        private Integer operation; // Enum: 用户操作类型。
-        //module = 1 时，可选： 1：issue_class； 2：transfer_class； 3：mint_nft； 4：edit_nft； 5：transfer_nft； 6：burn_nft；
-        //module = 2 时，可选： 1：create_domain； 2：transfer_domain
-        //module = 3 时，可选： 1: create_record 创建存证；
-        //module = 4 时，可选： 1: contract_call 合约调用；
+        private Integer operation; // Enum: 用户操作类型 请通过 查询枚举值列表 接口查看
 
         @JSONField(name = "tx_hash")
         private String txHash;// 交易哈希
