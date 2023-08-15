@@ -4,20 +4,23 @@ import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
 import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
-import ai.bianjie.avatasdk.proxy.nat.records.impl.RecordsClient;
 import ai.bianjie.avatasdk.proxy.user.impl.UserClient;
+import ai.bianjie.avatasdk.util.HttpClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
 import com.dtflys.forest.retryer.BackOffRetryer;
 import com.dtflys.forest.ssl.SSLUtils;
 import com.dtflys.forest.utils.StringUtils;
+import lombok.Data;
 
 public class AvataClient {
 
     public AccountClient accountClient;
     public OrderClient orderClient;
     public UserClient userClient;
+    public NativeClient nativeClient;
+    public EvmClient evmClient;
 
     /**
      * SDK initialization method
@@ -29,15 +32,15 @@ public class AvataClient {
         configInfo.setApiSecret(builder.apiSecret);
         configInfo.setHttpTimeout(builder.httpTimeout);
 
-
-        this.accountClient = new AccountClient(configInfo);
-
-        this.orderClient = new OrderClient(configInfo);
-
-        this.userClient = new UserClient(configInfo);
-
+        HttpClient httpClient = new HttpClient(configInfo);
+        this.accountClient = new AccountClient(httpClient);
+        this.orderClient = new OrderClient(httpClient);
+        this.userClient = new UserClient(httpClient);
+        this.nativeClient = new NativeClient(httpClient);
+        this.evmClient = new EvmClient(httpClient);
     }
 
+    @Data
     public static class Builder {
         private String domain;
         private String apiKey;
@@ -123,3 +126,7 @@ public class AvataClient {
         }
     }
 }
+
+
+
+
