@@ -18,10 +18,10 @@ public class OrderClient implements OrderProxy {
     private static final String QUERY_ORDER = "/v3/orders/%s";
     private static final String QUERY_ORDERS = "/v3/orders";
 
-    private ConfigInfo configInfo;
+    private HttpClient httpClient;
 
-    public OrderClient(ConfigInfo configInfo) {
-        this.configInfo = configInfo;
+    public OrderClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class OrderClient implements OrderProxy {
         if (req.getAmount() % 100 != 0) {
             throw AvataException.InvalidParamException(AvataException.ErrAmount);
         }
-        ForestResponse response = HttpClient.Post(CREATE_ORDER, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(CREATE_ORDER, JSONObject.toJSONString(req));
         String result = response.readAsString();
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         log.debug("createOrder end");
@@ -73,7 +73,7 @@ public class OrderClient implements OrderProxy {
                 throw AvataException.InvalidParamException(AvataException.ErrAmount);
             }
         });
-        ForestResponse response = HttpClient.Post(BATCH_CREATE_ORDER, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(BATCH_CREATE_ORDER, JSONObject.toJSONString(req));
         String result = response.readAsString();
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         log.debug("batchCreateOrder end");
@@ -85,7 +85,7 @@ public class OrderClient implements OrderProxy {
         log.debug("operationId {}", operationId);
         log.debug("queryOrder start");
         String path = String.format(QUERY_ORDER, operationId);
-        ForestResponse response = HttpClient.Get(path, "", configInfo);
+        ForestResponse response = httpClient.get(path, "" );
         String result = response.readAsString();
         QueryOrderRes res = JSONObject.parseObject(result, QueryOrderRes.class);
         log.debug("queryOrder end");
@@ -96,7 +96,7 @@ public class OrderClient implements OrderProxy {
     public QueryOrdersRes queryOrders(QueryOrdersReq req) {
         log.debug("QueryOrdersReq {}", req);
         log.debug("queryOrders start");
-        ForestResponse response = HttpClient.Get(QUERY_ORDERS, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.get(QUERY_ORDERS, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryOrdersRes res = JSONObject.parseObject(result, QueryOrdersRes.class);
         log.debug("queryOrders end");
