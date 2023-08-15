@@ -34,10 +34,10 @@ public class AccountTest {
         //请求查询链账户接口示例
     void TestQueryAccount() {
         QueryAccountsReq req = new QueryAccountsReq();
-        //req.setPageKey("587mvF9aNXbGhFK8jaLdK4gFJPuIuO3U73nz/QIj59r8689f6d7j9G8usCj1zYY0sYqvERiqErB9l6OeZfVDzxyVJN6XGv9nAIlzs3tY2FOxrm5YO2Yl0jirFa9KXSmGAKApeVypCB7pnFjl");
+        //req.setPageKey("");
         //req.setLimit("3");
-        req.setAccount("iaa1jjmwg5ah27aynuwt2phwa8sfvzh4lvvlelddxm");
-        //  req.setName("");
+        //req.setAccount("");
+        // req.setName("");
         //req.setOperationId("");
         //req.setStartDate("");
         //req.setEndDate("");
