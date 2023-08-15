@@ -1,12 +1,12 @@
 package nat;
 
-import ai.bianjie.avatasdk.AvataNativeClient;
+import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.nat.records.CreateRecordReq;
 import org.junit.jupiter.api.Test;
 
 public class RecordsTest {
-    AvataNativeClient client = new AvataNativeClient.Builder()
+    AvataClient client = new AvataClient.Builder()
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
@@ -28,7 +28,7 @@ public class RecordsTest {
         req.setHashType(1);
         req.setOperationId("createrecord" + OperationID);
         try {
-            PublicResponse res = client.recordsClient.createRecord(req);
+            PublicResponse res = client.nativeClient.recordsClient.createRecord(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
