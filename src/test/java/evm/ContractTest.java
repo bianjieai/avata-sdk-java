@@ -1,6 +1,6 @@
 package evm;
 
-import ai.bianjie.avatasdk.AvataEvmClient;
+import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.evm.contract.ContractCallReq;
 import ai.bianjie.avatasdk.model.evm.contract.QueryContractCallReq;
@@ -9,13 +9,12 @@ import org.junit.jupiter.api.Test;
 
 
 public class ContractTest {
-    AvataEvmClient client = new AvataEvmClient.Builder()
+    AvataClient client = new AvataClient.Builder()
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
             .setHttpTimeout(10000)
             .init();
-
     String OperationID = String.valueOf(System.currentTimeMillis());
 
     @Test
@@ -27,9 +26,9 @@ public class ContractTest {
         req.setData("");
         req.setGasLimit(400000);
         req.setEstimation(1);
-        req.setOperationId("contract" + OperationID);// contract1682649688154
+        req.setOperationId("contract" + OperationID);
         try {
-            PublicResponse res = client.contractClient.contractCall(req);
+            PublicResponse res = client.evmClient.contractClient.contractCall(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -45,7 +44,7 @@ public class ContractTest {
         req.setData("");
         req.setTo("");
         try {
-            QueryContractCallRes res = client.contractClient.queryContractCall(req);
+            QueryContractCallRes res = client.evmClient.contractClient.queryContractCall(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
