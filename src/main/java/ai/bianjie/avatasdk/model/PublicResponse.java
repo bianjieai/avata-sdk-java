@@ -13,7 +13,5 @@ public class PublicResponse {
 
     @NoArgsConstructor
     @Data
-    public static class DataDTO {
-
-    }
+    public static class DataDTO { }
 }
