@@ -1,6 +1,6 @@
 package ai.bianjie.avatasdk.proxy.nat.tx.impl;
 
-import ai.bianjie.avatasdk.config.ConfigInfo;
+
 import ai.bianjie.avatasdk.model.nat.tx.QueryTxRes;
 import ai.bianjie.avatasdk.model.nat.tx.QueryTxTypesRes;
 import ai.bianjie.avatasdk.proxy.nat.tx.TxProxy;
