@@ -18,10 +18,10 @@ public class ContractClient implements ContractProxy {
 
     private static final String CONTRACT_CALL = "/v3/evm/contract/calls";// 调用合约接口
     private static final String QUERY_CONTRACT_CALL = "/v3/evm/contract/calls";// 查询合约接口
-    private ConfigInfo configInfo;
+    private HttpClient httpClient;
 
-    public ContractClient(ConfigInfo configInfo) {
-        this.configInfo = configInfo;
+    public ContractClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ContractClient implements ContractProxy {
         if (StringUtils.isEmpty(req.getFrom())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "from"));
         }
-        ForestResponse response = HttpClient.Post(CONTRACT_CALL, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(CONTRACT_CALL, JSONObject.toJSONString(req));
         String result = response.readAsString();
         PublicResponse res = JSONObject.parseObject(result, PublicResponse.class);
         log.debug("contractCall end");
@@ -62,7 +62,7 @@ public class ContractClient implements ContractProxy {
         if (StringUtils.isEmpty(req.getData())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "data"));
         }
-        ForestResponse response = HttpClient.Get(QUERY_CONTRACT_CALL, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.get(QUERY_CONTRACT_CALL, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryContractCallRes res = JSONObject.parseObject(result, QueryContractCallRes.class);
         log.debug("queryContractCall end");

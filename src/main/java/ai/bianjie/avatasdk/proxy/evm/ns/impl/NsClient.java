@@ -24,10 +24,10 @@ public class NsClient implements NsProxy {
 
     private static final String QUERY_REVERSE_RESOLVE_DOMAIN = "/v3/evm/ns/reverse-resolves/%s"; // 查询域名反向解析
 
-    private ConfigInfo configInfo;
+    private HttpClient httpClient;
 
-    public NsClient(ConfigInfo configInfo) {
-        this.configInfo = configInfo;
+    public NsClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class NsClient implements NsProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(REGISTER_DOMAIN, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(REGISTER_DOMAIN, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("RegisterDomain end");
         return res;
@@ -61,7 +61,7 @@ public class NsClient implements NsProxy {
         if (StringUtils.isEmpty(req.getName())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
-        ForestResponse response = HttpClient.Get(QUERY_DOMAIN, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.get(QUERY_DOMAIN, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryDomainRes res = JSONObject.parseObject(result, QueryDomainRes.class);
         log.debug("queryDomain end");
@@ -73,7 +73,7 @@ public class NsClient implements NsProxy {
         log.debug("QueryOwnerDomainReq {}", req);
         log.debug("queryOwnerDomain start");
         String path = String.format(QUERY_OWNER_DOMAIN, owner);
-        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.get(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryOwnerDomainRes res = JSONObject.parseObject(result, QueryOwnerDomainRes.class);
         log.debug("queryDomain end");
@@ -92,7 +92,7 @@ public class NsClient implements NsProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(TRANSFER_DOMAIN, owner, name);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(path, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("transferDomain end");
         return res;
@@ -110,7 +110,7 @@ public class NsClient implements NsProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
         String path = String.format(RESOLVE_DOMAIN, owner, name);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(path, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("resolveDomainReq end");
         return res;
@@ -121,7 +121,7 @@ public class NsClient implements NsProxy {
         log.debug("name {}, QueryDomainResolvesReq {}", name, req);
         log.debug("queryDomainResolves start");
         String path = String.format(QUERY_RESOLVE_DOMAIN, name, req);
-        ForestResponse response = HttpClient.Get(path, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.get(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryDomainResolvesRes res = JSONObject.parseObject(result, QueryDomainResolvesRes.class);
         log.debug("queryDomainResolves end");
@@ -133,7 +133,7 @@ public class NsClient implements NsProxy {
         log.debug("ReverseResolveDomainReq {}, owner {}", req, owner);
         log.debug("resolveDomain start");
         String path = String.format(REVERSE_RESOLVE_DOMAIN, owner);
-        ForestResponse response = HttpClient.Post(path, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(path, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("resolveDomain end");
         return res;
@@ -144,7 +144,7 @@ public class NsClient implements NsProxy {
         log.debug("owner {}", owner);
         log.debug("queryReverseResolveDomain start");
         String path = String.format(QUERY_REVERSE_RESOLVE_DOMAIN, owner);
-        ForestResponse response = HttpClient.Get(path, "", configInfo);
+        ForestResponse response = httpClient.get(path, "");
         String result = response.readAsString();
         QueryReverseResolveDomainRes res = JSONObject.parseObject(result, QueryReverseResolveDomainRes.class);
         log.debug("queryReverseResolveDomain end");

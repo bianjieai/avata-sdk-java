@@ -20,10 +20,10 @@ public class UserClient implements UserProxy {
 
     private static final String QUERY_USER = "/v3/users";// 查询用户信息
 
-    private ConfigInfo configInfo;
+    private HttpClient httpClient;
 
-    public UserClient(ConfigInfo configInfo) {
-        this.configInfo = configInfo;
+    public UserClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserClient implements UserProxy {
         if (req.getUserType() == 2 && req.getRegistrationNum() == null) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "registration_num"));
         }
-        ForestResponse response = HttpClient.Post(CREATE_USER, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(CREATE_USER, JSONObject.toJSONString(req));
         CreateUserRes res = JSONObject.parseObject(response.readAsString(), CreateUserRes.class);
         log.debug("createUser end");
         return res;
@@ -63,7 +63,7 @@ public class UserClient implements UserProxy {
         if (StringUtils.isEmpty(req.getPhoneNum())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "phone_num"));
         }
-        ForestResponse response = HttpClient.Patch(UPDATE_USER, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.patch(UPDATE_USER, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("updateUser end");
         return res;
@@ -80,7 +80,7 @@ public class UserClient implements UserProxy {
         if (StringUtils.isEmpty(req.getCode())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "code"));
         }
-        ForestResponse response = HttpClient.Get(QUERY_USER, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.get(QUERY_USER, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryUserRes res = JSONObject.parseObject(result, QueryUserRes.class);
         log.debug("queryUser end");

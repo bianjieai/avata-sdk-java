@@ -16,10 +16,10 @@ public class RecordsClient implements RecordsProxy {
 
     private static final String CREATE_RECORD = "/v3/native/record/records";// 创建存证
 
-    private ConfigInfo configInfo;
+    private HttpClient httpClient;
 
-    public RecordsClient(ConfigInfo configInfo) {
-        this.configInfo = configInfo;
+    public RecordsClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class RecordsClient implements RecordsProxy {
         if (StringUtils.isEmpty(req.getOperationId())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "operation_id"));
         }
-        ForestResponse response = HttpClient.Post(CREATE_RECORD, JSONObject.toJSONString(req), configInfo);
+        ForestResponse response = httpClient.post(CREATE_RECORD, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
         log.debug("createRecord end");
         return res;
