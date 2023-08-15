@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 原生查询链账户操作记录正确返回值
+ * 查询原生链账户操作记录正确返回值
  */
 @NoArgsConstructor
 @Data
