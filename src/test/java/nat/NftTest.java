@@ -1,12 +1,12 @@
 package nat;
 
-import ai.bianjie.avatasdk.AvataNativeClient;
+import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.nat.nft.*;
 import org.junit.jupiter.api.Test;
 
 public class NftTest {
-    AvataNativeClient client = new AvataNativeClient.Builder()
+    AvataClient client = new AvataClient.Builder()
             .setDomain("")
             .setApiKey("")
             .setApiSecret("")
@@ -29,7 +29,7 @@ public class NftTest {
         req.setOwner("");
         req.setOperationId("createnftclass" + OperationID);
         try {
-            PublicResponse res = client.nftClient.createClass(req);
+            PublicResponse res = client.nativeClient.nftClient.createClass(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -44,14 +44,14 @@ public class NftTest {
         QueryNftClassesReq req = new QueryNftClassesReq();
         req.setId("");
         req.setOwner("");
-        QueryNftClassesRes res = client.nftClient.queryClasses(req);
+        QueryNftClassesRes res = client.nativeClient.nftClient.queryClasses(req);
         System.out.println(res.getData());
     }
 
     @Test
         //请求查询 NFT 类别详情接口示例
     void TestQueryClass() {
-        QueryNftClassRes res = client.nftClient.queryClass("");
+        QueryNftClassRes res = client.nativeClient.nftClient.queryClass("");
         System.out.println(res.getData());
     }
 
@@ -62,7 +62,7 @@ public class NftTest {
         req.setRecipient("");
         req.setOperationId("transfernftclass" + OperationID);
         try {
-            PublicResponse res = client.nftClient.transferClass(req,
+            PublicResponse res =client.nativeClient.nftClient.transferClass(req,
                     "",
                     "");
             System.out.println(res.getData());
@@ -83,7 +83,7 @@ public class NftTest {
         req.setRecipient("");
         req.setOperationId("mintnft" + OperationID);
         try {
-            PublicResponse res = client.nftClient.createNft(req, "bakvavoy");
+            PublicResponse res = client.nativeClient.nftClient.createNft(req, "bakvavoy");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -99,7 +99,7 @@ public class NftTest {
         req.setRecipient("");
         req.setOperationId("transfernft" + OperationID);
         try {
-            PublicResponse res = client.nftClient.transferNft(req,
+            PublicResponse res = client.nativeClient.nftClient.transferNft(req,
                     "",
                     "",
                     "");
@@ -120,7 +120,7 @@ public class NftTest {
         req.setData("");
         req.setOperationId("editnft" + OperationID);
         try {
-            PublicResponse res = client.nftClient.editNft(req,
+            PublicResponse res = client.nativeClient.nftClient.editNft(req,
                     "",
                     "",
                     "");
@@ -138,7 +138,7 @@ public class NftTest {
         BurnNftReq req = new BurnNftReq();
         req.setOperationId("burnnft" + OperationID);
         try {
-            PublicResponse res = client.nftClient.burnNft(req,
+            PublicResponse res = client.nativeClient.nftClient.burnNft(req,
                     "",
                     "",
                     "");
@@ -157,14 +157,14 @@ public class NftTest {
         QueryNftsReq req = new QueryNftsReq();
         req.setLimit("2");
         req.setStatus("2");
-        QueryNftsRes res = client.nftClient.queryNfts(req);
+        QueryNftsRes res = client.nativeClient.nftClient.queryNfts(req);
         System.out.println(res.getData());
     }
 
     @Test
         //请求查询 NFT 详情接口示例
     void TestQueryNft() {
-        QueryNftRes res = client.nftClient.queryNft(
+        QueryNftRes res = client.nativeClient.nftClient.queryNft(
                 "",
                 "");
         System.out.println(res.getData());
@@ -175,7 +175,7 @@ public class NftTest {
     void TestQueryNftHistory() {
         QueryNftHistoryReq req = new QueryNftHistoryReq();
         req.setLimit("2");
-        QueryNftHistoryRes res = client.nftClient.queryNftHistory(
+        QueryNftHistoryRes res = client.nativeClient.nftClient.queryNftHistory(
                 "",
                 "", req);
         System.out.println(res.getData());
