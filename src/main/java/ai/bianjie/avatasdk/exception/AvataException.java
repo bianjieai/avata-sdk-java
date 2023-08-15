@@ -10,7 +10,7 @@ import ai.bianjie.avatasdk.model.ErrorResponse;
  */
 @Data
 public class AvataException extends RuntimeException {
-    private static final String CodeSpace = "AVATA-SDK-JAVA";
+    private static final String CodeSpace = "AVATA-SDK";
     private static final String BadRequest = "BAD_REQUEST";
     private static final String UnknownError = "UNKNOWN_ERROR";
     private static final String TimeoutError = "TIMEOUT_ERROR";
@@ -34,20 +34,23 @@ public class AvataException extends RuntimeException {
         this.code = code;
     }
 
+    // 来自 Avata SDK 返回的报错信息
     public static AvataException NewSDKException(String errorMessage) {
         return new AvataException(UnknownError, CodeSpace, errorMessage);
     }
 
-    public static AvataException NewHTTPException(ErrorResponse.AvataError avataError) {
+    // 来自 Avata OPEN API 返回的报错信息
+    public static AvataException NewClientException(ErrorResponse.AvataError avataError) {
         return new AvataException(avataError.getCode(), avataError.getCodeSpace(), avataError.getMessage());
     }
 
+    // 来自 Avata SDK 返回的报错信息，必填参数校验
     public static AvataException InvalidParamException(String errorMessage) {
         return new AvataException(BadRequest, CodeSpace, errorMessage);
     }
 
+    // 来自 Avata SDK 返回的报错信息，HTTP 连接超时报错
     public static AvataException TimeOutException() {
         return new AvataException(TimeoutError, CodeSpace, "request timeout");
     }
-
 }

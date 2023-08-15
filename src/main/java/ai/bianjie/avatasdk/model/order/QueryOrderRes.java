@@ -1,21 +1,22 @@
 package ai.bianjie.avatasdk.model.order;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * 查询能量值/业务费购买结果接口返回值
  */
 @NoArgsConstructor
-@lombok.Data
+@Data
 public class QueryOrderRes {
 
     @JSONField(name = "data")
-    private Data data;
+    private DataDTO data;
 
     @NoArgsConstructor
-    @lombok.Data
-    public static class Data {
+    @Data
+    public static class DataDTO {
         @JSONField(name = "order_id")
         private String orderId;// 订单流水号
         @JSONField(name = "status")
