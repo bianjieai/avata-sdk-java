@@ -18,41 +18,19 @@
 
 ### 创建和使用客户端
 
-公共接口：
-
 ```
-ai.bianjie.avatasdk.AvataClient client = new ai.bianjie.avatasdk.AvataClient.Builder()
-            .setDoMain("")
-            .setApiKey("")
-            .setApiSecret("")
-            .setHttpTimeout(10000)
-            .init();
+public class AvataClientTest {
+
+    public static  AvataClient getAvataClient() {
+        return new AvataClient.Builder()
+                .setDomain("域名，不同环境对应不同的域名，如测试环境: https://stage.apis.avata.bianjie.ai")
+                .setApiKey("项目参数 API KEY")
+                .setApiSecret("项目参数 API SECRET")
+                .setHttpTimeout(10000)
+                .init();
+    }
+}
 ```
-
-原生接口：
-
-```
-ai.bianjie.avatasdk.AvataNativeClient client = new ai.bianjie.avatasdk.AvataNativeClient.Builder()
-            .setDomain("")
-            .setApiKey("")
-            .setApiSecret("")
-            .setHttpTimeout(10000)
-            .init();
-
-```
-
-智能合约接口：
-
-```
-ai.bianjie.avatasdk.AvataEvmClient client = new ai.bianjie.avatasdk.AvataEvmClient.Builder()
-            .setDomain("")
-            .setApiKey("")
-            .setApiSecret("")
-            .setHttpTimeout(10000)
-            .init();
-
-```
-
 公共接口：
 
 - [链账户接口示例代码](./src/test/java/AccountTest.java)
