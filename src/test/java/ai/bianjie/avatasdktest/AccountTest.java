@@ -1,17 +1,11 @@
-import ai.bianjie.avatasdk.AvataClient;
+package ai.bianjie.avatasdktest;
+
 import ai.bianjie.avatasdk.model.account.*;
 import ai.bianjie.avatasdk.model.account.QueryNativeAccountsHistoryRes;
 import org.junit.jupiter.api.Test;
 
 
 public class AccountTest {
-    AvataClient client = new AvataClient.Builder()
-            .setDomain("")
-            .setApiKey("")
-            .setApiSecret("")
-            .setHttpTimeout(10000)
-            .init();
-
     String OperationID = String.valueOf(System.currentTimeMillis());
 
     @Test
@@ -21,7 +15,7 @@ public class AccountTest {
         req.setName("lmhtest");
         req.setOperationId("createaccount" + OperationID);
         try {
-            CreateAccountRes account = client.accountClient.createAccount(req);
+            CreateAccountRes account = AvataClientTest.getAvataClient().accountClient.createAccount(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -44,7 +38,7 @@ public class AccountTest {
         //req.setSortBy("");
         req.setCountTotal("1");
         try {
-            QueryAccountsRes account = client.accountClient.queryAccounts(req);
+            QueryAccountsRes account = AvataClientTest.getAvataClient().accountClient.queryAccounts(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -60,7 +54,7 @@ public class AccountTest {
         req.setCount(1);
         req.setOperationId("batchcreateaccount" + OperationID);
         try {
-            BatchCreateAccountRes account = client.accountClient.batchCreateAccounts(req);
+            BatchCreateAccountRes account = AvataClientTest.getAvataClient().accountClient.batchCreateAccounts(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -77,7 +71,7 @@ public class AccountTest {
         //req.setLimit("");
         req.setAccount("iaa1jjmwg5ah27aynuwt2phwa8sfvzh4lvvlelddxm");
         try {
-            QueryNativeAccountsHistoryRes account = client.accountClient.queryNativeAccountsHistory(req);
+            QueryNativeAccountsHistoryRes account = AvataClientTest.getAvataClient().accountClient.queryNativeAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -93,7 +87,7 @@ public class AccountTest {
         //req.setPageKey("");
         //req.setLimit("");
         try {
-            QueryNativeAccountsHistoryRes account = client.accountClient.queryEvmAccountsHistory(req);
+            QueryNativeAccountsHistoryRes account = AvataClientTest.getAvataClient().accountClient.queryEvmAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

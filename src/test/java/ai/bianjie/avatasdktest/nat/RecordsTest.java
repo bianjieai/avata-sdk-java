@@ -1,17 +1,12 @@
-package nat;
+package ai.bianjie.avatasdktest.nat;
 
-import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.nat.records.CreateRecordReq;
+import ai.bianjie.avatasdktest.AvataClientTest;
 import org.junit.jupiter.api.Test;
 
 public class RecordsTest {
-    AvataClient client = new AvataClient.Builder()
-            .setDomain("")
-            .setApiKey("")
-            .setApiSecret("")
-            .setHttpTimeout(10000)
-            .init();
+
     String OperationID = String.valueOf(System.currentTimeMillis());
 
     @Test
@@ -28,7 +23,7 @@ public class RecordsTest {
         req.setHashType(1);
         req.setOperationId("createrecord" + OperationID);
         try {
-            PublicResponse res = client.nativeClient.recordsClient.createRecord(req);
+            PublicResponse res = AvataClientTest.getAvataClient().nativeClient.recordsClient.createRecord(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
