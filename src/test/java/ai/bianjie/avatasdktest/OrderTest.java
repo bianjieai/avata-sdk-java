@@ -9,8 +9,6 @@ import java.util.List;
 
 public class OrderTest {
 
-    String OperationID = String.valueOf(System.currentTimeMillis());
-
     @Test
         //请求购买能量值接口示例
     void TestCreateOrder() {
@@ -18,7 +16,7 @@ public class OrderTest {
         req.setAccount("");
         req.setAmount(100);
         req.setOrderType(1);
-        req.setOperationId("buygas" + OperationID);
+        req.setOperationId("buygas");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().orderClient.createOrder(req);
             System.out.println(res.getData());
@@ -82,7 +80,7 @@ public class OrderTest {
         list.add(dto2);
 
         req.setList(list);
-        req.setOperationId("batchcreateorder" + OperationID);
+        req.setOperationId("batchcreateorder");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().orderClient.batchCreateOrders(req);
             System.out.println(res.getData());

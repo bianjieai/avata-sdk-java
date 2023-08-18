@@ -6,14 +6,13 @@ import org.junit.jupiter.api.Test;
 
 
 public class AccountTest {
-    String OperationID = String.valueOf(System.currentTimeMillis());
 
     @Test
         //请求创建链账户接口示例
     void TestCreateAccount() {
         CreateAccountReq req = new CreateAccountReq();
         req.setName("lmhtest");
-        req.setOperationId("createaccount" + OperationID);
+        req.setOperationId("createaccount");
         try {
             CreateAccountRes account = AvataClientTest.getAvataClient().accountClient.createAccount(req);
             System.out.println(account.getData());
@@ -52,7 +51,7 @@ public class AccountTest {
     void TestBatchCreateAccount() {
         BatchCreateAccountReq req = new BatchCreateAccountReq();
         req.setCount(1);
-        req.setOperationId("batchcreateaccount" + OperationID);
+        req.setOperationId("batchcreateaccount");
         try {
             BatchCreateAccountRes account = AvataClientTest.getAvataClient().accountClient.batchCreateAccounts(req);
             System.out.println(account.getData());

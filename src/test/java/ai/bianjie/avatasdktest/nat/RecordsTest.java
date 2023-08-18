@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class RecordsTest {
 
-    String OperationID = String.valueOf(System.currentTimeMillis());
-
     @Test
         // 请求创建数字作品存证接口示例
     void TestCreateRecord() {
@@ -21,7 +19,7 @@ public class RecordsTest {
         req.setName("");
         req.setHash("");
         req.setHashType(1);
-        req.setOperationId("createrecord" + OperationID);
+        req.setOperationId("createrecord");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.recordsClient.createRecord(req);
             System.out.println(res.getData());

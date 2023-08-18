@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class NftTest {
 
-    String OperationID = String.valueOf(System.currentTimeMillis());
 
     @Test
         //请求创建 NFT 类别接口示例
@@ -21,7 +20,7 @@ public class NftTest {
         req.setUriHash("");
         req.setData("");
         req.setOwner("");
-        req.setOperationId("createnftclass" + OperationID);
+        req.setOperationId("createnftclass");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.nftClient.createClass(req);
             System.out.println(res.getData());
@@ -54,7 +53,7 @@ public class NftTest {
     void TestTransferClass() {
         TransferNftClassReq req = new TransferNftClassReq();
         req.setRecipient("");
-        req.setOperationId("transfernftclass" + OperationID);
+        req.setOperationId("transfernftclass");
         try {
             PublicResponse res =AvataClientTest.getAvataClient().nativeClient.nftClient.transferClass(req,
                     "",
@@ -75,7 +74,7 @@ public class NftTest {
         req.setUriHash("");
         req.setData("");
         req.setRecipient("");
-        req.setOperationId("mintnft" + OperationID);
+        req.setOperationId("mintnft");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.nftClient.createNft(req, "bakvavoy");
             System.out.println(res.getData());
@@ -91,7 +90,7 @@ public class NftTest {
     void TestTransferNft() {
         TransferNftReq req = new TransferNftReq();
         req.setRecipient("");
-        req.setOperationId("transfernft" + OperationID);
+        req.setOperationId("transfernft");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.nftClient.transferNft(req,
                     "",
@@ -112,7 +111,7 @@ public class NftTest {
         req.setName("");
         req.setUri("");
         req.setData("");
-        req.setOperationId("editnft" + OperationID);
+        req.setOperationId("editnft");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.nftClient.editNft(req,
                     "",
@@ -130,7 +129,7 @@ public class NftTest {
         //请求销毁 NFT 接口示例
     void TestDeleteNft() {
         BurnNftReq req = new BurnNftReq();
-        req.setOperationId("burnnft" + OperationID);
+        req.setOperationId("burnnft");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.nftClient.burnNft(req,
                     "",

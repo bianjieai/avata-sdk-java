@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class NsTest {
 
-    String OperationID = String.valueOf(System.currentTimeMillis());
-
     @Test
         //请求注册域名接口示例
     void TestRegisterDomain() {
@@ -16,7 +14,7 @@ public class NsTest {
         req.setName("");
         req.setOwner("");
         req.setDuration(1);
-        req.setOperationId("registerdomain" + OperationID);
+        req.setOperationId("registerdomain");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().evmClient.nsClient.registerDomain(req);
             System.out.println(res.getData());
@@ -67,7 +65,7 @@ public class NsTest {
     void TestTransferDomain() {
         TransferDomainReq req = new TransferDomainReq();
         req.setRecipient("");
-        req.setOperationId("transferDomian" + OperationID);
+        req.setOperationId("transferDomian");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().evmClient.nsClient.transferDomain(req,
                     "",
@@ -94,7 +92,7 @@ public class NsTest {
         //req.setTextDTO(textDTO);
         //textDTO.setKey("");
         //textDTO.setTextValue("");
-        req.setOperationId("resolveDomain" + OperationID);
+        req.setOperationId("resolveDomain");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().evmClient.nsClient.ResolveDomain(req,
                     "",
@@ -128,7 +126,7 @@ public class NsTest {
     void TestReverseResolveDomain() {
         ReverseResolveDomainReq req = new ReverseResolveDomainReq();
         req.setName("");
-        req.setOperationId(OperationID);
+        req.setOperationId("");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().evmClient.nsClient.reverseResolveDomain(req,
                     "");

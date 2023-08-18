@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class MtTest {
 
-    String OperationID = String.valueOf(System.currentTimeMillis());
-
     @Test
         //请求创建 MT 类别接口示例
     void TestCreateMtClass() {
@@ -16,7 +14,7 @@ public class MtTest {
         req.setName("");
         req.setOwner("");
         req.setData("");
-        req.setOperationId("createmtclass" + OperationID);
+        req.setOperationId("createmtclass");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.mtClient.createMtClass(req);
             System.out.println(res.getData());
@@ -49,7 +47,7 @@ public class MtTest {
     void TestTransferMtClass() {
         TransferMtClassReq req = new TransferMtClassReq();
         req.setRecipient("");
-        req.setOperationId("transfermtclass" + OperationID);
+        req.setOperationId("transfermtclass");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.mtClient.transferMtClass(req,
                     "",
@@ -68,7 +66,7 @@ public class MtTest {
         req.setData("");
         req.setAmount(1);
         req.setRecipient("");
-        req.setOperationId("createmt" + OperationID);
+        req.setOperationId("createmt");
         try {
             PublicResponse res =AvataClientTest.getAvataClient().nativeClient.mtClient.createMt(req, "");
             System.out.println(res.getData());
@@ -85,7 +83,7 @@ public class MtTest {
         MintMtReq req = new MintMtReq();
         req.setAmount(10);
         req.setRecipient("");
-        req.setOperationId("mintmt" + OperationID);
+        req.setOperationId("mintmt");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.mtClient.mintMt(req,
                     "",
@@ -104,7 +102,7 @@ public class MtTest {
         TransferMtReq req = new TransferMtReq();
         req.setAmount(10);
         req.setRecipient("");
-        req.setOperationId("transfermt" + OperationID);
+        req.setOperationId("transfermt");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.mtClient.transferMt(req,
                     "",
@@ -123,7 +121,7 @@ public class MtTest {
     void TestEditMt() {
         EditMtReq req = new EditMtReq();
         req.setData("789");
-        req.setOperationId("editmt" + OperationID);
+        req.setOperationId("editmt");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.mtClient.editMt(req,
                     "",
@@ -142,7 +140,7 @@ public class MtTest {
     void TestDeleteMt() {
         BurnMtReq req = new BurnMtReq();
         req.setAmount(1);
-        req.setOperationId("burnmt" + OperationID);
+        req.setOperationId("burnmt");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().nativeClient.mtClient.deleteMt(req,
                     "",

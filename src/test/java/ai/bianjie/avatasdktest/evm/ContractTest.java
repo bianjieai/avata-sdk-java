@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import ai.bianjie.avatasdktest.AvataClientTest;
 
 public class ContractTest{
-    String OperationID = String.valueOf(System.currentTimeMillis());
 
     @Test
         //请求调用合约接口示例
@@ -19,7 +18,7 @@ public class ContractTest{
         req.setData("");
         req.setGasLimit(400000);
         req.setEstimation(1);
-        req.setOperationId("contract" + OperationID);
+        req.setOperationId("");
         try {
             PublicResponse res = AvataClientTest.getAvataClient().evmClient.contractClient.contractCall(req);
             System.out.println(res.getData());
