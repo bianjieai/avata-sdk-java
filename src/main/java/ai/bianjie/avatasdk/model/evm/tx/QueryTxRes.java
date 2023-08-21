@@ -49,7 +49,7 @@ public class QueryTxRes {
         private Nft nft;// 具体参考接口文档
 
         @JSONField(name = "ns")
-        private Ns ns;// 具体参考接口文档
+        private String ns;// 具体参考接口文档
 
         @NoArgsConstructor
         @Data
@@ -60,23 +60,6 @@ public class QueryTxRes {
 
             @JSONField(name = "id")
             private Integer id;// NFT ID
-        }
-
-        @NoArgsConstructor
-        @Data
-        public static class Ns {
-
-            @JSONField(name = "name")
-            private String name;// 一级域名
-
-            @JSONField(name = "owner")
-            private String owner;// 当前域名拥有者的链账户地址
-
-            @JSONField(name = "node")
-            private String node;// 域名 node key
-
-            @JSONField(name = "expires")
-            private Integer expires;// 过期状态：Enum: 0:未过期; 1:已过期
         }
 
         @NoArgsConstructor
