@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * EVM 查询链账户操作记录请求体
+ * 查询链账户操作记录请求体
  */
 @NoArgsConstructor
 @Data
@@ -20,20 +20,10 @@ public class QueryAccountsHistoryReq {
     private String account;// 链账户地址
 
     @JSONField(name = "module")
-    private String module;// 功能模块：1：nft；
+    private String module;// 功能模块：请通过 查询枚举值列表 接口查看
 
-
-    // 原生项目：
-    // 操作类型，仅 module 不为空时有效，默认为："0"（all）。
-    // module = 1 时，可选：1：issue_class；2：transfer_class；3：mint； 4：edit；5：transfer；6：burn；
-    // module = 2 时，可选：1：issue_class；2：transfer_class；3：issue；4：mint；5：edit；6：transfer；7：burn
-
-    // EVM 项目：
-    // 操作类型，仅 module 不为空时有效，默认为："0"（all）。
-    // module = 1 时，可选：1：issue_class；2：transfer_class；3：mint； 4：edit；5：transfer；6：burn；
     @JSONField(name = "operation")
-    private String operation;
-
+    private String operation; //操作类型，仅 module 不为空时有效，默认为："0"（all）。请通过 查询枚举值列表 接口查看
 
     @JSONField(name = "tx_hash")
     private String txHash;// Tx Hash
