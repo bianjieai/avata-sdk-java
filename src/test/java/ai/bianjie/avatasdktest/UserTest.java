@@ -1,11 +1,19 @@
 package ai.bianjie.avatasdktest;
 
+import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.user.*;
 import ai.bianjie.avatasdk.util.AvataUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
+    private AvataClient client;
+
+    @BeforeEach
+    public void init() {
+        client = AvataClientTest.getAvataClient();
+    }
     @Test
         //请求创建用户接口示例
     void TestCreateUser() {
@@ -15,7 +23,7 @@ public class UserTest {
         req.setCertificateNum("");
         req.setPhoneNum("");
         try {
-            CreateUserRes user = AvataClientTest.getAvataClient().userClient.createUser(req);
+            CreateUserRes user = client.userClient.createUser(req);
             System.out.println(user.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -31,7 +39,7 @@ public class UserTest {
         req.setUserId("");
         req.setPhoneNum("");
         try {
-            PublicResponse user = AvataClientTest.getAvataClient().userClient.updateUser(req);
+            PublicResponse user = client.userClient.updateUser(req);
             System.out.println(user.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -51,7 +59,7 @@ public class UserTest {
         req.setUserType("1");
         req.setCode(code);
         try {
-            QueryUserRes user = AvataClientTest.getAvataClient().userClient.queryUser(req);
+            QueryUserRes user = client.userClient.queryUser(req);
             System.out.println(user.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

@@ -1,14 +1,21 @@
 package ai.bianjie.avatasdktest;
 
+import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.order.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderTest {
+    private AvataClient client;
 
+    @BeforeEach
+    public void init() {
+        client = AvataClientTest.getAvataClient();
+    }
     @Test
         //请求购买能量值接口示例
     void TestCreateOrder() {
@@ -18,7 +25,7 @@ public class OrderTest {
         req.setOrderType(1);
         req.setOperationId("buygas");
         try {
-            PublicResponse res = AvataClientTest.getAvataClient().orderClient.createOrder(req);
+            PublicResponse res = client.orderClient.createOrder(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -31,7 +38,7 @@ public class OrderTest {
         //请求查询能量值/业务费购买结果接口示例
     void TestQueryOrder() {
         try {
-            QueryOrderRes res = AvataClientTest.getAvataClient().orderClient.queryOrder(
+            QueryOrderRes res = client.orderClient.queryOrder(
                     "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
@@ -53,7 +60,7 @@ public class OrderTest {
         //req.setSortBy("");
         req.setCountTotal("1");
         try {
-            QueryOrdersRes res = AvataClientTest.getAvataClient().orderClient.queryOrders(req);
+            QueryOrdersRes res = client.orderClient.queryOrders(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -82,7 +89,7 @@ public class OrderTest {
         req.setList(list);
         req.setOperationId("batchcreateorder");
         try {
-            PublicResponse res = AvataClientTest.getAvataClient().orderClient.batchCreateOrders(req);
+            PublicResponse res = client.orderClient.batchCreateOrders(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

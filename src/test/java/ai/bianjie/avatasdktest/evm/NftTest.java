@@ -1,12 +1,19 @@
 package ai.bianjie.avatasdktest.evm;
 
+import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.evm.nft.*;
 import ai.bianjie.avatasdktest.AvataClientTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class NftTest {
+    private AvataClient client;
 
+    @BeforeEach
+    public void init() {
+        client = AvataClientTest.getAvataClient();
+    }
     @Test
         //请求创建 NFT 类别接口示例
     void TestCreateClass() {
@@ -18,7 +25,7 @@ public class NftTest {
         req.setEditableByClassOwner(1);
         req.setOperationId("createnftclass");
         try {
-            PublicResponse res = AvataClientTest.getAvataClient().evmClient.nftClient.createNftClass(req);
+            PublicResponse res = client.evmClient.nftClient.createNftClass(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -42,7 +49,7 @@ public class NftTest {
         req.setCountTotal("1");
         req.setId("");
         try {
-            QueryNftClassesRes res = AvataClientTest.getAvataClient().evmClient.nftClient.queryNftClasses(req);
+            QueryNftClassesRes res = client.evmClient.nftClient.queryNftClasses(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -55,7 +62,7 @@ public class NftTest {
         //请求查询 NFT 类别详情接口示例
     void TestQueryNftClass() {
         try {
-            QueryNftClassRes res = AvataClientTest.getAvataClient().evmClient.nftClient.queryNftClass("");
+            QueryNftClassRes res = client.evmClient.nftClient.queryNftClass("");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -71,7 +78,7 @@ public class NftTest {
         req.setRecipient("");
         req.setOperationId("transfernftclass");
         try {
-            PublicResponse res = AvataClientTest.getAvataClient().evmClient.nftClient.transferNftClass(req,
+            PublicResponse res = client.evmClient.nftClient.transferNftClass(req,
                     "",
                     "");
             System.out.println(res.getData());
@@ -90,7 +97,7 @@ public class NftTest {
         req.setRecipient("");
         req.setOperationId("mintnft");
         try {
-            PublicResponse res =AvataClientTest.getAvataClient().evmClient.nftClient.mintNft(req,
+            PublicResponse res =client.evmClient.nftClient.mintNft(req,
                     "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
@@ -107,7 +114,7 @@ public class NftTest {
         req.setRecipient("");
         req.setOperationId("transfernft");
         try {
-            PublicResponse res = AvataClientTest.getAvataClient().evmClient.nftClient.transferNft(req,
+            PublicResponse res = client.evmClient.nftClient.transferNft(req,
                     "",
                     "",
                     "");
@@ -127,7 +134,7 @@ public class NftTest {
         req.setUriHash("");
         req.setOperationId("editnft");
         try {
-            PublicResponse res =AvataClientTest.getAvataClient().evmClient.nftClient.editNft(req,
+            PublicResponse res =client.evmClient.nftClient.editNft(req,
                     "",
                     "",
                     "");
@@ -145,7 +152,7 @@ public class NftTest {
         BurnNftReq req = new BurnNftReq();
         req.setOperationId("burnnft");
         try {
-            PublicResponse res =AvataClientTest.getAvataClient().evmClient.nftClient.burnNft(req,
+            PublicResponse res =client.evmClient.nftClient.burnNft(req,
                     "",
                     "",
                     "");
@@ -173,7 +180,7 @@ public class NftTest {
             req.setEndDate("");
             req.setSortBy("");
             req.setCountTotal("1");
-            QueryNftsRes res =AvataClientTest.getAvataClient().evmClient.nftClient.queryNfts(req);
+            QueryNftsRes res =client.evmClient.nftClient.queryNfts(req);
             System.out.println(res.getData());
         } catch (Exception e) {
             System.out.println(e);
@@ -185,7 +192,7 @@ public class NftTest {
         //请求查询 NFT 详情接口示例
     void TestQueryNft() {
         try {
-            QueryNftRes res = AvataClientTest.getAvataClient().evmClient.nftClient.queryNft(
+            QueryNftRes res = client.evmClient.nftClient.queryNft(
                     "",
                     "");
             System.out.println(res.getData());
@@ -201,7 +208,7 @@ public class NftTest {
         try {
             QueryNftHistoryReq req = new QueryNftHistoryReq();
             req.setLimit("2");
-            QueryNftHistoryRes res =AvataClientTest.getAvataClient().evmClient.nftClient.queryNftHistory(
+            QueryNftHistoryRes res =client.evmClient.nftClient.queryNftHistory(
                     "",
                     "", req);
             System.out.println(res.getData());
