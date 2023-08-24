@@ -33,20 +33,20 @@ public class AvataClientTest {
 ```
 公共接口：
 
-- [链账户接口示例代码](./src/test/java/AccountTest.java)
-- [钱包用户接口示例代码](./src/test/java/UserTest.java)
-- [充值接口示例代码](./src/test/java/OrderTest.java)
+- [链账户接口示例代码](src/test/java/ai/bianjie/avatasdktest/AccountTest.java)
+- [钱包用户接口示例代码](src/test/java/ai/bianjie/avatasdktest/UserTest.java)
+- [充值接口示例代码](src/test/java/ai/bianjie/avatasdktest/OrderTest.java)
 
 原生接口：
 
-- [NFT 接口示例代码](./src/test/java/nat/NftTest.java)
-- [MT 接口示例代码](./src/test/java/nat/MtTest.java)
-- [存证接口示例代码](./src/test/java/nat/RecordsTest.java)
-- [交易结果查询接口示例代码](./src/test/java/nat/TxTest.java)
+- [NFT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/NftTest.java)
+- [MT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/MtTest.java)
+- [存证接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/RecordsTest.java)
+- [交易结果查询接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/TxTest.java)
 
 智能合约接口：
 
-- [NFT 接口示例代码](./src/test/java/evm/NftTest.java)
-- [Web3 域名服务接口示例代码](./src/test/java/evm/NsTest.java)
-- [智能合约服务接口示例代码](./src/test/java/evm/ContractTest.java)
-- [交易结果查询接口示例代码](./src/test/java/evm/TxTest.java)
+- [NFT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NftTest.java)
+- [Web3 域名服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NsTest.java)
+- [智能合约服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/ContractTest.java)
+- [交易结果查询接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/TxTest.java)
