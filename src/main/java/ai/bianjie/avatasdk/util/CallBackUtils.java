@@ -53,8 +53,8 @@ public class CallBackUtils {
             return "FAILED";
     }
 
-    public static Map<String, Object> getMap(String canshu) {
-        Map<String, Object> maps = JSON.parseObject(canshu);
+    public static Map<String, Object> getMap(String params) {
+        Map<String, Object> maps = JSON.parseObject(params);
         return maps;
     }
 
