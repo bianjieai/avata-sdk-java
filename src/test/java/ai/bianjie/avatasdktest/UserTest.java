@@ -23,7 +23,7 @@ public class UserTest {
         req.setCertificateNum("");
         req.setPhoneNum("");
         try {
-            CreateUserRes user = client.userClient.createUser(req);
+            CreateUserRes user = client.user.createUser(req);
             System.out.println(user.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -39,7 +39,7 @@ public class UserTest {
         req.setUserId("");
         req.setPhoneNum("");
         try {
-            PublicResponse user = client.userClient.updateUser(req);
+            PublicResponse user = client.user.updateUser(req);
             System.out.println(user.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class UserTest {
         req.setUserType("1");
         req.setCode(code);
         try {
-            QueryUserRes user = client.userClient.queryUser(req);
+            QueryUserRes user = client.user.queryUser(req);
             System.out.println(user.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

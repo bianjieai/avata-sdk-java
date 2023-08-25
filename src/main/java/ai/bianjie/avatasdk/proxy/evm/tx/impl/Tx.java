@@ -9,14 +9,14 @@ import com.dtflys.forest.http.ForestResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class TxClient implements TxProxy {
+public class Tx implements TxProxy {
 
     private static final String QUERY_TX = "/v3/evm/tx/%s"; // EVM 上链交易结果查询
     private static final String QUERY_TX_TYPES = "/v3/evm/dict/tx_types"; // EVM 枚举值列表查询
 
     private HttpClient httpClient;
 
-    public TxClient(HttpClient httpClient) {
+    public Tx(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

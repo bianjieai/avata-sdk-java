@@ -1,6 +1,5 @@
 package ai.bianjie.avatasdk.proxy.user.impl;
 
-import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.user.*;
@@ -12,7 +11,7 @@ import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class UserClient implements UserProxy {
+public class User implements UserProxy {
 
     private static final String CREATE_USER = "/v3/users";// 创建用户
 
@@ -22,7 +21,7 @@ public class UserClient implements UserProxy {
 
     private HttpClient httpClient;
 
-    public UserClient(HttpClient httpClient) {
+    public User(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

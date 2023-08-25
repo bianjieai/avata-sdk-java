@@ -17,14 +17,14 @@ public class TxTest {
     @Test
     // 请求上链交易结果查询接口示例
     public void queryTx() {
-        QueryTxRes txRes = client.nativeClient.txClient.queryTx("");
+        QueryTxRes txRes = client.nat.tx.queryTx("");
         System.out.println(txRes.getData());
     }
 
     @Test
     // 枚举值列表查询
     public void queryTxTypes() {
-        QueryTxTypesRes txRes = client.nativeClient.txClient.queryTxTypes();
+        QueryTxTypesRes txRes = client.nat.tx.queryTxTypes();
         System.out.println(txRes.getData());
     }
 }

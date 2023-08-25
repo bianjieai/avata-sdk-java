@@ -22,7 +22,7 @@ public class AccountTest {
         req.setName("lmhtest");
         req.setOperationId("createaccount");
         try {
-            CreateAccountRes account = client.accountClient.createAccount(req);
+            CreateAccountRes account = client.account.createAccount(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class AccountTest {
         //req.setSortBy("");
         req.setCountTotal("1");
         try {
-            QueryAccountsRes account = client.accountClient.queryAccounts(req);
+            QueryAccountsRes account = client.account.queryAccounts(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class AccountTest {
         req.setCount(1);
         req.setOperationId("batchcreateaccount");
         try {
-            BatchCreateAccountRes account = client.accountClient.batchCreateAccounts(req);
+            BatchCreateAccountRes account = client.account.batchCreateAccounts(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class AccountTest {
         //req.setLimit("");
         req.setAccount("iaa1jjmwg5ah27aynuwt2phwa8sfvzh4lvvlelddxm");
         try {
-            QueryNativeAccountsHistoryRes account = client.accountClient.queryNativeAccountsHistory(req);
+            QueryNativeAccountsHistoryRes account = client.account.queryNativeAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class AccountTest {
         //req.setPageKey("");
         //req.setLimit("");
         try {
-            QueryNativeAccountsHistoryRes account = client.accountClient.queryEvmAccountsHistory(req);
+            QueryNativeAccountsHistoryRes account = client.account.queryEvmAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

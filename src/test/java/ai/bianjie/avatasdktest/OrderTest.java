@@ -25,7 +25,7 @@ public class OrderTest {
         req.setOrderType(1);
         req.setOperationId("buygas");
         try {
-            PublicResponse res = client.orderClient.createOrder(req);
+            PublicResponse res = client.order.createOrder(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class OrderTest {
         //请求查询能量值/业务费购买结果接口示例
     void TestQueryOrder() {
         try {
-            QueryOrderRes res = client.orderClient.queryOrder(
+            QueryOrderRes res = client.order.queryOrder(
                     "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
@@ -60,7 +60,7 @@ public class OrderTest {
         //req.setSortBy("");
         req.setCountTotal("1");
         try {
-            QueryOrdersRes res = client.orderClient.queryOrders(req);
+            QueryOrdersRes res = client.order.queryOrders(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -89,7 +89,7 @@ public class OrderTest {
         req.setList(list);
         req.setOperationId("batchcreateorder");
         try {
-            PublicResponse res = client.orderClient.batchCreateOrders(req);
+            PublicResponse res = client.order.batchCreateOrders(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

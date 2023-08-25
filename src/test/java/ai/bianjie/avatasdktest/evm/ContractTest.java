@@ -27,7 +27,7 @@ public class ContractTest{
         req.setEstimation(1);
         req.setOperationId("");
         try {
-            PublicResponse res = client.evmClient.contractClient.contractCall(req);
+            PublicResponse res = client.evm.contract.contractCall(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class ContractTest{
         req.setData("");
         req.setTo("");
         try {
-            QueryContractCallRes res = client.evmClient.contractClient.queryContractCall(req);
+            QueryContractCallRes res = client.evm.contract.queryContractCall(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

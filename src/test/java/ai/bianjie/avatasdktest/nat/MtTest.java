@@ -23,7 +23,7 @@ public class MtTest {
         req.setData("");
         req.setOperationId("createmtclass");
         try {
-            PublicResponse res = client.nativeClient.mtClient.createMtClass(req);
+            PublicResponse res = client.nat.mt.createMtClass(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -38,14 +38,14 @@ public class MtTest {
         QueryMtClassesReq req = new QueryMtClassesReq();
         req.setId("");
         req.setOwner("");
-        QueryMtClassesRes res = client.nativeClient.mtClient.queryMtClasses(req);
+        QueryMtClassesRes res = client.nat.mt.queryMtClasses(req);
         System.out.println(res.getData());
     }
 
     @Test
         //请求查询 MT 类别详情接口示例
     void TestQueryMtClass() {
-        QueryMtClassRes res = client.nativeClient.mtClient.queryMtClass("");
+        QueryMtClassRes res = client.nat.mt.queryMtClass("");
         System.out.println(res.getData());
     }
 
@@ -56,7 +56,7 @@ public class MtTest {
         req.setRecipient("");
         req.setOperationId("transfermtclass");
         try {
-            PublicResponse res = client.nativeClient.mtClient.transferMtClass(req,
+            PublicResponse res = client.nat.mt.transferMtClass(req,
                     "",
                     "");
             System.out.println(res.getData());
@@ -75,7 +75,7 @@ public class MtTest {
         req.setRecipient("");
         req.setOperationId("createmt");
         try {
-            PublicResponse res =client.nativeClient.mtClient.createMt(req, "");
+            PublicResponse res =client.nat.mt.createMt(req, "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class MtTest {
         req.setRecipient("");
         req.setOperationId("mintmt");
         try {
-            PublicResponse res = client.nativeClient.mtClient.mintMt(req,
+            PublicResponse res = client.nat.mt.mintMt(req,
                     "",
                     "");
             System.out.println(res.getData());
@@ -111,7 +111,7 @@ public class MtTest {
         req.setRecipient("");
         req.setOperationId("transfermt");
         try {
-            PublicResponse res = client.nativeClient.mtClient.transferMt(req,
+            PublicResponse res = client.nat.mt.transferMt(req,
                     "",
                     "",
                     "");
@@ -130,7 +130,7 @@ public class MtTest {
         req.setData("789");
         req.setOperationId("editmt");
         try {
-            PublicResponse res = client.nativeClient.mtClient.editMt(req,
+            PublicResponse res = client.nat.mt.editMt(req,
                     "",
                     "",
                     "");
@@ -149,7 +149,7 @@ public class MtTest {
         req.setAmount(1);
         req.setOperationId("burnmt");
         try {
-            PublicResponse res = client.nativeClient.mtClient.deleteMt(req,
+            PublicResponse res = client.nat.mt.deleteMt(req,
                     "",
                     "",
                     "");
@@ -167,14 +167,14 @@ public class MtTest {
     void TestQueryMts() {
         QueryMtsReq req = new QueryMtsReq();
         req.setId("");
-        QueryMtsRes res = client.nativeClient.mtClient.queryMts(req);
+        QueryMtsRes res = client.nat.mt.queryMts(req);
         System.out.println(res.getData());
     }
 
     @Test
         //请求查询 MT 详情接口示例
     void TestQueryMt() {
-        QueryMtRes res = client.nativeClient.mtClient.queryMt(
+        QueryMtRes res = client.nat.mt.queryMt(
                 "",
                 "");
         System.out.println(res.getData());
@@ -184,7 +184,7 @@ public class MtTest {
         //请求查询 MT 操作记录接口请求示例
     void TestQueryMtHistory() {
         QueryMtHistoryReq req = new QueryMtHistoryReq();
-        QueryMtHistoryRes res =client.nativeClient.mtClient.queryMtHistory(req,
+        QueryMtHistoryRes res =client.nat.mt.queryMtHistory(req,
                 "",
                 "");
         System.out.println(res);
@@ -195,7 +195,7 @@ public class MtTest {
     void TestQueryMtBalances() {
         QueryMtBalancesReq req = new QueryMtBalancesReq();
         req.setId("");
-        QueryMtBalancesRes res = client.nativeClient.mtClient.queryMtBalances(req,
+        QueryMtBalancesRes res = client.nat.mt.queryMtBalances(req,
                 "",
                 "");
         System.out.println(res);

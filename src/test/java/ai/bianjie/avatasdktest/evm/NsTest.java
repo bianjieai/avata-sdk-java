@@ -23,7 +23,7 @@ public class NsTest {
         req.setDuration(1);
         req.setOperationId("registerdomain");
         try {
-            PublicResponse res = client.evmClient.nsClient.registerDomain(req);
+            PublicResponse res = client.evm.ns.registerDomain(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class NsTest {
         QueryDomainReq req = new QueryDomainReq();
         req.setName("");
         try {
-            QueryDomainRes res =client.evmClient.nsClient.queryDomain(req);
+            QueryDomainRes res =client.evm.ns.queryDomain(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class NsTest {
         req.setTld("");
         req.setCountTotal("1");
         try {
-            QueryOwnerDomainRes res = client.evmClient.nsClient.queryOwnerDomain(req,
+            QueryOwnerDomainRes res = client.evm.ns.queryOwnerDomain(req,
                     "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
@@ -74,7 +74,7 @@ public class NsTest {
         req.setRecipient("");
         req.setOperationId("transferDomian");
         try {
-            PublicResponse res = client.evmClient.nsClient.transferDomain(req,
+            PublicResponse res = client.evm.ns.transferDomain(req,
                     "",
                     "");
             System.out.println(res.getData());
@@ -101,7 +101,7 @@ public class NsTest {
         //textDTO.setTextValue("");
         req.setOperationId("resolveDomain");
         try {
-            PublicResponse res = client.evmClient.nsClient.ResolveDomain(req,
+            PublicResponse res = client.evm.ns.ResolveDomain(req,
                     "",
                     "");
             System.out.println(res.getData());
@@ -118,7 +118,7 @@ public class NsTest {
         QueryDomainResolvesReq req = new QueryDomainResolvesReq();
         req.setResolveType(0);
         try {
-            QueryDomainResolvesRes res = client.evmClient.nsClient.queryDomainResolves(
+            QueryDomainResolvesRes res = client.evm.ns.queryDomainResolves(
                     "", req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
@@ -135,7 +135,7 @@ public class NsTest {
         req.setName("");
         req.setOperationId("");
         try {
-            PublicResponse res = client.evmClient.nsClient.reverseResolveDomain(req,
+            PublicResponse res = client.evm.ns.reverseResolveDomain(req,
                     "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
@@ -149,7 +149,7 @@ public class NsTest {
         // 查询域名反向解析接口示例
     void TestQueryReverseResolveDomain() {
         try {
-            QueryReverseResolveDomainRes res = client.evmClient.nsClient.queryReverseResolveDomain(
+            QueryReverseResolveDomainRes res = client.evm.ns.queryReverseResolveDomain(
                     "");
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");

@@ -1,6 +1,5 @@
 package ai.bianjie.avatasdk.proxy.order.impl;
 
-import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.order.*;
@@ -12,7 +11,7 @@ import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class OrderClient implements OrderProxy {
+public class Order implements OrderProxy {
     private static final String CREATE_ORDER = "/v3/orders";
     private static final String BATCH_CREATE_ORDER = "/v3/orders/batch";
     private static final String QUERY_ORDER = "/v3/orders/%s";
@@ -20,7 +19,7 @@ public class OrderClient implements OrderProxy {
 
     private HttpClient httpClient;
 
-    public OrderClient(HttpClient httpClient) {
+    public Order(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

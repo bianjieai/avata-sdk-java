@@ -11,7 +11,7 @@ import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MtClient implements MtProxy {
+public class Mt implements MtProxy {
     private static final String CREATE_MT_CLASS = "/v3/native/mt/classes";
     private static final String QUERY_MT_CLASSES = "/v3/native/mt/classes";
     private static final String QUERY_MT_CLASS = "/v3/native/mt/classes/%s";
@@ -28,7 +28,7 @@ public class MtClient implements MtProxy {
 
     private HttpClient httpClient;
 
-    public MtClient(HttpClient httpClient) {
+    public Mt(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

@@ -10,7 +10,7 @@ import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class AccountClient implements AccountProxy {
+public class Account implements AccountProxy {
 
     private static final String CREATE_ACCOUNT = "/v3/account";// 创建链账户接口
     private static final String BATCH_CREATE_ACCOUNTS = "/v3/accounts";// 批量创建链账户接口
@@ -19,7 +19,7 @@ public class AccountClient implements AccountProxy {
     private static final String QUERY_EVM_ACCOUNTS_HISTORY = "/v3/evm/accounts/history";// EVM 项目查询链账户操作记录接口
     private HttpClient httpClient;
 
-    public AccountClient(HttpClient httpClient) {
+    public Account(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

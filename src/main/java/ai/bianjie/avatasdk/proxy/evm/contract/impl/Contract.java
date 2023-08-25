@@ -1,6 +1,5 @@
 package ai.bianjie.avatasdk.proxy.evm.contract.impl;
 
-import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.evm.contract.ContractCallReq;
@@ -14,13 +13,13 @@ import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ContractClient implements ContractProxy {
+public class Contract implements ContractProxy {
 
     private static final String CONTRACT_CALL = "/v3/evm/contract/calls";// 调用合约接口
     private static final String QUERY_CONTRACT_CALL = "/v3/evm/contract/calls";// 查询合约接口
     private HttpClient httpClient;
 
-    public ContractClient(HttpClient httpClient) {
+    public Contract(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

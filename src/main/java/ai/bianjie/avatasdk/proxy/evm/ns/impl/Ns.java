@@ -1,9 +1,7 @@
 package ai.bianjie.avatasdk.proxy.evm.ns.impl;
 
-import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
 import ai.bianjie.avatasdk.model.PublicResponse;
-import ai.bianjie.avatasdk.model.evm.nft.QueryNftHistoryRes;
 import ai.bianjie.avatasdk.model.evm.ns.*;
 import ai.bianjie.avatasdk.proxy.evm.ns.NsProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
@@ -13,7 +11,7 @@ import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class NsClient implements NsProxy {
+public class Ns implements NsProxy {
     private static final String REGISTER_DOMAIN = "/v3/evm/ns/domains"; // 注册域名
     private static final String QUERY_DOMAIN = "/v3/evm/ns/domains"; // 查询域名
     private static final String QUERY_OWNER_DOMAIN = "/v3/evm/ns/domains/%s"; // 查询用户域名
@@ -26,7 +24,7 @@ public class NsClient implements NsProxy {
 
     private HttpClient httpClient;
 
-    public NsClient(HttpClient httpClient) {
+    public Ns(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

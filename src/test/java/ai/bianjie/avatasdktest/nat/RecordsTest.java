@@ -28,7 +28,7 @@ public class RecordsTest {
         req.setHashType(1);
         req.setOperationId("createrecord");
         try {
-            PublicResponse res = client.nativeClient.recordsClient.createRecord(req);
+            PublicResponse res = client.nat.records.createRecord(req);
             System.out.println(res.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
