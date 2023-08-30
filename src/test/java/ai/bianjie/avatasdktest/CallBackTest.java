@@ -18,7 +18,7 @@ public class CallBackTest {
 
 
     @Test
-    // 测试 V2 以其以上版本版本回调
+    // 测试 V2 以其以上版本回调
     public void callBack() {
         String path = "回调地址（去掉域名）";
         String body = "Avata 推送的消息 body";
