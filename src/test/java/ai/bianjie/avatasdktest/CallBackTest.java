@@ -11,8 +11,8 @@ public class CallBackTest {
         String signature = "Avata 推送的消息的签名";
         String apiSecret = "API 项目 Secret";
         // 实现业务接口
-        Business business = new Business();
-        String res = CallBackUtils.callBackV1(body, signature, apiSecret, business);
+        APP app = new APP();
+        String res = CallBackUtils.callBackV1(body, signature, apiSecret, app);
         System.out.println(res);
     }
 
@@ -26,16 +26,16 @@ public class CallBackTest {
         String signature = "Avata 推送的消息的签名";
         String apiSecret = "API 项目 Secret";
         // 实现业务接口
-        Business business = new Business();
-        String res = CallBackUtils.callBack(path, body, timeStamp, apiSecret, signature, business);
+        APP app = new APP();
+        String res = CallBackUtils.callBack(path, body, timeStamp, apiSecret, signature, app);
         System.out.println(res);
     }
 }
 
 // 实现业务逻辑类
-class Business implements CallBackUtils.Business {
+class APP implements CallBackUtils.APP {
     @Override
-    public void businessV1(String body, String signature, String apiSecret) {
+    public void onCallbackV1(String body, String signature, String apiSecret) {
         // 在此实现业务逻辑
         System.out.println("在此实现业务逻辑");
         System.out.println(body);
@@ -44,7 +44,7 @@ class Business implements CallBackUtils.Business {
     }
 
     @Override
-    public void business(String path, String body, Long timeStamp, String apiSecret, String signature) {
+    public void onCallback(String path, String body, Long timeStamp, String apiSecret, String signature) {
         // 在此实现业务逻辑
         System.out.println("在此实现业务逻辑");
         System.out.println(path);
