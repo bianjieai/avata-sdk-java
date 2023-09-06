@@ -22,26 +22,83 @@ public class CallBackUtils {
 
     // CallBackV1 v1 版本签名回调验签
     public static boolean callBackV1(HttpServletRequest r, String apiSecret) {
-        String signature = r.getHeader("X-Signature");
-        JSONObject jsonObj = JSON.parseObject(getRequestBody(r).toString());
-        String jsonStr = JSON.toJSONString(jsonObj, SerializerFeature.MapSortField);
-        // 执行签名
-        String hexHash = sha256Sum(jsonStr + apiSecret);
-        if (!hexHash.equals(signature)) {
+        try {
+            String signature = r.getHeader("X-Signature");
+            JSONObject jsonObj = JSON.parseObject(getRequestBody(r).toString());
+            String jsonStr = JSON.toJSONString(jsonObj, SerializerFeature.MapSortField);
+            // 执行签名
+            String hexHash = sha256Sum(jsonStr + apiSecret);
+            if (!hexHash.equals(signature)) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            // 处理异常
+            e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     // CallBack  v2 及其以上版本签名回调验签
     public static boolean callBack(HttpServletRequest r, String path, String apiSecret) {
-        String signature = r.getHeader("X-Signature");
-        Long timestamp = Long.valueOf(r.getHeader("X-Timestamp"));
-        String hexHash = sign(path, null, getRequestBody(r), timestamp, apiSecret);
-        if (!hexHash.equals(signature)) {
+        try {
+            String signature = r.getHeader("X-Signature");
+            Long timestamp = Long.valueOf(r.getHeader("X-Timestamp"));
+            String hexHash = sign(path, null, getRequestBody(r), timestamp, apiSecret);
+            if (!hexHash.equals(signature)) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            // 处理数字格式异常
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            // 处理其他异常
+            e.printStackTrace();
             return false;
         }
-        return true;
+    }
+
+    /**
+     * 接收来自 Avata 的推送消息
+     *
+     * @param version   版本 ：v1 需要传 APIVersionV1 , v2 或者 v3 版本传 APIVersionsOther
+     * @param apiSecret 项目 API Secret
+     * @param path      在 Avata服务平台设置的回调地址(去掉域名)
+     * @param r         该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+     * @param app       自己的业务逻辑代码（验证签名通过才会执行）
+     * @return
+     * @throws IOException
+     */
+    public static String onCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) {
+        try {
+            boolean result;
+            switch (version) {
+                case APIVersionV1:
+                    result = callBackV1(r, apiSecret);
+                    break;
+                case APIVersionsOther:
+                    result = callBack(r, path, apiSecret);
+                    break;
+                default:
+                    throw AvataException.NewSDKException("version verification failed");
+            }
+            if (!result) {
+                throw AvataException.NewSDKException("signature verification failed");
+            }
+            // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+            app.app(r, version, apiSecret, path);
+            return "SUCCESS"; // 向 Avata 服务器返回结果
+        } catch (AvataException e) {
+            System.out.println(e);
+            e.printStackTrace();
+            return "error in sdk: " + e.getMessage();
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+            return "error in app: " + e.getMessage(); // 处理其他异常情况
+        }
     }
 
     private static Map<String, Object> getRequestBody(HttpServletRequest r) {
@@ -61,48 +118,10 @@ public class CallBackUtils {
     }
 
     /**
-     * 接收来自 Avata 的推送消息
-     *
-     * @param version   版本 ：v1 需要传 APIVersionV1 , v2 或者 v3 版本传 APIVersionsOther
-     * @param apiSecret 项目 API Secret
-     * @param path      在 Avata服务平台设置的回调地址(去掉域名)
-     * @param r         该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
-     * @param app       自己的业务逻辑代码（验证签名通过才会执行）
-     * @return
-     * @throws IOException
-     */
-    public static String onCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) {
-        boolean result;
-        switch (version) {
-            case APIVersionV1:
-                result = callBackV1(r, apiSecret);
-                break;
-            case APIVersionsOther:
-                result = callBack(r, path, apiSecret);
-                break;
-            default:
-                throw AvataException.NewSDKException("version verification failed");
-        }
-        if (!result) {
-            throw AvataException.NewSDKException("signature verification failed");
-        }
-        // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
-        try {
-            app.app(r, version, apiSecret, path);
-        } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
-        }
-        // 返回给消息推送端
-        return "SUCCESS";
-    }
-
-
-    /**
      * 业务接口，应用方需要实现业务逻辑，在验签成功后执行
      */
     public interface APP {
-        void app(HttpServletRequest r, String version, String apiSecret, String path);
+        void app(HttpServletRequest r, String version, String apiSecret, String path) throws Exception;
     }
 }
 
