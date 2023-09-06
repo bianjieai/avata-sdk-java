@@ -5,6 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Map;
 
 import static ai.bianjie.avatasdk.util.AvataUtils.sha256Sum;
@@ -17,16 +20,10 @@ public class CallBackUtils {
     public static final String APIVersionsOther = "v3"; // 其它版本 AVATA Open API,如 v2、v3
 
 
-    /**
-     * CallBackV1 v1 版本签名回调验签
-     *
-     * @param body      来自 Avata API 推送的请求体参数
-     * @param signature 来自 Avata API 推送的请求头的签名，算法为 SHA256 (body + ApiSecret)
-     * @param apiSecret 项目 API Secret
-     * @return
-     */
-    public static boolean callBackV1(String body, String signature, String apiSecret) {
-        JSONObject jsonObj = JSON.parseObject(body);
+    // CallBackV1 v1 版本签名回调验签
+    public static boolean callBackV1(HttpServletRequest r, String apiSecret) {
+        String signature = r.getHeader("X-Signature");
+        JSONObject jsonObj = JSON.parseObject(getRequestBody(r).toString());
         String jsonStr = JSON.toJSONString(jsonObj, SerializerFeature.MapSortField);
         // 执行签名
         String hexHash = sha256Sum(jsonStr + apiSecret);
@@ -36,26 +33,30 @@ public class CallBackUtils {
         return true;
     }
 
-    /**
-     * CallBack  v2 及其以上版本签名回调验签
-     *
-     * @param path      在 Avata服务平台设置的回调地址(去掉域名)
-     * @param body      来自 Avata API 推送的请求体参数
-     * @param timeStamp 来自 Avata API 推送的请求头中的时间戳
-     * @param apiSecret 项目 API Secret
-     * @param signature 来自 Avata API 推送的请求头的签名，与 网关鉴权签名 方式保持一致
-     * @return
-     */
-    public static boolean callBack(String path, String body, Long timeStamp, String apiSecret, String signature) {
-        String hexHash = sign(path, null, getMap(body), timeStamp, apiSecret);
+    // CallBack  v2 及其以上版本签名回调验签
+    public static boolean callBack(HttpServletRequest r, String path, String apiSecret) {
+        String signature = r.getHeader("X-Signature");
+        Long timestamp = Long.valueOf(r.getHeader("X-Timestamp"));
+        String hexHash = sign(path, null, getRequestBody(r), timestamp, apiSecret);
         if (!hexHash.equals(signature)) {
             return false;
         }
         return true;
     }
 
-    public static Map<String, Object> getMap(String params) {
-        Map<String, Object> maps = JSON.parseObject(params);
+    private static Map<String, Object> getRequestBody(HttpServletRequest r) {
+        StringBuilder requestBody = new StringBuilder();
+        try {
+            BufferedReader reader = r.getReader();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                requestBody.append(line);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        Map<String, Object> maps = JSON.parseObject(String.valueOf(requestBody));
+        //System.out.println("Request Body: " + requestBody);
         return maps;
     }
 
@@ -63,24 +64,21 @@ public class CallBackUtils {
      * 接收来自 Avata 的推送消息
      *
      * @param version   版本 ：v1 需要传 APIVersionV1 , v2 或者 v3 版本传 APIVersionsOther
-     * @param body      来自 Avata API 推送的请求体参数
-     * @param timeStamp 来自 Avata API 推送的请求头中的时间戳
      * @param apiSecret 项目 API Secret
-     * @param signature 来自 Avata API 推送的请求头的签名，与 网关鉴权签名 方式保持一致
      * @param path      在 Avata服务平台设置的回调地址(去掉域名)
+     * @param r         该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
      * @param app       自己的业务逻辑代码（验证签名通过才会执行）
      * @return
+     * @throws IOException
      */
-    public static String onCallback(String version, String body, Long timeStamp, String apiSecret, String signature, String path, APP app) {
-        boolean result = true;
+    public static String onCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) {
+        boolean result;
         switch (version) {
             case APIVersionV1:
-                result = callBackV1(body, signature, apiSecret);
-                app.appV1(body, signature, apiSecret);   // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+                result = callBackV1(r, apiSecret);
                 break;
             case APIVersionsOther:
-                result = callBack(path, body, timeStamp, apiSecret, signature);
-                app.app(path, body, timeStamp, apiSecret, signature);   // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+                result = callBack(r, path, apiSecret);
                 break;
             default:
                 throw AvataException.NewSDKException("version verification failed");
@@ -88,7 +86,13 @@ public class CallBackUtils {
         if (!result) {
             throw AvataException.NewSDKException("signature verification failed");
         }
-
+        // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+        try {
+            app.app(r, version, apiSecret, path);
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
         // 返回给消息推送端
         return "SUCCESS";
     }
@@ -98,13 +102,9 @@ public class CallBackUtils {
      * 业务接口，应用方需要实现业务逻辑，在验签成功后执行
      */
     public interface APP {
-
-        // 如果对接的是 v1 版本，实现以下业务逻辑
-        void appV1(String body, String signature, String apiSecret);
-
-        // 如果对接的是 v2 及其以上版本，实现以下业务逻辑
-        void app(String path, String body, Long timeStamp, String apiSecret, String signature);
+        void app(HttpServletRequest r, String version, String apiSecret, String path);
     }
 }
+
 
 
