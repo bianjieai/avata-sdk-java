@@ -17,7 +17,7 @@ public class CallBackUtils {
 
     // 验证签名时传入的 API 版本号
     public static final String APIVersionV1 = "v1"; // v1 版本 AVATA Open API
-    public static final String APIVersionsOther = "v3"; // 其它版本 AVATA Open API,如 v2、v3
+    public static final String APIVersionsOther = ""; // 其它版本 AVATA Open API,如 v2、v3
 
 
     // CallBackV1 v1 版本签名回调验签
@@ -49,10 +49,6 @@ public class CallBackUtils {
                 return false;
             }
             return true;
-        } catch (NumberFormatException e) {
-            // 处理数字格式异常
-            e.printStackTrace();
-            return false;
         } catch (Exception e) {
             // 处理其他异常
             e.printStackTrace();
@@ -71,34 +67,29 @@ public class CallBackUtils {
      * @return
      * @throws IOException
      */
-    public static String onCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) {
-        try {
-            boolean result;
-            switch (version) {
-                case APIVersionV1:
-                    result = callBackV1(r, apiSecret);
-                    break;
-                case APIVersionsOther:
-                    result = callBack(r, path, apiSecret);
-                    break;
-                default:
-                    throw AvataException.NewSDKException("version verification failed");
-            }
-            if (!result) {
-                throw AvataException.NewSDKException("signature verification failed");
-            }
-            // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
-            app.app(r, version, apiSecret, path);
-            return "SUCCESS"; // 向 Avata 服务器返回结果
-        } catch (AvataException e) {
-            System.out.println(e);
-            e.printStackTrace();
-            return "error in sdk: " + e.getMessage();
-        } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
-            return "error in app: " + e.getMessage(); // 处理其他异常情况
+    public static String onCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) throws Exception {
+        boolean result;
+        switch (version) {
+            case APIVersionV1:
+                result = callBackV1(r, apiSecret);
+                break;
+            case APIVersionsOther:
+                result = callBack(r, path, apiSecret);
+                break;
+            default:
+                throw AvataException.NewSDKException("version verification failed"); // 版本不对，报错版本验证失败
         }
+        if (!result) {
+            throw AvataException.NewSDKException("signature verification failed"); // 签名验证失败
+        }
+
+        // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+        try {
+            app.app(r, version, apiSecret, path);
+        } catch (Exception e) {
+            throw e;
+        }
+        return "SUCCESS"; // 向 Avata 服务器返回结果
     }
 
     private static Map<String, Object> getRequestBody(HttpServletRequest r) {

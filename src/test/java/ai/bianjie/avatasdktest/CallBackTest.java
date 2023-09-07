@@ -19,8 +19,8 @@ public class CallBackTest {
                     System.out.println(path);
                     System.out.println(r.getHeader("X-Signature"));
                     System.out.println(r.getHeader("X-Timestamp"));
-                    //Add your app logic here
-                    throw new RuntimeException("error occurred in the app method");
+                    // Add your app logic here
+                    // throw new RuntimeException("error occurred in the app method");
                 }
             });
             if (result.equals("SUCCESS")) {
