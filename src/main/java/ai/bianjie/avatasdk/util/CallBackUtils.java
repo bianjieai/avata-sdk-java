@@ -1,6 +1,5 @@
 package ai.bianjie.avatasdk.util;
 
-import ai.bianjie.avatasdk.exception.AvataException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -50,7 +49,7 @@ public class CallBackUtils {
             }
             return true;
         } catch (Exception e) {
-            // 处理其他异常
+            // 处理异常
             e.printStackTrace();
             return false;
         }
@@ -77,17 +76,17 @@ public class CallBackUtils {
                 result = callBack(r, path, apiSecret);
                 break;
             default:
-                throw AvataException.NewSDKException("version verification failed"); // 版本不对，报错版本验证失败
+                throw new AppException("version verification failed"); // 版本不对，报错版本验证失败
         }
         if (!result) {
-            throw AvataException.NewSDKException("signature verification failed"); // 签名验证失败
+            throw new AppException("signature verification failed"); // 回调推送签名验证失败
         }
 
         // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
         try {
             app.app(r, version, apiSecret, path);
-        } catch (Exception e) {
-            throw e;
+        }catch (AppException e) {
+            throw new AppException("app error: " + e.getMessage()); // 业务接口异常
         }
         return "SUCCESS"; // 向 Avata 服务器返回结果
     }
@@ -112,7 +111,12 @@ public class CallBackUtils {
      * 业务接口，应用方需要实现业务逻辑，在验签成功后执行
      */
     public interface APP {
-        void app(HttpServletRequest r, String version, String apiSecret, String path) throws Exception;
+        void app(HttpServletRequest r, String version, String apiSecret, String path) throws AppException;
+    }
+    public static class AppException extends Exception {
+        public AppException(String message) {
+            super(message);
+        }
     }
 }
 
