@@ -12,15 +12,15 @@ import java.util.Map;
 import static ai.bianjie.avatasdk.util.AvataUtils.sha256Sum;
 import static ai.bianjie.avatasdk.util.AvataUtils.sign;
 
-public class CallBackUtils {
+public class CallbackUtils {
 
     // 验证签名时传入的 API 版本号
     public static final String APIVersionV1 = "v1"; // v1 版本 AVATA Open API
     public static final String APIVersionsOther = ""; // 其它版本 AVATA Open API,如 v2、v3
 
 
-    // CallBackV1 v1 版本签名回调验签
-    public static boolean callBackV1(HttpServletRequest r, String apiSecret) {
+    // callbackV1 v1 版本签名回调验签
+    public static boolean callbackV1(HttpServletRequest r, String apiSecret) {
         try {
             String signature = r.getHeader("X-Signature");
             JSONObject jsonObj = JSON.parseObject(getRequestBody(r).toString());
@@ -38,8 +38,8 @@ public class CallBackUtils {
         }
     }
 
-    // CallBack  v2 及其以上版本签名回调验签
-    public static boolean callBack(HttpServletRequest r, String path, String apiSecret) {
+    // callback  v2 及其以上版本签名回调验签
+    public static boolean callback(HttpServletRequest r, String path, String apiSecret) {
         try {
             String signature = r.getHeader("X-Signature");
             Long timestamp = Long.valueOf(r.getHeader("X-Timestamp"));
@@ -70,10 +70,10 @@ public class CallBackUtils {
         boolean result;
         switch (version) {
             case APIVersionV1:
-                result = callBackV1(r, apiSecret);
+                result = callbackV1(r, apiSecret);
                 break;
             case APIVersionsOther:
-                result = callBack(r, path, apiSecret);
+                result = callback(r, path, apiSecret);
                 break;
             default:
                 throw new AppException("version verification failed"); // 版本不对，报错版本验证失败
