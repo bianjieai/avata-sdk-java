@@ -46,13 +46,13 @@ public class onCallbackRes {
         private String timestamp;// 交易上链时间（UTC 时间）
 
         @JSONField(name = "nft")
-        private NftV1 nft;//对应不同操作类型的消息体(json)
+        private NftV1 nft;//对应不同操作类型的消息体
 
         @JSONField(name = "mt")
-        private Mt mt;// 对应不同操作类型的消息体(json)
+        private Mt mt;// 对应不同操作类型的消息体
 
         @JSONField(name = "record")
-        private Record record;// 对应不同操作类型的消息体(json)
+        private Record record;// 对应不同操作类型的消息体
     }
 
 
@@ -88,13 +88,13 @@ public class onCallbackRes {
         private String timestamp;// 交易上链时间（UTC 时间）
 
         @JSONField(name = "nft")
-        private NftNative nft;//对应不同操作类型的消息体(json)
+        private NftNative nft;//对应不同操作类型的消息体
 
         @JSONField(name = "mt")
-        private Mt mt;// 对应不同操作类型的消息体(json)
+        private Mt mt;// 对应不同操作类型的消息体
 
         @JSONField(name = "record")
-        private Record record;// 对应不同操作类型的消息体(json)
+        private Record record;// 对应不同操作类型的消息体
     }
 
 
@@ -130,43 +130,43 @@ public class onCallbackRes {
         private String timestamp;// 交易上链时间（UTC 时间）
 
         @JSONField(name = "nft")
-        private NftEVM nft;//对应不同操作类型的消息体(json)
+        private NftEVM nft;//对应不同操作类型的消息体
     }
 
     @Data
     public static class NftV1 {
         @JSONField(name = "class_id")
-        private String classId;
+        private String classId;// 类别 ID
 
         @JSONField(name = "nft_id")
-        private String nftId;
+        private String nftId;// NFT ID
     }
 
     @Data
     public static class NftNative {
         @JSONField(name = "class_id")
-        private String classId;
+        private String classId;// 类别 ID
 
         @JSONField(name = "id")
-        private String Id;
+        private String Id;// NFT ID
     }
 
     @Data
     public static class NftEVM {
         @JSONField(name = "class_id")
-        private String classId;
+        private String classId;// 类别 ID
 
         @JSONField(name = "id")
-        private Integer Id;
+        private Integer Id;// NFT ID
     }
 
     @Data
     public static class Mt {
         @JSONField(name = "class_id")
-        private String classId;
+        private String classId;// MT 类别 ID
 
         @JSONField(name = "mt_id")
-        private String mtId;
+        private String mtId;// MT ID
     }
 
     @Data
