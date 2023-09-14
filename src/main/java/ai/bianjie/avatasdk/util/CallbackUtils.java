@@ -1,5 +1,6 @@
 package ai.bianjie.avatasdk.util;
 
+import ai.bianjie.avatasdk.model.onCallbackRes;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -11,15 +12,13 @@ import java.util.Map;
 
 import static ai.bianjie.avatasdk.util.AvataUtils.sha256Sum;
 import static ai.bianjie.avatasdk.util.AvataUtils.sign;
+import static ai.bianjie.avatasdk.model.onCallbackRes.*;
 
 public class CallbackUtils {
 
-    // 验证签名时传入的 API 版本号
-    public static final String APIVersionV1 = "v1"; // v1 版本 AVATA Open API
-    public static final String APIVersionsOther = ""; // 其它版本 AVATA Open API,如 v2、v3
-
-
-    // callbackV1 v1 版本签名回调验签
+    /**
+     * v1 版本签名回调验签
+     */
     public static boolean callbackV1(HttpServletRequest r, String apiSecret) {
         try {
             String signature = r.getHeader("X-Signature");
@@ -32,13 +31,14 @@ public class CallbackUtils {
             }
             return true;
         } catch (Exception e) {
-            // 处理异常
             e.printStackTrace();
             return false;
         }
     }
 
-    // callback  v2 及其以上版本签名回调验签
+    /**
+     * v2 及其以上版本签名回调验签
+     */
     public static boolean callback(HttpServletRequest r, String path, String apiSecret) {
         try {
             String signature = r.getHeader("X-Signature");
@@ -49,7 +49,6 @@ public class CallbackUtils {
             }
             return true;
         } catch (Exception e) {
-            // 处理异常
             e.printStackTrace();
             return false;
         }
@@ -64,31 +63,50 @@ public class CallbackUtils {
      * @param r         该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
      * @param app       自己的业务逻辑代码（验证签名通过才会执行）
      * @return
-     * @throws IOException
+     * @throws Exception
      */
-    public static String onCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) throws Exception {
+    public static String OnCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) throws Exception {
+        Object obj = null;
+
         boolean result;
         switch (version) {
             case APIVersionV1:
                 result = callbackV1(r, apiSecret);
+                // 获取请求体的 Reader
+                BufferedReader reader = r.getReader();
+                StringBuilder body = new StringBuilder();
+
+                // 读取请求体内容
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    body.append(line);
+                }
+
+                // 请求体内容存储在 body 变量中
+                String requestBody = body.toString();
+                obj = JSON.parseObject(requestBody, onCallbackRes.onCallbackResV1.class);
                 break;
             case APIVersionsOther:
                 result = callback(r, path, apiSecret);
                 break;
             default:
-                throw new AppException("version verification failed"); // 版本不对，报错版本验证失败
+                // 版本不对，报错版本验证失败
+                throw new Exception("version verification failed");
         }
         if (!result) {
-            throw new AppException("signature verification failed"); // 回调推送签名验证失败
+            // 回调推送签名验证失败
+            throw new Exception("signature verification failed");
         }
 
         // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
         try {
-            app.app(r, version, apiSecret, path);
-        }catch (AppException e) {
-            throw new AppException("app error: " + e.getMessage()); // 业务接口异常
+            app.app(r, version, apiSecret, path, obj);
+        } catch (Exception e) {
+            // 业务接口异常
+            throw new Exception("app error: " + e.getMessage());
         }
-        return "SUCCESS"; // 向 Avata 服务器返回结果
+        // 向 Avata 服务器返回结果
+        return "SUCCESS";
     }
 
     private static Map<String, Object> getRequestBody(HttpServletRequest r) {
@@ -111,13 +129,9 @@ public class CallbackUtils {
      * 业务接口，应用方需要实现业务逻辑，在验签成功后执行
      */
     public interface APP {
-        void app(HttpServletRequest r, String version, String apiSecret, String path) throws AppException;
+        void app(HttpServletRequest r, String version, String apiSecret, String path, Object object);
     }
-    public static class AppException extends Exception {
-        public AppException(String message) {
-            super(message);
-        }
-    }
+
 }
 
 

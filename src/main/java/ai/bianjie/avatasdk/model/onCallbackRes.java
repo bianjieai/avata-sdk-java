@@ -19,7 +19,7 @@ public class onCallbackRes {
     // OnCallbackResV1 AVATA Open API V1 版本回调服务参数
     @Data
     @NoArgsConstructor
-    public class onCallbackResV1 {
+    public static class onCallbackResV1 {
 
         @JSONField(name = "operation_id")
         private String operationId;// 操作 ID
@@ -58,7 +58,7 @@ public class onCallbackRes {
 
     @Data
     @NoArgsConstructor
-    public class onCallbackResNative {
+    public static class onCallbackResNative {
 
         @JSONField(name = "kind")
         private Kind kind;// 区分服务，native / evm
@@ -100,7 +100,7 @@ public class onCallbackRes {
 
     @Data
     @NoArgsConstructor
-    public class onCallbackResEVM {
+    public static class onCallbackResEVM {
 
         @JSONField(name = "kind")
         private Kind kind;// 区分服务，native / evm
