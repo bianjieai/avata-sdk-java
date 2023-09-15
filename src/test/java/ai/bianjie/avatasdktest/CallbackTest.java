@@ -22,8 +22,8 @@ public class CallbackTest {
                     //throw new CallbackUtils.AppException("error occurred in the app method");
                     if (object instanceof onCallbackResV1) {
                         onCallbackResV1 v1Res = (onCallbackResV1) object;
-                        JSONObject nft = JSONObject.parseObject(v1Res.getNft());
-                        System.out.println(nft.get("nft_id"));
+                        JSONObject nftRes = JSONObject.parseObject(v1Res.getNft());
+                        System.out.println(nftRes.get("nft_id"));
                     } else if (object instanceof onCallbackResNative) {
                         onCallbackResNative nativeRes = (onCallbackResNative) object;
                         System.out.println(nativeRes.getNft().getId());

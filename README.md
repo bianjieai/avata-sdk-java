@@ -50,3 +50,5 @@ public class AvataClientTest {
 - [Web3 域名服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NsTest.java)
 - [智能合约服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/ContractTest.java)
 - [交易结果查询接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/TxTest.java)
+
+[回调服务示例代码](src/test/java/ai/bianjie/avatasdktest/CallbackTest.java)

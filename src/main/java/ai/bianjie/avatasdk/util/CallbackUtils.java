@@ -77,7 +77,7 @@ public class CallbackUtils {
                     throw new Exception("signature verification failed");
                 }
                 // 解析回调结果
-                obj = JSON.parseObject(requestBodyData, onCallbackRes.onCallbackResV1.class);
+                obj = JSON.parseObject(requestBodyData, onCallbackResV1.class);
                 break;
 
             case APIVersionsOther:
@@ -89,15 +89,15 @@ public class CallbackUtils {
                 }
 
                 // 根据不同的服务模块（native/evm）解析回调结果
-                obj = JSON.parseObject(requestBodyData, onCallbackRes.Kind.class);
-                onCallbackRes.Kind kindRes = (onCallbackRes.Kind) obj;
+                obj = JSON.parseObject(requestBodyData, Kind.class);
+                Kind kindRes = (Kind) obj;
 
                 switch (kindRes.getKind()) {
-                    case onCallbackRes.Native:
-                        obj = JSON.parseObject(requestBodyData, onCallbackRes.onCallbackResNative.class);
+                    case Native:
+                        obj = JSON.parseObject(requestBodyData, onCallbackResNative.class);
                         break;
-                    case onCallbackRes.EVM:
-                        obj = JSON.parseObject(requestBodyData, onCallbackRes.onCallbackResEVM.class);
+                    case EVM:
+                        obj = JSON.parseObject(requestBodyData, onCallbackResEVM.class);
                         break;
                 }
                 break;
