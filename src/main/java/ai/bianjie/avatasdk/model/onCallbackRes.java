@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 public class onCallbackRes {
 
     // 验证签名时传入的 API 版本号
-    public static final String APIVersionV1 = "V1"; // V1 版本 AVATA Open API
+    public static final String APIVersionV1 = "v1"; // V1 版本 AVATA Open API
     public static final String APIVersionsOther = "";// 其它版本 AVATA Open API
 
     // 区分调用不同服务模块的接口
-    public String Native = "native";
-    public String EVM = "evm";
+    public static final String Native = "native";
+    public static final String EVM = "evm";
 
     // OnCallbackResV1 AVATA Open API V1 版本回调服务参数
     @Data
@@ -46,13 +46,13 @@ public class onCallbackRes {
         private String timestamp;// 交易上链时间（UTC 时间）
 
         @JSONField(name = "nft")
-        private NftV1 nft;//对应不同操作类型的消息体
+        private String nft;//对应不同操作类型的消息体
 
         @JSONField(name = "mt")
-        private Mt mt;// 对应不同操作类型的消息体
+        private String mt;// 对应不同操作类型的消息体
 
         @JSONField(name = "record")
-        private Record record;// 对应不同操作类型的消息体
+        private String record;// 对应不同操作类型的消息体
     }
 
 
@@ -61,7 +61,7 @@ public class onCallbackRes {
     public static class onCallbackResNative {
 
         @JSONField(name = "kind")
-        private Kind kind;// 区分服务，native / evm
+        private String kind;// 区分服务，native / evm
 
         @JSONField(name = "operation_id")
         private String operationId;// 操作 ID
@@ -103,7 +103,7 @@ public class onCallbackRes {
     public static class onCallbackResEVM {
 
         @JSONField(name = "kind")
-        private Kind kind;// 区分服务，native / evm
+        private String kind;// 区分服务，native / evm
 
         @JSONField(name = "operation_id")
         private String operationId;// 操作 ID
@@ -131,15 +131,6 @@ public class onCallbackRes {
 
         @JSONField(name = "nft")
         private NftEVM nft;//对应不同操作类型的消息体
-    }
-
-    @Data
-    public static class NftV1 {
-        @JSONField(name = "class_id")
-        private String classId;// 类别 ID
-
-        @JSONField(name = "nft_id")
-        private String nftId;// NFT ID
     }
 
     @Data
