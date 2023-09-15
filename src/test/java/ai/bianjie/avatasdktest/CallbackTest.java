@@ -1,6 +1,7 @@
 package ai.bianjie.avatasdktest;
 
 import ai.bianjie.avatasdk.util.CallbackUtils;
+import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +12,7 @@ public class CallbackTest {
         try {
             String result = CallbackUtils.OnCallback(APIVersionV1, "", null, r, new CallbackUtils.APP() {
                 @Override
-                public void app(HttpServletRequest r, String version, String apiSecret, String path, Object object) {
+                public void onCallback(HttpServletRequest r, String version, String apiSecret, String path, Object object) throws Exception {
                     System.out.println(version);
                     System.out.println(apiSecret);
                     System.out.println(path);
@@ -19,22 +20,19 @@ public class CallbackTest {
                     System.out.println(r.getHeader("X-Timestamp"));
                     // Add your app logic here
                     //throw new CallbackUtils.AppException("error occurred in the app method");
-                    switch (object.getClass().getName()) {
-                        case "onCallbackResV1":
-                            onCallbackResV1 v1Res = (onCallbackResV1) object;
-                            System.out.println(v1Res.getTxHash());
-                            break;
-                        case "onCallbackResNative":
-                            onCallbackResNative nativeRes = (onCallbackResNative) object;
-                            System.out.println(nativeRes.getTxHash());
-                            break;
-                        case "onCallbackResEVM":
-                            onCallbackResEVM evmRes = (onCallbackResEVM) object;
-                            System.out.println(evmRes.getTxHash());
-                            break;
-                        default:
-                            // 处理其他类型或默认情况
-                            System.out.println("Object is of unknown type");
+                    if (object instanceof onCallbackResV1) {
+                        onCallbackResV1 v1Res = (onCallbackResV1) object;
+                        JSONObject nft = JSONObject.parseObject(v1Res.getNft());
+                        System.out.println(nft.get("nft_id"));
+                    } else if (object instanceof onCallbackResNative) {
+                        onCallbackResNative nativeRes = (onCallbackResNative) object;
+                        System.out.println(nativeRes.getNft().getId());
+                    } else if (object instanceof onCallbackResEVM) {
+                        onCallbackResEVM evmRes = (onCallbackResEVM) object;
+                        System.out.println(evmRes.getNft().getId());
+                    } else {
+                        // 处理其他类型或默认情况
+                        throw new Exception("Object is of unknown type");
                     }
                 }
             });

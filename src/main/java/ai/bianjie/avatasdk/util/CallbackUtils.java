@@ -7,7 +7,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.Map;
 
 import static ai.bianjie.avatasdk.util.AvataUtils.sha256Sum;
@@ -19,10 +18,10 @@ public class CallbackUtils {
     /**
      * v1 版本签名回调验签
      */
-    public static boolean callbackV1(HttpServletRequest r, String apiSecret) {
+    public static boolean callbackV1(HttpServletRequest r, String apiSecret, String requestBodyData) {
         try {
             String signature = r.getHeader("X-Signature");
-            JSONObject jsonObj = JSON.parseObject(getRequestBody(r).toString());
+            JSONObject jsonObj = JSON.parseObject(getMap(requestBodyData).toString());
             String jsonStr = JSON.toJSONString(jsonObj, SerializerFeature.MapSortField);
             // 执行签名
             String hexHash = sha256Sum(jsonStr + apiSecret);
@@ -39,11 +38,11 @@ public class CallbackUtils {
     /**
      * v2 及其以上版本签名回调验签
      */
-    public static boolean callback(HttpServletRequest r, String path, String apiSecret) {
+    public static boolean callback(HttpServletRequest r, String path, String apiSecret, String requestBodyData) {
         try {
             String signature = r.getHeader("X-Signature");
             Long timestamp = Long.valueOf(r.getHeader("X-Timestamp"));
-            String hexHash = sign(path, null, getRequestBody(r), timestamp, apiSecret);
+            String hexHash = sign(path, null, getMap(requestBodyData), timestamp, apiSecret);
             if (!hexHash.equals(signature)) {
                 return false;
             }
@@ -61,46 +60,55 @@ public class CallbackUtils {
      * @param apiSecret 项目 API Secret
      * @param path      在 Avata服务平台设置的回调地址(去掉域名)
      * @param r         该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
-     * @param app       自己的业务逻辑代码（验证签名通过才会执行）
+     * @param onCallback       自己的业务逻辑代码（验证签名通过才会执行）
      * @return
      * @throws Exception
      */
-    public static String OnCallback(String version, String apiSecret, String path, HttpServletRequest r, APP app) throws Exception {
+    public static String OnCallback(String version, String apiSecret, String path, HttpServletRequest r, APP onCallback) throws Exception {
+        String requestBodyData = getRequestBody(r);
         Object obj = null;
-
         boolean result;
         switch (version) {
             case APIVersionV1:
-                result = callbackV1(r, apiSecret);
-                // 获取请求体的 Reader
-                BufferedReader reader = r.getReader();
-                StringBuilder body = new StringBuilder();
+                // 验证签名
+                result = callbackV1(r, apiSecret, requestBodyData);
+                if (!result) {
+                    // 回调推送签名验证失败
+                    throw new Exception("signature verification failed");
+                }
+                // 解析回调结果
+                obj = JSON.parseObject(requestBodyData, onCallbackRes.onCallbackResV1.class);
+                break;
 
-                // 读取请求体内容
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    body.append(line);
+            case APIVersionsOther:
+                // 验证签名
+                result = callback(r, path, apiSecret, requestBodyData);
+                if (!result) {
+                    // 回调推送签名验证失败
+                    throw new Exception("signature verification failed");
                 }
 
-                // 请求体内容存储在 body 变量中
-                String requestBody = body.toString();
-                obj = JSON.parseObject(requestBody, onCallbackRes.onCallbackResV1.class);
-                break;
-            case APIVersionsOther:
-                result = callback(r, path, apiSecret);
+                // 根据不同的服务模块（native/evm）解析回调结果
+                obj = JSON.parseObject(requestBodyData, onCallbackRes.Kind.class);
+                onCallbackRes.Kind kindRes = (onCallbackRes.Kind) obj;
+
+                switch (kindRes.getKind()) {
+                    case onCallbackRes.Native:
+                        obj = JSON.parseObject(requestBodyData, onCallbackRes.onCallbackResNative.class);
+                        break;
+                    case onCallbackRes.EVM:
+                        obj = JSON.parseObject(requestBodyData, onCallbackRes.onCallbackResEVM.class);
+                        break;
+                }
                 break;
             default:
                 // 版本不对，报错版本验证失败
                 throw new Exception("version verification failed");
         }
-        if (!result) {
-            // 回调推送签名验证失败
-            throw new Exception("signature verification failed");
-        }
 
         // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
         try {
-            app.app(r, version, apiSecret, path, obj);
+            onCallback.onCallback(r, version, apiSecret, path, obj);
         } catch (Exception e) {
             // 业务接口异常
             throw new Exception("app error: " + e.getMessage());
@@ -109,7 +117,10 @@ public class CallbackUtils {
         return "SUCCESS";
     }
 
-    private static Map<String, Object> getRequestBody(HttpServletRequest r) {
+    /**
+     * 获取 HTTP 请求体内容
+     */
+    public static String getRequestBody(HttpServletRequest r) {
         StringBuilder requestBody = new StringBuilder();
         try {
             BufferedReader reader = r.getReader();
@@ -117,11 +128,19 @@ public class CallbackUtils {
             while ((line = reader.readLine()) != null) {
                 requestBody.append(line);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
-        Map<String, Object> maps = JSON.parseObject(String.valueOf(requestBody));
-        //System.out.println("Request Body: " + requestBody);
+        // 请求体内容存储在 body 变量中
+        String body = requestBody.toString();
+        return body;
+    }
+
+    /**
+     * JSON 格式的字符串转换为 Map 对象
+     */
+    public static Map<String, Object> getMap(String params) {
+        Map<String, Object> maps = JSON.parseObject(params);
         return maps;
     }
 
@@ -129,7 +148,7 @@ public class CallbackUtils {
      * 业务接口，应用方需要实现业务逻辑，在验签成功后执行
      */
     public interface APP {
-        void app(HttpServletRequest r, String version, String apiSecret, String path, Object object);
+        void onCallback(HttpServletRequest r, String version, String apiSecret, String path, Object object) throws Exception;
     }
 
 }
