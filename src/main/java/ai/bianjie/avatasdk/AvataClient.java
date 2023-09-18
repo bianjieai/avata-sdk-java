@@ -2,26 +2,25 @@ package ai.bianjie.avatasdk;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
 import ai.bianjie.avatasdk.exception.AvataException;
-import ai.bianjie.avatasdk.proxy.account.impl.AccountClient;
-import ai.bianjie.avatasdk.proxy.mt.impl.MtClient;
-import ai.bianjie.avatasdk.proxy.nft.impl.NftClient;
-import ai.bianjie.avatasdk.proxy.order.impl.OrderClient;
-import ai.bianjie.avatasdk.proxy.record.impl.RecordClient;
-import ai.bianjie.avatasdk.proxy.tx.impl.TxClient;
+import ai.bianjie.avatasdk.proxy.account.impl.Account;
+import ai.bianjie.avatasdk.proxy.order.impl.Order;
+import ai.bianjie.avatasdk.proxy.user.impl.User;
+import ai.bianjie.avatasdk.util.HttpClient;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.config.ForestConfiguration;
 import com.dtflys.forest.http.ForestAsyncMode;
 import com.dtflys.forest.retryer.BackOffRetryer;
 import com.dtflys.forest.ssl.SSLUtils;
 import com.dtflys.forest.utils.StringUtils;
+import lombok.Data;
 
 public class AvataClient {
-    public NftClient nftClient;
-    public AccountClient accountClient;
-    public MtClient mtClient;
-    public OrderClient orderClient;
-    public RecordClient recordsClient;
-    public TxClient txClient;
+
+    public Account account;
+    public Order order;
+    public User user;
+    public Native nat;
+    public Evm evm;
 
     /**
      * SDK initialization method
@@ -33,14 +32,15 @@ public class AvataClient {
         configInfo.setApiSecret(builder.apiSecret);
         configInfo.setHttpTimeout(builder.httpTimeout);
 
-        this.accountClient = new AccountClient(configInfo);
-        this.nftClient = new NftClient(configInfo);
-        this.mtClient = new MtClient(configInfo);
-        this.orderClient = new OrderClient(configInfo);
-        this.recordsClient = new RecordClient(configInfo);
-        this.txClient = new TxClient(configInfo);
+        HttpClient httpClient = new HttpClient(configInfo);
+        this.account = new Account(httpClient);
+        this.order = new Order(httpClient);
+        this.user = new User(httpClient);
+        this.nat = new Native(httpClient);
+        this.evm = new Evm(httpClient);
     }
 
+    @Data
     public static class Builder {
         private String domain;
         private String apiKey;
@@ -126,3 +126,7 @@ public class AvataClient {
         }
     }
 }
+
+
+
+

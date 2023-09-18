@@ -14,12 +14,17 @@ import ai.bianjie.avatasdk.model.ErrorResponse;
 
 @Slf4j
 public class HttpClient {
+    private ConfigInfo configInfo;
+    public HttpClient(ConfigInfo configInfo) {
+        this.configInfo = configInfo;
+    }
+
     /**
      * Send a post request
      * @param path The url of the post request
      * @param content The body parameter of the post request
      */
-    public static ForestResponse Post(String path, String content, ConfigInfo configInfo) {
+    public ForestResponse post(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(configInfo.getDoMain());
         url.append(path);
@@ -45,7 +50,7 @@ public class HttpClient {
      * @param path The url of the get request
      * @param content The query parameter of the get request
      */
-    public static ForestResponse Get(String path, String content, ConfigInfo configInfo) {
+    public  ForestResponse get(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(configInfo.getDoMain());
         url.append(path);
@@ -71,7 +76,7 @@ public class HttpClient {
      * @param path The url of the patch request
      * @param content The body parameter of the patch request
      */
-    public static ForestResponse Patch(String path, String content, ConfigInfo configInfo) {
+    public ForestResponse patch(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(configInfo.getDoMain());
         url.append(path);
@@ -97,7 +102,7 @@ public class HttpClient {
      * @param path The url of the delete request
      * @param content The body parameter of the delete request
      */
-    public static ForestResponse Delete(String path, String content, ConfigInfo configInfo) {
+    public ForestResponse delete(String path, String content) {
         StringBuffer url = new StringBuffer();
         url.append(configInfo.getDoMain());
         url.append(path);

@@ -4,6 +4,9 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 创建链账户正确返回值
+ */
 @NoArgsConstructor
 @Data
 public class CreateAccountRes {
@@ -14,11 +17,13 @@ public class CreateAccountRes {
     @NoArgsConstructor
     @Data
     public static class DataDTO {
-        @JSONField(name = "account")
-        private String account;// 链账户地址
-        @JSONField(name = "name")
-        private String name;// 链账户名称
-        @JSONField(name = "operation_id")
-        private String operationId;// 操作 ID。此操作 ID 仅限在查询链账户接口中使用，用于查询创建链账户的授权状态。
+
+        @JSONField(name = "native_address")
+        private String nativeAddress;// 原生地址格式
+
+        @JSONField(name = "hex_address")
+        private String hexAddress;// 以太坊地址格式
+
     }
 }
+

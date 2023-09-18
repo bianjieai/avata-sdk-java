@@ -5,8 +5,6 @@ import ai.bianjie.avatasdk.model.ErrorResponse;
 
 /**
  * SDK custom ai.bianjie.avatasdk.exception
- *
- * @author sxj
  */
 @Data
 public class AvataException extends RuntimeException {
@@ -23,9 +21,9 @@ public class AvataException extends RuntimeException {
     public static final String ErrAPISecret = "the api secret the project is required";
     public static final String ErrAmount = "amount should be integer yuan";
 
-    private final String codeSpace;
-    private final String code;
-    private final String message;
+    private final String codeSpace; // 命名空间
+    private final String code; // 错误码
+    private final String message; // 错误描述
 
     public AvataException(String code, String codeSpace, String message) {
         super(message);

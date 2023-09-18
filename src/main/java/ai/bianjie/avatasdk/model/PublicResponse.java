@@ -13,8 +13,5 @@ public class PublicResponse {
 
     @NoArgsConstructor
     @Data
-    public static class DataDTO {
-        @JSONField(name = "operation_id")
-        private String operationId;
-    }
+    public static class DataDTO { }
 }
