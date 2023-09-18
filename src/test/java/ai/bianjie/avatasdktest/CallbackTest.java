@@ -1,6 +1,7 @@
 package ai.bianjie.avatasdktest;
 
 import ai.bianjie.avatasdk.util.CallbackUtils;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,22 +13,27 @@ public class CallbackTest {
         try {
             String result = CallbackUtils.OnCallback(APIVersionV1, "", null, r, new CallbackUtils.APP() {
                 @Override
-                public void onCallback(HttpServletRequest r, String version, String apiSecret, String path, Object object) throws Exception {
+                public void onCallback(String version, String kind, Object object) throws Exception {
                     System.out.println(version);
-                    System.out.println(apiSecret);
-                    System.out.println(path);
                     System.out.println(r.getHeader("X-Signature"));
                     System.out.println(r.getHeader("X-Timestamp"));
                     // Add your app logic here
                     //throw new CallbackUtils.AppException("error occurred in the app method");
                     if (object instanceof onCallbackResV1) {
+                        // V1 版本回调结果
                         onCallbackResV1 v1Res = (onCallbackResV1) object;
-                        JSONObject nftRes = JSONObject.parseObject(v1Res.getNft());
-                        System.out.println(nftRes.get("nft_id"));
+                        System.out.println(v1Res);
+
+                        Object nftObj = JSON.parseObject(v1Res.getNft(), NftV1.class);
+                        NftV1 nftRes = (NftV1) nftObj;
+                        System.out.println(nftRes.getClassId());
+
                     } else if (object instanceof onCallbackResNative) {
+                        // V2 及以上版本原生模块接口回调结果
                         onCallbackResNative nativeRes = (onCallbackResNative) object;
                         System.out.println(nativeRes.getNft().getId());
                     } else if (object instanceof onCallbackResEVM) {
+                        // V2 及以上版本 EVM 模块接口回调结果
                         onCallbackResEVM evmRes = (onCallbackResEVM) object;
                         System.out.println(evmRes.getNft().getId());
                     } else {

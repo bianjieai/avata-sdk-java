@@ -9,16 +9,17 @@ import lombok.NoArgsConstructor;
 public class onCallbackRes {
 
     // 验证签名时传入的 API 版本号
-    public static final String APIVersionV1 = "v1"; // V1 版本 AVATA Open API
+    public static final String APIVersionV1 = "V1"; // V1 版本 AVATA Open API
     public static final String APIVersionsOther = "";// 其它版本 AVATA Open API
 
     // 区分调用不同服务模块的接口
     public static final String Native = "native";
     public static final String EVM = "evm";
 
-    // OnCallbackResV1 AVATA Open API V1 版本回调服务参数
+
     @Data
     @NoArgsConstructor
+    // OnCallbackResV1 AVATA Open API V1 版本回调服务参数
     public static class onCallbackResV1 {
 
         @JSONField(name = "operation_id")
@@ -58,6 +59,7 @@ public class onCallbackRes {
 
     @Data
     @NoArgsConstructor
+    // OnCallbackResNative AVATA Open API V2 及以上版本 Native 模块接口回调服务参数
     public static class onCallbackResNative {
 
         @JSONField(name = "kind")
@@ -100,6 +102,7 @@ public class onCallbackRes {
 
     @Data
     @NoArgsConstructor
+    // OnCallbackResEVM V2 及以上版本 EVM 模块接口回调服务参数
     public static class onCallbackResEVM {
 
         @JSONField(name = "kind")
@@ -134,6 +137,19 @@ public class onCallbackRes {
     }
 
     @Data
+    @NoArgsConstructor
+    // NftV1 V1 版本回调返回的 NFT 相关参数
+    public static class NftV1 {
+        @JSONField(name = "class_id")
+        private String classId;// 类别 ID
+
+        @JSONField(name = "nft_id")
+        private String nftId;// NFT ID
+    }
+
+    @Data
+    @NoArgsConstructor
+    // NftNative V2 及以上版本回调返回的原生模块 NFT 相关参数
     public static class NftNative {
         @JSONField(name = "class_id")
         private String classId;// 类别 ID
@@ -143,6 +159,8 @@ public class onCallbackRes {
     }
 
     @Data
+    @NoArgsConstructor
+    // NftEVM V2 及以上版本回调返回的 EVM 模块 NFT 相关参数
     public static class NftEVM {
         @JSONField(name = "class_id")
         private String classId;// 类别 ID
@@ -152,6 +170,8 @@ public class onCallbackRes {
     }
 
     @Data
+    @NoArgsConstructor
+    // Mt 回调返回的 MT 相关参数（不同版本通用）
     public static class Mt {
         @JSONField(name = "class_id")
         private String classId;// MT 类别 ID
@@ -161,6 +181,8 @@ public class onCallbackRes {
     }
 
     @Data
+    @NoArgsConstructor
+    // Record 回调返回的 Record 相关参数（不同版本通用）
     public static class Record {
         @JSONField(name = "record_id")
         private String recordId;// 区块链存证 ID
@@ -170,6 +192,7 @@ public class onCallbackRes {
     }
 
     @Data
+    @NoArgsConstructor
     public static class Kind {
         @JSONField(name = "kind")
         private String kind;//区分服务，native / evm

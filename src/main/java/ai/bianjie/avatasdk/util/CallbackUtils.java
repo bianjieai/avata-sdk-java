@@ -56,17 +56,18 @@ public class CallbackUtils {
     /**
      * 接收来自 Avata 的推送消息
      *
-     * @param version   版本 ：v1 需要传 APIVersionV1 , v2 或者 v3 版本传 APIVersionsOther
-     * @param apiSecret 项目 API Secret
-     * @param path      在 Avata服务平台设置的回调地址(去掉域名)
-     * @param r         该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
-     * @param onCallback       自己的业务逻辑代码（验证签名通过才会执行）
+     * @param version    版本 ：v1 需要传 APIVersionV1 , v2 或者 v3 版本传 APIVersionsOther
+     * @param apiSecret  项目 API Secret
+     * @param path       在 Avata服务平台设置的回调地址(去掉域名)
+     * @param r          该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
+     * @param onCallback 自己的业务逻辑代码（验证签名通过才会执行）
      * @return
      * @throws Exception
      */
     public static String OnCallback(String version, String apiSecret, String path, HttpServletRequest r, APP onCallback) throws Exception {
         String requestBodyData = getRequestBody(r);
         Object obj = null;
+        String kind = "";
         boolean result;
         switch (version) {
             case APIVersionV1:
@@ -81,22 +82,23 @@ public class CallbackUtils {
                 break;
 
             case APIVersionsOther:
-                // 验证签名
+                //验证签名
                 result = callback(r, path, apiSecret, requestBodyData);
                 if (!result) {
                     // 回调推送签名验证失败
                     throw new Exception("signature verification failed");
                 }
-
                 // 根据不同的服务模块（native/evm）解析回调结果
                 obj = JSON.parseObject(requestBodyData, Kind.class);
                 Kind kindRes = (Kind) obj;
 
                 switch (kindRes.getKind()) {
                     case Native:
+                        kind = Native;
                         obj = JSON.parseObject(requestBodyData, onCallbackResNative.class);
                         break;
                     case EVM:
+                        kind = EVM;
                         obj = JSON.parseObject(requestBodyData, onCallbackResEVM.class);
                         break;
                 }
@@ -108,7 +110,7 @@ public class CallbackUtils {
 
         // 该笔推送消息属于文昌链上链完成所推送消息，请及时存储数据
         try {
-            onCallback.onCallback(r, version, apiSecret, path, obj);
+            onCallback.onCallback(version, kind, obj);
         } catch (Exception e) {
             // 业务接口异常
             throw new Exception("app error: " + e.getMessage());
@@ -148,9 +150,8 @@ public class CallbackUtils {
      * 业务接口，应用方需要实现业务逻辑，在验签成功后执行
      */
     public interface APP {
-        void onCallback(HttpServletRequest r, String version, String apiSecret, String path, Object object) throws Exception;
+        void onCallback(String version, String kind, Object object) throws Exception;
     }
-
 }
 
 
