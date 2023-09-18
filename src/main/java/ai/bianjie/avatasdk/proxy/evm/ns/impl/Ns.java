@@ -97,7 +97,7 @@ public class Ns implements NsProxy {
     }
 
     @Override
-    public PublicResponse ResolveDomain(ResolveDomainReq req, String owner, String name) {
+    public PublicResponse resolveDomain(ResolveDomainReq req, String owner, String name) {
         log.debug("ResolveDomainReq {},owner {}, name {}", req, owner, name);
         log.debug("resolveDomain start");
         // check params

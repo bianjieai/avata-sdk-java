@@ -101,7 +101,7 @@ public class NsTest {
         //textDTO.setTextValue("");
         req.setOperationId("resolveDomain");
         try {
-            PublicResponse res = client.evm.ns.ResolveDomain(req,
+            PublicResponse res = client.evm.ns.resolveDomain(req,
                     "",
                     "");
             System.out.println(res.getData());

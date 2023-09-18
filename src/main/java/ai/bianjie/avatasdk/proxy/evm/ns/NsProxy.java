@@ -46,7 +46,7 @@ public interface NsProxy {
      * @param name  域名名称
      * @return
      */
-    PublicResponse ResolveDomain(ResolveDomainReq req, String owner, String name);
+    PublicResponse resolveDomain(ResolveDomainReq req, String owner, String name);
 
 
     /**
