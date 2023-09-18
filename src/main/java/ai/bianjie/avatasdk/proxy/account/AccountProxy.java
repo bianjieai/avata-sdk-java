@@ -29,7 +29,7 @@ public interface AccountProxy {
     QueryAccountsRes queryAccounts(QueryAccountsReq req);
 
     /**
-     * 原生项目 查询链账户操作记录
+     * 原生模块 查询链账户操作记录
      *
      * @param req 查询链账户操作记录请求实体
      * @return
@@ -37,7 +37,7 @@ public interface AccountProxy {
     QueryNatAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req);
 
     /**
-     * EVM项目 查询链账户操作记录
+     * EVM 模块 查询链账户操作记录
      *
      * @param req 查询链账户操作记录请求实体
      * @return

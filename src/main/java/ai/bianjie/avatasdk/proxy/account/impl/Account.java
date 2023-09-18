@@ -15,8 +15,8 @@ public class Account implements AccountProxy {
     private static final String CREATE_ACCOUNT = "/v3/account";// 创建链账户接口
     private static final String BATCH_CREATE_ACCOUNTS = "/v3/accounts";// 批量创建链账户接口
     private static final String QUERY_ACCOUNTS = "/v3/accounts";// 查询链账户接口
-    private static final String QUERY_NATIVE_ACCOUNTS_HISTORY = "/v3/native/accounts/history";// 原生项目查询链账户操作记录接口
-    private static final String QUERY_EVM_ACCOUNTS_HISTORY = "/v3/evm/accounts/history";// EVM 项目查询链账户操作记录接口
+    private static final String QUERY_NATIVE_ACCOUNTS_HISTORY = "/v3/native/accounts/history";// 原生模块查询链账户操作记录接口
+    private static final String QUERY_EVM_ACCOUNTS_HISTORY = "/v3/evm/accounts/history";// EVM 模块查询链账户操作记录接口
     private HttpClient httpClient;
 
     public Account(HttpClient httpClient) {

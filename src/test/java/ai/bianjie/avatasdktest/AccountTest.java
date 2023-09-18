@@ -70,7 +70,7 @@ public class AccountTest {
     }
 
     @Test
-        //原生项目：请求查询链账户操作记录接口示例
+        //原生模块：请求查询链账户操作记录接口示例
     void TestQueryNativeAccountHistory() {
         QueryAccountsHistoryReq req = new QueryAccountsHistoryReq();
         //req.setPageKey("");
@@ -87,7 +87,7 @@ public class AccountTest {
     }
 
     @Test
-        //EVM 项目：请求查询链账户操作记录接口示例
+        //EVM 模块：请求查询链账户操作记录接口示例
     void TestQueryEvmAccountHistory() {
         QueryAccountsHistoryReq req = new QueryAccountsHistoryReq();
         //req.setPageKey("");
