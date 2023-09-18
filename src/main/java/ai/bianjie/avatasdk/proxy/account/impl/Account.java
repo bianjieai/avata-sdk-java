@@ -66,25 +66,25 @@ public class Account implements AccountProxy {
 
 
     @Override
-    public QueryNativeAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req) {
+    public QueryNatAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req) {
         log.debug("QueryAccountsHistoryReq {}", req);
-        log.debug("queryAccountsHistory start");
+        log.debug("queryNatAccountsHistory start");
         ForestResponse response = httpClient.get(QUERY_NATIVE_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
         String result = response.readAsString();
-        QueryNativeAccountsHistoryRes res = JSONObject.parseObject(result, QueryNativeAccountsHistoryRes.class);
-        log.debug("queryAccountsHistory end");
+        QueryNatAccountsHistoryRes res = JSONObject.parseObject(result, QueryNatAccountsHistoryRes.class);
+        log.debug("queryNatAccountsHistory end");
         return res;
     }
 
 
     @Override
-    public QueryNativeAccountsHistoryRes queryEvmAccountsHistory(QueryAccountsHistoryReq req) {
+    public QueryEvmAccountsHistoryRes queryEvmAccountsHistory(QueryAccountsHistoryReq req) {
         log.debug("QueryAccountsHistoryReq {}", req);
-        log.debug("queryAccountsHistory start");
+        log.debug("queryEvmAccountsHistory start");
         ForestResponse response = httpClient.get(QUERY_EVM_ACCOUNTS_HISTORY, JSONObject.toJSONString(req));
         String result = response.readAsString();
-        QueryNativeAccountsHistoryRes res = JSONObject.parseObject(result, QueryNativeAccountsHistoryRes.class);
-        log.debug("queryAccountsHistory end");
+        QueryEvmAccountsHistoryRes res = JSONObject.parseObject(result, QueryEvmAccountsHistoryRes.class);
+        log.debug("queryEvmAccountsHistory end");
         return res;
     }
 }

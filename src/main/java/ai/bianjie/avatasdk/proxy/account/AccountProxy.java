@@ -1,7 +1,6 @@
 package ai.bianjie.avatasdk.proxy.account;
 
 import ai.bianjie.avatasdk.model.account.*;
-import ai.bianjie.avatasdk.model.account.QueryNativeAccountsHistoryRes;
 
 public interface AccountProxy {
 
@@ -35,7 +34,7 @@ public interface AccountProxy {
      * @param req 查询链账户操作记录请求实体
      * @return
      */
-    QueryNativeAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req);
+    QueryNatAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req);
 
     /**
      * EVM项目 查询链账户操作记录
@@ -43,7 +42,7 @@ public interface AccountProxy {
      * @param req 查询链账户操作记录请求实体
      * @return
      */
-    QueryNativeAccountsHistoryRes queryEvmAccountsHistory(QueryAccountsHistoryReq req);
+    QueryEvmAccountsHistoryRes queryEvmAccountsHistory(QueryAccountsHistoryReq req);
 }
 
 

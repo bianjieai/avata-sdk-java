@@ -2,7 +2,6 @@ package ai.bianjie.avatasdktest;
 
 import ai.bianjie.avatasdk.AvataClient;
 import ai.bianjie.avatasdk.model.account.*;
-import ai.bianjie.avatasdk.model.account.QueryNativeAccountsHistoryRes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -78,7 +77,7 @@ public class AccountTest {
         //req.setLimit("");
         req.setAccount("iaa1jjmwg5ah27aynuwt2phwa8sfvzh4lvvlelddxm");
         try {
-            QueryNativeAccountsHistoryRes account = client.account.queryNativeAccountsHistory(req);
+            QueryNatAccountsHistoryRes account = client.account.queryNativeAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {
@@ -94,7 +93,7 @@ public class AccountTest {
         //req.setPageKey("");
         //req.setLimit("");
         try {
-            QueryNativeAccountsHistoryRes account = client.account.queryEvmAccountsHistory(req);
+            QueryEvmAccountsHistoryRes account = client.account.queryEvmAccountsHistory(req);
             System.out.println(account.getData());
             System.out.println("no ai.bianjie.avatasdk.exception");
         } catch (Exception e) {

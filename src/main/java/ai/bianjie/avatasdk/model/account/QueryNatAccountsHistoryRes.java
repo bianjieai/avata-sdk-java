@@ -11,7 +11,7 @@ import java.util.List;
  */
 @NoArgsConstructor
 @Data
-public class QueryNativeAccountsHistoryRes {
+public class QueryNatAccountsHistoryRes {
 
     @JSONField(name = "data")
     private DataDTO data;
