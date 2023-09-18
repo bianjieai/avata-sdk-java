@@ -12,10 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Order implements OrderProxy {
-    private static final String CREATE_ORDER = "/v3/orders";
-    private static final String BATCH_CREATE_ORDER = "/v3/orders/batch";
-    private static final String QUERY_ORDER = "/v3/orders/%s";
-    private static final String QUERY_ORDERS = "/v3/orders";
+    private static final String CREATE_ORDER = "/v3/orders";// 购买能量值
+    private static final String BATCH_CREATE_ORDER = "/v3/orders/batch";// 批量购买能量值
+    private static final String QUERY_ORDER = "/v3/orders/%s";// 查询能量值购买结果
+    private static final String QUERY_ORDERS = "/v3/orders";// 查询能量值购买结果列表
 
     private HttpClient httpClient;
 
@@ -84,7 +84,7 @@ public class Order implements OrderProxy {
         log.debug("operationId {}", operationId);
         log.debug("queryOrder start");
         String path = String.format(QUERY_ORDER, operationId);
-        ForestResponse response = httpClient.get(path, "" );
+        ForestResponse response = httpClient.get(path, "");
         String result = response.readAsString();
         QueryOrderRes res = JSONObject.parseObject(result, QueryOrderRes.class);
         log.debug("queryOrder end");

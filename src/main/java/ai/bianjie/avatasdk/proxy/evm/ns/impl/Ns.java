@@ -74,7 +74,7 @@ public class Ns implements NsProxy {
         ForestResponse response = httpClient.get(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
         QueryOwnerDomainRes res = JSONObject.parseObject(result, QueryOwnerDomainRes.class);
-        log.debug("queryDomain end");
+        log.debug("queryOwnerDomain end");
         return res;
     }
 
@@ -110,7 +110,7 @@ public class Ns implements NsProxy {
         String path = String.format(RESOLVE_DOMAIN, owner, name);
         ForestResponse response = httpClient.post(path, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
-        log.debug("resolveDomainReq end");
+        log.debug("resolveDomain end");
         return res;
     }
 
@@ -129,11 +129,11 @@ public class Ns implements NsProxy {
     @Override
     public PublicResponse reverseResolveDomain(ReverseResolveDomainReq req, String owner) {
         log.debug("ReverseResolveDomainReq {}, owner {}", req, owner);
-        log.debug("resolveDomain start");
+        log.debug("reverseResolveDomain start");
         String path = String.format(REVERSE_RESOLVE_DOMAIN, owner);
         ForestResponse response = httpClient.post(path, JSONObject.toJSONString(req));
         PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
-        log.debug("resolveDomain end");
+        log.debug("reverseResolveDomain end");
         return res;
     }
 

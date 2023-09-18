@@ -12,19 +12,19 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Mt implements MtProxy {
-    private static final String CREATE_MT_CLASS = "/v3/native/mt/classes";
-    private static final String QUERY_MT_CLASSES = "/v3/native/mt/classes";
-    private static final String QUERY_MT_CLASS = "/v3/native/mt/classes/%s";
-    private static final String TRANSFER_MT_CLASS = "/v3/native/mt/class-transfers/%s/%s";
-    private static final String CREATE_MT = "/v3/native/mt/mt-issues/%s";
-    private static final String MINT_MT = "/v3/native/mt/mt-mints/%s/%s";
-    private static final String TRANSFER_MT = "/v3/native/mt/mt-transfers/%s/%s/%s";
-    private static final String EDIT_MT = "/v3/native/mt/mts/%s/%s/%s";
-    private static final String DELETE_MT = "/v3/native/mt/mts/%s/%s/%s";
-    private static final String QUERY_MTS = "/v3/native/mt/mts";
-    private static final String QUERY_MT = "/v3/native/mt/mts/%s/%s";
-    private static final String QUERY_MT_HISTORY = "/v3/native/mt/mts/%s/%s/history";
-    private static final String QUERY_MT_BALANCES = "/v3/native/mt/mts/%s/%s/balances";
+    private static final String CREATE_MT_CLASS = "/v3/native/mt/classes"; // 创建 MT 类别
+    private static final String QUERY_MT_CLASSES = "/v3/native/mt/classes"; // 查询 MT 类别
+    private static final String QUERY_MT_CLASS = "/v3/native/mt/classes/%s"; // 查询 MT 类别详情
+    private static final String TRANSFER_MT_CLASS = "/v3/native/mt/class-transfers/%s/%s"; // 转让 MT 类别
+    private static final String CREATE_MT = "/v3/native/mt/mt-issues/%s"; // 发行 MT
+    private static final String MINT_MT = "/v3/native/mt/mt-mints/%s/%s"; // 增发 MT
+    private static final String TRANSFER_MT = "/v3/native/mt/mt-transfers/%s/%s/%s"; // 转让 MT
+    private static final String EDIT_MT = "/v3/native/mt/mts/%s/%s/%s"; // 编辑 MT
+    private static final String DELETE_MT = "/v3/native/mt/mts/%s/%s/%s"; // 销毁 MT
+    private static final String QUERY_MTS = "/v3/native/mt/mts"; // 查询 MT
+    private static final String QUERY_MT = "/v3/native/mt/mts/%s/%s"; // 查询 MT 详情
+    private static final String QUERY_MT_HISTORY = "/v3/native/mt/mts/%s/%s/history"; // 查询 MT 操作记录
+    private static final String QUERY_MT_BALANCES = "/v3/native/mt/mts/%s/%s/balances"; // 查询 MT 余额
 
     private HttpClient httpClient;
 
@@ -58,9 +58,7 @@ public class Mt implements MtProxy {
         log.debug("queryMtClasses start");
         ForestResponse response = httpClient.get(QUERY_MT_CLASSES, JSONObject.toJSONString(req));
         String result = response.readAsString();
-        
         QueryMtClassesRes res = JSONObject.parseObject(result, QueryMtClassesRes.class);
-        
         log.debug("queryMtClasses end");
         return res;
     }
@@ -68,13 +66,12 @@ public class Mt implements MtProxy {
     @Override
     public QueryMtClassRes queryMtClass(String classId) {
         log.debug("classId {}", classId);
-        log.debug("queryMtClasses start");
+        log.debug("queryMtClass start");
         String path = String.format(QUERY_MT_CLASS, classId);
         ForestResponse response = httpClient.get(path, "");
         String result = response.readAsString();
-        
         QueryMtClassRes res = JSONObject.parseObject(result, QueryMtClassRes.class);
-        
+        log.debug("queryMtClass end");
         return res;
     }
 
@@ -183,9 +180,7 @@ public class Mt implements MtProxy {
         log.debug("queryMts start");
         ForestResponse response = httpClient.get(QUERY_MTS, JSONObject.toJSONString(req));
         String result = response.readAsString();
-        
         QueryMtsRes res = JSONObject.parseObject(result, QueryMtsRes.class);
-        
         log.debug("queryMts end");
         return res;
     }
@@ -197,9 +192,7 @@ public class Mt implements MtProxy {
         String path = String.format(QUERY_MT, classId, mtId);
         ForestResponse response = httpClient.get(path,"");
         String result = response.readAsString();
-        
         QueryMtRes res = JSONObject.parseObject(result, QueryMtRes.class);
-        
         log.debug("queryMt end");
         return res;
     }
@@ -211,9 +204,7 @@ public class Mt implements MtProxy {
         String path = String.format(QUERY_MT_HISTORY, classId, mtId);
         ForestResponse response = httpClient.get(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
-        
         QueryMtHistoryRes res = JSONObject.parseObject(result, QueryMtHistoryRes.class);
-        
         log.debug("queryMtHistory end");
         return res;
     }
@@ -225,9 +216,7 @@ public class Mt implements MtProxy {
         String path = String.format(QUERY_MT_BALANCES, classId, account);
         ForestResponse response = httpClient.get(path, JSONObject.toJSONString(req));
         String result = response.readAsString();
-        
         QueryMtBalancesRes res = JSONObject.parseObject(result, QueryMtBalancesRes.class);
-        
         log.debug("queryMtBalances end");
         return res;
     }

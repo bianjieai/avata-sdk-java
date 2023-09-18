@@ -99,7 +99,7 @@ public class Nft implements NftProxy {
     @Override
     public PublicResponse mintNft(MintNftReq req, String classId) {
         log.debug("MintNftReq {}, classId {}", req, classId);
-        log.debug("createNft start");
+        log.debug("mintNft start");
         // check params
         if (StringUtils.isEmpty(req.getUri())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "uri"));
