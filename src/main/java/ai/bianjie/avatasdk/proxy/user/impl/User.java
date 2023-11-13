@@ -13,11 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class User implements UserProxy {
 
-    private static final String CREATE_USER = "/v3/users";// 创建用户
+    private static final String CREATE_USER = "/v3/users"; // 创建钱包用户
 
-    private static final String UPDATE_USER = "/v3/users";// 更新用户
+    private static final String UPDATE_USER = "/v3/users"; // 更新钱包用户
 
-    private static final String QUERY_USER = "/v3/users";// 查询用户信息
+    private static final String KYC_USER = "/v3/users/kyc"; // 认证钱包用户
+
+    private static final String QUERY_USER = "/v3/users"; // 查询钱包用户信息
 
     private HttpClient httpClient;
 
@@ -30,10 +32,7 @@ public class User implements UserProxy {
         log.debug("CreateUserReq {}", req);
         log.debug("createUser start");
         // check params
-        if (req.getUserType() == null) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "user_type"));
-        }
-        if (req.getName() == null) {
+        if ((req.getUserType() == 1 || req.getUserType() == 2) && req.getName() == null) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
         if (req.getPhoneNum() == null) {
@@ -69,15 +68,38 @@ public class User implements UserProxy {
     }
 
     @Override
+    public PublicResponse kycUser(KycUserReq req) {
+        log.debug("KycUserReq {}", req);
+        log.debug("kycUser start");
+        // check params
+        if (req.getUserType() != 1 && req.getUserType() != 2) {
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "user_type"));
+        }
+        if (StringUtils.isEmpty(req.getUserId())) {
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "user_id"));
+        }
+        if (StringUtils.isEmpty(req.getName())) {
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
+        }
+        if (StringUtils.isEmpty(req.getCertificateNum())) {
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "certificate_num"));
+        }
+        if (StringUtils.isEmpty(req.getRegistrationNum())) {
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "registration_num"));
+        }
+        ForestResponse response = httpClient.post(KYC_USER, JSONObject.toJSONString(req));
+        PublicResponse res = JSONObject.parseObject(response.readAsString(), PublicResponse.class);
+        log.debug("kycUser end");
+        return res;
+    }
+
+    @Override
     public QueryUserRes queryUser(QueryUserReq req) {
         log.debug("QueryUserReq {}", req);
         log.debug("queryUser start");
         // check params
-        if (StringUtils.isEmpty(req.getUserType())) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "user_type"));
-        }
-        if (StringUtils.isEmpty(req.getCode())) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "code"));
+        if (StringUtils.isEmpty(req.getPhoneNum())) {
+            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "phone_num"));
         }
         ForestResponse response = httpClient.get(QUERY_USER, JSONObject.toJSONString(req));
         String result = response.readAsString();
