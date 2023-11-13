@@ -5,17 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 创建用户请求体
+ * 创建钱包用户请求体
  */
 @NoArgsConstructor
 @Data
 public class CreateUserReq {
 
     @JSONField(name = "user_type")
-    private Integer userType;// 用户类型， 对于创建的钱包用户的类型属性 Enum:1：个人 2：企业
+    private Integer userType;// 用户类型，对应创建的钱包用户的类型属性 Enum: 0(普通用户)、1(个人用户)、2(企业/机构用户)，默认为0
 
     @JSONField(name = "name")
-    private String name; // 用户的真实姓名， 支持汉字以及大小写字母、空格
+    private String name; // 用户名或者企业名称，支持汉字以及大小写字母、空格
 
     @JSONField(name = "region")
     private Integer region;// 所属 国家/地区 Enum：1：其他 2：中国大陆（默认） 3：中国香港 4：中国台湾
@@ -39,5 +39,5 @@ public class CreateUserReq {
     private String businessLicense;// 营业执照或认证授权人声明书
 
     @JSONField(name = "email")
-    private String email;// 企业邮箱，不支持汉字以及非规范性特殊字符。
+    private String email;// 企业邮箱，不支持汉字以及非规范性特殊字符
 }
