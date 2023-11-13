@@ -5,11 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 查询用户请求体
+ * 查询钱包用户信息请求体
  */
 @NoArgsConstructor
 @Data
 public class QueryUserReq {
+
+    @JSONField(name = "phone_num")
+    private String phoneNum;// 创建钱包用户时，填入的手机号。注意：参数需要进行 hash 操作，hash 算法为：sha-256
 
     @JSONField(name = "user_type")
     private String userType;// 用户类型， 对于创建的钱包用户的类型属性 Enum:1：个人 2：企业
