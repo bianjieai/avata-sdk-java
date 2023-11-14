@@ -21,14 +21,10 @@ public class QueryUserRes {
     public static class DataDTO {
 
         @JSONField(name = "user_ids")
-        private List<UserIdsDTO> userIds;// 用户唯一标识
-
-        @NoArgsConstructor
-        @Data
-        public static class UserIdsDTO {
-        }
+        private List<String> userIds;// 用户唯一标识
 
         @JSONField(name = "did")
         private String did;// 用户身份标识(预留字段)
     }
 }
+
