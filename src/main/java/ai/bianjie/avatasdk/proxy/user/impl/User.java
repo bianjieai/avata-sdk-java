@@ -102,8 +102,7 @@ public class User implements UserProxy {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "phone_num"));
         }
         ForestResponse response = httpClient.get(QUERY_USER, JSONObject.toJSONString(req));
-        String result = response.readAsString();
-        QueryUserRes res = JSONObject.parseObject(result, QueryUserRes.class);
+        QueryUserRes res = JSONObject.parseObject(response.readAsString(), QueryUserRes.class);
         log.debug("queryUser end");
         return res;
     }
