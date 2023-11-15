@@ -72,7 +72,7 @@ public class User implements UserProxy {
         log.debug("KycUserReq {}", req);
         log.debug("kycUser start");
         // check params
-        if (req.getUserType() != 1 && req.getUserType() != 2) {
+        if (req.getUserType() == null) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "user_type"));
         }
         if (StringUtils.isEmpty(req.getUserId())) {
@@ -81,10 +81,10 @@ public class User implements UserProxy {
         if (StringUtils.isEmpty(req.getName())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
         }
-        if (StringUtils.isEmpty(req.getCertificateNum())) {
+        if (req.getUserType() == 1 && StringUtils.isEmpty(req.getCertificateNum())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "certificate_num"));
         }
-        if (StringUtils.isEmpty(req.getRegistrationNum())) {
+        if (req.getUserType() == 2 && StringUtils.isEmpty(req.getRegistrationNum())) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "registration_num"));
         }
         ForestResponse response = httpClient.post(KYC_USER, JSONObject.toJSONString(req));
