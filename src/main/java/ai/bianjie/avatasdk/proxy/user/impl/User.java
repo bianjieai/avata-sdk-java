@@ -32,17 +32,19 @@ public class User implements UserProxy {
         log.debug("CreateUserReq {}", req);
         log.debug("createUser start");
         // check params
-        if ((req.getUserType() == 1 || req.getUserType() == 2) && req.getName() == null) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
+        if (req.getUserType() != null) {
+            if ((req.getUserType() == 1 || req.getUserType() == 2) && req.getName() == null) {
+                throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "name"));
+            }
+            if (req.getUserType() == 1 && req.getCertificateNum() == null) {
+                throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "certificate_num"));
+            }
+            if (req.getUserType() == 2 && req.getRegistrationNum() == null) {
+                throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "registration_num"));
+            }
         }
         if (req.getPhoneNum() == null) {
             throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "phone_num"));
-        }
-        if (req.getUserType() == 1 && req.getCertificateNum() == null) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "certificate_num"));
-        }
-        if (req.getUserType() == 2 && req.getRegistrationNum() == null) {
-            throw AvataException.InvalidParamException(String.format(AvataException.PARAM_ERROR, "registration_num"));
         }
         ForestResponse response = httpClient.post(CREATE_USER, JSONObject.toJSONString(req));
         CreateUserRes res = JSONObject.parseObject(response.readAsString(), CreateUserRes.class);
