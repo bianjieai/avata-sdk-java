@@ -16,6 +16,12 @@ public class QueryAccountsReq {
     @JSONField(name = "limit")
     private String limit;// 每页记录数，默认为 10，上限为 50
 
+    @JSONField(name = "user_id")
+    private String UserID; // 钱包应用项目在创建链账户地址时传入的字段，方便查询某一终端用户的链账户地址信息。该字段值由创建用户接口返回
+
+    @JSONField(name = "phone_num")
+    private String PhoneNum; // 钱包应用项目在创建用户时，填入的手机号。注意：参数需要进行 hash 操作，hash 算法为：sha-256
+
     @JSONField(name = "account")
     private String account;// 链账户地址
 

@@ -5,14 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 创建钱包用户请求体
+ * 认证钱包用户请求体
  */
 @NoArgsConstructor
 @Data
-public class CreateUserReq {
-
+public class KycUserReq {
     @JSONField(name = "user_type")
-    private Integer userType;// 用户类型，对应创建的钱包用户的类型属性 Enum: 0(普通用户)、1(个人用户)、2(企业/机构用户)，默认为0
+    private Integer userType;// 用户类型，对应创建的钱包用户的类型属性 Enum: 1(个人用户)、2(企业/机构用户)
+
+    @JSONField(name = "user_id")
+    private String userId;// 用户唯一标识
 
     @JSONField(name = "name")
     private String name; // 用户名或者企业名称，支持汉字以及大小写字母、空格
@@ -25,9 +27,6 @@ public class CreateUserReq {
 
     @JSONField(name = "certificate_num")
     private String certificateNum;// 用户证件号码
-
-    @JSONField(name = "phone_num")
-    private String phoneNum;// 联系人或授权人手机号
 
     @JSONField(name = "registration_region")
     private Integer registrationRegion;// 企业注册地址 Enum: 1：其他 2：中国大陆（默认） 3：中国香港 4：中国台湾
