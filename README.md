@@ -4,7 +4,7 @@
 
 ### SDK 介绍
 
-该 SDK 为 Avata v3 版本。 AVATA V3 是基于 v1 和 V2 两个版本，在产品架构、接口功能、核心服务、整体性能等方面都做了较大提升，同时兼容原生模块和智能合约模块；为 AVATA 平台用户提供多种功能与服务的组合使用，助力广大企业及开发者通过 AVATA 平台更加灵活便捷地对接底层链平台，打造开放多元的分布式商业应用。
+该 SDK 为 Avata v3 版本。 Avata v3 是基于 v1 和 v2 两个版本，在产品架构、接口功能、核心服务、整体性能等方面都做了较大提升，同时兼容原生模块和智能合约模块；为 Avata 平台用户提供多种功能与服务的组合使用，助力广大企业及开发者通过 Avata 平台更加灵活便捷地对接底层链平台，打造开放多元的分布式商业应用。
 
 ### 引入依赖
 
@@ -31,24 +31,27 @@ public class AvataClientTest {
     }
 }
 ```
-公共接口：
+
+- [回调服务示例代码](src/test/java/ai/bianjie/avatasdktest/CallbackTest.java)
 
 - [链账户接口示例代码](src/test/java/ai/bianjie/avatasdktest/AccountTest.java)
-- [钱包用户接口示例代码](src/test/java/ai/bianjie/avatasdktest/UserTest.java)
-- [充值接口示例代码](src/test/java/ai/bianjie/avatasdktest/OrderTest.java)
 
-原生接口：
+- 原生模块：
+  - [NFT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/NftTest.java)
+  - [MT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/MtTest.java)
+  - [区块链存证接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/RecordsTest.java)
+  - [查询上链交易结果接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/TxTest.java)
+  - [查询链账户操作记录接口示例代码](src/test/java/ai/bianjie/avatasdktest/AccountTest.java)
+  - [查询枚举值列表接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/TxTest.java)
 
-- [NFT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/NftTest.java)
-- [MT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/MtTest.java)
-- [存证接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/RecordsTest.java)
-- [交易结果查询接口示例代码](src/test/java/ai/bianjie/avatasdktest/nat/TxTest.java)
+- 智能合约模块：
+  - [NFT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NftTest.java)
+  - [Web3 域名服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NsTest.java)
+  - [合约服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/ContractTest.java)
+  - [查询上链交易结果接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/TxTest.java)
+  - [查询链账户操作记录接口示例代码](src/test/java/ai/bianjie/avatasdktest/AccountTest.java)
+  - [查询枚举值列表接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/TxTest.java)
+    
+- [购买能量值接口示例代码](src/test/java/ai/bianjie/avatasdktest/OrderTest.java)
+- [钱包服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/UserTest.java)
 
-智能合约接口：
-
-- [NFT 接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NftTest.java)
-- [Web3 域名服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/NsTest.java)
-- [智能合约服务接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/ContractTest.java)
-- [交易结果查询接口示例代码](src/test/java/ai/bianjie/avatasdktest/evm/TxTest.java)
-
-[回调服务示例代码](src/test/java/ai/bianjie/avatasdktest/CallbackTest.java)
