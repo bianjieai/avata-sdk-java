@@ -19,7 +19,10 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
       - run: |
-          export GPG_TTY=$(tty)
+          export GPG_TTY=$(tty)    
+          echo "${{ secrets.GPG_PRIVATE_KEY }}"
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          gpg --list-secret-keys
           gpg --pinentry-mode loopback --passphrase '${{ secrets.GPG_PASSPHRASE }}' -s pom.xml
           mvn --batch-mode deploy -Dmaven.test.skip=true -P release
         env:
