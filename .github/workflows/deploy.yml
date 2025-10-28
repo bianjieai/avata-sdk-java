@@ -20,6 +20,7 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
       - run: |
           export GPG_TTY=$(tty)
+          gpg --pinentry-mode loopback --passphrase '${{ secrets.GPG_PASSPHRASE }}' -s pom.xml
           mvn --batch-mode deploy -Dmaven.test.skip=true -P release
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
