@@ -20,7 +20,7 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
       - run: |
           export GPG_TTY=$(tty)    
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | md5
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | md5sum
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
           gpg --list-secret-keys
           gpg --pinentry-mode loopback --passphrase '${{ secrets.GPG_PASSPHRASE }}' -s pom.xml
