@@ -3,6 +3,7 @@ package ai.bianjie.avatasdk.proxy.account;
 import ai.bianjie.avatasdk.model.account.*;
 
 public interface AccountProxy {
+
     /**
      * 创建链账户
      *
@@ -28,10 +29,20 @@ public interface AccountProxy {
     QueryAccountsRes queryAccounts(QueryAccountsReq req);
 
     /**
-     * 查询链账户操作记录
+     * 原生模块 查询链账户操作记录
      *
      * @param req 查询链账户操作记录请求实体
      * @return
      */
-    QueryAccountsHistoryRes queryAccountsHistory(QueryAccountsHistoryReq req);
+    QueryNatAccountsHistoryRes queryNativeAccountsHistory(QueryAccountsHistoryReq req);
+
+    /**
+     * EVM 模块 查询链账户操作记录
+     *
+     * @param req 查询链账户操作记录请求实体
+     * @return
+     */
+    QueryEvmAccountsHistoryRes queryEvmAccountsHistory(QueryAccountsHistoryReq req);
 }
+
+

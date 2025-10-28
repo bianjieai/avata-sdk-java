@@ -50,7 +50,7 @@ public class AvataUtils {
      * @param str
      * @return
      */
-    private static String sha256Sum(String str) {
+    public static String sha256Sum(String str) {
         MessageDigest digest = null;
         try {
             digest = MessageDigest.getInstance("SHA-256");
@@ -79,4 +79,5 @@ public class AvataUtils {
         }
         return hexString.toString();
     }
+
 }

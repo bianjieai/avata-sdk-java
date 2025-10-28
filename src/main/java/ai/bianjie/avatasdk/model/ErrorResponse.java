@@ -13,11 +13,11 @@ public class ErrorResponse {
     @NoArgsConstructor
     @Data
     public static class AvataError {
-        @JSONField(name = "code")
-        private String code;
         @JSONField(name = "code_space")
-        private String codeSpace;
+        private String codeSpace; // 命名空间
+        @JSONField(name = "code")
+        private String code;// 错误码
         @JSONField(name = "message")
-        private String message;
+        private String message;// 错误描述
     }
 }

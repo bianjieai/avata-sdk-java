@@ -6,7 +6,7 @@
 
     <groupId>io.github.bianjieai</groupId>
     <artifactId>avata-sdk</artifactId>
-    <version>0.1.0</version>
+    <version>3.0.0</version>
     <url>https://github.com/bianjieai/avata-sdk-java</url>
     <name>avata-sdk</name>
     <licenses>
@@ -56,7 +56,12 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -81,7 +86,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.79</version>
+            <version>1.2.83</version>
         </dependency>
 
         <dependency>
