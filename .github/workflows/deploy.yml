@@ -13,14 +13,12 @@ jobs:
         with:
           java-version: 8
           distribution: 'adopt'
-          shell: bash -l {0}
           server-id: central
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
       - run: |
-          export GPG_TTY=$(tty)
           mvn --batch-mode deploy -Dmaven.test.skip=true -Dgpg.passphrase="${GPG_PASSPHRASE}" -Dgpg.pinentry.mode=loopback
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
