@@ -13,6 +13,7 @@ jobs:
         with:
           java-version: 8
           distribution: 'adopt'
+          shell: bash -l {0}
           server-id: central
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
