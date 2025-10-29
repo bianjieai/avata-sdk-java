@@ -1,10 +1,8 @@
 package ai.bianjie.avatasdk.model.evm.ns;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * 设置域名解析接口请求体

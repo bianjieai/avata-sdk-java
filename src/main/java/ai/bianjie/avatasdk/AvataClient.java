@@ -108,7 +108,7 @@ public class AvataClient {
             // [自v1.5.22版本起可用] 最大异步线程池队列大小
             configuration.setMaxAsyncQueueSize(16);
             // 请求超时时间，单位为毫秒, 默认值为3000
-            configuration.setTimeout(httpTimeout);
+            configuration.setReadTimeout(httpTimeout);
             // 连接超时时间，单位为毫秒, 默认值为2000
             configuration.setConnectTimeout(2000);
             // 设置重试器

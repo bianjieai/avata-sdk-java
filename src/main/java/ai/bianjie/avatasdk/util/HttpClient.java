@@ -1,7 +1,7 @@
 package ai.bianjie.avatasdk.util;
 
 import ai.bianjie.avatasdk.config.ConfigInfo;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestRequest;
 import com.dtflys.forest.http.ForestResponse;
