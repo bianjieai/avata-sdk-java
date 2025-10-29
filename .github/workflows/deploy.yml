@@ -21,7 +21,7 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
       - run: |
           export GPG_TTY=$(tty)
-          mvn --batch-mode deploy -Dmaven.test.skip=true
+          mvn --batch-mode deploy -Dmaven.test.skip=true -Dgpg.passphrase="${GPG_PASSPHRASE}" -Dgpg.pinentry.mode=loopback
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
