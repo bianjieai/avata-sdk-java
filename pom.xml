@@ -6,7 +6,7 @@
 
     <groupId>io.github.bianjieai</groupId>
     <artifactId>avata-sdk</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <url>https://github.com/bianjieai/avata-sdk-java</url>
     <name>avata-sdk</name>
     <licenses>
@@ -96,18 +96,6 @@
         </dependency>
     </dependencies>
 
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <extensions>
             <extension>
@@ -161,6 +149,17 @@
         </pluginManagement>
         <plugins>
             <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
@@ -176,6 +175,10 @@
                             <goal>sign</goal>
                         </goals>
                         <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
                             <keyname>bianjie</keyname>
                         </configuration>
                     </execution>
