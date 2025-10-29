@@ -1,9 +1,9 @@
 package ai.bianjie.avatasdk.util;
 
 import ai.bianjie.avatasdk.model.onCallbackRes;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -22,7 +22,7 @@ public class CallbackUtils {
         try {
             String signature = r.getHeader("X-Signature");
             JSONObject jsonObj = JSON.parseObject(getMap(requestBodyData).toString());
-            String jsonStr = JSON.toJSONString(jsonObj, SerializerFeature.MapSortField);
+            String jsonStr = JSON.toJSONString(jsonObj, JSONWriter.Feature.SortMapEntriesByKeys);
             // 执行签名
             String hexHash = sha256Sum(jsonStr + apiSecret);
             if (!hexHash.equals(signature)) {

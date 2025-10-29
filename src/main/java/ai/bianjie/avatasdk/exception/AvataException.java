@@ -1,12 +1,14 @@
 package ai.bianjie.avatasdk.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import ai.bianjie.avatasdk.model.ErrorResponse;
 
 /**
  * SDK custom ai.bianjie.avatasdk.exception
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class AvataException extends RuntimeException {
     private static final String CodeSpace = "AVATA-SDK";
     private static final String BadRequest = "BAD_REQUEST";

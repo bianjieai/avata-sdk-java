@@ -4,7 +4,7 @@ import ai.bianjie.avatasdk.model.evm.tx.QueryTxRes;
 import ai.bianjie.avatasdk.model.evm.tx.QueryTxTypesRes;
 import ai.bianjie.avatasdk.proxy.evm.tx.TxProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import lombok.extern.slf4j.Slf4j;
 

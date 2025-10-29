@@ -5,7 +5,7 @@ import ai.bianjie.avatasdk.model.PublicResponse;
 import ai.bianjie.avatasdk.model.user.*;
 import ai.bianjie.avatasdk.proxy.user.UserProxy;
 import ai.bianjie.avatasdk.util.HttpClient;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.dtflys.forest.http.ForestResponse;
 import com.dtflys.forest.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
